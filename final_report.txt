@@ -1,125 +1,24 @@
 1. rohitg00/ai-engineering-from-scratch:
-   star: 19782  语言/技术: Python, TypeScript, Rust, Julia, PyTorch, scikit-learn, Docker, Jupyter Notebooks, MCP (Model Context Protocol), Shell
-   项目简介: 这是一个从零开始构建AI工程能力的开源课程项目，包含435节课、20个阶段、约320小时的学习内容，覆盖数学基础、机器学习、深度学习、大语言模型、Agent工程等全栈AI知识体系。项目最大的特色是'先手写原理，再用框架'——每个算法都从原始数学推导开始实现，然后再用PyTorch等生产级框架运行，确保学习者真正理解底层机制而非只会调API。每节课都会产出可复用的工程产物（Prompt、Skill、Agent、MCP Server），最终形成一个包含435个实用工具的个人工具箱。
-   亮点: 435节课全部从原始数学和代码开始构建，不依赖框架先手写backpropagation、attention、tokenizer等核心算法; 每节课产出可复用的工程产物（Prompt/Skill/Agent/MCP Server），学完即拥有435个实用工具; 内置AI Agent技能（/find-your-level、/check-understanding），支持Claude/Cursor/Codex等主流编码助手，实现个性化学习路径; 覆盖Python/TypeScript/Rust/Julia四门语言，从线性代数到自主Agent集群的完整20阶段知识图谱; MIT协议完全免费，可在本地笔记本运行，无需云端GPU即可学习大部分内容
-   详细报告: 这个项目解决的核心痛点是：84%的学生已经在用AI工具，但只有18%觉得自己能专业地使用它们。市面上大多数AI教程要么是碎片化的论文解读，要么是'五分钟调用API'的快餐教程——你能搭个聊天机器人却说不清损失曲线，能接个工具调用却不懂注意力机制在干什么。
+   star: 20044  语言/技术: Python, TypeScript, Rust, Julia, PyTorch, Docker, Shell, MCP
+   项目简介: 这是一个从零开始构建AI工程能力的开源课程项目，包含435节课、20个阶段、约320小时的学习内容，覆盖数学基础、机器学习、深度学习、大语言模型、Agent工程等全栈AI知识体系。项目采用'先手写原始算法，再用生产框架'的独特教学法，每节课都产出可复用的Prompt、Skill、Agent或MCP Server，让学习者真正理解AI底层原理而非只会调API。支持Python、TypeScript、Rust、四种语言，完全免费开源，MIT协议。
+   亮点: 435节课全栈AI课程，从线性代数到自主Agent集群的完整知识图谱; 'Build It / Use It'双轨教学法：先手写原始算法理解原理，再用PyTorch/sklearn等框架实战; 每节课产出可复用工具（Prompt/Skill/Agent/MCP Server），学完即拥有435个实用工件; 内置AI Agent技能系统（/find-your-level智能分班测试、/check-understanding阶段测验），支持Claude/Cursor等主流编码助手; 覆盖Attention Is All You Need、GPT-3、RLHF、ReAct、MCP等核心论文的工程实现
+   详细报告: 这个项目解决的核心痛点是：84%的学生已经在用AI工具，但只有18%觉得自己能专业地使用它们。市面上大多数AI学习资料都是碎片化的——一篇论文、一个微调教程、一个花哨的Agent演示，知识之间缺乏连贯性。学习者可能做出了一个聊天机器人，但解释不了它的损失曲线；可能给Agent接了工具，但说不清模型内部的注意力机制在干什么。
 
-这个项目的设计哲学是'理解即构建'。20个阶段形成一条完整的学习链路：Phase 0是环境搭建（12节课，涵盖Docker、GPU配置、调试工具等），Phase 1是数学基础（22节课，线性代数、微积分、概率论、信息论全部用代码实现），Phase 2是经典机器学习（18节课，从线性回归到异常检测全部手写），Phase 3是深度学习核心（13节课，感知机→反向传播→优化器→自己写迷你框架→PyTorch），然后分叉进入视觉、NLP、语音、强化学习四个方向，再汇聚到Transformer、GenAI、LLM工程、多模态、Agent工程、自主系统、多智能体集群，最后以Capstone项目收尾。
+这个项目提供了一条完整的'脊柱'式学习路径：20个阶段、435节课、四种编程语言（Python、TypeScript、Rust、Julia），从线性代数一路学到自主Agent集群。每个算法都先从原始数学开始构建——反向传播、分词器、注意力机制、Agent循环——等PyTorch出现时，你已经知道它在底层干什么了。
 
-每节课的结构高度统一：问题→概念→手写实现→框架对照→产出工具。以Phase 14第一课为例，你会先手写一个约120行的纯Python Agent循环（无依赖），然后产出一个可安装的SKILL.md和一个调试Agent的Prompt。这种'Build It / Use It'的双轨制确保你不是在背代码，而是在理解为什么框架要这样设计。
+课程结构非常清晰：Phase 0是环境搭建（12课），Phase 1是数学基础（22课，线性代数、微积分、概率论、信息论等），Phase 2是机器学习基础（18课，从线性回归到异常检测全部手写），Phase 3是深度学习核心（13课，感知机到自建迷你框架），然后分岔出视觉、NLP、语音等方向，再汇聚到Transformers、GenAI、LLM工程、Agent工程、多智能体系统、生产基础设施，最后以Capstone项目收尾。
 
-项目还内置了与AI编码助手的深度集成。通过安装Claude/Cursor的技能，你可以用/find-your-level做一个10题定位测试，系统会根据你的知识水平推荐起始阶段并估算学习时间；学完每个阶段可以用/check-understanding进行8题测验并获得针对性复习建议。
+每节课遵循统一六步循环：MOTTO（一句话核心理念）→ PROBLEM（具体痛点）→ CONCEPT（图解与直觉）→ BUILD IT（原始数学实现，不用框架）→ USE IT（用PyTorch/sklearn实现同样东西）→ SHIP IT（产出可安装的工具）。这种'先造轮子再用轮子'的方法论是项目的核心竞争力。
 
-技术栈方面，Python是主力语言（覆盖90%以上的实现），TypeScript用于Web相关章节，Rust用于性能敏感模块，Julia用于科学计算密集型的数学基础课。框架层面涉及PyTorch、scikit-learn、Docker容器化部署，以及MCP协议的完整实现。
+项目还内置了Agent技能系统，可以通过/find-your-level进行十题定位测试，智能匹配你的起始阶段并生成个性化学习路径；通过/check-understanding进行八题阶段测验。所有产出的工件（Prompt、Skill、Agent、MCP Server）都可以通过scripts/install_skills.py一键安装到Claude、Cursor、Codex等主流编码助手中。
 
-项目维护者Rohit Ghumare在README中引用了Karpathy和Claude Code创始人Boris Cherny的观点，强调'模型会越来越好，真正复利增长的是知道该构建什么的能力'。课程覆盖了Attention Is All You Need、GPT-3、DDPM、RLHF、DPO、Chain-of-Thought、ReAct、MCP等所有重要论文和协议。
+技术覆盖极其全面：数学层（线性代数、微积分、概率统计、优化理论、图论、傅里叶变换）、ML层（所有经典算法手写实现）、DL层（从零构建神经网络、反向传播、优化器、正则化）、NLP/Transformers层（注意力机制、Tokenizer、LLM从 scratch）、Agent层（ReAct循环、工具调用、MCP协议、多智能体协作）、生产层（Docker、GPU云部署、ML Pipeline、实验跟踪）。
 
-社区治理方面，项目有完整的CONTRIBUTING.md、FORKING.md、LESSON_TEMPLATE.md贡献指南，以及一个自动化审计脚本（audit_lessons.py）来检查课程目录结构、文档完整性和测验JSON格式。赞助模式分5档（$25-$5000/月），当前有CodeRabbit和iii两个赞助商。
-   活跃度: 根据README内容，项目已完成435节课的架构设计和大量课程内容，有赞助商支持，月访问量超5万。但GitHub API显示近期commits=0、pushed_at=null，可能是维护节奏或数据同步问题，建议查看实际仓库确认最新提交时间。  社区健康: 项目有完整的贡献指南、行为准则、审计脚本和赞助体系，README结构专业且信息密度高。但GitHub API显示forks=0、open_issues=0、commits_recent=0，可能是数据抓取时间窗口问题，或项目处于早期阶段。7.5K Stars和55K月活表明社区关注度较高。
-   商业潜力: 项目本身采用免费MIT协议+赞助模式运营，README显示月访问量55,593、页面浏览90,709、7.5K Stars。商业潜力在于：(1) 企业内训授权和定制化课程服务；(2) 基于课程内容的认证考试和人才评估平台；(3) 435个可复用Agent/Skill/MCP Server的工具市场；(4) 与云厂商合作的GPU实训环境即服务。当前赞助分5档（$25-$5000/月），Platinum档位包含专属集成课程开发权。
+项目引用了AI领域的核心论文作为理论支撑：Attention Is All You Need、GPT-3、DDPM、InstructGPT/RLHF、DPO、Chain-of-Thought、ReAct、MCP协议等，并将它们映射到对应的学习阶段。
+
+社区治理方面，项目有完整的CONTRIBUTING.md、FORKING.md、LESSON_TEMPLATE.md贡献指南，以及自动化审计脚本scripts/audit_lessons.py（L001-L010规则验证课程结构一致性）。采用MIT协议，可以自由fork、教学、商用。
+   活跃度: 根据API指标，forks=0、open_issues=0、closed_issues_recent=0、commits_recent=0、latest_release=null、pushed_at=null，这些指标显示项目可能处于早期阶段或数据尚未更新。但README内容显示课程已完成435节课的完整规划，且有55K月活访问，说明内容产出活跃。  社区健康: 项目有完整的贡献指南、行为准则、课程模板和自动化审计工具，治理结构成熟。当前forks为0、open_issues为0，可能是新项目或维护非常及时。README中引用了Andrej Karpathy、Boris Cherny等行业领袖的观点，社区定位清晰。
+   商业潜力: 项目本身采用免费开源+赞助模式运营，当前有55K月活访问、7.5K Stars，赞助商包括CodeRabbit和iii。商业模式可拓展为：1）企业版团队学习平台（类似DataCamp for Business）；2）认证考试与人才推荐服务；3）AI工程工具市场抽成；4）企业定制培训。文档中明确提到Platinum级别赞助商（$5,000/月）可获得专属集成课程，说明已有B端商业化路径。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此课程的'Build It / Use It'双轨制理念，可以开发一个[AI学习进度追踪器]，用于解决自学者缺乏反馈闭环的问题——自动检测学习者手写的算法实现是否正确，并与框架实现进行对比验证。; 灵感2：可以将其MCP Server产出能力集成到[企业内部AI培训平台]中，让员工每学完一个模块就自动生成一个可部署的AI工具，形成'学习即产出'的正向循环。; 灵感3：基于Phase 14-16的Agent工程和集群内容，可以开发一个[多Agent协作开发框架]，让多个AI Agent分工完成一个软件项目的不同模块（前端、后端、测试、文档），模拟真实团队协作流程。; 灵感4：利用课程的/find-your-level定位测试机制，可以构建一个[AI技能评估SaaS]，面向企业提供员工AI能力摸底测试，自动生成个性化培训路径和ROI预测报告。
+   衍生灵感: 灵感1：基于此课程体系，可以开发一个「AI学习路径智能推荐引擎」，通过知识图谱分析学习者的GitHub代码仓库和技术博客，自动诊断知识盲区并生成个性化学习计划，解决'不知道从哪学起'的痛点。; 灵感2：可以将课程的'Build It / Use It'双轨模式抽象为一个「算法教学SaaS平台」，支持教师上传任意算法，系统自动生成'手写实现版'和'框架实战版'两套代码模板，并配套自动评测和可视化工具，适用于高校CS教育和企业内训。; 灵感3：基于课程产出的435个可复用工件（Prompt/Skill/Agent/MCP），可以构建一个「AI工程工具市场」，让学习者将自己构建的Agent和MCP Server上架交易，形成'学习即生产'的正循环生态，类似npm/pip但专注于AI工程工件。; 灵感4：可以将Phase 14的Agent循环和Phase 13的MCP协议实现抽取出来，开发一个「企业级AI Agent快速部署框架」，让非AI专业的开发者也能通过配置方式搭建具备工具调用、记忆、规划能力的业务Agent，降低AI应用开发门槛。
    项目链接: https://github.com/rohitg00/ai-engineering-from-scratch
-
-2. anthropics/knowledge-work-plugins:
-   star: 16261  语言/技术: Markdown, JSON, MCP (Model Context Protocol), Claude Code, Claude Cowork
-   项目简介: 这个项目提供了一套开源插件，将 Claude AI 助手转变为特定角色、团队和公司的专家。通过预构建的技能、连接器、斜杠命令和代理，帮助不同职能（如销售、产品、法律、财务等）的用户更高效地完成工作，并支持企业自定义适配。
-   亮点: 提供11个开箱即用的专业领域插件（如销售、产品管理、客户支持、法律、财务等）; 支持通过 MCP 协议连接主流办公工具（如 Slack、Notion、Jira、HubSpot、Snowflake 等）; 完全基于文件（Markdown/JSON），无需代码、基础设施或构建步骤，易于定制和扩展
-   详细报告: Knowledge Work Plugins 是一个专为 Claude Cowork 和 Claude Code 设计的开源插件集合，旨在让 Claude 成为特定职能领域的专家。每个插件包含四个核心组件：技能（Skills）、命令（Commands）、连接器（Connectors）和子代理（Sub-agents）。技能是领域知识和最佳实践的集合，Claude 会在相关上下文中自动调用；命令是用户主动触发的斜杠命令（如 `/sales:call-prep`）；连接器通过 MCP 协议将 Claude 接入外部工具（如 CRM、项目管理平台、数据仓库等）。
-
-项目目前开源了11个插件，覆盖生产力、销售、客户支持、产品管理、市场营销、法律、财务、数据、企业搜索、生物研究和插件管理。例如，销售插件可帮助研究潜在客户、准备电话会议、审查销售管道并生成竞争分析卡片；数据插件支持编写 SQL、运行统计分析、构建仪表盘等。
-
-该项目强调‘可定制性’：用户可通过编辑 `.mcp.json` 文件替换连接器，修改技能文件以匹配公司术语和流程，甚至创建全新插件。所有组件均为 Markdown 和 JSON 文件，无需编程或部署基础设施，极大降低了使用门槛。
-
-技术架构上，项目依赖 Model Context Protocol (MCP) 实现与外部工具的集成，这是 Anthropic 推动的开放标准，允许 AI 模型安全访问本地或远程数据源。插件结构清晰，包含 `plugin.json` 清单、`.mcp.json` 工具连接配置、`commands/` 和 `skills/` 目录。
-
-尽管项目文档完整且理念先进，但 GitHub 指标显示其社区活跃度较低（forks=0, issues=0, commits=0），可能处于早期阶段或尚未广泛推广。此外，项目本身不包含代码，主要提供配置模板和文档，实际功能依赖于 Claude 平台和 MCP 服务器的支持。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个‘HR 招聘助手插件’，集成 LinkedIn、Greenhouse、BambooHR 等 HR 工具，自动筛选简历、安排面试、生成候选人评估报告，解决招聘流程繁琐的问题。; 灵感2：可以将其集成到企业内部知识管理系统中，构建一个‘跨部门智能问答中枢’，员工通过自然语言提问即可获取来自 Jira、Confluence、Slack 等多源信息的聚合答案。; 灵感3：针对教育领域，开发‘学术写作与研究助手插件’，连接 Google Scholar、Zotero、Overleaf 等工具，帮助学生和研究人员自动整理文献、生成综述草稿、检查引用格式。
-   项目链接: https://github.com/anthropics/knowledge-work-plugins
-
-3. mukul975/Anthropic-Cybersecurity-Skills:
-   star: 9655  语言/技术: YAML, Markdown, Python, agentskills.io标准, MITRE ATT&CK v18, NIST CSF 2.0, MITRE ATLAS v5.4, MITRE D3FEND v1.3, NIST AI RMF 1.0, Apache-2.0
-   项目简介: 一句话概括：这是一个拥有754个生产级网络安全技能的AI Agent知识库，覆盖26个安全领域和5大行业标准框架（MITRE ATT&CK、NIST CSF 2.0、MITRE ATLAS、MITRE D3FEND、NIST AI RMF），让任何AI Agent都能瞬间拥有高级安全分析师的决策能力。解决的核心痛点是：AI Agent虽然能写代码搜网页，但缺乏真实的安全从业者的操作手册（playbook），这个项目填补了'结构化安全知识'的空白，让Agent从'会工具'变成'会分析'。
-   亮点: 754个结构化安全技能，覆盖26个安全领域，是目前最大的开源AI Agent网络安全技能库; 每个技能同时映射5大行业框架（MITRE ATT&CK、NIST CSF 2.0、ATLAS、D3FEND、AI RMF），一个技能满足五个合规检查点; 渐进式披露架构：每个技能仅需约30个token扫描元数据，500-2000token加载完整工作流，Agent可在一次遍历中搜索全部754个技能而不爆上下文窗口; 兼容Claude Code、GitHub Copilot、Cursor、Gemini CLI、OpenAI Codex CLI等26+AI平台，零配置即插即用; 每个技能包含YAML元数据（秒级发现）、结构化Markdown（逐步执行指南）、参考文件（深度技术上下文）、辅助脚本和报告模板，不是简单的脚本集合而是完整的AI原生知识库
-   详细报告: 这个项目本质上是一个'AI Agent的安全分析师大脑'。它的核心理念是：当前全球网络安全人才缺口达480万个岗位（ISC2 2024数据），AI Agent可以帮助缩小这个差距——但前提是你给它结构化的领域知识。现有的安全工具仓库给你的是字典、payload或漏洞利用代码，但没有一个能给AI Agent提供资深分析师的决策流程：什么时候用什么技术、需要哪些前置条件、如何一步步执行、如何验证结果。这个项目填补的正是这个空白。
-
-技术上，每个技能遵循agentskills.io开放标准，采用精心设计的目录结构：SKILL.md包含YAML frontmatter（用于Agent快速发现和匹配）和Markdown正文（When to Use触发条件、Prerequisites前置要求、Workflow逐步执行指南、Verification结果验证）。references/目录存放框架映射标准和工作流参考，scripts/目录包含可运行的辅助脚本，assets/目录提供可填写的检查清单和报告模板。
-
-框架映射是这个项目最大的技术壁垒和差异化优势。每个技能同时映射到MITRE ATT&CK v18（14个战术、200+技术）、NIST CSF 2.0（6个功能、22个类别）、MITRE ATLAS v5.4（16个战术、84个技术，涵盖AI/ML对抗威胁包括Agent上下文污染、工具调用滥用、MCP服务器攻击等新型威胁）、MITRE D3FEND v1.3（267个防御技术，基于OWL 2本体）、NIST AI RMF 1.0（72个子类别，加上GenAI Profile的12个生成式AI风险类别）。这种五框架统一映射在开源领域是独一无二的。
-
-26个安全领域的覆盖度也非常全面：从云安全（60个技能，AWS/Azure/GCP加固、CSPM、云取证）到威胁狩猎（55个技能，假设驱动狩猎、LOTL检测、行为分析），从恶意软件分析（39个技能，静态/动态分析、逆向工程）到OT/ICS安全（28个技能，Modbus、DNP3、IEC 62443、SCADA），甚至包括欺骗技术（蜜标、金丝雀）和合规治理（CIS基准、SOC 2）等细分领域。
-
-渐进式披露架构是一个精妙的设计：Agent先用约30个token扫描所有754个技能的YAML元数据（标签、描述、领域），筛选出相关技能，然后只加载Top 3匹配技能的完整工作流（500-2000token）。这意味着Agent可以在不耗尽上下文窗口的情况下，从754个技能中精准定位最相关的操作手册。
-
-兼容性方面，项目支持Claude Code、GitHub Copilot、Cursor、Windsurf、Cline、Aider、Continue、Roo Code、Amazon Q Developer、Tabnine、Sourcegraph Cody、JetBrains AI等AI编程助手，OpenAI Codex CLI、Gemini CLI等CLI Agent，Devin、Replit Agent、SWE-agent、OpenHands等自主Agent，以及LangChain、CrewAI、AutoGen、Semantic Kernel、Haystack、Vercel AI SDK等Agent框架，任何支持agentskills.io标准的MCP兼容Agent都可以零配置加载。
-
-实际使用场景举例：用户说'分析这个内存转储中的凭证窃取痕迹'，Agent会扫描754个技能的元数据，识别出12个相关技能，加载Top 3（Volatility3内存取证、LSASS凭证转储狩猎、Windows事件日志凭证访问分析），然后按结构化工作流逐步执行——运行Volatility3插件、检查LSASS访问模式、关联事件日志证据，最后用验证部分确认IOC并将发现映射到ATT&CK T1003（凭证转储）。没有这些技能，Agent会猜测工具命令并遗漏关键步骤；有了它们，它遵循的是和资深DFIR分析师相同的操作手册。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个'企业安全运营AI中台'，将这754个技能集成到企业现有的SIEM/SOAR平台中，当安全告警触发时，AI Agent自动匹配对应的安全技能执行调查、取证和响应流程，将初级分析师的工作效率提升10倍。; 灵感2：可以将其集成到MCP（Model Context Protocol）服务器中，构建一个'安全技能MCP Server'，让任何MCP兼容的AI Agent（如Claude Desktop、Cursor等）都能通过标准协议调用这些安全技能，实现安全能力的标准化分发和复用。; 灵感3：基于ATLAS和AI RMF的映射，可以开发一个'AI系统安全评估Agent'，专门用于评估企业内部的AI/ML系统面临的对抗性威胁（如模型投毒、提示注入、供应链攻击），自动生成合规报告和修复建议，帮助企业满足Colorado AI Act等新兴法规要求。; 灵感4：可以构建一个'网络安全培训模拟器'，利用这些结构化技能创建交互式攻防演练场景，让安全学员在AI Agent的引导下完成真实的安全调查任务（如事件响应、恶意软件分析、渗透测试），实现从理论到实战的无缝过渡。; 灵感5：针对合规领域（目前仅5个技能，是最薄弱的领域），可以开发一个'自动化合规检查Agent'，将NIST CSF、CIS Benchmark、SOC 2等框架的检查项转化为可执行的安全技能，自动扫描企业环境并生成差距分析报告。
-   项目链接: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
-
-4. st-tech/ppf-contact-solver:
-   star: 3228  语言/技术: Python, CUDA, C++, Docker, JupyterLab, Blender API, Finite Element Method (FEM), ACCD (Adaptive Continuous Collision Detection)
-   项目简介: 这是一个由日本时尚电商巨头 ZOZO 公司开发的、专为物理模拟设计的接触求解器。它主要用于处理布料（shells）、固体（solids）和绳索（rods）之间的复杂碰撞与接触问题。该项目最大的亮点在于其强大的 GPU 并行计算能力，能够处理超过 1.8 亿个接触点的极端场景，并且提供了 Blender 插件和 JupyterLab 接口，让开发者无需本地高端 NVIDIA 硬件即可通过云端进行大规模仿真。
-   亮点: 💪 鲁棒性强：接触分辨率无穿透，彻底解决布料穿插问题。; ⏲ 极致可扩展：支持超过 1.8 亿个接触点的超大规模仿真。; 🚀 全 GPU 加速：接触与弹性求解器均在 GPU 上以单精度运行，效率极高。; 🎨 无缝集成 Blender：提供插件支持，可在 macOS 上通过远程 GPU 进行仿真。; 🤖 MCP 支持：允许大语言模型通过自然语言控制仿真。
-   详细报告: ZOZO's Contact Solver 是一个面向工业级应用的高性能物理仿真引擎，特别针对时尚电商中常见的布料模拟难题进行了优化。其核心算法基于有限元方法（FEM），并采用了自适应连续碰撞检测（ACCD）技术，确保在极端变形下也不会发生布料穿透或三角形过度拉伸（严格控制在 1% 以内）。
-
-该项目的技术壁垒在于其极致的 GPU 内存效率和并行计算能力。通过将所有计算保持在单精度浮点数上，它成功在消费级显卡（如 RTX 4090）上实现了此前只有超级计算机才能处理的 1.8 亿接触点仿真。此外，项目提供了完整的 Python API 和 JupyterLab 交互界面，并支持 Docker 一键部署，极大降低了使用门槛。
-
-对于开发者而言，这意味着你可以用它来模拟复杂的服装试穿效果、虚拟时装秀、甚至电影特效中的大规模布料运动。由于支持 Blender 插件，美术人员也可以在不编写代码的情况下，直接在熟悉的 3D 软件中完成高保真仿真。项目还创新性地引入了 MCP 协议，允许 AI 助手通过自然语言指令来驱动仿真，为自动化设计流程打开了想象空间。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 该项目具有极高的商业价值，尤其适用于时尚电商、数字人、影视特效和游戏行业。其 Apache 2.0 许可证允许商业闭源使用，为企业提供了灵活的集成空间。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个「虚拟试衣间 SaaS 平台」，集成此求解器作为后端引擎，为中小型服装品牌提供低成本、高真实感的在线试穿解决方案。; 灵感2：将其集成到游戏开发引擎（如 Unity/Unreal）中，作为高级布料物理插件，提升角色服装的真实感和性能表现。; 灵感3：构建一个「AI 时装设计师」系统，结合 LLM 的自然语言理解能力与该求解器的物理仿真能力，实现从文字描述到可仿真服装模型的自动生成。
-   项目链接: https://github.com/st-tech/ppf-contact-solver
-
-5. microsoft/agent-governance-toolkit:
-   star: 2316  语言/技术: Python, TypeScript, .NET, Rust, Go, YAML, OPA, Cedar, SPIFFE, DID, mTLS, Streamlit, Docker, Azure, MCP
-   项目简介: Agent Governance Toolkit (AGT) 是微软开源的 AI Agent 生产级治理中间件，解决自主 AI Agent 部署后的三大核心问题：权限控制（Agent 能做什么）、身份追溯（谁做的）、审计合规（能否证明发生了什么）。它通过在应用层拦截所有工具调用、消息发送和委托操作，以确定性策略引擎替代不可靠的 prompt 级安全，实现'让 Agent 不可能违规'而非'请求 Agent 守规矩'。支持 Python、TypeScript、.NET、Rust、Go 多语言，兼容主流 Agent 框架，提供策略执行、身份认证、沙箱隔离、SRE 监控、合规审计等全栈治理能力。
-   亮点: 确定性策略引擎：在应用层拦截所有 Agent 操作，策略拒绝的动作在结构上不可能执行，而非依赖概率性的 prompt 安全; 多语言全栈支持：Python 完整功能栈，TypeScript/.NET/Rust/Go 核心治理能力，一行代码即可为任意工具函数添加治理; 企业级合规对齐：完整映射 OWASP Agentic Top 10、NIST AI RMF、EU AI Act、SOC 2 等合规框架，提供自动化证据生成; 全链路可审计：防篡改审计日志记录每次决策的策略、请求内容和判定结果，满足监管审计要求; 多框架原生集成：支持 Microsoft Agent Framework、Semantic Kernel、LangGraph、CrewAI、OpenAI Agents SDK 等 15+ 主流框架
-   详细报告: Agent Governance Toolkit 是微软为解决 AI Agent 生产部署中的治理难题而开发的开源中间件套件。其核心理念是：prompt 层的安全措施（如'请遵守规则'）对随机性的大语言模型而言只是礼貌请求，而非有效控制。AGT 将治理逻辑下沉到应用中间件层，在 Agent 的意图到达执行层之前进行拦截和判定。
-
-**核心架构包含八大模块：**
-
-1. **Agent OS（策略引擎）**：核心治理内核，支持 YAML/OPA/Cedar 策略定义，提供 fail-closed 语义（默认拒绝）。策略规则支持条件匹配、优先级排序、规则合并，并提供 68 个一致性测试。开发者只需两行代码 `govern(my_tool, policy="policy.yaml")` 即可为任意函数添加治理。
-
-2. **Agent Mesh（身份与信任网格）**：基于 SPIFFE/DID/mTLS 实现零信任身份体系，解决多 Agent 共享 API 密钥时的归因难题。支持 Agent 发现、路由、信任评分和委托链追踪，提供 135 个一致性测试。
-
-3. **Agent Runtime（执行沙箱）**：四级特权环（Privilege Rings）隔离机制，支持 Saga 编排、终止控制和执行计划验证。确保 Agent 在受限环境中执行，防止权限提升。
-
-4. **Agent SRE（站点可靠性工程）**：为 Agent 提供 SLO 监控、错误预算、熔断器和混沌工程测试。包含紧急 Kill Switch，可在检测到异常时立即终止 Agent 行为。
-
-5. **Agent Compliance（合规验证）**：自动化 OWASP 合规检查、策略文件完整性验证、策略 linting。内置 PromptDefense Evaluator，提供 12 维提示注入审计能力。
-
-6. **Agent Marketplace（插件治理）**：插件生命周期管理和信任评分，防止恶意插件注入。
-
-7. **Agent Lightning（RL 训练治理）**：为强化学习训练过程提供治理约束，对违规行为施加惩罚。
-
-8. **Agent Hypervisor（执行审计）**：执行计划验证、可逆性验证和承诺锚定，确保操作可追溯、可回滚。
-
-**关键差异化能力：**
-- **MCP 安全网关**：检测工具投毒、漂移监控、域名抢注和隐藏指令扫描
-- **Shadow AI 发现**：跨进程、配置和仓库扫描未注册 Agent
-- **治理仪表板**：基于 Streamlit 的实时舰队健康、信任和合规可视化
-- **贡献者声誉**：PR/Issue 作者的社会工程筛查（可复用 GitHub Action）
-
-**快速使用示例：**
-python
-from agentmesh.governance import govern
-safe_tool = govern(my_tool, policy="policy.yaml")
-
-策略文件支持细粒度控制，如禁止破坏性操作、要求邮件发送需审批等。CLI 工具提供 `agt doctor`（安装检查）、`agt verify`（OWASP 合规）、`agt red-team`（提示注入审计）、`agt lint-policy`（策略验证）等实用命令。
-
-**合规对齐：** 项目提供完整的 OWASP Agentic Top 10、NIST AI RMF 1.0、EU AI Act、SOC 2 映射文档，支持自动化证据生成，极大降低企业合规成本。
-
-**安全边界说明：** AGT 在应用中间件层执行治理，策略引擎与 Agent 共享进程边界。生产环境建议将每个 Agent 运行在独立容器中以获得 OS 级隔离。项目采用 CodeQL、Gitleaks、ClusterFuzzLite 等安全工具进行持续扫描。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 AGT 策略引擎，开发一个'金融 AI Agent 合规沙箱'，用于银行、证券等强监管场景，确保 AI 交易 Agent 无法执行未授权操作，并自动生成监管审计报告。; 灵感2：将 AGT 的 Shadow AI 发现能力集成到企业 IT 资产管理平台中，构建'企业 AI Agent 资产地图'，自动发现和管理组织内所有 AI Agent 的权限、行为和安全状态。; 灵感3：利用 AGT 的 MCP 安全网关和信任评分机制，开发一个'AI 插件应用商店'，为第三方 AI 工具插件提供安全审核、信任评级和运行时监控服务。; 灵感4：基于 AGT 的 SRE 模块和治理仪表板，构建'AI Agent 运维中心'，为大规模 Agent 舰队提供 SLO 监控、异常熔断、混沌测试和自动修复能力。
-   项目链接: https://github.com/microsoft/agent-governance-toolkit
