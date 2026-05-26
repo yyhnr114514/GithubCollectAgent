@@ -34,7 +34,7 @@ jobs:
           SEND_MESSAGE: 'false'
           TRENDING_LANGUAGE: python
           TRENDING_SINCE: daily
-          ANALYSIS_NUM: '5'
+          ANALYSIS_NUM: '1'
           README_MAX_LENGTH: '20000'
           SAVE_README: 'false'
           PROMPT_TEMPLATE_PATH: Prompt.txt
