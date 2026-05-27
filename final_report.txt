@@ -22,3 +22,50 @@
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于此课程体系，可以开发一个「AI学习路径智能推荐引擎」，通过知识图谱分析学习者的GitHub代码仓库和技术博客，自动诊断知识盲区并生成个性化学习计划，解决'不知道从哪学起'的痛点。; 灵感2：可以将课程的'Build It / Use It'双轨模式抽象为一个「算法教学SaaS平台」，支持教师上传任意算法，系统自动生成'手写实现版'和'框架实战版'两套代码模板，并配套自动评测和可视化工具，适用于高校CS教育和企业内训。; 灵感3：基于课程产出的435个可复用工件（Prompt/Skill/Agent/MCP），可以构建一个「AI工程工具市场」，让学习者将自己构建的Agent和MCP Server上架交易，形成'学习即生产'的正循环生态，类似npm/pip但专注于AI工程工件。; 灵感4：可以将Phase 14的Agent循环和Phase 13的MCP协议实现抽取出来，开发一个「企业级AI Agent快速部署框架」，让非AI专业的开发者也能通过配置方式搭建具备工具调用、记忆、规划能力的业务Agent，降低AI应用开发门槛。
    项目链接: https://github.com/rohitg00/ai-engineering-from-scratch
+
+2. anthropics/knowledge-work-plugins:
+   star: 16802  语言/技术: Markdown, JSON, MCP (Model Context Protocol), Claude Code, Claude Cowork, Slack, Notion, Jira, HubSpot, Snowflake, Databricks, BigQuery, Figma, Asana, Linear, Microsoft 365
+   项目简介: Knowledge Work Plugins 是一个开源插件集合，旨在将 Claude AI 转变为特定岗位、团队和公司的专属专家。通过预置的技能、连接器、斜杠命令和子代理，这些插件让 Claude 能够理解并执行销售、产品管理、客户支持、财务、法律、市场营销、数据分析和生物研究等专业领域的复杂工作流。项目解决了 AI 助手在专业场景下缺乏领域知识和工具集成能力的核心痛点，使团队能够获得更一致、更高质量的 AI 辅助成果。
+   亮点: 11个开箱即用的专业岗位插件，覆盖销售、产品、客服、市场、法务、财务、数据、企业搜索和生物研究等核心职能; 基于 MCP 协议的丰富连接器生态，可无缝对接 Slack、Notion、Jira、HubSpot、Snowflake 等数十种主流企业工具; 纯文件驱动架构（Markdown + JSON），无需编写代码、无需基础设施、无构建步骤，极大降低了定制和开发门槛
+   详细报告: Knowledge Work Plugins 是由 Anthropic 团队开发并开源的一套面向知识工作者的 AI 插件集合，专为 Claude Cowork 和 Claude Code 设计。其核心理念是通过插件机制，将 Claude 从一个通用 AI 助手转变为具备特定岗位专业知识的领域专家。
+
+项目提供了 11 个精心设计的插件，每个插件都针对一个具体的工作职能进行了深度定制。例如，sales 插件可以帮助销售人员研究潜在客户、准备电话会议、审查销售管道、起草外联邮件并构建竞争分析卡片；customer-support 插件则能自动分类工单、起草回复、打包升级问题、研究客户背景并将已解决的问题转化为知识库文章；data 插件支持查询、可视化和解释数据集，编写 SQL、运行统计分析、构建仪表板并在分享前验证工作成果。
+
+从技术架构来看，每个插件都遵循统一的结构：包含 plugin.json 清单文件、.mcp.json 工具连接配置、commands 目录下的斜杠命令以及 skills 目录下的领域知识。Skills 编码了领域专业知识、最佳实践和分步工作流，Claude 会在相关场景下自动调用；Commands 是用户显式触发的操作（如 /finance:reconciliation 或 /product-management:write-spec）；Connectors 通过 MCP 服务器将 Claude 连接到外部工具，包括 CRM、项目跟踪器、数据仓库和设计工具等。
+
+项目的最大亮点在于其极低的定制门槛——所有组件都是基于文件的（Markdown 和 JSON），没有代码、没有基础设施、没有构建步骤。用户可以轻松替换连接器、添加公司上下文、调整工作流，甚至创建全新的插件。这种设计使得企业能够快速将 Claude 适配到自己的工具栈、术语体系和业务流程中，让 AI 真正像为企业量身定制的专家一样工作。
+
+从 GitHub 指标来看，该项目目前 forks、open_issues、commits 等均为 0，latest_release 为 null，说明项目可能处于早期阶段或刚开源，社区活跃度尚待观察。但考虑到这是 Anthropic 官方推出的项目，且与 Claude 生态深度集成，其长期发展潜力值得期待。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 该项目具有显著的商业潜力。随着企业 AI 助手需求的爆发式增长，将通用 AI 模型转变为具备特定岗位专业知识的领域专家是一个高价值方向。企业可以基于这些插件快速构建定制化的 AI 工作流，大幅降低 AI 落地的时间和成本。SaaS 厂商也可以将这些插件作为基础，面向不同行业提供垂直化的 AI 解决方案。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目，可以开发一个「HR 招聘专家插件」，集成 LinkedIn、Greenhouse、Lever 等招聘工具，自动筛选简历、安排面试、生成候选人评估报告，解决 HR 团队重复性工作量大的问题。; 灵感2：可以将其集成到「企业内部知识管理平台」中，利用 enterprise-search 插件的能力，构建一个跨邮件、聊天、文档和维基的统一搜索入口，让员工能够用自然语言快速找到任何公司内部信息。; 灵感3：基于 bio-research 插件的架构，可以开发一个「药物研发智能助手」，连接更多专业数据库（如 PDB、UniProt、DrugBank），自动化文献综述、靶点分析和临床试验数据汇总，加速制药企业的早期研发流程。
+   项目链接: https://github.com/anthropics/knowledge-work-plugins
+
+3. mukul975/Anthropic-Cybersecurity-Skills:
+   star: 10262  语言/技术: YAML, Markdown, Apache-2.0, agentskills.io标准, MITRE ATT&CK v18, NIST CSF 2.0, MITRE ATLAS v5.4, MITRE D3FEND v1.3, NIST AI RMF 1.0
+   项目简介: 这是一个为AI智能体（AI Agent）量身打造的开源网络安全技能库，包含754个生产级安全技能，覆盖26个安全领域，并映射到MITRE ATT&CK、NIST CSF 2.0、MITRE ATLAS、MITRE D3FEND和NIST AI RMF五大行业标准框架。它不是脚本集合，而是遵循agentskills.io标准的结构化知识库，让AI代理能像资深安全分析师一样执行取证、威胁狩猎、事件响应等复杂任务。
+   亮点: 754个结构化安全技能，覆盖从云安全到勒索软件防御的26个领域; 唯一开源库实现五大安全框架统一映射（ATT&CK、CSF、ATLAS、D3FEND、AI RMF），一次技能调用满足多重合规需求; 专为AI Agent设计：YAML前端元数据支持快速发现，Markdown工作流提供可执行步骤，上下文窗口友好（扫描仅~30 token）; 兼容Claude Code、GitHub Copilot、Cursor、Gemini CLI等26+主流AI平台，零配置即插即用
+   详细报告: 这个项目本质上是给AI Agent装上‘安全专家大脑’的操作系统级知识库。传统安全工具仓库提供的是payload或脚本，而这个项目提供的是决策逻辑——什么时候用Volatility3、怎么判断Kerberoasting攻击、如何跨云环境定位入侵范围。每个技能都采用标准化结构：YAML元数据用于AI快速检索（标签、描述、框架ID），Markdown正文包含触发条件、前置依赖、分步工作流和验证方法，还有references/、scripts/、assets/三个子目录存放深度技术文档、辅助脚本和报告模板。
+
+技术架构上，它创新性地采用‘渐进式披露’设计：AI先扫描全部754个技能的元数据（每个约30 token），识别出相关技能后再加载完整工作流（500–2000 token），避免一次性塞爆上下文窗口。例如用户说‘分析内存转储中的凭证窃取痕迹’，Agent会自动匹配到performing-memory-forensics-with-volatility3、hunting-for-credential-dumping-lsass等技能，按步骤执行Volatility3插件、检查LSASS访问模式、关联Windows事件日志，最终验证IOC并映射到ATT&CK T1003。
+
+框架映射是其最大壁垒：MITRE ATT&CK覆盖14个战术200+技术，NIST CSF 2.0对齐全部6个功能22个类别，ATLAS专门针对AI/ML对抗威胁（含MCP服务器攻击、工具滥用等新型向量），D3FEND提供267种防御对策，NIST AI RMF则覆盖生成式AI特有的幻觉、提示注入等风险。这种五维映射让企业能同时满足技术检测、组织治理和AI合规三重需求。
+
+文档质量极高，包含详细的技能解剖图、ATT&CK Navigator可视化层、各框架覆盖热力图，以及真实用户评价和媒体报道。虽然GitHub指标显示fork和issue均为0（可能是新项目或数据延迟），但README本身已达到生产级文档标准。
+   活跃度: 文档未提及  社区健康: 文档未提及
+   商业潜力: 可面向MSSP（托管安全服务商）提供合规自动化服务，或作为AI安全产品的底层知识引擎授权使用。科罗拉多州AI法案已将为NIST AI RMF合规提供法律安全港，直接提升商业价值。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：开发一个‘安全技能市场插件’，允许企业私有部署时上传自定义技能（如内部红队流程），同时自动继承五大框架映射，解决大型机构定制化需求。; 灵感2：将其集成到现有SIEM/SOAR平台（如Splunk、Elastic Security）中，当告警触发时自动调用对应技能生成处置建议，实现‘告警→技能→响应’闭环自动化。; 灵感3：构建‘AI安全培训沙盒’，利用Casky.ai Playground模式，让安全新手通过交互式执行这些技能来学习真实攻防场景，替代传统CTF平台。
+   项目链接: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
+
+4. st-tech/ppf-contact-solver:
+   star: 3566  语言/技术: CUDA, Python, C++, Docker, JupyterLab, Blender API, Finite Element Method (FEM), GPU Parallel Computing, MCP (Model Context Protocol)
+   项目简介: 这是一个由日本最大时尚电商 ZOZO 公司开发的物理仿真接触求解器，专门用于处理布料（shells）、固体（solids）和杆件（rods）之间的接触问题。它基于 GPU 并行计算和有限元方法（FEM），支持高达 1.8 亿次接触的极端规模仿真，并通过 Blender 插件、JupyterLab 接口和 MCP 协议提供多种交互方式，让开发者无需本地 NVIDIA GPU 也能在云端完成高质量物理模拟。
+   亮点: 支持超大规模接触仿真（最高 1.8 亿接触点），且无穿透、无卡顿; 完全基于 GPU 单精度浮点运行，内存效率高，无需双精度; 提供 Blender 插件，可在 macOS 上远程调用 GPU 服务器进行仿真; 集成 JupyterLab 和完整 Python API，适合科研与教学; 支持 MCP 协议，允许大语言模型通过自然语言控制仿真流程; Apache 2.0 许可，允许商业闭源使用
+   详细报告: ZOZO's Contact Solver 是一个专为复杂物理交互设计的高性能接触求解器，主要面向服装、柔性体、结构力学等场景。其核心技术壁垒在于：采用立方势垒函数（cubic barrier）结合弹性动态刚度模型，确保接触过程中不发生穿透；使用 FEM 对可变形体建模，并引入符号化力雅可比矩阵提升精度；所有计算均在 GPU 上以单精度完成，极大提升了缓存效率与可扩展性。项目支持 Windows 原生可执行文件（免安装）、Docker 容器化部署（约 1GB 镜像），以及 JupyterLab 交互式开发环境。用户可通过 Blender 插件构建场景并远程提交仿真任务（即使在没有 NVIDIA GPU 的 macOS 上也可用），也可通过 Python API 脚本化控制整个流程。此外，项目还支持状态保存/加载、应力测试自动化（GitHub Actions 连续运行 10 次验证稳定性）、云平台部署（AWS、GCE、vast.ai、Scaleway）等高级功能。文档完整，包含视频教程、参数说明、日志系统和社区案例。虽然目前仍处于离线非实时仿真阶段，但部分示例已能达到交互式速率。该项目源自 ACM TOG 论文成果，具有坚实的学术基础，同时具备工业级实用性。
+   活跃度: 高。从变更历史可见，2024 年底至 2025 年持续高频更新，包括 Blender 插件、Windows 可执行文件、大规模示例、MCP 支持等重大功能迭代，且通过 GitHub Actions 实现自动化测试与发布。  社区健康: 初步建立。项目拥有 GitHub Discussions、社区作品展示区、多语言文章支持，但当前 forks 和 issues 数量较低，社区规模尚小。作者积极维护并鼓励用户分享教程，具备良好成长潜力。
+   商业潜力: 高。适用于时尚电商（虚拟试衣）、影视特效（布料动画）、工业设计（柔性体交互）、教育科研（物理仿真教学）等多个高价值领域。Apache 2.0 许可允许商业化集成，且 ZOZO 的行业背景为其在服装仿真场景提供了天然落地优势。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目开发一个‘虚拟试衣间 AI 引擎’，结合用户上传的身材数据与服装模型，在云端自动仿真不同面料的穿着效果，用于电商平台的沉浸式购物体验。; 灵感2：将其集成到游戏引擎（如 Unity 或 Unreal）的后处理管线中，作为高保真布料与角色交互的离线预计算模块，提升过场动画的真实感。; 灵感3：构建一个‘智能工业设计验证平台’，利用其大规模接触仿真能力，对机械臂抓取软物体、安全气囊展开、防护装备冲击测试等场景进行自动化仿真与优化。
+   项目链接: https://github.com/st-tech/ppf-contact-solver
