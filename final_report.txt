@@ -1,0 +1,24 @@
+1. rohitg00/ai-engineering-from-scratch:
+   star: 20044  语言/技术: Python, TypeScript, Rust, Julia, PyTorch, Docker, Shell, MCP
+   项目简介: 这是一个从零开始构建AI工程能力的开源课程项目，包含435节课、20个阶段、约320小时的学习内容，覆盖数学基础、机器学习、深度学习、大语言模型、Agent工程等全栈AI知识体系。项目采用'先手写原始算法，再用生产框架'的独特教学法，每节课都产出可复用的Prompt、Skill、Agent或MCP Server，让学习者真正理解AI底层原理而非只会调API。支持Python、TypeScript、Rust、四种语言，完全免费开源，MIT协议。
+   亮点: 435节课全栈AI课程，从线性代数到自主Agent集群的完整知识图谱; 'Build It / Use It'双轨教学法：先手写原始算法理解原理，再用PyTorch/sklearn等框架实战; 每节课产出可复用工具（Prompt/Skill/Agent/MCP Server），学完即拥有435个实用工件; 内置AI Agent技能系统（/find-your-level智能分班测试、/check-understanding阶段测验），支持Claude/Cursor等主流编码助手; 覆盖Attention Is All You Need、GPT-3、RLHF、ReAct、MCP等核心论文的工程实现
+   详细报告: 这个项目解决的核心痛点是：84%的学生已经在用AI工具，但只有18%觉得自己能专业地使用它们。市面上大多数AI学习资料都是碎片化的——一篇论文、一个微调教程、一个花哨的Agent演示，知识之间缺乏连贯性。学习者可能做出了一个聊天机器人，但解释不了它的损失曲线；可能给Agent接了工具，但说不清模型内部的注意力机制在干什么。
+
+这个项目提供了一条完整的'脊柱'式学习路径：20个阶段、435节课、四种编程语言（Python、TypeScript、Rust、Julia），从线性代数一路学到自主Agent集群。每个算法都先从原始数学开始构建——反向传播、分词器、注意力机制、Agent循环——等PyTorch出现时，你已经知道它在底层干什么了。
+
+课程结构非常清晰：Phase 0是环境搭建（12课），Phase 1是数学基础（22课，线性代数、微积分、概率论、信息论等），Phase 2是机器学习基础（18课，从线性回归到异常检测全部手写），Phase 3是深度学习核心（13课，感知机到自建迷你框架），然后分岔出视觉、NLP、语音等方向，再汇聚到Transformers、GenAI、LLM工程、Agent工程、多智能体系统、生产基础设施，最后以Capstone项目收尾。
+
+每节课遵循统一六步循环：MOTTO（一句话核心理念）→ PROBLEM（具体痛点）→ CONCEPT（图解与直觉）→ BUILD IT（原始数学实现，不用框架）→ USE IT（用PyTorch/sklearn实现同样东西）→ SHIP IT（产出可安装的工具）。这种'先造轮子再用轮子'的方法论是项目的核心竞争力。
+
+项目还内置了Agent技能系统，可以通过/find-your-level进行十题定位测试，智能匹配你的起始阶段并生成个性化学习路径；通过/check-understanding进行八题阶段测验。所有产出的工件（Prompt、Skill、Agent、MCP Server）都可以通过scripts/install_skills.py一键安装到Claude、Cursor、Codex等主流编码助手中。
+
+技术覆盖极其全面：数学层（线性代数、微积分、概率统计、优化理论、图论、傅里叶变换）、ML层（所有经典算法手写实现）、DL层（从零构建神经网络、反向传播、优化器、正则化）、NLP/Transformers层（注意力机制、Tokenizer、LLM从 scratch）、Agent层（ReAct循环、工具调用、MCP协议、多智能体协作）、生产层（Docker、GPU云部署、ML Pipeline、实验跟踪）。
+
+项目引用了AI领域的核心论文作为理论支撑：Attention Is All You Need、GPT-3、DDPM、InstructGPT/RLHF、DPO、Chain-of-Thought、ReAct、MCP协议等，并将它们映射到对应的学习阶段。
+
+社区治理方面，项目有完整的CONTRIBUTING.md、FORKING.md、LESSON_TEMPLATE.md贡献指南，以及自动化审计脚本scripts/audit_lessons.py（L001-L010规则验证课程结构一致性）。采用MIT协议，可以自由fork、教学、商用。
+   活跃度: 根据API指标，forks=0、open_issues=0、closed_issues_recent=0、commits_recent=0、latest_release=null、pushed_at=null，这些指标显示项目可能处于早期阶段或数据尚未更新。但README内容显示课程已完成435节课的完整规划，且有55K月活访问，说明内容产出活跃。  社区健康: 项目有完整的贡献指南、行为准则、课程模板和自动化审计工具，治理结构成熟。当前forks为0、open_issues为0，可能是新项目或维护非常及时。README中引用了Andrej Karpathy、Boris Cherny等行业领袖的观点，社区定位清晰。
+   商业潜力: 项目本身采用免费开源+赞助模式运营，当前有55K月活访问、7.5K Stars，赞助商包括CodeRabbit和iii。商业模式可拓展为：1）企业版团队学习平台（类似DataCamp for Business）；2）认证考试与人才推荐服务；3）AI工程工具市场抽成；4）企业定制培训。文档中明确提到Platinum级别赞助商（$5,000/月）可获得专属集成课程，说明已有B端商业化路径。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此课程体系，可以开发一个「AI学习路径智能推荐引擎」，通过知识图谱分析学习者的GitHub代码仓库和技术博客，自动诊断知识盲区并生成个性化学习计划，解决'不知道从哪学起'的痛点。; 灵感2：可以将课程的'Build It / Use It'双轨模式抽象为一个「算法教学SaaS平台」，支持教师上传任意算法，系统自动生成'手写实现版'和'框架实战版'两套代码模板，并配套自动评测和可视化工具，适用于高校CS教育和企业内训。; 灵感3：基于课程产出的435个可复用工件（Prompt/Skill/Agent/MCP），可以构建一个「AI工程工具市场」，让学习者将自己构建的Agent和MCP Server上架交易，形成'学习即生产'的正循环生态，类似npm/pip但专注于AI工程工件。; 灵感4：可以将Phase 14的Agent循环和Phase 13的MCP协议实现抽取出来，开发一个「企业级AI Agent快速部署框架」，让非AI专业的开发者也能通过配置方式搭建具备工具调用、记忆、规划能力的业务Agent，降低AI应用开发门槛。
+   项目链接: https://github.com/rohitg00/ai-engineering-from-scratch
