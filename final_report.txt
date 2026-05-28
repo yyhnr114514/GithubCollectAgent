@@ -1,27 +1,19 @@
-1. rohitg00/ai-engineering-from-scratch:
-   star: 20044  语言/技术: Python, TypeScript, Rust, Julia, PyTorch, Docker, Shell, MCP
-   项目简介: 这是一个从零开始构建AI工程能力的开源课程项目，包含435节课、20个阶段、约320小时的学习内容，覆盖数学基础、机器学习、深度学习、大语言模型、Agent工程等全栈AI知识体系。项目采用'先手写原始算法，再用生产框架'的独特教学法，每节课都产出可复用的Prompt、Skill、Agent或MCP Server，让学习者真正理解AI底层原理而非只会调API。支持Python、TypeScript、Rust、四种语言，完全免费开源，MIT协议。
-   亮点: 435节课全栈AI课程，从线性代数到自主Agent集群的完整知识图谱; 'Build It / Use It'双轨教学法：先手写原始算法理解原理，再用PyTorch/sklearn等框架实战; 每节课产出可复用工具（Prompt/Skill/Agent/MCP Server），学完即拥有435个实用工件; 内置AI Agent技能系统（/find-your-level智能分班测试、/check-understanding阶段测验），支持Claude/Cursor等主流编码助手; 覆盖Attention Is All You Need、GPT-3、RLHF、ReAct、MCP等核心论文的工程实现
-   详细报告: 这个项目解决的核心痛点是：84%的学生已经在用AI工具，但只有18%觉得自己能专业地使用它们。市面上大多数AI学习资料都是碎片化的——一篇论文、一个微调教程、一个花哨的Agent演示，知识之间缺乏连贯性。学习者可能做出了一个聊天机器人，但解释不了它的损失曲线；可能给Agent接了工具，但说不清模型内部的注意力机制在干什么。
+1. harry0703/MoneyPrinterTurbo:
+   star: 63166  语言/技术: Python, Streamlit, FastAPI, ImageMagick, FFmpeg, Whisper, Edge-TTS, OpenAI, DeepSeek, Moonshot, Azure, Docker
+   项目简介: MoneyPrinterTurbo 是一个全自动短视频生成神器，只需输入主题或关键词，就能一键生成包含AI文案、无版权素材、多语言语音合成、智能字幕和背景音乐的完整短视频。它解决了内容创作者‘从0到1’制作视频的高门槛问题，堪称‘打工人神器’和‘自媒体起号利器’。
+   亮点: 全自动视频生成流水线：从文案、素材、配音到字幕、背景音乐一键合成; 支持12+主流大模型接入（包括国产DeepSeek、通义千问等），国内用户友好; 提供Web界面和API双模式，适合普通用户和开发者集成; 支持竖屏(9:16)和横屏(16:9)高清输出，适配抖音、YouTube等平台; 无版权视频素材源 + 自定义本地素材，规避版权风险
+   详细报告: MoneyPrinterTurbo 是一个基于 Python 的全自动短视频生成系统，采用 MVC 架构，代码结构清晰，支持 Web 界面和 REST API 两种使用方式。其核心流程是：用户输入一个视频主题或关键词 → 系统调用大模型（如 DeepSeek、OpenAI 等）自动生成视频文案 → 从 Pexels 等无版权平台获取匹配的高清视频素材 → 使用 Edge-TTS 或 Azure 进行多语言语音合成（支持中英文，可试听）→ 自动生成字幕（支持字体、颜色、位置、描边等样式调整）→ 添加背景音乐（可指定或随机）→ 最终合成一个完整的短视频。
 
-这个项目提供了一条完整的'脊柱'式学习路径：20个阶段、435节课、四种编程语言（Python、TypeScript、Rust、Julia），从线性代数一路学到自主Agent集群。每个算法都先从原始数学开始构建——反向传播、分词器、注意力机制、Agent循环——等PyTorch出现时，你已经知道它在底层干什么了。
+项目支持多种高清视频尺寸（竖屏1080x1920、横屏1920x1080），适合抖音、快手、YouTube Shorts 等平台。字幕生成提供两种模式：edge（速度快、资源占用低）和 whisper（质量高、需GPU）。背景音乐和字体文件可自定义替换。
 
-课程结构非常清晰：Phase 0是环境搭建（12课），Phase 1是数学基础（22课，线性代数、微积分、概率论、信息论等），Phase 2是机器学习基础（18课，从线性回归到异常检测全部手写），Phase 3是深度学习核心（13课，感知机到自建迷你框架），然后分岔出视觉、NLP、语音等方向，再汇聚到Transformers、GenAI、LLM工程、Agent工程、多智能体系统、生产基础设施，最后以Capstone项目收尾。
+部署方式灵活：Windows 用户可使用一键启动包；Mac/Linux 推荐用 uv 管理依赖；Docker 支持一键部署。配置上需设置 LLM 提供商 API Key 和 Pexels API Key。项目对硬件要求不高，但若启用本地 Whisper 模型或批量生成，建议使用带显存的 GPU。
 
-每节课遵循统一六步循环：MOTTO（一句话核心理念）→ PROBLEM（具体痛点）→ CONCEPT（图解与直觉）→ BUILD IT（原始数学实现，不用框架）→ USE IT（用PyTorch/sklearn实现同样东西）→ SHIP IT（产出可安装的工具）。这种'先造轮子再用轮子'的方法论是项目的核心竞争力。
-
-项目还内置了Agent技能系统，可以通过/find-your-level进行十题定位测试，智能匹配你的起始阶段并生成个性化学习路径；通过/check-understanding进行八题阶段测验。所有产出的工件（Prompt、Skill、Agent、MCP Server）都可以通过scripts/install_skills.py一键安装到Claude、Cursor、Codex等主流编码助手中。
-
-技术覆盖极其全面：数学层（线性代数、微积分、概率统计、优化理论、图论、傅里叶变换）、ML层（所有经典算法手写实现）、DL层（从零构建神经网络、反向传播、优化器、正则化）、NLP/Transformers层（注意力机制、Tokenizer、LLM从 scratch）、Agent层（ReAct循环、工具调用、MCP协议、多智能体协作）、生产层（Docker、GPU云部署、ML Pipeline、实验跟踪）。
-
-项目引用了AI领域的核心论文作为理论支撑：Attention Is All You Need、GPT-3、DDPM、InstructGPT/RLHF、DPO、Chain-of-Thought、ReAct、MCP协议等，并将它们映射到对应的学习阶段。
-
-社区治理方面，项目有完整的CONTRIBUTING.md、FORKING.md、LESSON_TEMPLATE.md贡献指南，以及自动化审计脚本scripts/audit_lessons.py（L001-L010规则验证课程结构一致性）。采用MIT协议，可以自由fork、教学、商用。
-   活跃度: 根据API指标，forks=0、open_issues=0、closed_issues_recent=0、commits_recent=0、latest_release=null、pushed_at=null，这些指标显示项目可能处于早期阶段或数据尚未更新。但README内容显示课程已完成435节课的完整规划，且有55K月活访问，说明内容产出活跃。  社区健康: 项目有完整的贡献指南、行为准则、课程模板和自动化审计工具，治理结构成熟。当前forks为0、open_issues为0，可能是新项目或维护非常及时。README中引用了Andrej Karpathy、Boris Cherny等行业领袖的观点，社区定位清晰。
-   商业潜力: 项目本身采用免费开源+赞助模式运营，当前有55K月活访问、7.5K Stars，赞助商包括CodeRabbit和iii。商业模式可拓展为：1）企业版团队学习平台（类似DataCamp for Business）；2）认证考试与人才推荐服务；3）AI工程工具市场抽成；4）企业定制培训。文档中明确提到Platinum级别赞助商（$5,000/月）可获得专属集成课程，说明已有B端商业化路径。
+技术栈方面，前端使用 Streamlit 快速构建 WebUI，后端 API 基于 FastAPI，视频处理依赖 FFmpeg 和 ImageMagick，语音合成支持 Edge-TTS 和 Azure，大模型接入覆盖 OpenAI、DeepSeek、通义千问、Gemini 等主流服务商。项目还贴心地提供了国内用户可用的模型下载方式（百度网盘、夸克网盘），解决了 HuggingFace 访问难题。
+   活跃度: 未知  社区健康: 文档未提及
+   商业潜力: 该项目具有明确的商业化路径：可作为SaaS服务（如录咖已实践）、电商内容工具、自媒体运营助手、教育类视频自动生成平台等。短视频营销市场需求巨大，自动化生成是刚需。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此课程体系，可以开发一个「AI学习路径智能推荐引擎」，通过知识图谱分析学习者的GitHub代码仓库和技术博客，自动诊断知识盲区并生成个性化学习计划，解决'不知道从哪学起'的痛点。; 灵感2：可以将课程的'Build It / Use It'双轨模式抽象为一个「算法教学SaaS平台」，支持教师上传任意算法，系统自动生成'手写实现版'和'框架实战版'两套代码模板，并配套自动评测和可视化工具，适用于高校CS教育和企业内训。; 灵感3：基于课程产出的435个可复用工件（Prompt/Skill/Agent/MCP），可以构建一个「AI工程工具市场」，让学习者将自己构建的Agent和MCP Server上架交易，形成'学习即生产'的正循环生态，类似npm/pip但专注于AI工程工件。; 灵感4：可以将Phase 14的Agent循环和Phase 13的MCP协议实现抽取出来，开发一个「企业级AI Agent快速部署框架」，让非AI专业的开发者也能通过配置方式搭建具备工具调用、记忆、规划能力的业务Agent，降低AI应用开发门槛。
-   项目链接: https://github.com/rohitg00/ai-engineering-from-scratch
+   衍生灵感: 灵感1：基于此项目，可以开发一个‘小红书爆款视频生成器’，针对小红书平台优化文案风格和素材选择，自动添加热门标签和封面图，解决小红书博主日更难题。; 灵感2：可以将其集成到电商运营系统中，开发一个‘商品短视频自动生成平台’，商家上传商品信息后，自动生成带货短视频，降低电商内容制作成本。; 灵感3：可以扩展为‘多语言出海视频工厂’，结合翻译API和本地化配音，一键生成英语、西班牙语、阿拉伯语等版本的短视频，助力企业海外营销。
+   项目链接: https://github.com/harry0703/MoneyPrinterTurbo
 
 2. anthropics/knowledge-work-plugins:
    star: 16802  语言/技术: Markdown, JSON, MCP (Model Context Protocol), Claude Code, Claude Cowork, Slack, Notion, Jira, HubSpot, Snowflake, Databricks, BigQuery, Figma, Asana, Linear, Microsoft 365
@@ -42,30 +34,36 @@
    衍生灵感: 灵感1：基于此项目，可以开发一个「HR 招聘专家插件」，集成 LinkedIn、Greenhouse、Lever 等招聘工具，自动筛选简历、安排面试、生成候选人评估报告，解决 HR 团队重复性工作量大的问题。; 灵感2：可以将其集成到「企业内部知识管理平台」中，利用 enterprise-search 插件的能力，构建一个跨邮件、聊天、文档和维基的统一搜索入口，让员工能够用自然语言快速找到任何公司内部信息。; 灵感3：基于 bio-research 插件的架构，可以开发一个「药物研发智能助手」，连接更多专业数据库（如 PDB、UniProt、DrugBank），自动化文献综述、靶点分析和临床试验数据汇总，加速制药企业的早期研发流程。
    项目链接: https://github.com/anthropics/knowledge-work-plugins
 
-3. mukul975/Anthropic-Cybersecurity-Skills:
-   star: 10262  语言/技术: YAML, Markdown, Apache-2.0, agentskills.io标准, MITRE ATT&CK v18, NIST CSF 2.0, MITRE ATLAS v5.4, MITRE D3FEND v1.3, NIST AI RMF 1.0
-   项目简介: 这是一个为AI智能体（AI Agent）量身打造的开源网络安全技能库，包含754个生产级安全技能，覆盖26个安全领域，并映射到MITRE ATT&CK、NIST CSF 2.0、MITRE ATLAS、MITRE D3FEND和NIST AI RMF五大行业标准框架。它不是脚本集合，而是遵循agentskills.io标准的结构化知识库，让AI代理能像资深安全分析师一样执行取证、威胁狩猎、事件响应等复杂任务。
-   亮点: 754个结构化安全技能，覆盖从云安全到勒索软件防御的26个领域; 唯一开源库实现五大安全框架统一映射（ATT&CK、CSF、ATLAS、D3FEND、AI RMF），一次技能调用满足多重合规需求; 专为AI Agent设计：YAML前端元数据支持快速发现，Markdown工作流提供可执行步骤，上下文窗口友好（扫描仅~30 token）; 兼容Claude Code、GitHub Copilot、Cursor、Gemini CLI等26+主流AI平台，零配置即插即用
-   详细报告: 这个项目本质上是给AI Agent装上‘安全专家大脑’的操作系统级知识库。传统安全工具仓库提供的是payload或脚本，而这个项目提供的是决策逻辑——什么时候用Volatility3、怎么判断Kerberoasting攻击、如何跨云环境定位入侵范围。每个技能都采用标准化结构：YAML元数据用于AI快速检索（标签、描述、框架ID），Markdown正文包含触发条件、前置依赖、分步工作流和验证方法，还有references/、scripts/、assets/三个子目录存放深度技术文档、辅助脚本和报告模板。
+3. p-e-w/heretic:
+   star: 22102  语言/技术: Python, PyTorch, Optuna, Hugging Face Transformers, bitsandbytes, PaCMAP, uv
+   项目简介: Heretic 是一个全自动移除大语言模型内容审查（安全对齐）的工具，无需昂贵的再训练。它结合了方向性消融（abliteration）技术和基于 Optuna 的 TPE 参数优化器，能够自动找到最优的消融参数，在最大程度减少模型拒绝回答有害提示的同时，最小化对原始模型智能的损害（通过 KL 散度衡量）。用户只需一条命令即可生成去审查模型，无需理解 Transformer 内部机制，堪称“打工人神器”——让模型自由说话，同时保持聪明才智。
+   亮点: 全自动去审查：无需人工干预，一键生成高质量去审查模型; 智能参数优化：使用 Optuna 的 TPE 优化器联合最小化拒绝率和 KL 散度，保留模型原始能力; 支持多种架构：兼容大多数稠密模型、多模态模型、MoE 架构及混合模型（如 Qwen3.5）; 内置研究功能：提供残差向量可视化（PaCMAP 投影动画）和几何分析，助力模型可解释性研究
+   详细报告: Heretic 是一个专为移除大语言模型（LLM）内容审查机制而设计的开源工具。其核心技术是方向性消融（directional ablation），即通过识别并正交化模型各层中与“拒绝回答”相关的权重方向，从而抑制模型对有害提示的拒绝行为。与传统手动调整不同，Heretic 引入了全自动优化流程：利用 Optuna 框架的 TPE（Tree-structured Parzen Estimator）算法，在大量可能的消融参数空间中搜索最优解，目标是最小化两个关键指标：一是模型对有害提示的拒绝数量，二是去审查后模型与原始模型在无害提示上的输出分布差异（KL 散度）。这种双目标优化确保了生成的模型既“敢说话”，又“不失智”。
 
-技术架构上，它创新性地采用‘渐进式披露’设计：AI先扫描全部754个技能的元数据（每个约30 token），识别出相关技能后再加载完整工作流（500–2000 token），避免一次性塞爆上下文窗口。例如用户说‘分析内存转储中的凭证窃取痕迹’，Agent会自动匹配到performing-memory-forensics-with-volatility3、hunting-for-credential-dumping-lsass等技能，按步骤执行Volatility3插件、检查LSASS访问模式、关联Windows事件日志，最终验证IOC并映射到ATT&CK T1003。
+Heretic 支持广泛的模型架构，包括稠密模型（如 Gemma、Qwen）、多模态模型、MoE（混合专家）模型等，并可通过 bitsandbytes 实现 4 位量化以降低显存需求。使用方式极为简单：安装后运行 `heretic Qwen/Qwen3-4B-Instruct-2507` 即可启动全自动处理，在 RTX 3090 上约需 20-30 分钟。完成后用户可选择保存模型、上传至 Hugging Face、聊天测试或运行标准基准测试（如 MMLU、GSM8K）。
 
-框架映射是其最大壁垒：MITRE ATT&CK覆盖14个战术200+技术，NIST CSF 2.0对齐全部6个功能22个类别，ATLAS专门针对AI/ML对抗威胁（含MCP服务器攻击、工具滥用等新型向量），D3FEND提供267种防御对策，NIST AI RMF则覆盖生成式AI特有的幻觉、提示注入等风险。这种五维映射让企业能同时满足技术检测、组织治理和AI合规三重需求。
+此外，Heretic 还具备强大的研究功能。启用 `--plot-residuals` 可生成每层残差向量的 PaCMAP 2D 投影图及跨层变换动画，直观展示“有害”与“无害”提示在模型内部表示空间的分离与演化；`--print-residual-geometry` 则输出详细的几何统计量（如余弦相似度、L2 范数、轮廓系数），帮助研究者深入理解拒绝方向的语义结构。
 
-文档质量极高，包含详细的技能解剖图、ATT&CK Navigator可视化层、各框架覆盖热力图，以及真实用户评价和媒体报道。虽然GitHub指标显示fork和issue均为0（可能是新项目或数据延迟），但README本身已达到生产级文档标准。
-   活跃度: 文档未提及  社区健康: 文档未提及
-   商业潜力: 可面向MSSP（托管安全服务商）提供合规自动化服务，或作为AI安全产品的底层知识引擎授权使用。科罗拉多州AI法案已将为NIST AI RMF合规提供法律安全港，直接提升商业价值。
+社区已基于 Heretic 生成并发布了超过 3000 个去审查模型，在 Reddit 等平台获得高度评价，被认为在保持模型智能方面优于其他同类工具。项目完全从零实现，不依赖现有 ablation 代码库，体现了较高的技术原创性。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个‘安全技能市场插件’，允许企业私有部署时上传自定义技能（如内部红队流程），同时自动继承五大框架映射，解决大型机构定制化需求。; 灵感2：将其集成到现有SIEM/SOAR平台（如Splunk、Elastic Security）中，当告警触发时自动调用对应技能生成处置建议，实现‘告警→技能→响应’闭环自动化。; 灵感3：构建‘AI安全培训沙盒’，利用Casky.ai Playground模式，让安全新手通过交互式执行这些技能来学习真实攻防场景，替代传统CTF平台。
-   项目链接: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
+   衍生灵感: 灵感1：开发一个“一键式模型合规性调节器”，允许企业根据本地法规或内部政策动态调整模型的审查强度，而非完全移除或保留，实现细粒度的安全控制。; 灵感2：将 Heretic 的参数优化框架集成到模型微调平台中，作为“去偏”或“去毒”模块，用于生成更符合特定文化或伦理准则的定制化模型。; 灵感3：构建一个“模型解剖实验室”Web 应用，结合 Heretic 的可视化功能，让研究者和学生能交互式探索不同模型的内部表示差异，用于 AI 教学与安全审计。
+   项目链接: https://github.com/p-e-w/heretic
 
-4. st-tech/ppf-contact-solver:
-   star: 3566  语言/技术: CUDA, Python, C++, Docker, JupyterLab, Blender API, Finite Element Method (FEM), GPU Parallel Computing, MCP (Model Context Protocol)
-   项目简介: 这是一个由日本最大时尚电商 ZOZO 公司开发的物理仿真接触求解器，专门用于处理布料（shells）、固体（solids）和杆件（rods）之间的接触问题。它基于 GPU 并行计算和有限元方法（FEM），支持高达 1.8 亿次接触的极端规模仿真，并通过 Blender 插件、JupyterLab 接口和 MCP 协议提供多种交互方式，让开发者无需本地 NVIDIA GPU 也能在云端完成高质量物理模拟。
-   亮点: 支持超大规模接触仿真（最高 1.8 亿接触点），且无穿透、无卡顿; 完全基于 GPU 单精度浮点运行，内存效率高，无需双精度; 提供 Blender 插件，可在 macOS 上远程调用 GPU 服务器进行仿真; 集成 JupyterLab 和完整 Python API，适合科研与教学; 支持 MCP 协议，允许大语言模型通过自然语言控制仿真流程; Apache 2.0 许可，允许商业闭源使用
-   详细报告: ZOZO's Contact Solver 是一个专为复杂物理交互设计的高性能接触求解器，主要面向服装、柔性体、结构力学等场景。其核心技术壁垒在于：采用立方势垒函数（cubic barrier）结合弹性动态刚度模型，确保接触过程中不发生穿透；使用 FEM 对可变形体建模，并引入符号化力雅可比矩阵提升精度；所有计算均在 GPU 上以单精度完成，极大提升了缓存效率与可扩展性。项目支持 Windows 原生可执行文件（免安装）、Docker 容器化部署（约 1GB 镜像），以及 JupyterLab 交互式开发环境。用户可通过 Blender 插件构建场景并远程提交仿真任务（即使在没有 NVIDIA GPU 的 macOS 上也可用），也可通过 Python API 脚本化控制整个流程。此外，项目还支持状态保存/加载、应力测试自动化（GitHub Actions 连续运行 10 次验证稳定性）、云平台部署（AWS、GCE、vast.ai、Scaleway）等高级功能。文档完整，包含视频教程、参数说明、日志系统和社区案例。虽然目前仍处于离线非实时仿真阶段，但部分示例已能达到交互式速率。该项目源自 ACM TOG 论文成果，具有坚实的学术基础，同时具备工业级实用性。
-   活跃度: 高。从变更历史可见，2024 年底至 2025 年持续高频更新，包括 Blender 插件、Windows 可执行文件、大规模示例、MCP 支持等重大功能迭代，且通过 GitHub Actions 实现自动化测试与发布。  社区健康: 初步建立。项目拥有 GitHub Discussions、社区作品展示区、多语言文章支持，但当前 forks 和 issues 数量较低，社区规模尚小。作者积极维护并鼓励用户分享教程，具备良好成长潜力。
-   商业潜力: 高。适用于时尚电商（虚拟试衣）、影视特效（布料动画）、工业设计（柔性体交互）、教育科研（物理仿真教学）等多个高价值领域。Apache 2.0 许可允许商业化集成，且 ZOZO 的行业背景为其在服装仿真场景提供了天然落地优势。
+4. shiyu-coder/Kronos:
+   star: 26963  语言/技术: Python, PyTorch, Hugging Face Transformers, Qlib, pandas, torchrun
+   项目简介: Kronos 是首个专为金融市场 K 线语言设计的开源基础模型，通过两阶段框架（分层分词器 + 自回归 Transformer）对全球 45+ 交易所的金融时序数据进行预训练，支持多资产价格预测、批量推理和领域微调，为量化交易和金融预测提供开箱即用的 AI 能力。
+   亮点: 首个开源金融 K 线基础模型，覆盖全球 45+ 交易所数据; 创新两阶段架构：专用分词器将 OHLCV 转为层级离散 token，再用 Transformer 自回归建模; 提供从预测、批量推理到领域微调的完整 pipeline，支持 A 股等本地化市场适配
+   详细报告: Kronos 是一个专为金融市场设计的基础模型家族，其核心思想是将金融 K 线（蜡烛图）视为一种‘语言’，并借鉴自然语言处理中的自回归建模范式来处理。项目采用两阶段框架：首先，一个专用分词器将连续的、多维的 OHLCV（开盘价、最高价、最低价、收盘价、成交量）数据量化为层级离散 token；然后，一个大型自回归 Transformer 在这些 token 上进行预训练，从而学习金融市场的潜在动态模式。
+
+该模型家族包含多个版本（mini/small/base/large），参数量从 4.1M 到 499.2M 不等，上下文长度从 512 到 2048，用户可根据计算资源和任务复杂度灵活选择。所有模型均通过 Hugging Face Hub 开源（除 large 版本外），极大降低了使用门槛。
+
+在功能上，Kronos 提供 `KronosPredictor` 类，封装了数据预处理、归一化、预测和反归一化全流程，开发者只需几行代码即可生成未来价格预测。同时支持 `predict_batch` 方法，利用 GPU 并行处理多个资产或时间段的预测任务，显著提升效率。此外，项目还提供了完整的微调 pipeline，以中国 A 股市场为例，结合微软 Qlib 框架，展示了如何从数据准备、分词器微调、预测器微调到回测试验的全流程，帮助用户将 Kronos 适配到特定市场或资产类别。
+
+值得注意的是，Kronos 已被 AAAI 2026 接收，学术价值得到认可。其设计充分考虑了金融数据高噪声、非平稳等特性，相比通用时间序列模型更具针对性。然而，文档也明确指出，当前提供的回测示例仅为教学演示，实际生产应用需结合投资组合优化、风险因子中性化、交易成本建模等更复杂的系统工程。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目开发一个‘虚拟试衣间 AI 引擎’，结合用户上传的身材数据与服装模型，在云端自动仿真不同面料的穿着效果，用于电商平台的沉浸式购物体验。; 灵感2：将其集成到游戏引擎（如 Unity 或 Unreal）的后处理管线中，作为高保真布料与角色交互的离线预计算模块，提升过场动画的真实感。; 灵感3：构建一个‘智能工业设计验证平台’，利用其大规模接触仿真能力，对机械臂抓取软物体、安全气囊展开、防护装备冲击测试等场景进行自动化仿真与优化。
-   项目链接: https://github.com/st-tech/ppf-contact-solver
+   衍生灵感: 灵感1：基于 Kronos 开发一个‘加密货币多资产智能预警系统’，实时监测 BTC、ETH 等主流币种，并结合波动率预测自动触发风控警报或对冲指令。; 灵感2：将其集成到现有量化交易平台（如聚宽、米筐）中，作为 Alpha 信号生成器，替代传统技术指标，提升选股或择时策略的预测精度。; 灵感3：针对特定垂直市场（如大宗商品、外汇、NFT 地板价）构建领域自适应版本，利用 Kronos 的微调 pipeline 快速训练专属预测模型，形成‘金融预测即服务’（FPaaS）产品。
+   项目链接: https://github.com/shiyu-coder/Kronos
