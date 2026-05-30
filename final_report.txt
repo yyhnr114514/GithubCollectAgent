@@ -1,18 +1,37 @@
 1. harry0703/MoneyPrinterTurbo:
-   star: 63166  语言/技术: Python, Streamlit, FastAPI, ImageMagick, FFmpeg, Whisper, Edge-TTS, OpenAI, DeepSeek, Moonshot, Azure, Docker
-   项目简介: MoneyPrinterTurbo 是一个全自动短视频生成神器，只需输入主题或关键词，就能一键生成包含AI文案、无版权素材、多语言语音合成、智能字幕和背景音乐的完整短视频。它解决了内容创作者‘从0到1’制作视频的高门槛问题，堪称‘打工人神器’和‘自媒体起号利器’。
-   亮点: 全自动视频生成流水线：从文案、素材、配音到字幕、背景音乐一键合成; 支持12+主流大模型接入（包括国产DeepSeek、通义千问等），国内用户友好; 提供Web界面和API双模式，适合普通用户和开发者集成; 支持竖屏(9:16)和横屏(16:9)高清输出，适配抖音、YouTube等平台; 无版权视频素材源 + 自定义本地素材，规避版权风险
-   详细报告: MoneyPrinterTurbo 是一个基于 Python 的全自动短视频生成系统，采用 MVC 架构，代码结构清晰，支持 Web 界面和 REST API 两种使用方式。其核心流程是：用户输入一个视频主题或关键词 → 系统调用大模型（如 DeepSeek、OpenAI 等）自动生成视频文案 → 从 Pexels 等无版权平台获取匹配的高清视频素材 → 使用 Edge-TTS 或 Azure 进行多语言语音合成（支持中英文，可试听）→ 自动生成字幕（支持字体、颜色、位置、描边等样式调整）→ 添加背景音乐（可指定或随机）→ 最终合成一个完整的短视频。
+   star: 70137  语言/技术: Python, Streamlit, FastAPI, ImageMagick, FFmpeg, Whisper, Edge TTS, OpenAI, DeepSeek, Moonshot, Docker
+   项目简介: MoneyPrinterTurbo 是一个全自动短视频生成工具，只需输入视频主题或关键词，即可自动生成文案、素材、字幕、背景音乐并合成高清短视频。它解决了内容创作者需要大量时间制作视频的痛点，支持中英文、多种AI模型接入、批量生成和高度自定义，堪称'打工人神器'和'自媒体救星'。
+   亮点: 全自动视频生成：从主题到成品视频一键完成，支持AI自动生成文案、素材匹配、字幕合成和背景音乐添加; 多模型支持：兼容OpenAI、DeepSeek、Moonshot、Google Gemini等12+种大模型，国内用户推荐使用DeepSeek或Moonshot; 高度可自定义：支持字幕样式（字体/颜色/位置/描边）、背景音乐音量调节、视频尺寸（9:16竖屏/16:9横屏）、片段时长设置; 双界面支持：提供Web界面（Streamlit）和API接口（FastAPI），适合不同使用场景; 批量生成模式：一次生成多个视频，方便选择最优结果
+   详细报告: MoneyPrinterTurbo 是一个基于 Python 的全自动短视频生成系统，采用 MVC 架构设计，代码结构清晰易于维护。项目的核心理念是'只需一个主题，自动生成完整视频'。
 
-项目支持多种高清视频尺寸（竖屏1080x1920、横屏1920x1080），适合抖音、快手、YouTube Shorts 等平台。字幕生成提供两种模式：edge（速度快、资源占用低）和 whisper（质量高、需GPU）。背景音乐和字体文件可自定义替换。
+**核心功能模块：**
+1. **AI文案生成**：支持接入多种大语言模型（OpenAI、DeepSeek、Moonshot、通义千问等），自动生成视频文案，也支持自定义文案输入
+2. **视频素材管理**：使用高清无版权素材，支持本地素材替换，素材来源包括 Pexels 等
+3. **语音合成（TTS）**：支持多种语音合成服务，包括 Azure TTS（声音更真实），可实时试听效果
+4. **字幕生成**：提供两种模式 - edge（速度快但质量不稳定）和 whisper（速度慢但质量可靠），支持字幕样式自定义
+5. **视频合成**：基于 FFmpeg 和 ImageMagick 进行视频渲染，支持 1080x1920（竖屏）和 1920x1080（横屏）两种高清格式
 
-部署方式灵活：Windows 用户可使用一键启动包；Mac/Linux 推荐用 uv 管理依赖；Docker 支持一键部署。配置上需设置 LLM 提供商 API Key 和 Pexels API Key。项目对硬件要求不高，但若启用本地 Whisper 模型或批量生成，建议使用带显存的 GPU。
+**技术架构：**
+- 前端：Streamlit 构建的 Web 界面
+- API：FastAPI 提供的 RESTful 接口
+- 环境管理：推荐使用 uv 进行 Python 依赖管理
+- 部署方式：支持 Docker 一键部署、Windows 一键启动包、手动部署
 
-技术栈方面，前端使用 Streamlit 快速构建 WebUI，后端 API 基于 FastAPI，视频处理依赖 FFmpeg 和 ImageMagick，语音合成支持 Edge-TTS 和 Azure，大模型接入覆盖 OpenAI、DeepSeek、通义千问、Gemini 等主流服务商。项目还贴心地提供了国内用户可用的模型下载方式（百度网盘、夸克网盘），解决了 HuggingFace 访问难题。
-   活跃度: 未知  社区健康: 文档未提及
-   商业潜力: 该项目具有明确的商业化路径：可作为SaaS服务（如录咖已实践）、电商内容工具、自媒体运营助手、教育类视频自动生成平台等。短视频营销市场需求巨大，自动化生成是刚需。
+**配置要求：**
+- 最低配置：4核CPU + 4GB内存（依赖云端服务）
+- 推荐配置：6-8核CPU + 8GB内存 + 4GB显存GPU
+- 理想配置：8核以上CPU + 16GB内存 + 8GB显存GPU
+
+**国内用户友好：**
+- 推荐使用 DeepSeek 或 Moonshot 作为 LLM 提供商（国内直接访问，无需 VPN）
+- 提供了 Whisper 模型的国内网盘下载链接（百度网盘、夸克网盘）
+- 支持 Google Colab 在线运行
+
+项目文档详细，提供了完整的安装部署指南、常见问题解答和 API 文档，适合有一定技术基础的用户部署使用。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 该项目具有明确的商业化潜力，可作为短视频内容生产工具直接面向自媒体创作者、电商卖家、营销团队等用户群体。已有类似商业产品（如录咖）基于此项目开发，验证了市场需求。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个‘小红书爆款视频生成器’，针对小红书平台优化文案风格和素材选择，自动添加热门标签和封面图，解决小红书博主日更难题。; 灵感2：可以将其集成到电商运营系统中，开发一个‘商品短视频自动生成平台’，商家上传商品信息后，自动生成带货短视频，降低电商内容制作成本。; 灵感3：可以扩展为‘多语言出海视频工厂’，结合翻译API和本地化配音，一键生成英语、西班牙语、阿拉伯语等版本的短视频，助力企业海外营销。
+   衍生灵感: 灵感1：开发一个'短视频矩阵生成器'，基于此项目的批量生成能力，为电商卖家自动生成多个产品宣传短视频，用于抖音、快手、小红书等多平台分发。; 灵感2：集成到企业营销系统中，开发'AI营销视频工厂'，根据产品数据库和营销日历，自动生成节日促销、新品发布等营销视频内容。; 灵感3：开发'教育内容自动化平台'，将课程大纲或知识点输入后，自动生成配套的教学短视频，适用于在线教育机构和知识付费创作者。; 灵感4：基于API接口开发'短视频SaaS服务'，提供按量付费的视频生成能力，集成到现有的内容管理系统或社交媒体管理工具中。
    项目链接: https://github.com/harry0703/MoneyPrinterTurbo
 
 2. microsoft/markitdown:
@@ -37,66 +56,40 @@
    衍生灵感: 灵感1：基于此项目，可以开发一个「智能客服知识库构建器」，自动将企业散落的 PDF 手册、PPT 培训资料、Excel FAQ 表统一转为结构化 Markdown，直接喂给 RAG 系统，打造专属 AI 客服。; 灵感2：可以将其集成到「学术论文助手」中，自动解析 arXiv PDF 论文并提取图表描述（结合 LLM），生成带摘要和关键词的 Markdown 笔记，提升科研效率。; 灵感3：结合 Azure Content Understanding 的自定义分析器，开发一个「合同智能审查工具」，批量处理合同 PDF，自动提取关键条款（如金额、期限、违约责任）并以 YAML 结构化输出，供法务团队快速比对风险点。
    项目链接: https://github.com/microsoft/markitdown
 
-3. unclecode/crawl4ai:
-   star: 67076  语言/技术: Python, Playwright, Selenium, FastAPI, Docker, Pydantic, BM25, Cosine Similarity, LLM Integration, AsyncIO
-   项目简介: Crawl4AI 是一款专为大语言模型（LLM）优化的开源网络爬虫与数据抓取工具，致力于将复杂网页内容转化为干净、结构化的 Markdown 格式，便于 RAG 系统、AI Agent 和数据管道直接使用。它解决了传统爬虫输出杂乱、难以被 AI 高效处理的核心痛点，是构建智能数据采集系统的“程序员救星”。
-   亮点: LLM 就绪的 Markdown 输出：智能生成带标题、表格、代码块和引用提示的结构化 Markdown，极大提升 RAG 和 Agent 的上下文质量; 全功能浏览器集成：支持 Playwright 和 Selenium，具备会话管理、代理、Cookie 控制、反爬虫绕过（如 Shadow DOM 展平、反检测）等高级能力; 结构化数据提取：结合 LLM 驱动提取与 CSS/XPath 选择器，支持自定义 Schema 和 Pydantic 模型，实现高精度 JSON 输出; 异步高性能架构：基于 AsyncIO 和浏览器池，支持深度爬取、断点续传（crash recovery）、预取模式（prefetch），显著提升抓取效率; 开箱即用的 Docker 部署：提供完整容器化方案，含监控面板、API 网关、JWT 认证和 MCP 集成，适合企业级生产部署
-   详细报告: Crawl4AI 是一个面向 AI 时代的数据采集基础设施，其核心目标是让网页内容能直接被大语言模型高效消费。不同于传统爬虫仅返回原始 HTML，Crawl4AI 内置了先进的 Markdown 生成引擎，能够自动识别并保留页面结构（如 h1-h6 标题、列表、代码块），同时通过 BM25 或启发式过滤算法去除广告、导航栏等噪声内容，输出‘Fit Markdown’——即高度浓缩、语义清晰的文本。
+3. anthropics/claude-code:
+   star: 127966  语言/技术: Node.js 18+, Shell 脚本, PowerShell
+   项目简介: Claude Code 是一个终端里的 AI 编程助手，能理解你的代码库，通过自然语言命令帮你执行日常任务、解释复杂代码和处理 Git 工作流程，让你在终端、IDE 或 GitHub 上更快地编码。
+   亮点: 终端内运行的 AI 编码助手，理解整个代码库上下文; 通过自然语言命令执行日常编码任务、解释代码和处理 Git 工作流; 支持终端、IDE 和 GitHub 多端使用; 提供插件系统扩展自定义命令和 Agent 功能
+   详细报告: Claude Code 是 Anthropic 官方推出的一款 Agentic 编码工具，直接集成在开发者的终端环境中。它的核心能力在于能够理解整个代码库的上下文，而不仅仅是单个文件，这意味着你可以用自然语言向它提问或下达指令，比如'帮我重构这个模块'、'解释一下这段复杂逻辑'、'提交代码并创建 PR'等。
 
-在技术实现上，项目采用 Python 编写，底层依赖 Playwright（默认）或 Selenium 实现真实浏览器渲染，完美支持 JavaScript 动态加载、懒加载图片、无限滚动等现代网页特性。它提供了完整的异步 API（AsyncWebCrawler），支持并发抓取、缓存机制（CacheMode）、请求钩子（hooks）和自定义用户脚本，极大增强了灵活性和性能。
+从技术角度看，项目要求 Node.js 18+ 运行环境，提供了多种安装方式：MacOS/Linux 推荐使用 curl 脚本一键安装，也支持 Homebrew；Windows 用户可以通过 PowerShell 脚本或 WinGet 安装。NPM 安装方式已被标记为废弃。
 
-对于结构化数据提取，Crawl4AI 支持两种路径：一是基于规则的 CSS/XPath 快速提取；二是利用任意 LLM（如 GPT、Claude、本地模型）进行语义理解式提取，并可通过 Pydantic 模型定义输出 Schema，确保返回标准 JSON。此外，它还集成了 Cosine Similarity 和 Chunking 策略，支持从长文档中精准定位相关段落。
+项目架构上支持插件系统，在 plugins 目录下提供了多个扩展插件，可以为 Claude Code 添加自定义命令和 Agent，这意味着开发者可以根据自己的工作流定制专属能力。
 
-部署方面，项目提供轻量级 CLI 工具（crwl 命令）和完整的 Docker 镜像，后者包含 FastAPI 服务、实时监控仪表盘、交互式 Playground 和 MCP 协议集成，方便与 Claude Code 等 AI 开发工具联动。安全性上，v0.8.6 版本已修复 litellm 供应链攻击风险，替换为可信分支 unclecode-litellm。
+数据方面，Claude Code 会收集使用反馈数据，包括代码接受/拒绝情况、对话数据和 bug 报告。Anthropic 声明了隐私保护措施，包括敏感信息的有限保留期、会话数据的受限访问，以及明确承诺不使用反馈数据进行模型训练。
 
-社区生态方面，Crawl4AI 拥有超过 5 万 GitHub Stars，被众多初创公司和数据团队用于构建知识库、竞品分析、舆情监控等场景。其赞助模式也为长期可持续发展提供了保障。
-   活跃度: 高。近期频繁发布新版本（v0.8.6 安全热修复），文档完善，示例丰富，GitHub 提交和 issue 处理活跃。  社区健康: 优秀。拥有 50k+ Stars，活跃的贡献者社区，定期发布版本更新（如 v0.8.5/v0.8.6），并有企业赞助支持，生态健康。
-   商业潜力: 高。Crawl4AI 解决了 AI 应用中最关键的数据获取瓶颈，适用于金融、电商、法律、教育等多个行业的自动化信息采集需求。其开源+云 API 双轨模式具备清晰的商业化路径，尤其适合 SaaS 化数据服务。
+不过从 GitHub API 指标来看，该仓库的 forks、issues、commits 等数据均为 0，这可能是因为这是官方仓库的特殊配置，或者数据获取时的异常情况，不代表项目实际活跃度。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个「企业知识库自动构建平台」，用于解决内部文档分散、检索困难的问题。只需输入公司官网或 Wiki 地址，即可自动生成结构化知识图谱并接入内部 RAG 系统。; 灵感2：可以将其集成到「AI 客服训练数据工厂」中，自动抓取产品手册、FAQ 页面并生成高质量问答对，大幅降低人工标注成本。; 灵感3：结合定时任务与通知系统，开发一个「竞品动态监控 Agent」，持续追踪竞品官网更新日志、价格变动或新功能发布，并通过 Slack/邮件推送摘要。
-   项目链接: https://github.com/unclecode/crawl4ai
+   衍生灵感: 灵感1：基于 Claude Code 的插件系统，可以开发一个「团队代码规范自动审查 Agent」，在提交代码时自动检查是否符合团队约定的编码规范、命名约定和架构原则，解决 Code Review 效率低下的问题。; 灵感2：可以将其集成到 CI/CD 流水线中，构建一个「智能 CI 助手」，当构建失败时自动分析日志、定位问题根因并给出修复建议，大幅减少开发者在排查构建问题上的时间消耗。; 灵感3：利用 Claude Code 理解代码库上下文的能力，开发一个「新人入职引导 Agent」，新成员可以通过自然语言提问快速了解项目架构、模块关系和核心业务逻辑，解决新人上手慢的痛点。
+   项目链接: https://github.com/anthropics/claude-code
 
-4. OpenMOSS/MOSS-TTS:
-   star: 2332  语言/技术: Python, PyTorch, Transformers, llama.cpp, ONNX Runtime, SGLang, Gradio, FlashAttention 2, DiT（Diffusion Transformer）, Flow Matching, RVQ（Residual Vector Quantization）, Causal Transformer, GGUF量化, LoRA微调
-   项目简介: MOSS-TTS Family 是由 MOSI.AI 和 OpenMOSS 团队推出的开源语音与声音生成模型家族，专为高保真、高表现力和复杂真实场景设计。它不是一个单一模型，而是一个包含多个专用模型的完整生态系统，覆盖长文本语音合成、多说话人对话、声音设计、环境音效生成和实时流式TTS等核心场景。该项目解决了传统单一TTS模型在长语音稳定性、多角色对话、零样本声音克隆和实时交互等方面的痛点，提供了从生产级8B参数模型到轻量级100M参数Nano版本的完整产品线，支持31种语言，并提供了llama.cpp无PyTorch推理、SGLang加速推理等多种部署方案，是开发者和企业进行语音应用开发的强大工具箱。
-   亮点: 模型家族化设计：不是单一模型，而是包含MOSS-TTS（旗舰零样本克隆）、MOSS-TTSD（多说话人生成）、MOSS-VoiceGenerator（文本描述生成声音）、MOSS-TTS-Realtime（180ms低延迟实时交互）、MOSS-SoundEffect（音效生成）五个专用模型的完整生态; 极致的部署灵活性：支持PyTorch标准推理、llama.cpp+ONNX无PyTorch轻量部署（8B模型可运行在8GB GPU上）、SGLang后端3倍加速推理，以及mlx-audio支持，覆盖从云端到边缘设备的全场景; 31种语言支持与精细控制：支持中文、英文、粤语等31种语言，提供拼音/音素级发音控制、token级时长控制、内联停顿标记（[pause X.Ys]）等精细控制能力; MOSS-Audio-Tokenizer在3百万小时数据上训练，在开源音频tokenizer中重建质量领先，支持原生流式推理设计
-   详细报告: MOSS-TTS Family 是一个面向生产环境的开源语音生成模型家族，由 MOSI.AI 和 OpenMOSS 团队联合开发。项目的核心理念是'一个模型打天下不够用'，因此将语音生成任务拆解为五个各司其职的专用模型，可以独立使用也可以组合成完整流水线。
+4. galilai-group/stable-worldmodel:
+   star: 1285  语言/技术: Python, PyTorch, Gymnasium, LanceDB, HDF5, LeRobot, CEM, MPPI, JEPA
+   项目简介: stable-worldmodel 是一个为“世界模型”研究提供统一、可复现评测的 Python 平台。它把数据收集、模型训练和基于模型预测控制（MPC）的评估三大阶段封装进一个接口，并内置了多种经典环境（如 Atari、DMControl、Craftax 等）和基线模型（如 LeWM、DINO-WM），让研究者只需关注核心算法创新，而不用重复造轮子。
+   亮点: 统一封装了世界模型研究的数据收集、训练、MPC评估全流程; 支持多种数据格式（LanceDB、HDF5、Video、LeRobot），且 LanceDB 在吞吐和存储上表现优异; 集成 30+ 标准环境，支持视觉和物理参数的可控变化，便于零样本泛化测试; 内置多种求解器（CEM、iCEM、MPPI、梯度下降等）和基线模型（LeWM、DINO-WM、GCBC 等）; 提供 CLI 工具，无需写代码即可查看、转换数据集和环境
+   详细报告: stable-worldmodel 的核心目标是解决世界模型研究中“复现难、对比难、流程碎”的痛点。它通过一个统一的 Python 接口，把原本分散的数据收集、模型训练和基于模型预测控制（MPC）的评估流程整合在一起。用户只需几行代码就能完成从数据采集到策略评估的完整闭环。
 
-**核心模型详解：**
+在数据层面，项目支持多种存储格式：LanceDB（默认，追加友好、读取快）、HDF5（便携单文件）、Video（MP4压缩，适合长序列）和 LeRobot Hub 数据集。基准测试显示，LanceDB 在本地读取时吞吐量可达 4814 samples/s，远超 HDF5 的 1416 samples/s，且存储占用仅 13.31 GB（HDF5 为 43.12 GB，Video 为 496 MB）。
 
-1. **MOSS-TTS（旗舰模型）**：8B参数，基于MossTTSDelay架构，采用多头并行RVQ预测与延迟调度模式。主打高保真零样本声音克隆、长文本语音生成、多语言/代码切换合成。v1.5版本在语言标签支持、克隆稳定性、长参考短文本克隆、标点韵律跟随和内联停顿控制方面都有显著提升。
+环境方面，项目集成了 DeepMind Control Suite、Gymnasium、OGBench、Craftax、Arcade Learning Environment（100+ Atari 游戏）以及 Two-Room、PushT 等经典世界模型基准。每个环境都带有“变化因子”（Factors of Variation），如光照、纹理、动力学参数等，可以独立控制，方便研究者测试模型在分布偏移下的零样本泛化能力。
 
-2. **MOSS-TTSD（对话生成模型）**：8B参数，同样基于MossTTSDelay架构，专注于多说话人对话场景。在客观指标上达到行业领先，在主观评测中超越了Doubao和Gemini 2.5-pro等顶级闭源模型。适合播客生成、有声书、角色扮演等需要多角色对话的场景。
+在求解器和基线方面，项目提供了 Cross-Entropy Method (CEM)、iCEM、MPPI、Predictive Sampling、梯度下降、PGD、Augmented Lagrangian 等多种规划算法，以及 LeWM、DINO-WM、PLDM、GCBC、GCIVL、GCIQL 等参考实现。用户可以直接使用这些基线进行对比，也可以快速接入自己的模型。
 
-3. **MOSS-VoiceGenerator（声音设计模型）**：1.7B参数，这是一个非常有创意的模型——无需参考音频，仅通过文本描述就能生成多样化的声音和风格。它在竞技场评分中超越了其他顶级声音设计模型。
-
-4. **MOSS-TTS-Realtime（实时交互模型）**：1.7B参数，基于MossTTSRealtime架构，采用分层文本-音频输入设计，专为语音Agent场景优化。TTFB（首字节时间）仅180ms，结合LLM首句生成总延迟377ms，支持多轮上下文感知和增量合成。
-
-5. **MOSS-SoundEffect（音效生成模型）**：v1.0为8B参数，v2.0升级为1.3B DiT骨干网络配合Flow Matching目标函数，支持48kHz双语音效生成，最长30秒，覆盖自然环境、城市场景、生物声音、人类动作和音乐片段。
-
-6. **MOSS-TTS-Nano**：约100M参数的轻量级模型，支持多语言声音克隆、48kHz立体声输入输出，仅需4个CPU核心即可流式输出，适合边缘设备和移动端部署。
-
-**技术架构亮点：**
-
-项目定义了三种互补的架构基线：
-- **MossTTSDelay**：多头并行RVQ预测+延迟调度，强调长上下文稳定性、推理速度和生产就绪性
-- **MossTTSLocal**：时间同步RVQ块+深度Transformer，强调轻量灵活性和流式系统目标性能
-- **MossTTSRealtime**：分层文本-音频输入，专为语音Agent的低延迟多轮对话设计
-
-**部署方案丰富度是该项目的一大杀手锏：**
-- 标准PyTorch推理（支持FlashAttention 2加速）
-- llama.cpp + ONNX Runtime无PyTorch推理，GGUF量化权重让8B模型在8GB GPU上运行
-- SGLang后端支持，推理吞吐量提升约3倍
-- mlx-audio支持
-- 提供了ComfyUI扩展、OpenAI兼容API等社区集成方案
-
-**音频Tokenizer方面**，MOSS-Audio-Tokenizer在3百万小时语音、音效和音乐数据上从头训练，在0-4kbps比特率范围内重建质量领先开源同类，采用纯因果Transformer架构，原生支持流式推理。
-
-**支持31种语言**，包括中文、粤语、英文、日文、韩文、法文、德文、西班牙文、阿拉伯文、俄文、葡萄牙文、意大利文、荷兰文、芬兰文、印地文、马其顿文、马来文、罗马尼亚文、斯瓦希里文、他加禄文、泰文、越南文等。
-
-项目采用Apache 2.0许可证，技术报告已发表在arXiv上。
-   活跃度: 极高。从News时间线看，2026年2月至5月期间密集发布了多个重大更新：MOSS-TTS-v1.5、MOSS-SoundEffect-v2.0、MOSS-TTS-Nano、llama.cpp支持、SGLang支持、mlx-audio支持、多篇arXiv技术报告等，开发节奏非常快，是一个处于快速迭代期的活跃项目。  社区健康: 社区活跃度较高，有ComfyUI扩展、OpenAI兼容API封装、AnyPod播客工具、挪威语LoRA适配器等社区项目。项目在HuggingFace、ModelScope等平台均有发布，有Discord社区和微信交流群。但GitHub API指标显示forks和issues数据为0，可能是API统计时间窗口问题。
-   商业潜力: 该项目具有极高的商业价值。语音合成市场正在快速增长，MOSS-TTS Family提供了从模型到部署的完整解决方案，Apache 2.0许可证允许商业使用。潜在商业模式包括：1）基于MOSS-TTS-Realtime的AI客服/语音Agent SaaS服务；2）基于MOSS-TTSD的有声内容自动生成平台；3）基于MOSS-VoiceGenerator的游戏/影视配音工具；4）基于MOSS-TTS-Nano的边缘设备语音SDK授权；5）企业级TTS API聚合服务。项目已被ClawHub集成，说明已有一定的生态基础。
+此外，项目还提供了命令行工具 `swm`，用于查看数据集、环境、检查点，以及格式转换，降低了使用门槛。整体设计遵循 Gymnasium 接口规范，扩展新环境只需实现对应接口即可。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于MOSS-TTS-Realtime的低延迟特性（TTFB 180ms），可以开发一个'AI电话客服系统'，用于替代传统IVR语音菜单，实现自然流畅的多轮语音对话，大幅降低用户等待时间和提升服务体验。结合MOSS-VoiceGenerator可以定制符合品牌形象的专属客服声音。; 灵感2：利用MOSS-TTSD的多说话人对话生成能力和MOSS-SoundEffect的音效生成能力，可以构建一个'AI播客/有声书自动生成平台'，输入剧本或小说文本，自动分配不同角色声音、添加背景音效和音乐，一键生成专业级有声内容，适用于自媒体创作者和出版社。; 灵感3：基于MOSS-TTS-Nano的轻量级特性（100M参数，4核CPU流式输出），可以开发一个'离线智能语音助手SDK'，集成到智能家居设备、车载系统或IoT设备中，无需联网即可实现本地语音交互，特别适合对隐私要求高的场景。; 灵感4：结合MOSS-VoiceGenerator的文本描述生成声音能力，可以开发一个'游戏NPC语音设计工具'，游戏开发者只需用文字描述角色性格和声音特征，即可批量生成大量独特的NPC语音，大幅降低游戏配音成本。; 灵感5：基于MOSS-TTS的OpenAI兼容API封装方案，可以构建一个'多模型语音合成聚合网关'，统一接口对接MOSS-TTS、ElevenLabs、Azure TTS等多个TTS服务，实现智能路由、故障切换和成本优化，为企业级应用提供高可用的语音合成服务。
-   项目链接: https://github.com/OpenMOSS/MOSS-TTS
+   衍生灵感: 灵感1：基于此平台开发一个“机器人仿真训练工厂”，利用其丰富的环境和 MPC 求解器，快速验证不同世界模型在机械臂、四足机器人等场景下的泛化能力，加速 sim-to-real 迁移。; 灵感2：将其集成到游戏 AI 研究管线中，利用 Atari 和 Craftax 环境，结合 JEPA 类模型，探索更高效的离线强化学习或规划算法。; 灵感3：构建一个“世界模型评测即服务”平台，利用其统一接口和标准化环境，为不同研究团队提供可复现的排行榜和对比报告，类似 Hugging Face 的模型评测但专注于世界模型。
+   项目链接: https://github.com/galilai-group/stable-worldmodel
