@@ -1,4 +1,26 @@
-1. harry0703/MoneyPrinterTurbo:
+1. microsoft/markitdown:
+   star: 128035  语言/技术: Python, Markdown, Azure Document Intelligence, Azure Content Understanding, OpenAI API, OCR, Docker, Hatch
+   项目简介: MarkItDown 是微软开源的一款轻量级 Python 工具，专为将多种格式的文件（如 PDF、Word、Excel、PPT、图片、音频、YouTube 链接等）高效转换为 Markdown 格式而设计，主要服务于 LLM 和文本分析流水线。它解决了非结构化文档难以被 AI 模型高效解析的痛点，通过保留标题、列表、表格、链接等关键结构信息，生成对大语言模型友好且 token 效率高的 Markdown 输出，是构建 RAG 系统、知识库和多模态 AI 应用的“数据预处理神器”。
+   亮点: 支持超过 10 种主流文件格式（PDF、Office、图片、音频、视频、ZIP、YouTube 等）一键转 Markdown; 深度集成 Azure 云服务（Document Intelligence 和 Content Understanding），提供高精度 OCR 和结构化字段提取（YAML front matter）; 支持插件机制和 LLM 增强（如用 GPT-4o 描述图片内容或转录音频），可扩展性强
+   详细报告: MarkItDown 是一个由微软开发的 Python 库，核心目标是将各种非结构化文档统一转化为对大语言模型（LLM）友好的 Markdown 格式。其设计哲学强调‘结构保留’而非‘视觉保真’，因此特别适合用于 RAG（检索增强生成）、知识图谱构建、文档摘要等 AI 下游任务。
+
+项目技术上采用模块化架构，每种文件类型对应一个独立转换器（converter），并通过依赖注入支持可选功能（如 `[pdf]`、`[docx]`）。它原生支持本地文件、远程 URL 和字节流输入，并提供细粒度的安全控制（如 `convert_local()` 防止 SSRF）。
+
+亮点功能包括：
+1. **多模态支持**：不仅处理文本，还能从图片中提取 EXIF 和 OCR 文字，从音频中转录语音（需启用 `audio-transcription`），甚至解析 YouTube 视频字幕。
+2. **企业级集成**：无缝对接 Azure Document Intelligence（用于高质量 PDF/表格识别）和 Azure Content Understanding（支持自定义分析器提取发票金额、合同条款等结构化字段，输出为 YAML front matter）。
+3. **LLM 增强模式**：通过传入 `llm_client` 和 `llm_model`，可让 GPT-4o 等模型为图片生成描述或转录音频，提升内容理解深度。
+4. **插件生态**：支持第三方插件（如 `markitdown-ocr`），无需修改核心代码即可扩展能力。
+5. **开发者友好**：提供 CLI、Python API、Docker 镜像三种使用方式，测试框架基于 Hatch，贡献流程清晰。
+
+安全方面，项目明确警示输入需消毒，并推荐使用最窄权限的 API（如仅读本地文件时用 `convert_local()`），体现了企业级安全意识。
+   活跃度: 文档未提及  社区健康: 文档未提及
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目，可以开发一个「智能客服知识库构建器」，自动将企业散落的 PDF 手册、PPT 培训资料、Excel FAQ 表统一转为结构化 Markdown，直接喂给 RAG 系统，打造专属 AI 客服。; 灵感2：可以将其集成到「学术论文助手」中，自动解析 arXiv PDF 论文并提取图表描述（结合 LLM），生成带摘要和关键词的 Markdown 笔记，提升科研效率。; 灵感3：结合 Azure Content Understanding 的自定义分析器，开发一个「合同智能审查工具」，批量处理合同 PDF，自动提取关键条款（如金额、期限、违约责任）并以 YAML 结构化输出，供法务团队快速比对风险点。
+   项目链接: https://github.com/microsoft/markitdown
+
+2. harry0703/MoneyPrinterTurbo:
    star: 70137  语言/技术: Python, Streamlit, FastAPI, ImageMagick, FFmpeg, Whisper, Edge TTS, OpenAI, DeepSeek, Moonshot, Docker
    项目简介: MoneyPrinterTurbo 是一个全自动短视频生成工具，只需输入视频主题或关键词，即可自动生成文案、素材、字幕、背景音乐并合成高清短视频。它解决了内容创作者需要大量时间制作视频的痛点，支持中英文、多种AI模型接入、批量生成和高度自定义，堪称'打工人神器'和'自媒体救星'。
    亮点: 全自动视频生成：从主题到成品视频一键完成，支持AI自动生成文案、素材匹配、字幕合成和背景音乐添加; 多模型支持：兼容OpenAI、DeepSeek、Moonshot、Google Gemini等12+种大模型，国内用户推荐使用DeepSeek或Moonshot; 高度可自定义：支持字幕样式（字体/颜色/位置/描边）、背景音乐音量调节、视频尺寸（9:16竖屏/16:9横屏）、片段时长设置; 双界面支持：提供Web界面（Streamlit）和API接口（FastAPI），适合不同使用场景; 批量生成模式：一次生成多个视频，方便选择最优结果
@@ -34,28 +56,6 @@
    衍生灵感: 灵感1：开发一个'短视频矩阵生成器'，基于此项目的批量生成能力，为电商卖家自动生成多个产品宣传短视频，用于抖音、快手、小红书等多平台分发。; 灵感2：集成到企业营销系统中，开发'AI营销视频工厂'，根据产品数据库和营销日历，自动生成节日促销、新品发布等营销视频内容。; 灵感3：开发'教育内容自动化平台'，将课程大纲或知识点输入后，自动生成配套的教学短视频，适用于在线教育机构和知识付费创作者。; 灵感4：基于API接口开发'短视频SaaS服务'，提供按量付费的视频生成能力，集成到现有的内容管理系统或社交媒体管理工具中。
    项目链接: https://github.com/harry0703/MoneyPrinterTurbo
 
-2. microsoft/markitdown:
-   star: 128035  语言/技术: Python, Markdown, Azure Document Intelligence, Azure Content Understanding, OpenAI API, OCR, Docker, Hatch
-   项目简介: MarkItDown 是微软开源的一款轻量级 Python 工具，专为将多种格式的文件（如 PDF、Word、Excel、PPT、图片、音频、YouTube 链接等）高效转换为 Markdown 格式而设计，主要服务于 LLM 和文本分析流水线。它解决了非结构化文档难以被 AI 模型高效解析的痛点，通过保留标题、列表、表格、链接等关键结构信息，生成对大语言模型友好且 token 效率高的 Markdown 输出，是构建 RAG 系统、知识库和多模态 AI 应用的“数据预处理神器”。
-   亮点: 支持超过 10 种主流文件格式（PDF、Office、图片、音频、视频、ZIP、YouTube 等）一键转 Markdown; 深度集成 Azure 云服务（Document Intelligence 和 Content Understanding），提供高精度 OCR 和结构化字段提取（YAML front matter）; 支持插件机制和 LLM 增强（如用 GPT-4o 描述图片内容或转录音频），可扩展性强
-   详细报告: MarkItDown 是一个由微软开发的 Python 库，核心目标是将各种非结构化文档统一转化为对大语言模型（LLM）友好的 Markdown 格式。其设计哲学强调‘结构保留’而非‘视觉保真’，因此特别适合用于 RAG（检索增强生成）、知识图谱构建、文档摘要等 AI 下游任务。
-
-项目技术上采用模块化架构，每种文件类型对应一个独立转换器（converter），并通过依赖注入支持可选功能（如 `[pdf]`、`[docx]`）。它原生支持本地文件、远程 URL 和字节流输入，并提供细粒度的安全控制（如 `convert_local()` 防止 SSRF）。
-
-亮点功能包括：
-1. **多模态支持**：不仅处理文本，还能从图片中提取 EXIF 和 OCR 文字，从音频中转录语音（需启用 `audio-transcription`），甚至解析 YouTube 视频字幕。
-2. **企业级集成**：无缝对接 Azure Document Intelligence（用于高质量 PDF/表格识别）和 Azure Content Understanding（支持自定义分析器提取发票金额、合同条款等结构化字段，输出为 YAML front matter）。
-3. **LLM 增强模式**：通过传入 `llm_client` 和 `llm_model`，可让 GPT-4o 等模型为图片生成描述或转录音频，提升内容理解深度。
-4. **插件生态**：支持第三方插件（如 `markitdown-ocr`），无需修改核心代码即可扩展能力。
-5. **开发者友好**：提供 CLI、Python API、Docker 镜像三种使用方式，测试框架基于 Hatch，贡献流程清晰。
-
-安全方面，项目明确警示输入需消毒，并推荐使用最窄权限的 API（如仅读本地文件时用 `convert_local()`），体现了企业级安全意识。
-   活跃度: 文档未提及  社区健康: 文档未提及
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个「智能客服知识库构建器」，自动将企业散落的 PDF 手册、PPT 培训资料、Excel FAQ 表统一转为结构化 Markdown，直接喂给 RAG 系统，打造专属 AI 客服。; 灵感2：可以将其集成到「学术论文助手」中，自动解析 arXiv PDF 论文并提取图表描述（结合 LLM），生成带摘要和关键词的 Markdown 笔记，提升科研效率。; 灵感3：结合 Azure Content Understanding 的自定义分析器，开发一个「合同智能审查工具」，批量处理合同 PDF，自动提取关键条款（如金额、期限、违约责任）并以 YAML 结构化输出，供法务团队快速比对风险点。
-   项目链接: https://github.com/microsoft/markitdown
-
 3. anthropics/claude-code:
    star: 127966  语言/技术: Node.js 18+, Shell 脚本, PowerShell
    项目简介: Claude Code 是一个终端里的 AI 编程助手，能理解你的代码库，通过自然语言命令帮你执行日常任务、解释复杂代码和处理 Git 工作流程，让你在终端、IDE 或 GitHub 上更快地编码。
@@ -75,21 +75,17 @@
    衍生灵感: 灵感1：基于 Claude Code 的插件系统，可以开发一个「团队代码规范自动审查 Agent」，在提交代码时自动检查是否符合团队约定的编码规范、命名约定和架构原则，解决 Code Review 效率低下的问题。; 灵感2：可以将其集成到 CI/CD 流水线中，构建一个「智能 CI 助手」，当构建失败时自动分析日志、定位问题根因并给出修复建议，大幅减少开发者在排查构建问题上的时间消耗。; 灵感3：利用 Claude Code 理解代码库上下文的能力，开发一个「新人入职引导 Agent」，新成员可以通过自然语言提问快速了解项目架构、模块关系和核心业务逻辑，解决新人上手慢的痛点。
    项目链接: https://github.com/anthropics/claude-code
 
-4. galilai-group/stable-worldmodel:
-   star: 1285  语言/技术: Python, PyTorch, Gymnasium, LanceDB, HDF5, LeRobot, CEM, MPPI, JEPA
-   项目简介: stable-worldmodel 是一个为“世界模型”研究提供统一、可复现评测的 Python 平台。它把数据收集、模型训练和基于模型预测控制（MPC）的评估三大阶段封装进一个接口，并内置了多种经典环境（如 Atari、DMControl、Craftax 等）和基线模型（如 LeWM、DINO-WM），让研究者只需关注核心算法创新，而不用重复造轮子。
-   亮点: 统一封装了世界模型研究的数据收集、训练、MPC评估全流程; 支持多种数据格式（LanceDB、HDF5、Video、LeRobot），且 LanceDB 在吞吐和存储上表现优异; 集成 30+ 标准环境，支持视觉和物理参数的可控变化，便于零样本泛化测试; 内置多种求解器（CEM、iCEM、MPPI、梯度下降等）和基线模型（LeWM、DINO-WM、GCBC 等）; 提供 CLI 工具，无需写代码即可查看、转换数据集和环境
-   详细报告: stable-worldmodel 的核心目标是解决世界模型研究中“复现难、对比难、流程碎”的痛点。它通过一个统一的 Python 接口，把原本分散的数据收集、模型训练和基于模型预测控制（MPC）的评估流程整合在一起。用户只需几行代码就能完成从数据采集到策略评估的完整闭环。
+4. OpenBMB/VoxCPM:
+   star: 22881  语言/技术: Python, PyTorch, Diffusion Autoregressive, AudioVAE V2, MiniCPM-4, vLLM, Nano-vLLM, ONNX, GGML/GGUF, Rust
+   项目简介: VoxCPM2 是一款由 OpenBMB 开发的“Tokenizer-Free”文本转语音（TTS）系统，基于扩散自回归架构直接在连续语音表征上生成，跳过了传统的离散 Token 化过程。它支持 30 种语言的多语种合成、自然语言描述的“声音设计”、可控声音克隆以及 48kHz 录音室级音质输出。基于 2B 参数骨干网络，它不仅在零样本 TTS 基准测试中表现出色，还提供了极低的实时率（RTF），是追求高自然度、多语言支持和创意语音设计的开发者的“声音魔术师”。
+   亮点: Tokenizer-Free 架构：直接在连续语音表征上生成，避免了离散化带来的信息丢失，实现了极高的自然度和表现力。; 多语种与方言支持：支持 30 种语言及多种中文方言，无需语言标签即可直接合成。; Voice Design：仅需自然语言描述（如“年轻女性，温柔甜美”）即可创造全新声音，无需参考音频。; 高质量与实时性：原生 48kHz 输出，结合 Nano-vLLM 或 vLLM-Omni 部署，在 RTX 4090 上 RTF 低至 0.13，满足生产级实时流式需求。; 丰富的生态系统：支持 ComfyUI、Rust 重写、ONNX 导出、Apple Neural Engine 等多种部署和集成方式。
+   详细报告: VoxCPM2 是一个极具突破性的开源 TTS 项目，其核心在于摒弃了传统 TTS 系统中常见的离散 Token（如 VQ-VAE 或 Codec）转换步骤。它采用了一种基于扩散自回归（Diffusion Autoregressive）的端到端架构，直接在 AudioVAE V2 的潜在空间中进行四阶段处理：LocEnc（局部编码）→ TSLM（时序语言模型）→ RALM（表征自回归模型）→ LocDiT（局部扩散变换器）。这种“Tokenizer-Free”的设计使得模型能够保留更多的语音细节和情感色彩，从而生成极其逼真、富有表现力的语音。
 
-在数据层面，项目支持多种存储格式：LanceDB（默认，追加友好、读取快）、HDF5（便携单文件）、Video（MP4压缩，适合长序列）和 LeRobot Hub 数据集。基准测试显示，LanceDB 在本地读取时吞吐量可达 4814 samples/s，远超 HDF5 的 1416 samples/s，且存储占用仅 13.31 GB（HDF5 为 43.12 GB，Video 为 496 MB）。
+在功能上，VoxCPM2 堪称“全能选手”。它不仅支持 30 种主流语言及多种中文方言的多语种合成，还引入了极具创意的“Voice Design”功能，用户只需输入一段文字描述（例如“一个略带沙哑、语速缓慢的中年男性声音”），模型就能凭空创造出符合该特征的声音，这对于游戏角色配音、虚拟人创建等场景极具价值。此外，它的“Controllable Cloning”和“Ultimate Cloning”功能允许用户提供参考音频进行克隆，并且可以在克隆的基础上调整情感、语速等风格，甚至通过提供参考音频及其转录本来实现极致的“无缝衔接”克隆。
 
-环境方面，项目集成了 DeepMind Control Suite、Gymnasium、OGBench、Craftax、Arcade Learning Environment（100+ Atari 游戏）以及 Two-Room、PushT 等经典世界模型基准。每个环境都带有“变化因子”（Factors of Variation），如光照、纹理、动力学参数等，可以独立控制，方便研究者测试模型在分布偏移下的零样本泛化能力。
-
-在求解器和基线方面，项目提供了 Cross-Entropy Method (CEM)、iCEM、MPPI、Predictive Sampling、梯度下降、PGD、Augmented Lagrangian 等多种规划算法，以及 LeWM、DINO-WM、PLDM、GCBC、GCIVL、GCIQL 等参考实现。用户可以直接使用这些基线进行对比，也可以快速接入自己的模型。
-
-此外，项目还提供了命令行工具 `swm`，用于查看数据集、环境、检查点，以及格式转换，降低了使用门槛。整体设计遵循 Gymnasium 接口规范，扩展新环境只需实现对应接口即可。
+在工程落地方面，VoxCPM2 同样表现出色。它基于 MiniCPM-4 骨干网络，拥有 2B 参数，在 NVIDIA RTX 4090 上即可实现约 0.3 的 RTF（实时率），如果配合专用的 Nano-vLLM 或官方的 vLLM-Omni 推理引擎，RTF 更是可以低至 0.13，完美支持高并发的生产环境部署。项目还提供了 Python API、CLI 工具、Web Demo 以及 Docker 部署方案，极大降低了使用门槛。其开源协议为 Apache-2.0，允许商业使用，且社区生态活跃，已有 ComfyUI 节点、Rust 重写版本、ONNX 导出工具等第三方扩展，为开发者提供了丰富的二次开发素材。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此平台开发一个“机器人仿真训练工厂”，利用其丰富的环境和 MPC 求解器，快速验证不同世界模型在机械臂、四足机器人等场景下的泛化能力，加速 sim-to-real 迁移。; 灵感2：将其集成到游戏 AI 研究管线中，利用 Atari 和 Craftax 环境，结合 JEPA 类模型，探索更高效的离线强化学习或规划算法。; 灵感3：构建一个“世界模型评测即服务”平台，利用其统一接口和标准化环境，为不同研究团队提供可复现的排行榜和对比报告，类似 Hugging Face 的模型评测但专注于世界模型。
-   项目链接: https://github.com/galilai-group/stable-worldmodel
+   衍生灵感: 灵感1：基于此项目，可以开发一个“AI 有声书创作平台”，利用其多语种支持和 Voice Design 功能，让作者能够为不同角色定制独特的声音，实现一键生成高质量有声书。; 灵感2：可以将其集成到“游戏 NPC 对话系统”中，利用其实时流式生成和可控克隆功能，为游戏中的不同角色赋予生动、多变的语音，提升玩家沉浸感。; 灵感3：可以构建一个“个性化语音助手/虚拟人”服务，用户只需上传几秒钟的语音样本或输入文字描述，即可生成专属的 AI 语音，用于智能客服、虚拟主播或个性化导航等场景。
+   项目链接: https://github.com/OpenBMB/VoxCPM
