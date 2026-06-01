@@ -111,7 +111,7 @@ def run() -> list[AnalysisResult]:
 
             logger.info("全部完成，本次生成 {} 份报告", len(results))
             write_final_report(results, settings)
-
+            logger.info(f"send_message_flag:{settings.send_message_flag}")
             if push_results and settings.send_message_flag:
                 notifier.send_message(push_results)
             else:
