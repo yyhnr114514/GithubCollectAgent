@@ -31,7 +31,6 @@ jobs:
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
           NOTIFIER_WEBHOOK: ${{ secrets.NOTIFIER_WEBHOOK }}
           GITHUB_TOKEN: ${{ github.token }}
-          SEND_MESSAGE: 'false'
           TRENDING_LANGUAGE: python
           TRENDING_SINCE: daily
           ANALYSIS_NUM: '4'
