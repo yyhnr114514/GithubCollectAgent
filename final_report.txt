@@ -1,4 +1,26 @@
-1. microsoft/markitdown:
+1. chopratejas/headroom:
+   star: 7202  语言/技术: Python, TypeScript, HuggingFace Transformers, AST (抽象语法树), MCP (Model Context Protocol), Docker
+   项目简介: Headroom 是一个专为 AI Agent 设计的上下文压缩层，能在不影响回答质量的前提下，将发送给大模型（LLM）的 Token 数量削减 60%–95%。它通过本地优先的架构，对工具输出、日志、RAG 分块、文件及对话历史进行智能压缩，并提供可逆压缩（CCR）机制确保原始数据随时可取回，是降低 AI 应用运行成本、提升响应速度的“省钱神器”。
+   亮点: 极致降本：实测最高可节省 92% 的 Token 消耗（如代码搜索场景），且基准测试显示准确率几乎无损（如 GSM8K 数学基准零损耗）。; 多模态压缩：内置 SmartCrusher (JSON)、CodeCompressor (代码AST) 和 Kompress-base (文本模型)，针对不同数据类型采用最优压缩算法。; 可逆压缩 (CCR)：原始数据永不丢失，LLM 可通过工具按需取回原文，兼顾了压缩率与数据完整性。; 无缝集成：支持 Proxy 模式（零代码改动）、Library 模式（Python/TS SDK）、Agent Wrap 模式（一行命令包裹 Claude/Cursor 等）以及 MCP Server。; 跨 Agent 记忆：支持 Claude、Codex、Gemini 等多个 Agent 共享上下文存储并自动去重。
+   详细报告: Headroom 解决的核心痛点是：随着 AI Agent 处理的任务越来越复杂（如长对话、大量工具调用、代码库分析），发送给 LLM 的上下文（Context）会急剧膨胀，导致 API 成本飙升和响应延迟增加。
+
+项目的技术壁垒在于其精细化的流水线设计：
+1. **智能路由 (ContentRouter)**：自动识别输入内容是 JSON、代码还是普通文本。
+2. **专用压缩器**：
+   - **SmartCrusher**：针对 JSON 结构进行深度压缩，保留关键键值对。
+   - **CodeCompressor**：基于 AST（抽象语法树）分析代码，移除注释、空白和不影响逻辑的冗余结构，支持 Python、JS、Go 等多种语言。
+   - **Kompress-base**：自研的 HuggingFace 模型，专门用于压缩自然语言文本和 Agent 交互轨迹。
+3. **缓存对齐 (CacheAligner)**：这是一个非常巧妙的工程优化。由于 LLM 提供商（如 Anthropic/OpenAI）通常有 KV Cache 机制，Headroom 会稳定前缀内容，确保压缩后的 Prompt 依然能命中 Provider 的缓存，进一步降低计费 Token。
+4. **可逆压缩 (CCR)**：虽然压缩了，但原始文件存储在本地。如果 LLM 觉得信息不够，可以调用 `headroom_retrieve` 工具取回原文，实现了“该省省，该花花”。
+
+此外，Headroom 提供了极其友好的接入方式。你可以把它当作一个本地代理（Proxy），完全不用改业务代码；也可以直接调用它的 Python/TS 库；甚至可以用 `headroom wrap claude` 一行命令直接给 Claude Code 套上“省钱 Buff”。它还具备 `headroom learn` 功能，能从失败的会话中提取教训并写入配置文件，让 Agent 越用越聪明。
+   活跃度: 活跃。项目处于快速迭代期，文档完善，功能矩阵丰富，且积极拥抱各种 Agent 生态（Claude, Cursor, LangChain 等）。  社区健康: 健康。项目提供了 Discord 社区、详细的文档站（Vercel 部署）、HuggingFace 模型页，并且有清晰的贡献指南和 Devcontainer 配置，显示出良好的开源协作意愿。
+   商业潜力: 极高。随着 AI Agent 的普及，Token 消耗成本是企业面临的主要痛点之一。Headroom 提供了立竿见影的成本优化方案，且支持私有化部署（Local-first），对数据敏感型企业极具吸引力。SaaS 化或企业版授权模式具有很高的商业变现潜力。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：开发一个 '企业级 AI 成本管控网关'。将 Headroom 部署在公司内部，作为所有员工调用 AI API 的统一出口，强制压缩上下文，预计可节省 50% 以上的大模型 API 账单。; 灵感2：构建 '超长文档智能问答系统'。利用 Headroom 的 CCR 和 RAG 压缩能力，将整本书或大量法规文档压缩后让 LLM 回答问题，当用户追问细节时，再通过 CCR 精准定位并展示原文片段。; 灵感3：打造 '边缘设备上的离线 AI 助手'。结合 Headroom 的本地优先特性和轻量化模型（Kompress-base），在算力受限的边缘设备（如树莓派、旧款手机）上运行复杂的 Agent 任务，通过极致压缩减少对云端大模型 API 的依赖。
+   项目链接: https://github.com/chopratejas/headroom
+
+2. microsoft/markitdown:
    star: 135816  语言/技术: Python, Markdown, Azure Document Intelligence, Azure Content Understanding, OpenAI API, LLM Vision, OCR, Docker, Hatch, pre-commit
    项目简介: MarkItDown 是微软开源的一款轻量级 Python 工具，专为将多种格式的文件（如 PDF、Word、Excel、PPT、图片、音频、HTML、YouTube 链接等）高效转换为 Markdown 格式而设计，主要服务于大语言模型（LLM）训练、文本分析管道和知识库构建场景。其核心优势在于保留文档结构（标题、列表、表格、链接等），输出结果对 LLM 友好且 token 高效，解决了多格式数据难以统一喂给 AI 模型的痛点。
    亮点: 支持超过 10 种主流文件格式转 Markdown，包括 PDF、Office 文档、图片、音频、视频、ZIP、YouTube 链接等，覆盖广泛的数据源类型。; 深度集成 Azure 云服务（Document Intelligence 和 Content Understanding），提供高质量、结构化字段提取能力，并支持自定义分析器（如发票、合同字段自动识别）。; 原生支持 LLM 增强功能：可通过 GPT-4o 等模型生成图片描述、音频转录，并允许插件扩展（如 markitdown-ocr 插件利用 LLM Vision 实现 OCR），无需额外 ML 依赖。
@@ -15,7 +37,30 @@
    衍生灵感: 灵感1：基于此项目，可以开发一个 **智能知识库预处理引擎**，用于企业文档自动化入库。用户上传任意格式的合同、报告、邮件，系统自动调用 MarkItDown 转为结构化 Markdown，再向量化存入向量数据库，实现 RAG（检索增强生成）问答系统。; 灵感2：可以将其集成到 **AI 写作助手** 中，作为内容输入层。例如，用户拖入一份 PDF 论文或 Excel 数据表，助手先通过 MarkItDown 提取关键信息并转为 Markdown，然后基于此生成摘要、分析报告或 PPT 大纲。; 灵感3：结合 Azure Content Understanding 的自定义分析器能力，开发一个 **行业专用文档解析平台**，比如医疗病历结构化系统或法律合同条款提取工具，利用 MarkItDown 的插件机制扩展特定领域的字段识别逻辑。
    项目链接: https://github.com/microsoft/markitdown
 
-2. nesquena/hermes-webui:
+3. D4Vinci/Scrapling:
+   star: 58315  语言/技术: Python, Playwright, Chromium, Lxml, Parsel, IPython, Docker, MCP
+   项目简介: 一句话概括：Scrapling 是一个为现代网页设计的自适应 Python 网络爬虫框架，旨在解决传统爬虫在面对反爬机制（如 Cloudflare）和网站结构频繁变更时脆弱、易断的问题。它集成了一个能够“学习”并自动重定位元素的智能解析器、可绕过高级反机器人的 StealthyFetcher，以及一个支持并发、断点续传和代理轮换的全功能 Spider 框架，让开发者用几行 Python 就能搞定从单次请求到大规模抓取的一切。
+   亮点: 🛡️ 反爬杀手：内置 StealthyFetcher，能绕过 Cloudflare Turnstile 等主流反机器人系统，支持 TLS 指纹伪装和 DNS 泄露防护。; 🧠 智能自适应：其解析器能在网站改版后，通过相似度算法自动“找回”原来的数据元素，极大提升爬虫健壮性。; 🕷️ 企业级爬虫框架：提供类 Scrapy 的 Spider API，支持并发抓取、断点续传、流式输出、robots.txt 遵守和代理轮换，开箱即用。; ⚡ 极致性能：解析速度远超 BeautifulSoup 等库，内存占用低，并内置 10 倍速 JSON 序列化。; 🤖 AI 友好：提供 MCP Server，可直接集成到 Claude/Cursor 等 AI 助手工作流中，实现智能数据提取。
+   详细报告: Scrapling 是一个专为应对现代网页复杂反爬策略和动态变化而生的 Python 爬虫框架。它不仅仅是一个库，而是一个完整的生态系统，覆盖了从数据获取到解析，再到大规模调度的全流程。
+
+**核心痛点解决**：传统爬虫最大的噩梦就是网站一改版，选择器就失效，或者被 Cloudflare 等盾墙拦截。Scrapling 通过两大杀手锏解决这些问题：
+1.  **自适应解析**：其解析引擎内置了智能元素追踪算法。当网站结构发生变化时，只需在查询时传入 `adaptive=True`，它就能基于内容、属性、位置等多维度相似度，自动重新定位到你想要的元素，让爬虫拥有“自我修复”能力。
+2.  **隐形获取**：`StealthyFetcher` 和 `DynamicFetcher` 基于 Playwright，但进行了深度定制，能够完美模拟真实浏览器行为（包括 TLS 指纹、HTTP/3、头部伪装），轻松绕过 Cloudflare Turnstile 等高级验证，实现“隐形”抓取。
+
+**技术架构深度**：
+- **高性能底层**：解析核心基于 Lxml，但进行了极致优化。基准测试显示，其文本提取速度比 PyQuery 快 12 倍，比 BeautifulSoup 快近 800 倍。同时，它拥有 92% 的测试覆盖率和完整的类型提示，代码质量极高。
+- **全功能 Spider 框架**：提供了类似 Scrapy 的声明式 API，但更现代化。支持异步并发、请求限速、多会话管理（可在同一个 Spider 中混合使用普通 HTTP 请求和 stealthy 浏览器请求）。
+- **开发者体验**：提供交互式 IPython 爬虫 Shell，方便快速调试选择器；支持直接从终端命令行抓取 URL；内置结果导出为 JSON/JSONL 的功能；支持 Docker 一键部署。
+- **AI 集成**：通过 MCP Server，可以将 Scrapling 的能力暴露给 AI 编程助手（如 Claude），让 AI 能直接调用 Scrapling 进行精准网页内容提取，减少 Token 消耗并提高准确性。
+
+**适用场景**：无论是需要抓取几个页面的数据分析师，还是需要 7x24 小时运行大规模爬虫的数据工程师，Scrapling 都能提供合适的工具。它特别适合目标网站有强反爬、结构不稳定、或需要高可靠性的商业数据采集项目。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：构建一个 **竞品价格智能监控平台**。利用 Scrapling 的 StealthyFetcher 绕过电商网站的反爬，结合其自适应解析能力应对页面改版，实现 7x24 小时自动采集竞品价格、库存、评价数据，并通过 MCP Server 让 AI 自动生成市场分析报告。; 灵感2：开发一个 **舆情分析引擎**。使用 Scrapling 的 Spider 框架并发抓取新闻网站、论坛、社交媒体（需遵守 robots.txt），利用其流式输出和断点续传功能处理海量数据，将清洗后的文本输入 NLP 模型进行情感分析和热点追踪。; 灵感3：创建一个 **自动化数据采集 SaaS 服务**。将 Scrapling 封装成后端服务，提供一个可视化前端，让用户可以通过点选的方式定义抓取规则（利用其 auto selector generation），无需编程即可配置定时抓取任务，服务于市场调研、SEO 监控、招聘聚合等垂直领域。
+   项目链接: https://github.com/D4Vinci/Scrapling
+
+4. nesquena/hermes-webui:
    star: 10236  语言/技术: Python, Vanilla JavaScript, HTML/CSS, SSE (Server-Sent Events), Prism.js, Mermaid.js, Web Speech API, WebAuthn / Passkeys, HMAC Cookies, SQLite, Docker, Tailscale
    项目简介: Hermes Web UI 是一个为 Hermes Agent 打造的开源、轻量级 Web 界面，提供与命令行（CLI）完全对等的操作体验。它解决了 AI Agent 工具通常缺乏持久记忆、无法跨会话学习、且只能通过终端访问的痛点。通过这个 Web UI，用户可以在浏览器中安全地访问部署在服务器上的 Hermes Agent，享受流式对话、会话管理、工作区文件浏览、语音输入、多主题切换、定时任务管理等全套功能，真正实现'一次部署，随时随地通过浏览器与你的智能助手对话'。
    亮点: 1:1 CLI 功能对等：所有终端操作均可在浏览器中完成，无需额外配置; 持久化记忆与会话管理：支持跨会话记忆、自动技能学习、定时任务调度; 安全远程访问：支持 SSH 隧道、Tailscale、密码/WebAuthn 认证，适合自托管部署; 极致轻量架构：无构建步骤、无前端框架、无打包器，仅依赖 Python 和原生 JS
@@ -38,37 +83,3 @@
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于此项目，可以开发一个 '企业级 AI 运维助手控制台'，用于让运维人员通过浏览器与部署在服务器上的 AI Agent 对话，执行日志分析、服务重启、告警处理等操作，同时利用其工作区浏览能力直接查看和编辑配置文件。; 灵感2：可以将其集成到 '远程开发环境' 中，作为 VS Code Server 或 JetBrains Gateway 的补充界面，让开发者在低带宽环境下也能通过轻量级 Web UI 与 AI 编程助手协作，尤其适合移动端或平板场景。; 灵感3：利用其多模型支持和会话持久化特性，构建一个 'AI 多角色协作平台'，例如让不同 Agent（如产品经理、架构师、测试工程师）在同一个 Web UI 中协同工作，每个角色拥有独立 Profile 和记忆，通过子代理委托机制完成任务分解与整合。
    项目链接: https://github.com/nesquena/hermes-webui
-
-3. harry0703/MoneyPrinterTurbo:
-   star: 75355  语言/技术: Python, Streamlit, FastAPI, ImageMagick, FFmpeg, Whisper, Edge TTS, OpenAI, DeepSeek, Gemini, Ollama, Docker
-   项目简介: MoneyPrinterTurbo 是一个全自动短视频生成工具，只需输入主题或关键词，即可一键生成包含文案、素材、字幕、配音和背景音乐的高清短视频。它解决了内容创作者‘从0到1’制作视频的繁琐流程，堪称‘打工人神器’和‘自媒体效率核弹’。
-   亮点: 全自动视频生成流水线：输入主题 → AI写文案 → 匹配无版权素材 → 合成语音 → 添加字幕与背景音乐 → 输出高清视频; 支持多种大模型接入（OpenAI、DeepSeek、Gemini、通义千问等），灵活适配不同用户需求; 提供 Web 界面 + API 双模式，既适合小白用户快速上手，也方便开发者集成到自有系统
-   详细报告: MoneyPrinterTurbo 是一个基于 Python 的全自动短视频生产系统，采用 MVC 架构设计，代码清晰易维护。其核心能力在于将传统需要多步骤、多工具协作的视频制作流程完全自动化。用户只需提供一个视频主题或关键词，系统便会自动调用大语言模型（如 GPT、DeepSeek、Gemini 等）生成高质量文案，并从 Pexels 等无版权资源平台获取高清素材视频片段。随后，系统通过 Edge TTS 或 Azure 语音合成技术生成自然语音旁白，并利用 Whisper 或 Edge 字幕生成引擎添加可自定义样式（字体、颜色、位置、描边）的字幕。最后，结合背景音乐（支持本地或随机选择），使用 FFmpeg 和 ImageMagick 合成最终的高清短视频。项目支持竖屏（9:16）和横屏（16:9）两种主流比例，适用于抖音、YouTube Shorts、B站等平台。部署方式多样：Windows 用户可使用一键启动包，Mac/Linux 用户可通过 uv + Streamlit 快速启动，Docker 用户可直接 docker-compose up 一键部署。此外，项目还提供完整的 RESTful API 文档（Swagger/OpenAPI），便于二次开发和集成。配置方面支持 config.toml 文件化管理，涵盖 LLM 提供商、API 密钥、字幕生成模式、ImageMagick 路径等关键参数。对于国内用户，项目贴心地提供了百度网盘和夸克网盘的 Whisper 模型下载链接，解决了 HuggingFace 访问难题。整体来看，该项目技术栈成熟、功能完整、部署友好，极大降低了 AI 视频创作门槛。
-   活跃度: 未知  社区健康: 文档未提及
-   商业潜力: 该项目具备清晰的商业化路径：可作为 SaaS 工具向自媒体团队、MCN 机构、电商商家收费；也可嵌入现有内容管理平台作为增值服务；甚至可打造垂直领域模板库（如财经、情感、知识付费）进行订阅制变现。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个‘小红书爆款笔记视频生成器’，专用于将图文笔记自动转化为短视频，解决小红书博主内容多平台分发效率低的问题。; 灵感2：可以将其集成到电商 CMS 系统中，实现‘商品详情页 → 自动讲解视频’的批量生产，用于淘宝、京东等平台的短视频带货场景。; 灵感3：扩展为‘多语言出海视频工厂’，结合翻译 API 和本地化语音合成，一键生成英语、阿拉伯语、西班牙语等版本短视频，助力 TikTok 或 YouTube 全球化内容运营。
-   项目链接: https://github.com/harry0703/MoneyPrinterTurbo
-
-4. D4Vinci/Scrapling:
-   star: 58315  语言/技术: Python, Playwright, Chromium, Lxml, Parsel, IPython, Docker, MCP
-   项目简介: 一句话概括：Scrapling 是一个为现代网页设计的自适应 Python 网络爬虫框架，旨在解决传统爬虫在面对反爬机制（如 Cloudflare）和网站结构频繁变更时脆弱、易断的问题。它集成了一个能够“学习”并自动重定位元素的智能解析器、可绕过高级反机器人的 StealthyFetcher，以及一个支持并发、断点续传和代理轮换的全功能 Spider 框架，让开发者用几行 Python 就能搞定从单次请求到大规模抓取的一切。
-   亮点: 🛡️ 反爬杀手：内置 StealthyFetcher，能绕过 Cloudflare Turnstile 等主流反机器人系统，支持 TLS 指纹伪装和 DNS 泄露防护。; 🧠 智能自适应：其解析器能在网站改版后，通过相似度算法自动“找回”原来的数据元素，极大提升爬虫健壮性。; 🕷️ 企业级爬虫框架：提供类 Scrapy 的 Spider API，支持并发抓取、断点续传、流式输出、robots.txt 遵守和代理轮换，开箱即用。; ⚡ 极致性能：解析速度远超 BeautifulSoup 等库，内存占用低，并内置 10 倍速 JSON 序列化。; 🤖 AI 友好：提供 MCP Server，可直接集成到 Claude/Cursor 等 AI 助手工作流中，实现智能数据提取。
-   详细报告: Scrapling 是一个专为应对现代网页复杂反爬策略和动态变化而生的 Python 爬虫框架。它不仅仅是一个库，而是一个完整的生态系统，覆盖了从数据获取到解析，再到大规模调度的全流程。
-
-**核心痛点解决**：传统爬虫最大的噩梦就是网站一改版，选择器就失效，或者被 Cloudflare 等盾墙拦截。Scrapling 通过两大杀手锏解决这些问题：
-1.  **自适应解析**：其解析引擎内置了智能元素追踪算法。当网站结构发生变化时，只需在查询时传入 `adaptive=True`，它就能基于内容、属性、位置等多维度相似度，自动重新定位到你想要的元素，让爬虫拥有“自我修复”能力。
-2.  **隐形获取**：`StealthyFetcher` 和 `DynamicFetcher` 基于 Playwright，但进行了深度定制，能够完美模拟真实浏览器行为（包括 TLS 指纹、HTTP/3、头部伪装），轻松绕过 Cloudflare Turnstile 等高级验证，实现“隐形”抓取。
-
-**技术架构深度**：
-- **高性能底层**：解析核心基于 Lxml，但进行了极致优化。基准测试显示，其文本提取速度比 PyQuery 快 12 倍，比 BeautifulSoup 快近 800 倍。同时，它拥有 92% 的测试覆盖率和完整的类型提示，代码质量极高。
-- **全功能 Spider 框架**：提供了类似 Scrapy 的声明式 API，但更现代化。支持异步并发、请求限速、多会话管理（可在同一个 Spider 中混合使用普通 HTTP 请求和 stealthy 浏览器请求）。
-- **开发者体验**：提供交互式 IPython 爬虫 Shell，方便快速调试选择器；支持直接从终端命令行抓取 URL；内置结果导出为 JSON/JSONL 的功能；支持 Docker 一键部署。
-- **AI 集成**：通过 MCP Server，可以将 Scrapling 的能力暴露给 AI 编程助手（如 Claude），让 AI 能直接调用 Scrapling 进行精准网页内容提取，减少 Token 消耗并提高准确性。
-
-**适用场景**：无论是需要抓取几个页面的数据分析师，还是需要 7x24 小时运行大规模爬虫的数据工程师，Scrapling 都能提供合适的工具。它特别适合目标网站有强反爬、结构不稳定、或需要高可靠性的商业数据采集项目。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：构建一个 **竞品价格智能监控平台**。利用 Scrapling 的 StealthyFetcher 绕过电商网站的反爬，结合其自适应解析能力应对页面改版，实现 7x24 小时自动采集竞品价格、库存、评价数据，并通过 MCP Server 让 AI 自动生成市场分析报告。; 灵感2：开发一个 **舆情分析引擎**。使用 Scrapling 的 Spider 框架并发抓取新闻网站、论坛、社交媒体（需遵守 robots.txt），利用其流式输出和断点续传功能处理海量数据，将清洗后的文本输入 NLP 模型进行情感分析和热点追踪。; 灵感3：创建一个 **自动化数据采集 SaaS 服务**。将 Scrapling 封装成后端服务，提供一个可视化前端，让用户可以通过点选的方式定义抓取规则（利用其 auto selector generation），无需编程即可配置定时抓取任务，服务于市场调研、SEO 监控、招聘聚合等垂直领域。
-   项目链接: https://github.com/D4Vinci/Scrapling
