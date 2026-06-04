@@ -1,26 +1,41 @@
 1. chopratejas/headroom:
-   star: 7202  语言/技术: Python, TypeScript, HuggingFace Transformers, AST (抽象语法树), MCP (Model Context Protocol), Docker
-   项目简介: Headroom 是一个专为 AI Agent 设计的上下文压缩层，能在不影响回答质量的前提下，将发送给大模型（LLM）的 Token 数量削减 60%–95%。它通过本地优先的架构，对工具输出、日志、RAG 分块、文件及对话历史进行智能压缩，并提供可逆压缩（CCR）机制确保原始数据随时可取回，是降低 AI 应用运行成本、提升响应速度的“省钱神器”。
-   亮点: 极致降本：实测最高可节省 92% 的 Token 消耗（如代码搜索场景），且基准测试显示准确率几乎无损（如 GSM8K 数学基准零损耗）。; 多模态压缩：内置 SmartCrusher (JSON)、CodeCompressor (代码AST) 和 Kompress-base (文本模型)，针对不同数据类型采用最优压缩算法。; 可逆压缩 (CCR)：原始数据永不丢失，LLM 可通过工具按需取回原文，兼顾了压缩率与数据完整性。; 无缝集成：支持 Proxy 模式（零代码改动）、Library 模式（Python/TS SDK）、Agent Wrap 模式（一行命令包裹 Claude/Cursor 等）以及 MCP Server。; 跨 Agent 记忆：支持 Claude、Codex、Gemini 等多个 Agent 共享上下文存储并自动去重。
-   详细报告: Headroom 解决的核心痛点是：随着 AI Agent 处理的任务越来越复杂（如长对话、大量工具调用、代码库分析），发送给 LLM 的上下文（Context）会急剧膨胀，导致 API 成本飙升和响应延迟增加。
+   star: 10487  语言/技术: Python, TypeScript, HuggingFace Transformers, AST 解析, MCP 协议, LangChain, Agno, Strands, Vercel AI SDK, LiteLLM, Docker
+   项目简介: Headroom 是一个专为 AI Agent 设计的上下文压缩层，能在不损失回答质量的前提下，将输入 LLM 的 token 数量减少 60%–95%。它通过本地运行的库、代理、MCP 服务器或中间件，智能压缩工具输出、日志、RAG 块、文件和对话历史，支持可逆压缩（CCR），原始数据随时可取回。适用于多 Agent 协作、编码助手、运维排障等高 token 消耗场景，是降低 AI 使用成本的'程序员救星'。
+   亮点: 支持 6 种压缩算法（SmartCrusher、CodeCompressor、Kompress-base 等），按内容类型自动路由; 提供可逆压缩（CCR），原始数据本地存储，LLM 可按需检索，确保信息不丢失; 无缝集成主流 AI Agent（Claude Code、Cursor、Codex、Aider 等）和框架（LangChain、Agno、Vercel AI SDK）
+   详细报告: Headroom 的核心定位是'AI Agent 的上下文压缩中间件'。它解决的核心痛点是：当 AI Agent 处理复杂任务（如代码搜索、SRE 排障、GitHub issue 分类）时，会积累大量上下文（工具输出、日志、文件内容等），导致 token 成本剧增甚至超出模型上下文窗口。Headroom 通过在数据进入 LLM 前进行智能压缩，实测可减少 60%–95% 的 token 使用量，同时保持回答准确性（在 GSM8K、TruthfulQA 等基准上无损）。
 
-项目的技术壁垒在于其精细化的流水线设计：
-1. **智能路由 (ContentRouter)**：自动识别输入内容是 JSON、代码还是普通文本。
-2. **专用压缩器**：
-   - **SmartCrusher**：针对 JSON 结构进行深度压缩，保留关键键值对。
-   - **CodeCompressor**：基于 AST（抽象语法树）分析代码，移除注释、空白和不影响逻辑的冗余结构，支持 Python、JS、Go 等多种语言。
-   - **Kompress-base**：自研的 HuggingFace 模型，专门用于压缩自然语言文本和 Agent 交互轨迹。
-3. **缓存对齐 (CacheAligner)**：这是一个非常巧妙的工程优化。由于 LLM 提供商（如 Anthropic/OpenAI）通常有 KV Cache 机制，Headroom 会稳定前缀内容，确保压缩后的 Prompt 依然能命中 Provider 的缓存，进一步降低计费 Token。
-4. **可逆压缩 (CCR)**：虽然压缩了，但原始文件存储在本地。如果 LLM 觉得信息不够，可以调用 `headroom_retrieve` 工具取回原文，实现了“该省省，该花花”。
+技术实现上，Headroom 采用分层架构：ContentRouter 检测内容类型并选择最优压缩器；SmartCrusher 处理 JSON 结构数据；CodeCompressor 基于 AST 压缩代码；Kompress-base 是专为此场景训练的 HuggingFace 文本压缩模型；CacheAligner 优化 KV 缓存命中率；CCR（Contextual Compression with Retrieval）机制保证压缩可逆，原始数据本地存储，LLM 可通过 headroom_retrieve 工具按需获取。
 
-此外，Headroom 提供了极其友好的接入方式。你可以把它当作一个本地代理（Proxy），完全不用改业务代码；也可以直接调用它的 Python/TS 库；甚至可以用 `headroom wrap claude` 一行命令直接给 Claude Code 套上“省钱 Buff”。它还具备 `headroom learn` 功能，能从失败的会话中提取教训并写入配置文件，让 Agent 越用越聪明。
-   活跃度: 活跃。项目处于快速迭代期，文档完善，功能矩阵丰富，且积极拥抱各种 Agent 生态（Claude, Cursor, LangChain 等）。  社区健康: 健康。项目提供了 Discord 社区、详细的文档站（Vercel 部署）、HuggingFace 模型页，并且有清晰的贡献指南和 Devcontainer 配置，显示出良好的开源协作意愿。
-   商业潜力: 极高。随着 AI Agent 的普及，Token 消耗成本是企业面临的主要痛点之一。Headroom 提供了立竿见影的成本优化方案，且支持私有化部署（Local-first），对数据敏感型企业极具吸引力。SaaS 化或企业版授权模式具有很高的商业变现潜力。
+部署方式极其灵活：可作为 Python/TypeScript 库直接调用 compress() 函数；可作为零代码修改的代理（headroom proxy）；可一键包装现有 Agent（headroom wrap claude）；也可作为 MCP 服务器集成到任何 MCP 客户端。支持跨 Agent 共享记忆（如 Claude 和 Codex 共享上下文），并具备 headroom learn 功能，能从失败会话中学习并自动更新 CLAUDE.md 等指令文件。
+
+文档提供了详尽的集成指南，覆盖 Anthropic/OpenAI SDK、Vercel AI SDK、LiteLLM、LangChain、Agno、Strands 等主流技术栈，并支持 ASGI 中间件和多 Agent 工作流。项目强调本地优先，所有数据处理均在用户设备完成，符合隐私和安全要求。
+   活跃度: GitHub API 显示 pushed_at 为 null，latest_release 为 null，近期无提交记录，活跃度待确认。  社区健康: 项目提供 Discord 社区支持，文档完善，但 GitHub 指标显示 forks、issues、commits 均为 0，可能为新发布项目或数据未同步。
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个 '企业级 AI 成本管控网关'。将 Headroom 部署在公司内部，作为所有员工调用 AI API 的统一出口，强制压缩上下文，预计可节省 50% 以上的大模型 API 账单。; 灵感2：构建 '超长文档智能问答系统'。利用 Headroom 的 CCR 和 RAG 压缩能力，将整本书或大量法规文档压缩后让 LLM 回答问题，当用户追问细节时，再通过 CCR 精准定位并展示原文片段。; 灵感3：打造 '边缘设备上的离线 AI 助手'。结合 Headroom 的本地优先特性和轻量化模型（Kompress-base），在算力受限的边缘设备（如树莓派、旧款手机）上运行复杂的 Agent 任务，通过极致压缩减少对云端大模型 API 的依赖。
+   衍生灵感: 灵感1：基于 Headroom 开发一个'企业级 AI Agent 成本优化平台'，集成到内部 DevOps 流水线中，自动监控和压缩所有 Agent 交互的上下文，按团队/项目统计 token 节省量，解决企业大规模使用 AI Agent 时的成本失控问题。; 灵感2：将其集成到现有 RAG 系统中，作为'智能上下文预处理器'，在检索到的文档块送入 LLM 前进行动态压缩，使单次查询能容纳更多相关文档，提升问答覆盖率和准确性，尤其适合法律、医疗等长文档密集领域。; 灵感3：开发一个'多 Agent 协作记忆中枢'，利用 Headroom 的跨 Agent 共享存储和自动去重能力，构建一个统一的知识库，让不同角色的 AI Agent（如代码审查员、测试工程师、项目经理）共享上下文和决策历史，减少重复沟通和信息孤岛。
    项目链接: https://github.com/chopratejas/headroom
 
-2. microsoft/markitdown:
+2. NousResearch/hermes-agent:
+   star: 179570  语言/技术: Python 3.11, Node.js, ripgrep, ffmpeg, uv (包管理), MCP (Model Context Protocol), FTS5 (全文检索), Honcho (用户建模), Docker, SSH, Modal, Daytona
+   项目简介: Hermes Agent 是由 Nous Research 打造的一款具备自我进化能力的 AI 智能体（Agent）。它不仅仅是一个简单的聊天机器人，而是一个拥有“闭环学习循环”的全能型助手。其核心杀手锏在于：能从经验中自主创建技能、在使用中自我改进、主动提醒自己持久化知识、搜索历史对话，并跨会话构建用户画像。它支持接入 200+ 种大模型（如 OpenAI、Kimi、MiniMax 等），运行在 Telegram、Discord 等任意平台，甚至支持在 $5 的 VPS 或无服务器架构上低成本运行。简单来说，这是一个能记住你、会自学、能跨平台打工的“超级 AI 管家”。
+   亮点: 闭环学习循环：Agent 能从经验中自主创建技能（Skills），并在使用中自我改进，还能通过 FTS5 搜索历史对话，实现真正的“越用越聪明”。; 全平台通讯网关：支持 Telegram, Discord, Slack, WhatsApp, Signal 等主流平台，且支持语音备忘录转录和跨平台对话连续性，随时随地找到你的 AI。; 极致的成本与部署灵活性：支持本地、Docker、SSH 及 Serverless（Modal/Daytona）部署，空闲时休眠几乎不花钱，最低 $5 VPS 即可运行，打破硬件焦虑。; 多模型无锁定：支持 Nous Portal, OpenRouter, OpenAI, Kimi 等 200+ 模型，一条命令切换，拒绝厂商绑定。; 自动化与并行处理：内置 Cron 定时任务调度，支持生成隔离的子 Agent 进行并行工作流，甚至能写 Python 脚本通过 RPC 调用工具，极大提升复杂任务效率。
+   详细报告: Hermes Agent 是一个极具野心的开源项目，旨在构建一个真正“活着”的 AI 智能体。它解决了传统 AI 助手“金鱼记忆”（跨会话遗忘）和“工具人”（只能被动回答）的痛点。
+
+**核心机制解析：**
+1. **自我进化（The Learning Loop）**：这是 Hermes 的灵魂。它引入了类似人类“肌肉记忆”的机制。当 Agent 完成复杂任务后，它会自动将操作流程抽象为“技能（Skills）”。下次遇到类似任务，直接调用技能，且在使用中不断优化该技能。同时，它利用 FTS5 全文搜索引擎和 LLM 总结，实现了跨会话的长期记忆检索，配合 Honcho 辩证用户建模，让 AI 真正“认识”你。
+2. **无处不在的触达（Omnipresent Gateway）**：通过一个网关进程，Hermes 可以同时挂在 Telegram、Discord、Slack 等六大平台。你在 Telegram 提的问题，可以在 Discord 继续聊，且支持语音转文字，真正实现了“AI 随叫随到”。
+3. **降维打击的部署成本**：项目支持六种终端后端，特别是 Modal 和 Daytona 这种 Serverless 架构。这意味着你的 AI 不需要 24x7 烧钱跑在 GPU 上，空闲时休眠，有消息时唤醒，成本几乎为零。对于个人开发者和小团队极其友好。
+4. **硬核的自动化能力**：内置 Cron 调度器，支持自然语言设定定时任务（如“每天早上发日报”）。更强大的是它的“子 Agent”机制，可以派生独立的子进程并行干活，甚至能自己写 Python 脚本通过 RPC 调用工具，把多步流水线压缩为零上下文消耗的单轮对话。
+
+**技术栈与生态：**
+底层基于 Python 3.11 构建，使用 `uv` 进行极速包管理。集成了 MCP 协议，可以连接任何外部工具。兼容 `agentskills.io` 开放标准，拥有活跃的 Skills Hub 社区。支持从 OpenClaw 一键迁移，降低了用户切换门槛。
+   活跃度: 未知（API 显示近期无提交，但文档完善且功能复杂，可能处于开发初期或私有仓库转公开阶段）  社区健康: 项目由知名 AI 研究机构 Nous Research 背书，拥有 Discord 社区和 Skills Hub 生态。虽然当前 GitHub 指标（Forks/Issues）显示为新项目或刚重置，但文档极其详尽，社区活跃度预期较高。
+   商业潜力: 极高。项目解决了 AI Agent 落地中最痛的几个问题：记忆缺失、平台孤岛、运行成本高。其 Serverless 友好的特性使得 SaaS 化部署成本极低，非常适合做垂直领域的 Agent 托管服务（如客服、个人助理、自动化运维）。Nous Portal 的订阅模式也展示了清晰的商业化路径。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：【跨境电商 24/7 智能客服】利用 Hermes 的多平台网关（接入 WhatsApp/Telegram）和技能自进化能力，搭建一个能自动处理多语言售后、退换货流程的电商客服 Agent。它能从历史工单中学习，越处理越熟练，且无需昂贵的 SaaS 客服系统。; 灵感2：【个人 RPA 自动化中枢】结合 Hermes 的 Cron 调度和子 Agent 并行能力，开发一个“打工人神器”。例如：每天早上自动抓取竞品价格生成报表发 Discord，晚上自动整理 GitHub PR 并总结邮件。利用 Serverless 后端，实现零成本挂机自动化。; 灵感3：【垂直领域专家 Agent 孵化器】基于 Hermes 的 Skills 系统和 MCP 协议，为特定行业（如法律、医疗、量化交易）构建专家库。例如，接入实时行情 API，让 Agent 自主编写量化策略回测脚本（利用其 Python RPC 能力），形成闭环的“AI 量化交易员”。
+   项目链接: https://github.com/NousResearch/hermes-agent
+
+3. microsoft/markitdown:
    star: 135816  语言/技术: Python, Markdown, Azure Document Intelligence, Azure Content Understanding, OpenAI API, LLM Vision, OCR, Docker, Hatch, pre-commit
    项目简介: MarkItDown 是微软开源的一款轻量级 Python 工具，专为将多种格式的文件（如 PDF、Word、Excel、PPT、图片、音频、HTML、YouTube 链接等）高效转换为 Markdown 格式而设计，主要服务于大语言模型（LLM）训练、文本分析管道和知识库构建场景。其核心优势在于保留文档结构（标题、列表、表格、链接等），输出结果对 LLM 友好且 token 高效，解决了多格式数据难以统一喂给 AI 模型的痛点。
    亮点: 支持超过 10 种主流文件格式转 Markdown，包括 PDF、Office 文档、图片、音频、视频、ZIP、YouTube 链接等，覆盖广泛的数据源类型。; 深度集成 Azure 云服务（Document Intelligence 和 Content Understanding），提供高质量、结构化字段提取能力，并支持自定义分析器（如发票、合同字段自动识别）。; 原生支持 LLM 增强功能：可通过 GPT-4o 等模型生成图片描述、音频转录，并允许插件扩展（如 markitdown-ocr 插件利用 LLM Vision 实现 OCR），无需额外 ML 依赖。
@@ -36,29 +51,6 @@
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于此项目，可以开发一个 **智能知识库预处理引擎**，用于企业文档自动化入库。用户上传任意格式的合同、报告、邮件，系统自动调用 MarkItDown 转为结构化 Markdown，再向量化存入向量数据库，实现 RAG（检索增强生成）问答系统。; 灵感2：可以将其集成到 **AI 写作助手** 中，作为内容输入层。例如，用户拖入一份 PDF 论文或 Excel 数据表，助手先通过 MarkItDown 提取关键信息并转为 Markdown，然后基于此生成摘要、分析报告或 PPT 大纲。; 灵感3：结合 Azure Content Understanding 的自定义分析器能力，开发一个 **行业专用文档解析平台**，比如医疗病历结构化系统或法律合同条款提取工具，利用 MarkItDown 的插件机制扩展特定领域的字段识别逻辑。
    项目链接: https://github.com/microsoft/markitdown
-
-3. D4Vinci/Scrapling:
-   star: 58315  语言/技术: Python, Playwright, Chromium, Lxml, Parsel, IPython, Docker, MCP
-   项目简介: 一句话概括：Scrapling 是一个为现代网页设计的自适应 Python 网络爬虫框架，旨在解决传统爬虫在面对反爬机制（如 Cloudflare）和网站结构频繁变更时脆弱、易断的问题。它集成了一个能够“学习”并自动重定位元素的智能解析器、可绕过高级反机器人的 StealthyFetcher，以及一个支持并发、断点续传和代理轮换的全功能 Spider 框架，让开发者用几行 Python 就能搞定从单次请求到大规模抓取的一切。
-   亮点: 🛡️ 反爬杀手：内置 StealthyFetcher，能绕过 Cloudflare Turnstile 等主流反机器人系统，支持 TLS 指纹伪装和 DNS 泄露防护。; 🧠 智能自适应：其解析器能在网站改版后，通过相似度算法自动“找回”原来的数据元素，极大提升爬虫健壮性。; 🕷️ 企业级爬虫框架：提供类 Scrapy 的 Spider API，支持并发抓取、断点续传、流式输出、robots.txt 遵守和代理轮换，开箱即用。; ⚡ 极致性能：解析速度远超 BeautifulSoup 等库，内存占用低，并内置 10 倍速 JSON 序列化。; 🤖 AI 友好：提供 MCP Server，可直接集成到 Claude/Cursor 等 AI 助手工作流中，实现智能数据提取。
-   详细报告: Scrapling 是一个专为应对现代网页复杂反爬策略和动态变化而生的 Python 爬虫框架。它不仅仅是一个库，而是一个完整的生态系统，覆盖了从数据获取到解析，再到大规模调度的全流程。
-
-**核心痛点解决**：传统爬虫最大的噩梦就是网站一改版，选择器就失效，或者被 Cloudflare 等盾墙拦截。Scrapling 通过两大杀手锏解决这些问题：
-1.  **自适应解析**：其解析引擎内置了智能元素追踪算法。当网站结构发生变化时，只需在查询时传入 `adaptive=True`，它就能基于内容、属性、位置等多维度相似度，自动重新定位到你想要的元素，让爬虫拥有“自我修复”能力。
-2.  **隐形获取**：`StealthyFetcher` 和 `DynamicFetcher` 基于 Playwright，但进行了深度定制，能够完美模拟真实浏览器行为（包括 TLS 指纹、HTTP/3、头部伪装），轻松绕过 Cloudflare Turnstile 等高级验证，实现“隐形”抓取。
-
-**技术架构深度**：
-- **高性能底层**：解析核心基于 Lxml，但进行了极致优化。基准测试显示，其文本提取速度比 PyQuery 快 12 倍，比 BeautifulSoup 快近 800 倍。同时，它拥有 92% 的测试覆盖率和完整的类型提示，代码质量极高。
-- **全功能 Spider 框架**：提供了类似 Scrapy 的声明式 API，但更现代化。支持异步并发、请求限速、多会话管理（可在同一个 Spider 中混合使用普通 HTTP 请求和 stealthy 浏览器请求）。
-- **开发者体验**：提供交互式 IPython 爬虫 Shell，方便快速调试选择器；支持直接从终端命令行抓取 URL；内置结果导出为 JSON/JSONL 的功能；支持 Docker 一键部署。
-- **AI 集成**：通过 MCP Server，可以将 Scrapling 的能力暴露给 AI 编程助手（如 Claude），让 AI 能直接调用 Scrapling 进行精准网页内容提取，减少 Token 消耗并提高准确性。
-
-**适用场景**：无论是需要抓取几个页面的数据分析师，还是需要 7x24 小时运行大规模爬虫的数据工程师，Scrapling 都能提供合适的工具。它特别适合目标网站有强反爬、结构不稳定、或需要高可靠性的商业数据采集项目。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：构建一个 **竞品价格智能监控平台**。利用 Scrapling 的 StealthyFetcher 绕过电商网站的反爬，结合其自适应解析能力应对页面改版，实现 7x24 小时自动采集竞品价格、库存、评价数据，并通过 MCP Server 让 AI 自动生成市场分析报告。; 灵感2：开发一个 **舆情分析引擎**。使用 Scrapling 的 Spider 框架并发抓取新闻网站、论坛、社交媒体（需遵守 robots.txt），利用其流式输出和断点续传功能处理海量数据，将清洗后的文本输入 NLP 模型进行情感分析和热点追踪。; 灵感3：创建一个 **自动化数据采集 SaaS 服务**。将 Scrapling 封装成后端服务，提供一个可视化前端，让用户可以通过点选的方式定义抓取规则（利用其 auto selector generation），无需编程即可配置定时抓取任务，服务于市场调研、SEO 监控、招聘聚合等垂直领域。
-   项目链接: https://github.com/D4Vinci/Scrapling
 
 4. nesquena/hermes-webui:
    star: 10236  语言/技术: Python, Vanilla JavaScript, HTML/CSS, SSE (Server-Sent Events), Prism.js, Mermaid.js, Web Speech API, WebAuthn / Passkeys, HMAC Cookies, SQLite, Docker, Tailscale
