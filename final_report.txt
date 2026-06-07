@@ -1,74 +1,105 @@
-1. NousResearch/hermes-agent:
-   star: 181334  语言/技术: Python, uv, Node.js, ripgrep, ffmpeg, FTS5, MCP, Docker, SSH, Singularity, Modal, Daytona, Telegram Bot API, Discord API, Slack API, WhatsApp API, Signal API
-   项目简介: Hermes Agent 是由 Nous Research 打造的一款具备自我进化能力的 AI 智能体框架，核心亮点是内置了闭环学习机制——能从经验中自主创建技能、在使用过程中优化技能、主动提醒自己持久化知识、搜索历史对话，并跨会话构建用户画像。它支持接入 300+ 主流大模型（如 OpenAI、Kimi、MiniMax 等），可在 Telegram、Discord、Slack、WhatsApp 等多平台运行，同时提供完整的终端 TUI 界面和定时任务调度功能。部署极其灵活，从 $5 的 VPS 到无服务器架构（Modal/Daytona）均可运行，真正实现'一次部署，随处对话'。
-   亮点: 闭环学习系统：Agent 能从任务经验中自动创建、优化技能，并通过 FTS5 全文搜索 + LLM 摘要实现跨会话记忆召回; 多平台无缝接入：支持 Telegram、Discord、Slack、WhatsApp、Signal、Email 等主流通讯平台，一个网关进程统一管理; 极致部署灵活性：支持本地、Docker、SSH、Singularity、Modal、Daytona 六种终端后端，可在 $5 VPS 或 GPU 集群上运行，无服务器模式下空闲几乎零成本
-   详细报告: Hermes Agent 是一个面向开发者和高级用户的开源 AI 智能体框架，其最大创新在于实现了真正的'自我进化'能力。与传统 AI 助手不同，Hermes 内置了一个完整的学习循环（closed learning loop）：当它完成复杂任务后，会自动将操作流程抽象为可复用的技能（Skills），并在后续使用中持续优化这些技能。它通过 FTS5 全文搜索引擎索引所有历史对话，结合 LLM 摘要技术实现跨会话的知识召回，同时利用 Honcho 辩证用户建模技术逐步构建对用户的深度理解。
+1. mvanhorn/last30days-skill:
+   star: 29042  语言/技术: Python 3.12+, Node.js, yt-dlp, ScrapeCreators API, OpenRouter (Perplexity Sonar), SQLite, Agent Skills 标准, Claude Code 插件体系
+   项目简介: 一句话概括：/last30days 是一个由 AI Agent 驱动的多平台实时搜索引擎，它打通了 Reddit、X、YouTube、TikTok、Hacker News、Polymarket、GitHub 等十几个被围墙花园隔离的数据源，用真实用户的点赞、评论和真金白银的预测市场赔率作为评分权重，帮你获取过去30天内任何话题的真实社区声音，而非传统搜索引擎的 SEO 结果。它解决的核心痛点是：在信息碎片化时代，没有一个 AI 能同时搜索所有平台，而这个技能让 AI Agent 做到了。
+   亮点: 🔍 14+数据源并行搜索：Reddit、X、YouTube、TikTok、Instagram Reels、Hacker News、Polymarket、GitHub、Digg、Threads、Pinterest、Bluesky、Perplexity、Web，覆盖社交、视频、开发者、预测市场等全维度; 🧠 智能预研大脑（v3核心）：搜索前先解析话题——自动识别创始人推特账号、相关 subreddit、GitHub 仓库、TikTok 哈希标签，再发起搜索，大幅提升命中率; 🏆 真实参与度评分：用 Reddit 点赞数、TikTok 播放量、Polymarket 赔率（真金白银背书）代替 SEO 排名，告诉你什么才是真正重要的; 📊 交叉源聚类合并：同一事件在 Reddit、X、YouTube 出现时自动合并为一个信息簇，避免重复噪音; 🎭 Best Takes 趣味评分：第二个 AI 评判器专门打分幽默度和传播力，每个简报结尾附带最有趣的社区金句; 📄 可分享 HTML 简报：一键生成深色模式、离线可用的 HTML 文件，可直接丢进 Slack/邮件/Notion; 👤 GitHub 人肉模式：输入人名自动切换为作者维度查询，展示 PR 合并率、仓库星数、发布说明等开发者画像; 🔄 竞争对手自动发现与对比：--competitors 参数自动发现竞品并生成三向对比表; 📈 趋势监控与定时简报：SQLite 持久化 + watchlist.py 定时运行 + Slack/webhook 推送新发现; ✅ 1,012 个测试通过，MIT 零追踪开源
+   详细报告: 这个项目本质上是一个给 AI Agent 装上「全平台雷达」的技能包。传统搜索引擎（Google）依赖编辑和 SEO，各大 AI（ChatGPT、Gemini、Claude）各自只能访问部分平台的数据——ChatGPT 有 Reddit 合作但搜不了 X 和 TikTok，Gemini 有 YouTube 但没有 Reddit，Claude 原生一个都没有。/last30days 的突破在于：它不试图建一个更好的搜索引擎，而是用 AI Agent 作为桥梁，把十几个围墙花园的数据源串联起来，让用户自带 API Key 和浏览器会话后，一个 Agent 就能同时搜索所有平台。
 
-在模型兼容性方面，Hermes 几乎打破了所有围墙——支持 Nous Portal（300+ 模型）、OpenRouter（200+ 模型）、NovitaAI、NVIDIA NIM、Xiaomi MiMo、GLM、Kimi、MiniMax、Hugging Face、OpenAI 等主流提供商，用户只需一条 `hermes model` 命令即可切换模型，无需修改任何代码。
+**核心工作流程（7步）：**
+1. 用户输入话题（人名/公司/产品/技术/对比）
+2. Agent 智能预研：解析话题对应的 X 账号、GitHub 仓库、subreddit、YouTube 频道、TikTok 标签（v3 新增的 Python 预研大脑，由 @j-sperling 开发）
+3. 所有数据源并行搜索，多查询扩展
+4. 深度挖掘：YouTube 完整转录稿、Reddit 顶级评论及点赞数、TikTok 字幕、Polymarket 赔率
+5. 交叉源聚类：同一事件在多个平台出现时合并为单一信息簇
+6. AI 综合评分：按参与度（点赞/播放量/真金白银）排序，而非 SEO 相关性
+7. 生成一份带引用的简报，之后该话题知识沉淀在对话上下文中，可继续追问
 
-交互层面，Hermes 提供了两种主要入口：一是功能完整的终端 TUI（支持多行编辑、斜杠命令补全、对话历史、中断重定向、流式工具输出）；二是通过网关进程接入 Telegram、Discord、Slack、WhatsApp、Signal 等社交平台，实现'随时随地与你的 AI 助手对话'。它还内置了 cron 定时任务调度器，可以用自然语言设置自动化任务（如每日报告、夜间备份、周度审计），并将结果推送到指定平台。
+**v3 版本的重大升级：**
+- **智能预研（最大杀手锏）**：旧版搜关键词，新版先理解话题。搜 "OpenClaw" 会自动解析出创始人 @steipete、r/openclaw、r/ClaudeCode、相关 YouTube 频道和 TikTok 标签，再发起搜索。这意味着它能找到 v2 永远找不到的内容。
+- **Best Takes 趣味评判器**：第二个 AI 评判器专门打分幽默度和传播力，确保简报结尾附带最有趣的社区金句，而不是干巴巴的信息堆砌。
+- **交叉源聚类合并**：实体重叠检测，即使标题用词不同也能识别同一事件。
+- **单次对比搜索**："CLI vs MCP" 从三次串行（12分钟+）优化为单次并行（3分钟）。
+- **自动竞品发现**：--competitors 参数自动通过 WebSearch 发现竞品并生成三向对比。
+- **GitHub 人肉模式**：输入人名时切换为作者维度查询，展示 PR 合并率、仓库星数、发布说明。
+- **ELI5 模式**：一句话切换为通俗语言重写。
 
-技术架构上，Hermes 支持子代理（subagent）并行工作流，可以生成隔离的子任务并通过 RPC 调用工具，将多步流水线压缩为零上下文消耗的轮次。它还支持 MCP（Model Context Protocol）集成，可连接任何 MCP 扩展服务器来增强能力。部署方面，除了传统的本地和 Docker 部署，还支持 Modal 和 Daytona 等无服务器平台——环境在空闲时休眠，按需唤醒，成本极低。
+**数据源矩阵（14+）：**
+- Reddit：通过公开 JSON 免费获取，无需 API Key，含帖子+顶级评论+点赞数
+- X/Twitter：通过内置的 Bird 客户端搜索
+- YouTube：yt-dlp 获取完整转录稿，候选池扩大3倍以覆盖谈话/评测类内容
+- TikTok/Instagram Reels/Threads：通过 ScrapeCreators API（同一个 Key）
+- Hacker News：开发者共识
+- Polymarket：真金白银背书的预测市场赔率
+- GitHub：人的维度（PR 速度、仓库星数、发布说明）和话题维度（Issues 和讨论）
+- Digg：AI 1000 领袖榜精选的约1000个高信号 AI 账号，带可引用内联引用
+- Pinterest：按查询可选，视觉发现
+- Bluesky：去中心化社交层
+- Perplexity Sonar：带引用的网络搜索，通过 OpenRouter
+- Web：编辑报道和博客对比
+- Truth Social、小红书（RED）等正在接入中
 
-对于从 OpenClaw 迁移的用户，Hermes 提供了 `hermes claw migrate` 命令，可一键导入 SOUL.md 人格文件、记忆、技能、API 密钥、消息设置等所有配置。项目采用 MIT 许可证，由 Nous Research 团队维护，文档详尽，社区活跃。
-   活跃度: 根据 GitHub API 返回的指标（commits_recent: 0, pushed_at: null），近期代码提交活动无法确认，但考虑到项目功能复杂度和文档完整度，推测核心团队仍在积极开发中。  社区健康: 项目由知名 AI 研究机构 Nous Research 维护，拥有 Discord 社区和 Skills Hub 生态，文档体系完善。但 GitHub 指标显示 forks、issues、commits 等数据均为 0，可能项目刚开源不久或主要开发流程不在 GitHub 公开进行。
-   商业潜力: Hermes Agent 具备显著的商业化潜力。其多平台接入、技能自进化、定时任务等特性使其非常适合作为 SaaS 产品的底层引擎，可用于构建企业级 AI 客服、个人智能助理、自动化运维监控等产品。Nous Portal 的统一订阅模式也提供了清晰的变现路径。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 Hermes 的多平台接入能力和技能系统，可以开发一个'企业级 AI 客服中台'，将 Hermes 部署在云服务器上，通过 Telegram/WhatsApp/Slack 对接不同渠道的客户咨询，利用其自动技能创建能力让 AI 从历史工单中学习常见问题解决方案，实现客服知识库的自动进化。; 灵感2：利用 Hermes 的 cron 定时任务调度和多平台推送能力，可以构建一个'个人智能生活管家'——每天早上自动汇总日历、天气、待办事项并通过 Telegram 推送；晚上自动整理当天笔记、生成日报；周末自动分析消费习惯并给出理财建议。; 灵感3：结合 Hermes 的子代理并行工作流和 MCP 集成能力，可以开发一个'AI 辅助软件开发流水线'——主代理接收需求描述后，自动拆分为编码、测试、文档生成等子任务，分发给多个子代理并行执行，最后汇总结果并自动提交 PR，大幅提升开发效率。; 灵感4：基于 Hermes 的跨会话记忆和用户建模能力，可以打造'个性化 AI 教育导师'——通过长期跟踪学生的学习进度、知识薄弱点和学习风格，动态调整教学内容和难度，实现真正的因材施教。
-   项目链接: https://github.com/NousResearch/hermes-agent
+**安装方式极其友好：**
+- Claude Code（推荐）：/plugin marketplace add mvanhorn/last30days-skill → /plugin install last30days，自动更新
+- Codex/Cursor/Copilot/Gemini CLI 等50+ Agent Skills 宿主：npx skills add mvanhorn/last30days-skill -g
+- claude.ai 网页端：下载 .skill 文件上传
+- OpenClaw：clawhub install last30days-official
 
-2. chopratejas/headroom:
-   star: 14679  语言/技术: Python, TypeScript, HuggingFace Transformers, AST解析, MCP协议, ASGI中间件, Docker, LangChain, Agno, Strands, Vercel AI SDK, LiteLLM
-   项目简介: Headroom 是一个专为 AI Agent 设计的上下文压缩层，能够在不影响回答质量的前提下，将输入 LLM 的 token 数量减少 60%–95%。它通过本地运行的库、代理、MCP 服务器或中间件，智能压缩工具输出、日志、RAG 片段、文件内容和对话历史，并采用可逆压缩（CCR）机制确保原始数据可随时恢复。支持 Claude Code、Cursor、Codex、Aider、Copilot CLI 等主流编码 Agent，以及 LangChain、Agno、Strands、Vercel AI SDK 等主流框架。
-   亮点: 核心功能：多算法上下文压缩（SmartCrusher JSON压缩、CodeCompressor AST感知代码压缩、Kompress-base 文本压缩），实现 60%-95% token 节省; 解决痛点：AI Agent 长上下文场景下 token 成本爆炸、上下文窗口溢出、多 Agent 记忆孤岛问题; 亮点3：可逆压缩（CCR）机制——原始数据本地存储，LLM 可按需检索，兼顾压缩效率与信息完整性
-   详细报告: Headroom 是专为 AI Agent 打造的「上下文压缩层」，核心使命是：让 AI Agent 在读取海量上下文（工具输出、日志、RAG 片段、文件、对话历史）时，消耗更少 token，却能获得相同质量的回答。
+**配置要点：**
+- 零配置即可使用 Reddit、HN、Polymarket、GitHub
+- 设置 API Key 后解锁 X、YouTube、TikTok 等（30秒向导）
+- 研究文件默认保存到 ~/Documents/Last30Days/
+- 支持 --store 模式持久化到 SQLite，配合 watchlist.py 做定时监控和 Slack/webhook 推送
 
-**核心工作原理：**
-Headroom 在 AI Agent 和 LLM 提供商之间插入一个本地运行的压缩管道。当 Agent 准备向 LLM 发送请求时，Headroom 会：
-1. **ContentRouter（内容路由器）**：自动检测输入内容的类型（JSON、代码、纯文本、图片等），并路由到对应的压缩算法
-2. **三大压缩引擎**：
-   - **SmartCrusher**：针对 JSON 数据（如 API 响应、工具输出）进行智能压缩，处理嵌套对象、数组、混合类型
-   - **CodeCompressor**：基于 AST（抽象语法树）感知的代码压缩，支持 Python、JavaScript、Go、Rust、Java、C++ 等语言，保留语义结构的同时大幅精简
-   - **Kompress-base**：自研的 HuggingFace 模型，专门针对 Agent 交互痕迹训练的文本压缩模型
-3. **CacheAligner（缓存对齐器）**：稳定化 prompt 前缀，使 Anthropic/OpenAI 的 KV 缓存命中率最大化，进一步降低重复计算成本
-4. **CCR（可逆压缩）**：原始数据永不删除，存储在本地；当 LLM 需要查看原始内容时，可通过 `headroom_retrieve` 工具按需取回
+**技术架构：**
+- Python 3.12+ 作为引擎核心
+- Node.js 内置 Bird 客户端用于 X 搜索
+- yt-dlp 处理 YouTube 转录稿
+- ScrapeCreators API 统一处理 TikTok/Instagram/Threads/Pinterest
+- SQLite 用于趋势监控持久化
+- 1,012 个测试保证稳定性
+- MIT 许可证，零追踪，数据全在本地
 
-**部署方式极其灵活：**
-- **库模式**：`compress(messages)` 一行代码嵌入 Python/TypeScript 应用
-- **代理模式**：`headroom proxy --port 8787` 零代码改动，拦截所有 LLM 请求
-- **Agent 包装模式**：`headroom wrap claude|codex|cursor|aider|copilot` 一键包装主流编码 Agent
-- **MCP 服务器**：提供 `headroom_compress`、`headroom_retrieve`、`headroom_stats` 工具，任何 MCP 客户端均可接入
-- **中间件模式**：ASGI 中间件、LangChain 模型包装、Agno 模型包装、Vercel AI SDK 中间件等
+**实际使用场景举例：**
+- 会议前：/last30days Peter Steinberger → 获取他加入 OpenAI Codex 团队、与 Anthropic 的代理之争、23个 PR 85%合并率、LobsterOS 项目、Reddit 569赞讨论等 LinkedIn 上绝对看不到的信息
+- 突发事件：/last30days Kanye West → 签证被拒、音乐节取消、赞助商跑路、但 BULLY 专辑 Billboard #2、Polymarket "还会发推吗" 86% Yes
+- 工具对比：/last30days OpenClaw vs Hermes vs Paperclip → 三层架构对比表，GitHub 实时星数
+- 世界局势：/last30days Iran vs USA → 战争第38天、油价$126、Polymarket 停火概率74%
+- 旅行规划：/last30days Universal Epic Universe → 扩建中、排队148分钟、年票未出本地人不满
+- 快速学习：/last30days Nano Banana Pro prompting → JSON结构化提示词替代标签汤、先编辑工作流优于重生成，然后直接帮你写一个生产级提示词
 
-**跨 Agent 记忆共享：**
-Headroom 提供跨 Agent 的共享存储，支持 Claude、Codex、Gemini 等 Agent 之间的上下文共享和自动去重，解决多 Agent 协作时的记忆孤岛问题。
-
-**headroom learn（失败学习）：**
-自动挖掘失败的会话记录，将修正建议写入 `CLAUDE.md`、`AGENTS.md` 或 `GEMINI.md`，实现 Agent 的自我进化。
-
-**实测数据（来自文档）：**
-- 代码搜索（100条结果）：17,765 → 1,408 tokens（节省 92%）
-- SRE 故障排查：65,694 → 5,118 tokens（节省 92%）
-- GitHub Issue 分类：54,174 → 14,761 tokens（节省 73%）
-- 代码库探索：78,502 → 41,254 tokens（节省 47%）
-
-**准确性保持：**
-在 GSM8K（数学）、TruthfulQA（事实）、SQuAD v2（问答）、BFCL（工具调用）等标准基准测试中，压缩后准确率基本无损，部分场景甚至略有提升。
-
-**技术壁垒：**
-1. 多算法路由：不同类型内容需要完全不同的压缩策略，Headroom 实现了自动检测和路由
-2. AST 感知代码压缩：不是简单的文本截断，而是基于语法树的结构化压缩
-3. 自研 Kompress-base 模型：专门针对 Agent 场景训练的压缩模型
-4. CCR 可逆机制：在极致压缩的同时保证信息不丢失
-5. 跨 Agent 记忆共享：解决多 Agent 协作的核心痛点
-
-**对比竞品：**
-与 RTK（仅 CLI 输出）、lean-ctx（仅 CLI/MCP）、Compresr/Token Co.（托管 API）、OpenAI 原生压缩（仅对话历史）相比，Headroom 是唯一覆盖所有内容类型、本地运行、可逆、跨 Agent 的全栈解决方案。
-   活跃度: 未知  社区健康: 活跃（有 Discord 社区、HuggingFace 模型页面、文档站点）
+**用户评价：**
+- @itsjasonai：「手动搜索 Reddit 和 X 做研究，每次90分钟。这个技能消灭了它。」
+- @itswilsoncharles：「一个技能替代了整个研究工作流。」
+- @yieldhunter95：「GitHub 今日10个热门仓库中有5个是 Claude 工具，#1 是 mvanhorn/last30days-skill」
+   活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 Headroom 开发一个「企业级 AI Agent 成本优化平台」，用于监控和优化组织内所有 AI Agent 的 token 消耗，按部门/项目生成成本报告，预计可为企业节省 60%-90% 的 AI 推理成本。; 灵感2：将 Headroom 集成到现有的 RAG 系统中，作为检索后处理层——在 RAG 检索到相关文档片段后，先用 Headroom 压缩再送入 LLM，从而在相同的上下文窗口内塞入更多检索结果，提升 RAG 系统的知识覆盖密度。; 灵感3：开发一个「多 Agent 协作记忆中枢」，利用 Headroom 的跨 Agent 记忆共享和自动去重能力，构建一个统一的 Agent 知识库，让不同角色的 AI Agent（如代码审查 Agent、测试 Agent、文档 Agent）共享上下文和记忆，实现真正的多 Agent 协作。; 灵感4：基于 Headroom 的 CCR 可逆压缩机制，开发一个「AI Agent 审计与合规系统」——所有原始交互数据本地存储，满足数据合规要求（如 GDPR、等保），同时通过压缩降低存储和传输成本。
-   项目链接: https://github.com/chopratejas/headroom
+   衍生灵感: 灵感1：基于此项目的多平台聚合能力，可以开发一个「竞品情报雷达」产品，自动监控竞品在 Reddit、X、HN、GitHub 上的社区讨论和开发者动态，通过 Slack/webhook 实时推送给产品团队，解决 PM 手动刷多个平台的信息收集痛点。; 灵感2：将其 Polymarket 预测市场数据源集成到金融/投资研究工具中，构建一个「真实市场情绪仪表盘」，用真金白银背书的赔率替代传统分析师预测，为对冲基金或散户投资者提供另类数据信号。; 灵感3：利用其 GitHub 人肉模式和交叉源聚类能力，开发一个「技术人才招聘背调助手」，自动聚合候选人在 GitHub 的 PR 合并率、Reddit 技术社区声誉、YouTube 演讲内容、X 上的行业观点，生成360度开发者画像报告。; 灵感4：基于其 ELI5 模式和 HTML 简报功能，可以做一个「企业知识库自动摘要引擎」，定期抓取内部技术栈相关的社区讨论，自动生成通俗易懂的周报推送给非技术管理层。; 灵感5：将其 TikTok/Instagram 视觉内容搜索能力与 Pinterest 视觉发现结合，开发一个「品牌社媒舆情监控系统」，追踪品牌在短视频平台的真实用户反馈和文化影响力，而非只看传统社媒管理平台覆盖的大 V 账号。
+   项目链接: https://github.com/mvanhorn/last30days-skill
+
+2. MemPalace/mempalace:
+   star: 54372  语言/技术: Python, ChromaDB, SQLite, MCP (Model Context Protocol), Docker, Qdrant, pgvector, uv, pipx
+   项目简介: MemPalace 是一个本地优先的 AI 记忆系统，专为开发者设计，用于存储和检索对话历史。它通过语义搜索实现高精度召回（LongMemEval R@5 达 96.6%），无需调用任何云端 API，所有数据保留在用户设备上。项目采用模块化架构，支持多种向量数据库后端（如 ChromaDB、Qdrant、pgvector），并提供 MCP 服务器、知识图谱、自动保存钩子等功能，适用于 Claude Code 等 AI 编程助手的上下文持久化场景。
+   亮点: 本地优先架构：所有数据存储在用户设备上，隐私安全无忧; 高精度语义搜索：在 LongMemEval 基准测试中达到 96.6% R@5，无需 LLM 参与; 可插拔后端设计：支持 ChromaDB、Qdrant、pgvector 等多种向量存储方案; 结构化记忆模型：以“宫殿-翅膀-房间-抽屉”隐喻组织内容，支持作用域搜索; 完整的 MCP 服务器集成：提供 29 个工具，可与 Claude Code 等 AI 编程助手无缝协作; 内置知识图谱：支持带时间窗口的实体关系图谱，基于本地 SQLite 实现
+   详细报告: MemPalace 是一个专为 AI 助手（尤其是 Claude Code）设计的本地记忆系统，解决的是 AI 编程助手“记不住过去对话”的核心痛点。传统 AI 助手每次会话都从零开始，而 MemPalace 将用户的对话历史以原文（verbatim）形式存储，并通过语义搜索实现高效检索。
+
+其核心创新在于“宫殿”隐喻的数据结构：项目（projects）成为“翅膀”（wings），主题（topics）成为“房间”（rooms），原始内容存放在“抽屉”（drawers）中。这种结构化设计使得搜索可以限定在特定项目或主题范围内，避免在全量语料库中进行低效的全局搜索。
+
+技术实现上，MemPalace 默认使用 ChromaDB 作为向量存储后端，但通过 `mempalace/backends/base.py` 定义了清晰的接口，允许开发者轻松替换为 Qdrant（REST 接口）或 pgvector（PostgreSQL 扩展）。这种设计确保了系统不会被单一厂商锁定。
+
+性能方面，MemPalace 在权威的 LongMemEval 基准测试中表现惊人：纯语义搜索（无启发式、无 LLM）即可达到 96.6% 的 R@5 召回率；结合关键词增强、时间邻近性加权和偏好模式提取的混合检索（Hybrid v4）可提升至 98.4%；再叠加 LLM 重排序后可达 99% 以上。这些成绩均在本地完成，无需任何 API 调用。
+
+除了检索，MemPalace 还内置了基于 SQLite 的时序知识图谱，支持实体关系的添加、查询、失效管理和时间线追溯。这对于跟踪技术决策演变、人物关系变化等长期项目非常有用。
+
+对于 Claude Code 用户，MemPalace 提供了自动保存钩子（auto-save hooks），定期或在上下文压缩前自动保存会话内容。配合 `mempalace sweep` 命令，甚至可以实现消息级别的细粒度存储。
+
+部署方式灵活：可通过 `uv tool install` 快速安装 CLI，也可通过 Docker 镜像运行 MCP 服务器，支持 CPU 和 GPU 环境。Python 3.9+ 是唯运行时依赖，嵌入模型约需 300MB 磁盘空间。
+
+文档完整，涵盖快速入门、CLI 参考、Python API、MCP 工具列表、知识图谱使用等，且项目明确标注了官方渠道，警惕仿冒网站，体现了对安全性的重视。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目，可以开发一个「跨平台 AI 记忆同步器」，用于解决用户在不同 AI 助手（如 Cursor、GitHub Copilot、Claude）之间切换时上下文丢失的问题，实现统一的本地记忆中枢。; 灵感2：可以将其集成到「企业知识库管理系统」中，优化技术团队的知识沉淀与检索流程，尤其适合需要长期维护复杂代码库的研发团队。; 灵感3：结合其知识图谱能力，可二次开发为「个人数字记忆助理」，自动从聊天记录、邮件、笔记中提取人物关系、项目进展、决策脉络，形成可视化的个人知识图谱。
+   项目链接: https://github.com/MemPalace/mempalace
 
 3. Panniantong/Agent-Reach:
    star: 21686  语言/技术: Python, Shell, yt-dlp, twitter-cli, rdt-cli, xhs-cli, bili-cli, Jina Reader, Exa, mcporter, feedparser, douyin-mcp-server, linkedin-scraper-mcp, gh CLI, MCP协议
@@ -93,13 +124,21 @@ Headroom 提供跨 Agent 的共享存储，支持 Claude、Codex、Gemini 等 Ag
    衍生灵感: 灵感1：基于此项目开发一个'AI 竞品情报监控系统'，让 Agent 自动定时抓取竞品在 Twitter、小红书、抖音等平台的最新动态、用户评价和营销内容，生成每日竞品分析报告，解决市场情报收集耗时费力的问题。; 灵感2：将其集成到'内容创作者工作台'中，让 Agent 自动分析 YouTube/B站热门视频的字幕内容、评论区风向，帮助创作者快速了解受众喜好和热点趋势，优化选题方向。; 灵感3：开发一个'社交媒体舆情预警系统'，利用 Agent Reach 的多平台搜索能力，实时监控品牌/产品在 Reddit、Twitter、微博、小红书等平台的提及情况，发现负面舆情时自动告警并生成应对建议。; 灵感4：构建一个'AI 辅助学术研究助手'，让 Agent 自动搜索 GitHub 上的相关开源项目、阅读技术博客、提取 YouTube 教程字幕，帮助研究者快速梳理某个技术领域的现状和发展脉络。
    项目链接: https://github.com/Panniantong/Agent-Reach
 
-4. 666ghj/MiroFish:
-   star: 64781  语言/技术: Python, Node.js, LLM (如 Qwen-plus), Zep Cloud, GraphRAG, OASIS (Open Agent Social Interaction Simulations), Docker, React/Vue (前端推断)
-   项目简介: MiroFish 是一款基于多智能体（Multi-Agent）技术的下一代 AI 预测引擎，致力于通过构建高保真的平行数字世界来模拟现实世界的复杂演化。用户只需上传种子信息（如新闻、政策草案、金融信号或小说片段），并用自然语言描述预测需求，系统即可自动创建数千个具有独立人格、长期记忆和行为逻辑的智能体，在数字沙盒中进行社会交互与演化，最终生成详尽的预测报告和可深度交互的模拟世界。其核心理念是‘在数字沙盒中预演未来，在无数次模拟后赢得决策’，适用于舆情推演、政策测试、金融预测乃至文学创作等多元场景。
-   亮点: 基于多智能体的高保真社会模拟：每个 Agent 具备独立人格、长期记忆和行为逻辑，能自由交互并触发群体涌现现象; 支持‘上帝视角’动态注入变量，实现未来轨迹的精准推演，适用于政策、舆情、金融等领域的零风险预演; 集成 GraphRAG 构建知识图谱，结合 Zep Cloud 实现智能体的长期记忆管理，提升模拟的真实性和连续性
-   详细报告: MiroFish 是一个极具前瞻性的群体智能预测平台，它不依赖传统统计模型，而是通过构建一个由 AI 智能体组成的‘平行世界’来模拟现实社会的复杂动态。其工作流程分为五个阶段：图构建（Graph Building）、环境搭建（Environment Setup）、模拟运行（Simulation）、报告生成（Report Generation）和深度交互（Deep Interaction）。首先，系统从真实世界的种子材料（如新闻报道、政策文本或小说内容）中提取关键实体与关系，利用 GraphRAG 技术构建知识图谱，并为每个智能体注入个性化记忆和行为规则。随后，在双平台并行模拟环境中，成千上万的 Agent 基于 LLM 驱动进行社交互动、信息传播和决策演化，系统自动解析用户预测需求并动态更新时空记忆。模拟结束后，ReportAgent 利用丰富的工具集对结果进行深度分析，生成结构化预测报告。更酷的是，用户可以在模拟结束后‘进入’这个数字世界，与任意 Agent 对话，探索不同变量下的未来走向。项目底层依托 CAMEL-AI 的 OASIS 框架，使用 Python + Node.js 全栈架构，支持 Docker 一键部署，并推荐使用阿里云百炼平台的 Qwen-plus 模型作为 LLM 后端。尽管目前 GitHub 指标显示项目尚处早期（无 star、fork 或近期提交），但其技术愿景宏大，已在武汉大学舆情模拟和《红楼梦》遗失结局推演等案例中展示了强大潜力。
+4. openai/whisper:
+   star: 101917  语言/技术: Python, PyTorch, tiktoken, ffmpeg, Transformer, Rust
+   项目简介: Whisper 是 OpenAI 推出的一个通用语音识别模型，能够处理多语言的语音识别、语音翻译和语言识别任务。它通过一个统一的 Transformer 序列到序列模型，将多种语音处理任务整合在一起，替代了传统的复杂语音处理流水线。
+   亮点: 多任务统一模型：支持语音识别、翻译、语言识别和语音活动检测; 多语言支持：提供多种模型尺寸（tiny到turbo），支持多种语言; 易于使用：提供命令行和Python API两种使用方式
+   详细报告: Whisper 是 OpenAI 开发的一个革命性的语音识别系统，它最大的创新在于将多种语音处理任务统一到一个模型中。传统的语音处理通常需要多个独立的模型分别处理识别、翻译等任务，而 Whisper 通过特殊的 token 标记，让一个模型就能完成所有这些任务。
+
+技术架构上，Whisper 基于 Transformer 序列到序列模型，使用 Python 3.9.9 和 PyTorch 1.10.1 开发。模型训练使用了大量多样化的音频数据，使其具有很强的泛化能力。系统依赖 OpenAI 的 tiktoken 进行高效的分词处理，同时需要 ffmpeg 进行音频格式处理。
+
+Whisper 提供了六种不同规模的模型：tiny、base、small、medium、large 和 turbo，参数量从39M到1550M不等，用户可以根据硬件条件和精度需求选择合适的模型。其中 turbo 模型是 large-v3 的优化版本，在保持较高精度的同时提供了约8倍的速度提升。
+
+特别值得注意的是，Whisper 提供了英语专用版本（.en），这些版本在英语任务上表现更好。对于翻译任务，需要使用多语言模型（如 medium 或 large），因为 turbo 模型不支持翻译功能。
+
+使用方式非常灵活，既可以通过简单的命令行工具快速转录音频，也可以在 Python 中进行更精细的控制，包括语言检测、自定义解码选项等。模型支持滑动窗口处理，能够处理任意长度的音频文件。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个‘企业危机公关沙盘系统’，基于 MiroFish 模拟突发负面新闻下公众情绪演变路径，帮助企业提前制定应对策略。; 灵感2：将其集成到金融投研平台中，构建‘市场情绪模拟器’，通过模拟投资者群体行为预测股价波动或政策影响。; 灵感3：打造‘AI 文学创作助手’，允许作者输入小说前几章，由 MiroFish 推演多种结局走向，激发创作灵感或辅助剧情设计。
-   项目链接: https://github.com/666ghj/MiroFish
+   衍生灵感: 灵感1：基于 Whisper 开发一个智能会议记录助手，能够实时转录会议内容并自动翻译成多种语言，解决跨国企业沟通障碍问题。; 灵感2：将其集成到在线教育平台中，为视频课程自动生成多语言字幕，优化学习体验和可访问性。; 灵感3：开发一个播客内容分析工具，自动转录音频内容并提取关键话题、生成摘要，帮助内容创作者优化节目结构。
+   项目链接: https://github.com/openai/whisper
