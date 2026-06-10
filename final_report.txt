@@ -77,65 +77,69 @@
    项目链接: https://github.com/mvanhorn/last30days-skill
 
 2. RyanCodrai/turbovec:
-   star: 7480  语言/技术: Rust, Python, SIMD (NEON, AVX-512BW, AVX2), TurboQuant, Lloyd-Max量化, maturin
-   项目简介: turbovec 是一个基于 Rust 的高性能向量索引库，提供 Python 绑定，专为大规模近似最近邻搜索（ANN）设计。它实现了 Google Research 的 TurboQuant 算法，能够在无需训练阶段的情况下对高维向量进行极致压缩（最高16倍），并在压缩状态下直接执行高速相似度搜索。其核心优势在于：内存占用极低（1000万文档从31GB降至4GB）、搜索速度超越 FAISS、支持在线增量写入和搜索时动态过滤，特别适合对隐私、内存或延迟敏感的本地化 RAG 应用。
-   亮点: 极致压缩与高效搜索：将1000万float32向量的内存占用从31GB压缩至4GB，同时搜索速度比FAISS IndexPQFastScan快12-20%（ARM）或持平/略胜（x86）。; 零训练在线写入：采用数据无关的量化器，无需预训练、参数调优或重建索引，向量添加即索引，支持动态增长的数据集。; 搜索时高性能过滤：原生支持基于ID白名单或位掩码的过滤，过滤逻辑内嵌于SIMD内核，避免无效计算，确保在小候选集上几乎零开销。; 无缝集成主流框架：提供 LangChain、LlamaIndex、Haystack、Agno 的即插即用替换组件，一行代码即可替换原有内存向量存储。
-   详细报告: turbovec 解决的核心痛点是：在资源受限（尤其是内存）的环境下，如何高效地存储和检索大规模高维向量，以支撑现代 AI 应用（如 RAG）。传统方案如 FAISS 的 PQ 量化需要离线训练码本，且压缩率和速度存在瓶颈。turbovec 基于 Google 的 TurboQuant 算法，其技术壁垒在于“数据无关”的量化策略。它通过随机旋转将任意高维向量映射到一个已知统计分布（Beta/Gaussian）的空间，从而可以使用预先计算好的 Lloyd-Max 最优量化码本，完全省去了训练过程。整个流程包括：归一化 -> 随机旋转 -> （可选）TQ+坐标校准 -> Lloyd-Max 标量量化 -> 位打包。搜索时，查询向量也被旋转到同一空间，直接与压缩后的码本进行 SIMD 加速的内积计算，并通过长度重归一化技术消除量化带来的偏差，保证召回率。项目用 Rust 编写核心，保证了极致的性能和内存安全，并通过 maturin 提供 Python 接口。它还提供了 IdMapIndex 支持稳定的外部ID和O(1)删除。基准测试显示，在 OpenAI 1536/3072 维嵌入上，其召回率优于 FAISS IndexPQ，在 ARM 上速度领先 12-20%，在 x86 上互有胜负但整体竞争力极强。对于开发者而言，这意味着你可以用更少的硬件成本，构建响应更快、数据完全私有的本地 AI 知识库。
+   star: 10373  语言/技术: Rust, Python, SIMD (NEON, AVX-512BW, AVX2), TurboQuant 量化算法, Lloyd-Max 标量量化, maturin
+   项目简介: turbovec 是一个基于 Rust 实现的高性能向量索引库，提供 Python 绑定，核心采用 Google Research 的 TurboQuant 算法。它解决了大规模向量检索中内存占用高、需要训练阶段、搜索速度慢等痛点——能将 1000 万文档的内存从 31 GB（float32）压缩到仅 4 GB，同时搜索速度比 FAISS 更快。支持在线增量添加、搜索时过滤、稳定 ID 映射等特性，适用于对隐私、内存或延迟敏感的 RAG 场景。
+   亮点: 极致压缩：1000 万文档从 31 GB 压缩到 4 GB（16x 压缩比）; 搜索速度超越 FAISS：ARM 上快 12–20%，x86 上持平或更优; 无需训练阶段：在线增量添加向量，无参数调优，无需重建索引; 搜索时过滤：支持 ID 白名单或位掩码过滤，在 SIMD 内核层面短路跳过无关块，无召回损失; 与主流框架集成：提供 LangChain、LlamaIndex、Haystack、Agno 的即插即用替换; 纯本地运行：无需托管服务，数据不出机器，支持完全离线的 RAG 栈
+   详细报告: turbovec 是一个用 Rust 编写的高性能向量索引库，通过 Python 绑定让 Python 用户也能轻松使用。它的核心技术基于 Google Research 发表的 TurboQuant 算法（ICLR 2026），这是一种数据无关的量化器，能达到 Shannon 失真率下界的理论最优水平，且不需要码本训练和单独的训练阶段。
+
+**核心工作原理**分为六个步骤：
+1. **归一化**：剥离向量长度（模），将每个向量转化为单位方向向量，模单独存储为单个浮点数。
+2. **随机旋转**：将所有向量乘以同一个随机正交矩阵，旋转后每个坐标独立服从 Beta 分布（高维下收敛于高斯分布），这使得坐标分布可预测且与输入数据无关。
+3. **逐坐标校准（TQ+）**：在首次添加时，为每个坐标拟合平移和缩放两个标量，将经验分位数映射到标准 Beta 边际分布上。校准在首次 add 后冻结，后续添加复用，无需重新训练。这一步在低维嵌入（如 GloVe 2-bit）上可带来最多 +1.4pp 的召回提升。
+4. **Lloyd-Max 标量量化**：由于分布已知，可预先计算最优分桶方案。2-bit 对应 4 个桶，4-bit 对应 16 个桶。这些桶边界和质心从数学计算得出，而非从数据学习。
+5. **位打包**：每个坐标变为小整数（0-3 或 0-15），紧密打包成字节。1536 维向量从 6144 字节压缩到 384 字节，实现 16 倍压缩。
+6. **长度重归一化评分**：标量量化会系统性低估内积。编码时计算每个向量的校正标量（原向量与其重建之间的内积比），搜索内核在堆插入前乘以该校正因子，使估计量无偏，零搜索开销，零额外存储。
+
+**搜索过程**：查询向量旋转到同一空间后，直接对码本值评分，无需解压数据库向量。评分内核使用手写 SIMD 指令（ARM 用 NEON，x86 用 AVX-512BW，回退到 AVX2），采用 nibble-split 查找表实现最大吞吐量。
+
+**关键特性**：
+- **在线增量添加**：向量添加即索引，无训练步骤，无参数调优，索引随语料增长无需重建。
+- **搜索时过滤**：`search()` 方法接受 ID 白名单或槽位位掩码，在内核层面以 32 向量块粒度进行短路优化——无允许槽位的块直接跳过，块内非允许槽位在堆插入时丢弃。选择性过滤（白名单远小于索引）可避免大部分 SIMD 计算开销。输出长度为 min(k, len(allowed))，不会用填充结果凑数。
+- **稳定 ID（IdMapIndex）**：支持外部 uint64 ID 映射，删除操作 O(1)，ID 在持久化后仍然保留。
+- **混合检索**：可与 SQL、BM25、ACL、时间窗口等外部系统配合，先由外部系统缩小候选集，再由 turbovec 进行稠密重排序。
+- **框架集成**：提供 LangChain、LlamaIndex、Haystack、Agno 的即插即用替换，相同接口、相同的持久化和检索器管线，只需更换 import 即可。
+
+**性能表现**：在 10 万向量、1000 查询、k=64 的基准测试中，ARM（Apple M3 Max）上比 FAISS IndexPQFastScan 快 12–20%；x86（Intel Xeon Sapphire Rapids）上 4-bit 配置领先 1–6%，2-bit 单线程差距在 1% 以内。召回率方面，在 OpenAI d=1536 和 d=3072 上，TurboQuant 在 R@1 上比 FAISS 高 0.4–3.4 个百分点（2-bit 和 4-bit），k=4 时两者均收敛到 1.0。
+
+**适用场景**：构建对隐私、内存或延迟有严格要求的 RAG 系统，配合任意开源嵌入模型可实现完全离线的 RAG 栈。
    活跃度: 未知  社区健康: 未知
-   商业潜力: 在数据隐私法规日益严格（如GDPR）和边缘计算兴起的背景下，turbovec 的“纯本地”和“极致压缩”特性具有巨大商业潜力。它可以作为构建合规、低成本、高性能AI应用的基础设施，尤其适合金融、医疗、法律等对数据敏感行业的私有化部署方案。
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：构建一个面向边缘设备（如手机、IoT网关）的超轻量级本地知识库应用，利用 turbovec 的极低内存占用和无需联网的特性，实现离线文档问答或个人笔记智能检索。; 灵感2：将其作为核心引擎，开发一个多租户 SaaS 平台的后端向量搜索服务，利用其搜索时过滤功能，为每个租户提供隔离且高性能的语义搜索能力，而无需为每个租户维护独立的索引。; 灵感3：在现有的推荐系统或搜索引擎中，替换其底层向量检索模块，利用 turbovec 的在线写入能力，实现用户行为向量的实时增量更新，从而提供更及时、个性化的推荐结果。
+   衍生灵感: 灵感1：基于 turbovec 开发一个**企业级私有化知识库搜索引擎**，用于替代云端向量数据库服务（如 Pinecone、Weaviate Cloud），解决金融、医疗等敏感行业数据不能上云的痛点。利用其 16x 压缩比和搜索时过滤能力，可以在单机上索引数百万文档，按租户/部门进行精确过滤检索。; 灵感2：将 turbovec 集成到**边缘设备（如嵌入式 ARM 设备、移动端）上的离线语义搜索应用**中。由于其 ARM NEON 内核性能优异且无需训练阶段，非常适合在树莓派、Jetson 等边缘硬件上部署本地 RAG 助手，实现完全离线的智能问答。; 灵感3：开发一个**多模态混合检索平台**，将 turbovec 的稠密向量检索与 Elasticsearch 的 BM25 稀疏检索结合，利用 turbovec 的 allowlist 过滤机制实现两阶段检索（先稀疏召回候选集，再稠密重排序），构建比单一检索方式更精准的搜索系统，适用于电商搜索、法律文献检索等场景。; 灵感4：基于 turbovec 的 IdMapIndex 和删除能力，构建一个**实时增量更新的推荐系统向量索引**，支持用户和物品向量的动态增删，配合时间窗口过滤实现"最近 N 天活跃物品"的实时推荐，无需全量重建索引。
    项目链接: https://github.com/RyanCodrai/turbovec
 
-3. google/skills:
-   star: 12572  语言/技术: Google Cloud, Gemini API, Agent Platform, BigQuery, Cloud Run, Cloud SQL, Firebase, GKE, AlloyDB
-   项目简介: 一句话概括：这是 Google 官方推出的 Agent Skills 技能包仓库，专为 Google Cloud 和 Gemini 等产品设计，帮助开发者快速集成 AI Agent 能力到云端应用中。（400字以内）
-   亮点: 亮点1（核心功能）：提供一系列预构建的 Agent Skills，覆盖 Google Cloud 核心服务如 Gemini API、BigQuery、Firebase 等; 亮点2（解决了什么具体问题）：降低开发者集成 Google Cloud AI 和基础设施服务的门槛，通过标准化技能包快速构建智能 Agent; 亮点3（如果是'未知'则不返回此条）：包含 Google Cloud Well-Architected Framework 六大支柱（安全、可靠性、成本优化等）的最佳实践指南
-   详细报告: 通俗地解释这个项目的详细信息,尽可能的详细，核心功能,解决了什么具体问题，涉及到的技术有哪些什么，（不低于500字,不设置上限, 如果内容被截断导致看不出，就说'因文档不全无法详细点评该部分'）
+3. roboflow/supervision:
+   star: 43142  语言/技术: Python, OpenCV, Pillow, Ultralytics, Hugging Face Transformers, MMDetection, Roboflow Inference
+   项目简介: Supervision 是 Roboflow 推出的一个开源计算机视觉工具包，旨在为开发者提供从数据加载、模型集成到实时分析（如区域计数）的全套构建模块。它最大的亮点是模型无关性（Model Agnostic），支持无缝对接 Ultralytics、Transformers、MMDetection 等主流模型库，并提供了强大的数据集转换（COCO, YOLO, Pascal VOC）和高度自定义的可视化标注工具，让开发者能专注于上层应用开发，而非重复造轮子。
+   亮点: 模型无关架构：通过 sv.Detections 统一数据结构，轻松切换不同检测、分割或分类模型。; 一站式数据集管理：支持 COCO、YOLO、Pascal VOC 等多种格式的加载、拆分、合并与转换。; 丰富的可视化组件：提供 BoxAnnotator 等多种标注器，支持高度自定义的图像/视频标注效果。
+   详细报告: Supervision 解决了计算机视觉项目中常见的“胶水代码”痛点。在传统流程中，开发者需要花费大量时间处理不同模型输出的数据格式差异、编写重复的数据集转换脚本以及调试复杂的可视化逻辑。Supervision 通过定义一套核心的 `sv.Detections` 对象，将来自 YOLO、RF-DETR、MMDetection 等五花八门的模型输出统一成标准接口，极大降低了集成成本。
 
-这个项目是 Google 官方推出的 Agent Skills 技能包集合，主要面向希望在应用中集成 Google Cloud 和 Gemini AI 能力的开发者。核心功能是通过预构建的 Skills（技能包），让开发者无需从零开始学习复杂的云服务 API，就能快速构建具备特定能力的 AI Agent。
+在数据处理方面，它堪称“数据集瑞士军刀”。无论是从 Roboflow 平台下载的数据，还是本地已有的 COCO、YOLO 或 Pascal VOC 格式数据集，Supervision 都能一键加载，并支持按需懒加载图片以节省内存。更贴心的是，它内置了数据集拆分（split）、合并（merge）和多格式互转功能，省去了开发者自己写脚本的麻烦。
 
-从技术栈来看，项目覆盖了 Google Cloud 的多个核心服务：
-- **Gemini API**：提供大语言模型能力，支持文本生成、多模态交互等
-- **BigQuery**：云数据仓库，用于大规模数据分析
-- **Cloud Run**：无服务器容器平台，适合部署轻量级应用
-- **Cloud SQL**：托管式关系数据库服务
-- **Firebase**：移动和 Web 应用开发平台
-- **GKE (Kubernetes Engine)**：托管 Kubernetes 服务
-- **AlloyDB**：兼容 PostgreSQL 的高性能数据库
+在应用层面，Supervision 提供了丰富的 Annotators（标注器），如 BoxAnnotator、MaskAnnotator 等，可以轻松绘制检测框、掩码、标签等。结合其 Zone（区域）功能，开发者能快速实现诸如“实时人流统计”、“车辆测速”、“停留时间分析”等高级功能。文档中提到的教程展示了如何利用它进行实时流处理，优化零售顾客体验或交通管理，证明了其强大的实战能力。
 
-此外，项目还包含 Google Cloud Well-Architected Framework 的六大支柱最佳实践：安全性、可靠性、成本优化、运营卓越、性能优化和可持续性。这些不是简单的 API 调用指南，而是架构层面的最佳实践。
-
-安装方式非常友好，通过 `npx skills add google/skills` 一条命令即可完成，支持选择性安装特定技能包。
-
-不过需要注意的是，根据 GitHub API 指标显示，该项目目前处于早期阶段：forks 为 0，open_issues 为 0，没有最近的提交记录，也没有发布版本。README 中也明确标注 'This repository is under active development'，说明功能还在快速迭代中。
-
-对于开发者来说，这是一个了解 Google Cloud Agent 生态的入口，但生产环境使用需要谨慎评估成熟度。
+技术实现上，它基于 Python 3.9+，依赖 OpenCV 进行图像处理，Pillow 进行图像操作，并通过适配器模式与各大深度学习框架对接。其设计哲学是提供“构建块”（building blocks），而非一个笨重的端到端框架，这使得它非常轻量且易于集成到现有项目中。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个 Google Cloud 智能运维助手，自动监控 BigQuery 查询性能、Cloud Run 服务状态，并通过 Gemini API 生成优化建议报告。; 灵感2：可以将其集成到现有 CI/CD 流程中，利用 Well-Architected Framework 技能包自动进行云架构合规性检查，确保部署符合 Google 最佳实践。; 灵感3：基于 Agent Skills 模式，为其他云平台（如 AWS、Azure）开发类似的技能包系统，打造多云 Agent 开发框架。
-   项目链接: https://github.com/google/skills
+   衍生灵感: 灵感1：基于此项目，可以开发一个【智能零售分析系统】，用于解决线下门店顾客动线追踪、热力图生成和停留时长分析的问题，帮助商家优化商品陈列。; 灵感2：可以将其集成到【安防监控平台】中，优化周界入侵检测、人群密度预警和异常行为识别的实时可视化与报警流程。; 灵感3：利用其强大的数据集转换功能，开发一个【自动化数据标注流水线】，连接 Label Studio 等工具，实现模型训练前的数据预处理与格式标准化自动化。
+   项目链接: https://github.com/roboflow/supervision
 
-4. Panniantong/Agent-Reach:
-   star: 21686  语言/技术: Python, Shell, yt-dlp, twitter-cli, rdt-cli, xhs-cli, bili-cli, Jina Reader, Exa, mcporter, feedparser, douyin-mcp-server, linkedin-scraper-mcp, gh CLI, MCP协议
-   项目简介: Agent Reach 是一个给 AI Agent 装上互联网能力的开源脚手架工具。它解决的核心痛点是：AI Agent 虽然能写代码、改文档，但想上网搜东西时却处处碰壁——YouTube 看不了字幕、Twitter 搜不了内容、小红书打不开、网页抓回来一堆乱码。这个项目把 Twitter、YouTube、B站、小红书、抖音、Reddit、GitHub、微信公众号等 15+ 主流平台的访问能力打包成一键安装方案，让 Agent 通过命令行就能直接读取和搜索这些平台的内容。完全免费、开源、隐私安全，Cookie 只存本地不上传。一句话总结：给你的 AI Agent 一键装上互联网能力，让它从'只能写代码'变成'能上网冲浪的全能助手'。
-   亮点: 一键安装 15+ 主流平台访问能力，Agent 从'断网'变'全网通'; 完全免费开源，所有工具无需付费 API Key，Cookie 本地存储不上传; 可插拔架构设计，每个渠道独立文件，不满意随时替换上游工具; 自带诊断命令 agent-reach doctor，一键检测所有渠道状态; 兼容 Claude Code、Cursor、OpenClaw、Windsurf 等所有命令行 Agent
-   详细报告: Agent Reach 是一个极具实用价值的 AI Agent 能力扩展工具。它的核心理念是：AI Agent 已经很聪明了，但缺的是'上网能力'——就像一个学霸被关在没网的房间里，空有一身本事却查不了资料。
+4. Andyyyy64/whichllm:
+   star: 4197  语言/技术: Python 3.11+, Typer (CLI框架), Rich (终端表格输出), nvidia-ml-py (NVIDIA GPU检测), llama-cpp-python (GGUF模型推理), transformers (AWQ/GPTQ/FP16模型支持), HuggingFace API (模型数据获取), uv (包管理与虚拟环境), JSON (结构化输出)
+   项目简介: 一句话概括：whichllm 是一个帮你"看菜下饭"的本地大模型推荐神器。它能自动检测你的电脑硬件（GPU/CPU/RAM），然后从 HuggingFace 海量模型中，基于真实跑分（而非单纯看模型大小）排名出最适合你机器的那款 LLM。它解决了"我的显卡能跑哪个模型？哪个跑得最快最好？"这个让无数人头疼的痛点，堪称本地部署大模型的"装机指南针"。
+   亮点: 智能排名算法：基于 LiveBench、Artificial Analysis、Aider 等真实跑分排名，而非单纯按模型体积大小推荐，避免"大而无当"的坑; 硬件自动检测与模拟：支持 NVIDIA/AMD/Apple Silicon/CPU 自动识别，还能模拟未购买的 GPU（如 RTX 4090）进行硬件规划; 一键体验：`whichllm run` 自动下载模型并启动对话，`whichllm snippet` 生成即插即用的 Python 代码，零配置上手; 证据分级评分：每个分数标注 direct/variant/base/interpolated/self-reported 等级，主动拒绝虚高分数和跨家族分数继承，防止被"刷分"模型忽悠; 升级规划神器：`whichllm upgrade` 可对比多款 GPU 的升级收益，`whichllm plan` 反向查询运行特定模型所需的硬件
+   详细报告: whichllm 的核心价值在于它不是简单地回答"你的显存能装下哪个模型"，而是回答"能装下的模型里，哪个实际表现最好"。这个区别至关重要——一个 32B 模型可能刚好塞进 24GB 显卡，但一个更新的 27B 模型可能跑分更高、速度更快，whichllm 会正确地把 27B 排第一。
 
-这个项目做的事情很直接：把互联网上主流平台（Twitter/X、YouTube、B站、小红书、抖音、Reddit、GitHub、微信公众号、微博、雪球、V2EX、LinkedIn、小宇宙播客等）的访问能力，通过开源工具链打包成一套一键安装方案。安装后，Agent 就能直接调用这些工具去读网页、搜推文、看视频字幕、刷帖子、读公众号文章等等。
+项目的技术壁垒主要体现在评分引擎上：它整合了 LiveBench、Artificial Analysis Index、Aider、Chatbot Arena ELO、Open LLM Leaderboard 等多个基准来源，并对每个分数进行证据置信度加权（直接匹配满分，自报分数打 55 折）。同时，它还会对过时榜单进行"年代降级"处理，防止 2024 年的老模型因为旧榜单的高分而压制 2025 年的新模型。
 
-技术架构上，Agent Reach 采用'脚手架'设计而非框架——它不封装上游工具，而是帮 Agent 完成选型和配置。每个渠道背后是一个独立的上游工具（如 twitter-cli 读推特、yt-dlp 提取视频字幕、Jina Reader 读网页），Agent Reach 负责检测、安装和注册这些工具。这种设计的好处是灵活：不满意某个工具？换掉对应的 channel 文件就行。
+在硬件适配方面，whichllm 的 VRAM 估算非常精细：不仅计算模型权重，还包含 GQA KV Cache、激活值和约 500MB 的框架开销。速度估算则基于 GPU 内存带宽、量化精度、后端类型和 MoE 激活参数比例。对于 Apple Silicon 和 CPU-only 场景，它会自动限制只推荐 GGUF 格式以确保稳定性。
 
-安装方式极其简单：只需把一句话'帮我安装 Agent Reach'发给你的 AI Agent，它就会自动完成所有配置。更新也是一句话的事。安全方面，所有 Cookie 和 Token 只存在本地 ~/.agent-reach/config.yaml，文件权限 600，不上传不外传。还提供安全模式（--safe）和预览模式（--dry-run），适合生产环境使用。
+功能上，whichllm 提供了完整的"模型生命周期"支持：从硬件检测 → 模型推荐 → 运行对话 → 代码片段生成 → 硬件规划 → 升级对比，形成闭环。`--json` 输出模式让它可以轻松集成到自动化脚本和 CI 流程中，比如配合 Ollama 做模型管理。
 
-项目还贴心地提供了 agent-reach doctor 诊断命令，一条命令告诉你哪个渠道通、哪个不通、怎么修。对于需要 Cookie 认证的平台（Twitter、小红书等），推荐使用 Chrome 插件 Cookie-Editor 导出 Cookie，流程统一且简单。
-
-需要注意的是，使用 Cookie 登录的平台存在被平台检测封号的风险，项目明确建议使用专用小号而非主账号。另外，服务器部署可能需要代理（约 $1/月）来访问部分国内平台。
-
-总的来说，这是一个'程序员救星'级别的工具——它把原本需要逐个踩坑、装工具、调配置的繁琐过程，变成了一句话搞定。对于经常使用 AI Agent 做信息收集、内容分析、竞品监控的开发者来说，Agent Reach 能极大提升效率。
+项目结构清晰，代码组织在 `src/whichllm/` 下分为 cli、hardware、models、engine、output 五大模块，职责分明。开发使用 `uv` 管理依赖，支持 `uvx whichllm@latest` 零安装运行，对新手极其友好。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目开发一个'AI 竞品情报监控系统'，让 Agent 自动定时抓取竞品在 Twitter、小红书、抖音等平台的最新动态、用户评价和营销内容，生成每日竞品分析报告，解决市场情报收集耗时费力的问题。; 灵感2：将其集成到'内容创作者工作台'中，让 Agent 自动分析 YouTube/B站热门视频的字幕内容、评论区风向，帮助创作者快速了解受众喜好和热点趋势，优化选题方向。; 灵感3：开发一个'社交媒体舆情预警系统'，利用 Agent Reach 的多平台搜索能力，实时监控品牌/产品在 Reddit、Twitter、微博、小红书等平台的提及情况，发现负面舆情时自动告警并生成应对建议。; 灵感4：构建一个'AI 辅助学术研究助手'，让 Agent 自动搜索 GitHub 上的相关开源项目、阅读技术博客、提取 YouTube 教程字幕，帮助研究者快速梳理某个技术领域的现状和发展脉络。
-   项目链接: https://github.com/Panniantong/Agent-Reach
+   衍生灵感: 灵感1：基于此项目，可以开发一个 "LocalLLM 装机顾问" 网页应用，用户输入预算和用途（编程/写作/多模态），系统推荐最优硬件+模型组合方案，甚至对接电商链接赚取佣金。; 灵感2：可以将其集成到 AI 开发工作流中，比如在 CI/CD 流水线里用 `whichllm --json` 自动选择当前 runner 能跑的最强模型做自动化测试，避免手动配置模型。; 灵感3：开发一个 "模型性能监控面板"，定期运行 whichllm 抓取 HuggingFace 新模型数据，当发现某款模型在特定硬件上的性价比超过当前部署的模型时，自动发送通知提醒升级。
+   项目链接: https://github.com/Andyyyy64/whichllm
