@@ -76,70 +76,58 @@
    衍生灵感: 灵感1：基于此项目的多平台聚合能力，可以开发一个「竞品情报雷达」产品，自动监控竞品在 Reddit、X、HN、GitHub 上的社区讨论和开发者动态，通过 Slack/webhook 实时推送给产品团队，解决 PM 手动刷多个平台的信息收集痛点。; 灵感2：将其 Polymarket 预测市场数据源集成到金融/投资研究工具中，构建一个「真实市场情绪仪表盘」，用真金白银背书的赔率替代传统分析师预测，为对冲基金或散户投资者提供另类数据信号。; 灵感3：利用其 GitHub 人肉模式和交叉源聚类能力，开发一个「技术人才招聘背调助手」，自动聚合候选人在 GitHub 的 PR 合并率、Reddit 技术社区声誉、YouTube 演讲内容、X 上的行业观点，生成360度开发者画像报告。; 灵感4：基于其 ELI5 模式和 HTML 简报功能，可以做一个「企业知识库自动摘要引擎」，定期抓取内部技术栈相关的社区讨论，自动生成通俗易懂的周报推送给非技术管理层。; 灵感5：将其 TikTok/Instagram 视觉内容搜索能力与 Pinterest 视觉发现结合，开发一个「品牌社媒舆情监控系统」，追踪品牌在短视频平台的真实用户反馈和文化影响力，而非只看传统社媒管理平台覆盖的大 V 账号。
    项目链接: https://github.com/mvanhorn/last30days-skill
 
-2. RyanCodrai/turbovec:
-   star: 10373  语言/技术: Rust, Python, SIMD (NEON, AVX-512BW, AVX2), TurboQuant 量化算法, Lloyd-Max 标量量化, maturin
-   项目简介: turbovec 是一个基于 Rust 实现的高性能向量索引库，提供 Python 绑定，核心采用 Google Research 的 TurboQuant 算法。它解决了大规模向量检索中内存占用高、需要训练阶段、搜索速度慢等痛点——能将 1000 万文档的内存从 31 GB（float32）压缩到仅 4 GB，同时搜索速度比 FAISS 更快。支持在线增量添加、搜索时过滤、稳定 ID 映射等特性，适用于对隐私、内存或延迟敏感的 RAG 场景。
-   亮点: 极致压缩：1000 万文档从 31 GB 压缩到 4 GB（16x 压缩比）; 搜索速度超越 FAISS：ARM 上快 12–20%，x86 上持平或更优; 无需训练阶段：在线增量添加向量，无参数调优，无需重建索引; 搜索时过滤：支持 ID 白名单或位掩码过滤，在 SIMD 内核层面短路跳过无关块，无召回损失; 与主流框架集成：提供 LangChain、LlamaIndex、Haystack、Agno 的即插即用替换; 纯本地运行：无需托管服务，数据不出机器，支持完全离线的 RAG 栈
-   详细报告: turbovec 是一个用 Rust 编写的高性能向量索引库，通过 Python 绑定让 Python 用户也能轻松使用。它的核心技术基于 Google Research 发表的 TurboQuant 算法（ICLR 2026），这是一种数据无关的量化器，能达到 Shannon 失真率下界的理论最优水平，且不需要码本训练和单独的训练阶段。
+2. soxoj/maigret:
+   star: 32148  语言/技术: Python 3.10+, AsyncIO, Flask (Web UI), D3.js (Graph Visualization), OpenAI-compatible API, FlareSolverr, Tor/I2P, Docker, Selenium (implied via FlareSolverr)
+   项目简介: Maigret 是一个强大的开源 OSINT（开源情报）工具，仅凭用户名就能在 3000+ 网站上搜索目标人物的所有公开账户信息，并自动提取个人资料、关联账号等数据。无需 API Key，支持递归搜索、AI 智能分析、Tor/I2P 代理、Cloudflare 绕过，还能生成 PDF/HTML/XMind 等多种格式的报告。堪称“数字时代的福尔摩斯”，适用于网络安全调查、背景核查、竞品分析等场景。
+   亮点: 支持 3000+ 网站扫描，默认检查流量最高的 500 个站点，可按标签/国家过滤; 无需 API Key，开箱即用，支持命令行、Web UI、Python 库多种使用方式; 递归搜索：发现新用户名后自动继续追踪，构建完整社交图谱; AI 分析模式：集成 OpenAI 兼容 API，自动生成调查摘要（姓名、位置、职业等）; 支持 Tor/I2P 代理和 Cloudflare 绕过，具备一定反检测能力; 输出格式丰富：PDF、HTML、XMind、JSON、CSV、交互式 D3 图谱; 可嵌入 Python 项目，作为库调用，适合二次开发
+   详细报告: Maigret 是一款专为 OSINT 调查设计的 Python 工具，核心功能是通过用户名在海量网站中检索目标人物的公开账户。它内置了一个庞大的站点数据库（3000+），涵盖社交媒体、论坛、博客、约会平台、照片分享等多个类别，且数据库每日自动更新。
 
-**核心工作原理**分为六个步骤：
-1. **归一化**：剥离向量长度（模），将每个向量转化为单位方向向量，模单独存储为单个浮点数。
-2. **随机旋转**：将所有向量乘以同一个随机正交矩阵，旋转后每个坐标独立服从 Beta 分布（高维下收敛于高斯分布），这使得坐标分布可预测且与输入数据无关。
-3. **逐坐标校准（TQ+）**：在首次添加时，为每个坐标拟合平移和缩放两个标量，将经验分位数映射到标准 Beta 边际分布上。校准在首次 add 后冻结，后续添加复用，无需重新训练。这一步在低维嵌入（如 GloVe 2-bit）上可带来最多 +1.4pp 的召回提升。
-4. **Lloyd-Max 标量量化**：由于分布已知，可预先计算最优分桶方案。2-bit 对应 4 个桶，4-bit 对应 16 个桶。这些桶边界和质心从数学计算得出，而非从数据学习。
-5. **位打包**：每个坐标变为小整数（0-3 或 0-15），紧密打包成字节。1536 维向量从 6144 字节压缩到 384 字节，实现 16 倍压缩。
-6. **长度重归一化评分**：标量量化会系统性低估内积。编码时计算每个向量的校正标量（原向量与其重建之间的内积比），搜索内核在堆插入前乘以该校正因子，使估计量无偏，零搜索开销，零额外存储。
+工作流程简单高效：输入用户名 → 并发检查数百个站点 → 提取个人资料中的姓名、头像、简介、链接等信息 → 发现关联账号 → 递归搜索新发现的标识符 → 生成结构化报告。整个过程完全自动化，无需手动配置 API Key。
 
-**搜索过程**：查询向量旋转到同一空间后，直接对码本值评分，无需解压数据库向量。评分内核使用手写 SIMD 指令（ARM 用 NEON，x86 用 AVX-512BW，回退到 AVX2），采用 nibble-split 查找表实现最大吞吐量。
+技术实现上，Maigret 采用异步并发架构（AsyncIO），大幅提升扫描速度。它内置了反检测机制，能识别并部分绕过网站的封锁、验证码和 Cloudflare 防护（通过 FlareSolverr）。对于需要 JavaScript 渲染的页面，可配置 FlareSolverr 实例进行浏览器级绕过。
 
-**关键特性**：
-- **在线增量添加**：向量添加即索引，无训练步骤，无参数调优，索引随语料增长无需重建。
-- **搜索时过滤**：`search()` 方法接受 ID 白名单或槽位位掩码，在内核层面以 32 向量块粒度进行短路优化——无允许槽位的块直接跳过，块内非允许槽位在堆插入时丢弃。选择性过滤（白名单远小于索引）可避免大部分 SIMD 计算开销。输出长度为 min(k, len(allowed))，不会用填充结果凑数。
-- **稳定 ID（IdMapIndex）**：支持外部 uint64 ID 映射，删除操作 O(1)，ID 在持久化后仍然保留。
-- **混合检索**：可与 SQL、BM25、ACL、时间窗口等外部系统配合，先由外部系统缩小候选集，再由 turbovec 进行稠密重排序。
-- **框架集成**：提供 LangChain、LlamaIndex、Haystack、Agno 的即插即用替换，相同接口、相同的持久化和检索器管线，只需更换 import 即可。
+项目提供了多种使用方式：
+1. **命令行工具**：`pip install maigret` 后直接 `maigret username` 即可运行
+2. **Web UI**：内置 Flask 前端，支持可视化图谱浏览和报告下载
+3. **Python 库**：可导入 `maigret` 模块，集成到自定义脚本或工作流中
+4. **Docker 镜像**：提供 CLI 和 Web 两种模式，支持快速部署
+5. **Telegram Bot**：社区提供的免安装方案
 
-**性能表现**：在 10 万向量、1000 查询、k=64 的基准测试中，ARM（Apple M3 Max）上比 FAISS IndexPQFastScan 快 12–20%；x86（Intel Xeon Sapphire Rapids）上 4-bit 配置领先 1–6%，2-bit 单线程差距在 1% 以内。召回率方面，在 OpenAI d=1536 和 d=3072 上，TurboQuant 在 R@1 上比 FAISS 高 0.4–3.4 个百分点（2-bit 和 4-bit），k=4 时两者均收敛到 1.0。
+特别值得一提的是其 AI 分析功能（`--ai`），可将原始搜索结果发送给 OpenAI 兼容 API（支持 Azure、OpenRouter、本地模型等），生成简洁的调查摘要，包括推测的真实姓名、地理位置、职业、兴趣、语言能力和后续调查线索。
 
-**适用场景**：构建对隐私、内存或延迟有严格要求的 RAG 系统，配合任意开源嵌入模型可实现完全离线的 RAG 栈。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
+Maigret 已被多个专业 OSINT 和商业产品采用，如 SocialLinks API、UserSearch.ai 等，证明其在实际场景中的实用价值。项目采用 MIT 许可证，允许商业使用，但作者也提供付费的私有数据库（5000+ 站点，每日更新）和 API 服务，适合企业级需求。
+
+需要注意的是，该工具仅用于合法合规的调查目的，用户需自行遵守 GDPR、CCPA 等数据保护法规。
+   活跃度: 文档未提及  社区健康: 文档未提及
+   商业潜力: 文档明确提及商业用途：MIT 许可证允许免费商业使用，但作者提供付费的私有站点数据库（5000+ 站点，每日更新）和用户名检查 API 服务，适合企业级 OSINT 需求。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 turbovec 开发一个**企业级私有化知识库搜索引擎**，用于替代云端向量数据库服务（如 Pinecone、Weaviate Cloud），解决金融、医疗等敏感行业数据不能上云的痛点。利用其 16x 压缩比和搜索时过滤能力，可以在单机上索引数百万文档，按租户/部门进行精确过滤检索。; 灵感2：将 turbovec 集成到**边缘设备（如嵌入式 ARM 设备、移动端）上的离线语义搜索应用**中。由于其 ARM NEON 内核性能优异且无需训练阶段，非常适合在树莓派、Jetson 等边缘硬件上部署本地 RAG 助手，实现完全离线的智能问答。; 灵感3：开发一个**多模态混合检索平台**，将 turbovec 的稠密向量检索与 Elasticsearch 的 BM25 稀疏检索结合，利用 turbovec 的 allowlist 过滤机制实现两阶段检索（先稀疏召回候选集，再稠密重排序），构建比单一检索方式更精准的搜索系统，适用于电商搜索、法律文献检索等场景。; 灵感4：基于 turbovec 的 IdMapIndex 和删除能力，构建一个**实时增量更新的推荐系统向量索引**，支持用户和物品向量的动态增删，配合时间窗口过滤实现"最近 N 天活跃物品"的实时推荐，无需全量重建索引。
-   项目链接: https://github.com/RyanCodrai/turbovec
+   衍生灵感: 灵感1：开发一个 '企业员工背景调查助手'，集成 Maigret 作为核心引擎，自动扫描候选人在公开平台的足迹，生成可视化背景报告，用于 HR 招聘流程中的初步筛查。; 灵感2：构建一个 '品牌舆情监控平台'，利用 Maigret 的递归搜索能力，追踪特定用户名或关键词在社交网络中的传播路径，识别水军账号和虚假信息扩散网络。; 灵感3：将其集成到 '威胁情报系统' 中，作为外部攻击面评估（EASM）模块，自动发现组织员工在公开平台泄露的敏感信息（如技术栈、内部项目名称），辅助安全团队进行风险预警。
+   项目链接: https://github.com/soxoj/maigret
 
-3. roboflow/supervision:
-   star: 43142  语言/技术: Python, OpenCV, Pillow, Ultralytics, Hugging Face Transformers, MMDetection, Roboflow Inference
-   项目简介: Supervision 是 Roboflow 推出的一个开源计算机视觉工具包，旨在为开发者提供从数据加载、模型集成到实时分析（如区域计数）的全套构建模块。它最大的亮点是模型无关性（Model Agnostic），支持无缝对接 Ultralytics、Transformers、MMDetection 等主流模型库，并提供了强大的数据集转换（COCO, YOLO, Pascal VOC）和高度自定义的可视化标注工具，让开发者能专注于上层应用开发，而非重复造轮子。
-   亮点: 模型无关架构：通过 sv.Detections 统一数据结构，轻松切换不同检测、分割或分类模型。; 一站式数据集管理：支持 COCO、YOLO、Pascal VOC 等多种格式的加载、拆分、合并与转换。; 丰富的可视化组件：提供 BoxAnnotator 等多种标注器，支持高度自定义的图像/视频标注效果。
-   详细报告: Supervision 解决了计算机视觉项目中常见的“胶水代码”痛点。在传统流程中，开发者需要花费大量时间处理不同模型输出的数据格式差异、编写重复的数据集转换脚本以及调试复杂的可视化逻辑。Supervision 通过定义一套核心的 `sv.Detections` 对象，将来自 YOLO、RF-DETR、MMDetection 等五花八门的模型输出统一成标准接口，极大降低了集成成本。
+3. harry0703/MoneyPrinterTurbo:
+   star: 85306  语言/技术: Python, Streamlit, MoviePy, Pillow, Edge TTS, faster-whisper, FFmpeg, Docker, uv, OpenAI, DeepSeek, Gemini, Azure Speech SDK
+   项目简介: MoneyPrinterTurbo 是一个全自动短视频生成神器，堪称“打工人神器”和“内容创作者印钞机”。只需输入一个视频主题或关键词，它就能一条龙服务：AI自动生成文案、匹配无版权高清素材、合成多语言语音字幕、添加背景音乐，最终输出横屏或竖屏的高清短视频。支持 OpenAI、DeepSeek、通义千问等 13+ 大模型接入，并提供 Web 界面和 API 接口，极大降低了视频制作门槛。
+   亮点: 全自动视频生成流水线：从文案到成片一键完成，支持中英文双语; 多模型兼容：支持 OpenAI、DeepSeek、通义千问、Gemini 等 13+ 主流大模型灵活切换; 无版权素材集成：内置 Pexels、Pixabay、Coverr 等免费高清/4K 视频素材源; 双模式字幕生成：Edge TTS 快速对齐 或 Whisper 高精度转写，满足不同质量需求; 完整 MVC 架构：提供 Web UI 和 REST API，易于二次开发与集成
+   详细报告: MoneyPrinterTurbo 是一个基于 Python 的全自动短视频生成系统，专为内容创作者、营销人员和自媒体运营者设计。其核心逻辑是构建了一个端到端的 AI 视频生产流水线：用户输入主题 → AI 生成文案 → 自动检索匹配的无版权视频片段 → 合成语音（支持多种 TTS 引擎）→ 生成精准时间轴字幕 → 混合背景音乐 → 输出高清短视频。
 
-在数据处理方面，它堪称“数据集瑞士军刀”。无论是从 Roboflow 平台下载的数据，还是本地已有的 COCO、YOLO 或 Pascal VOC 格式数据集，Supervision 都能一键加载，并支持按需懒加载图片以节省内存。更贴心的是，它内置了数据集拆分（split）、合并（merge）和多格式互转功能，省去了开发者自己写脚本的麻烦。
+技术实现上，项目采用清晰的 MVC 架构，前端使用 Streamlit 快速搭建交互式 Web 界面，后端通过 FastAPI 提供标准化 API 服务。视频处理层依赖 MoviePy 2.x 和 Pillow 完成剪辑与字幕渲染（已弃用 ImageMagick），语音合成默认使用免费的 Edge TTS（在 UI 中显示为 Azure TTS V1），也支持付费的 Azure Speech SDK V2 以获得更自然音质。字幕生成提供两种模式：edge 模式利用 TTS 返回的时间戳快速对齐；whisper 模式则通过本地 faster-whisper 模型进行音频转写，精度更高但需下载约 3GB 模型文件。
 
-在应用层面，Supervision 提供了丰富的 Annotators（标注器），如 BoxAnnotator、MaskAnnotator 等，可以轻松绘制检测框、掩码、标签等。结合其 Zone（区域）功能，开发者能快速实现诸如“实时人流统计”、“车辆测速”、“停留时间分析”等高级功能。文档中提到的教程展示了如何利用它进行实时流处理，优化零售顾客体验或交通管理，证明了其强大的实战能力。
+项目支持竖屏（9:16, 1080x1920）和横屏（16:9, 1920x1080）两种主流短视频比例，适配抖音、YouTube Shorts、Instagram Reels 等平台。素材来源整合 Pexels、Pixabay、Coverr 三大无版权视频库，避免侵权风险。部署方式极其友好：Windows 用户可使用一键启动包，Mac/Linux 推荐 uv 管理依赖，同时支持 Docker 容器化部署和 Google Colab 云端运行。
 
-技术实现上，它基于 Python 3.9+，依赖 OpenCV 进行图像处理，Pillow 进行图像操作，并通过适配器模式与各大深度学习框架对接。其设计哲学是提供“构建块”（building blocks），而非一个笨重的端到端框架，这使得它非常轻量且易于集成到现有项目中。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
+配置灵活度高，所有关键参数（LLM 提供商、TTS 语音、字幕样式、背景音乐音量等）均可通过 config.toml 文件或 Web UI 实时调整。项目还贴心提供了国内用户无法访问 HuggingFace 时的手动模型下载方案（百度网盘/夸克网盘），体现了良好的本地化支持。
+   活跃度: 文档未提及  社区健康: 文档未提及
+   商业潜力: 该项目具有极强的商业化潜力，可作为 SaaS 服务（如录咖已实践）、电商营销工具、教育内容生产平台或本地生活服务插件。其低门槛、全自动的特性完美契合短视频时代的内容量产需求。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个【智能零售分析系统】，用于解决线下门店顾客动线追踪、热力图生成和停留时长分析的问题，帮助商家优化商品陈列。; 灵感2：可以将其集成到【安防监控平台】中，优化周界入侵检测、人群密度预警和异常行为识别的实时可视化与报警流程。; 灵感3：利用其强大的数据集转换功能，开发一个【自动化数据标注流水线】，连接 Label Studio 等工具，实现模型训练前的数据预处理与格式标准化自动化。
-   项目链接: https://github.com/roboflow/supervision
+   衍生灵感: 灵感1：开发一个「跨境电商短视频营销平台」，集成 MoneyPrinterTurbo 的 API，为 Shopify 卖家自动生成多语言产品推广视频，一键发布到 TikTok、Instagram 和 YouTube Shorts。; 灵感2：将其封装为「教育内容自动化引擎」，教师输入知识点关键词，自动生成带讲解语音、动态字幕和示意图解的教学微课视频，用于在线教育平台。; 灵感3：构建「本地生活探店视频生成器」，商家上传店铺信息，系统自动结合 Pexels 素材库生成风格统一的探店短视频模板，用于美团、大众点评等平台的营销推广。
+   项目链接: https://github.com/harry0703/MoneyPrinterTurbo
 
-4. Andyyyy64/whichllm:
-   star: 4197  语言/技术: Python 3.11+, Typer (CLI框架), Rich (终端表格输出), nvidia-ml-py (NVIDIA GPU检测), llama-cpp-python (GGUF模型推理), transformers (AWQ/GPTQ/FP16模型支持), HuggingFace API (模型数据获取), uv (包管理与虚拟环境), JSON (结构化输出)
-   项目简介: 一句话概括：whichllm 是一个帮你"看菜下饭"的本地大模型推荐神器。它能自动检测你的电脑硬件（GPU/CPU/RAM），然后从 HuggingFace 海量模型中，基于真实跑分（而非单纯看模型大小）排名出最适合你机器的那款 LLM。它解决了"我的显卡能跑哪个模型？哪个跑得最快最好？"这个让无数人头疼的痛点，堪称本地部署大模型的"装机指南针"。
-   亮点: 智能排名算法：基于 LiveBench、Artificial Analysis、Aider 等真实跑分排名，而非单纯按模型体积大小推荐，避免"大而无当"的坑; 硬件自动检测与模拟：支持 NVIDIA/AMD/Apple Silicon/CPU 自动识别，还能模拟未购买的 GPU（如 RTX 4090）进行硬件规划; 一键体验：`whichllm run` 自动下载模型并启动对话，`whichllm snippet` 生成即插即用的 Python 代码，零配置上手; 证据分级评分：每个分数标注 direct/variant/base/interpolated/self-reported 等级，主动拒绝虚高分数和跨家族分数继承，防止被"刷分"模型忽悠; 升级规划神器：`whichllm upgrade` 可对比多款 GPU 的升级收益，`whichllm plan` 反向查询运行特定模型所需的硬件
-   详细报告: whichllm 的核心价值在于它不是简单地回答"你的显存能装下哪个模型"，而是回答"能装下的模型里，哪个实际表现最好"。这个区别至关重要——一个 32B 模型可能刚好塞进 24GB 显卡，但一个更新的 27B 模型可能跑分更高、速度更快，whichllm 会正确地把 27B 排第一。
-
-项目的技术壁垒主要体现在评分引擎上：它整合了 LiveBench、Artificial Analysis Index、Aider、Chatbot Arena ELO、Open LLM Leaderboard 等多个基准来源，并对每个分数进行证据置信度加权（直接匹配满分，自报分数打 55 折）。同时，它还会对过时榜单进行"年代降级"处理，防止 2024 年的老模型因为旧榜单的高分而压制 2025 年的新模型。
-
-在硬件适配方面，whichllm 的 VRAM 估算非常精细：不仅计算模型权重，还包含 GQA KV Cache、激活值和约 500MB 的框架开销。速度估算则基于 GPU 内存带宽、量化精度、后端类型和 MoE 激活参数比例。对于 Apple Silicon 和 CPU-only 场景，它会自动限制只推荐 GGUF 格式以确保稳定性。
-
-功能上，whichllm 提供了完整的"模型生命周期"支持：从硬件检测 → 模型推荐 → 运行对话 → 代码片段生成 → 硬件规划 → 升级对比，形成闭环。`--json` 输出模式让它可以轻松集成到自动化脚本和 CI 流程中，比如配合 Ollama 做模型管理。
-
-项目结构清晰，代码组织在 `src/whichllm/` 下分为 cli、hardware、models、engine、output 五大模块，职责分明。开发使用 `uv` 管理依赖，支持 `uvx whichllm@latest` 零安装运行，对新手极其友好。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
+4. maziyarpanahi/openmed:
+   star: 2386  语言/技术: Python, Swift, PyTorch, Apple MLX, CoreML, Hugging Face Transformers, FastAPI, Docker, Faker, Tiktoken
+   项目简介: OpenMed 是一个本地优先的医疗 AI 工具包，专为在设备端运行而设计，无需将患者数据上传至云端。它提供超过 1,000 个专业的生物医学命名实体识别（NER）模型，支持疾病、药物、基因、解剖结构等实体提取，并具备强大的 PII 去标识化能力，覆盖 12 种语言和 247 个隐私检查点。通过 Python API、REST 服务或原生 iOS/macOS 应用（基于 Apple MLX 加速），开发者可轻松集成到医疗系统中，确保 HIPAA 合规并避免厂商锁定。
+   亮点: 1000+ 专业医疗 NER 模型，涵盖疾病、药物、基因、解剖等实体类型; 完全本地运行，患者数据永不离开设备，满足 HIPAA 合规要求; 支持 Apple Silicon MLX 加速，在 iPhone/iPad/Mac 上实现高性能推理; 多语言 PII 去标识化（12 种语言，247 个检查点），支持智能实体合并与格式保留伪造; 提供 Python API、REST 服务和原生 Swift 框架（OpenMedKit）三种集成方式
+   详细报告: OpenMed 是一个开源、本地优先的医疗 AI 平台，旨在解决医疗数据处理中的隐私与合规难题。其核心能力包括：1）**临床文本结构化**：通过一行 Python 代码调用 `analyze_text()` 函数，即可使用如 `disease_detection_superclinical` 或 `pharma_detection_superclinical` 等模型，从非结构化临床笔记中提取疾病、药物、治疗等关键信息；2）**PII 去标识化**：内置 `extract_pii()` 和 `deidentify()` 函数，支持掩码、替换（基于 Faker 的本地化假数据生成）、哈希、日期偏移等多种去标识化方法，覆盖姓名、地址、SSN、电话、邮箱等 18 类 HIPAA Safe Harbor 标识符；3）**跨平台部署**：不仅支持 Linux/macOS/Windows 上的 CPU/CUDA 运行，还深度集成 Apple MLX 框架，在 Apple Silicon 上实现 24–33 倍于 CPU 的加速，并通过 OpenMedKit 提供原生 Swift 支持，可直接嵌入 iOS/macOS 应用；4）**多语言支持**：PII 检测支持英语、中文、法语、德语、西班牙语、葡萄牙语、荷兰语、印地语、阿拉伯语、日语、土耳其语、泰卢固语共 12 种语言，每种语言均有针对性的 PII 检查点；5）**灵活部署模式**：除 Python SDK 外，还提供基于 FastAPI 的 REST 服务（支持 Docker 部署）和批处理管道，适用于大规模文档处理场景。项目采用 Apache-2.0 许可证，无厂商锁定，所有模型均可离线加载，适合医院、研究机构等对数据隐私要求极高的环境。
+   活跃度: 未知  社区健康: 文档未提及
+   商业潜力: 高。医疗 AI 市场快速增长，但数据隐私法规（如 HIPAA、GDPR）严格限制云端处理。OpenMed 的本地优先架构直击痛点，可面向医院、CRO、药企、健康科技公司提供合规即服务（Compliance-as-a-Service）解决方案，商业模式清晰。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个 "LocalLLM 装机顾问" 网页应用，用户输入预算和用途（编程/写作/多模态），系统推荐最优硬件+模型组合方案，甚至对接电商链接赚取佣金。; 灵感2：可以将其集成到 AI 开发工作流中，比如在 CI/CD 流水线里用 `whichllm --json` 自动选择当前 runner 能跑的最强模型做自动化测试，避免手动配置模型。; 灵感3：开发一个 "模型性能监控面板"，定期运行 whichllm 抓取 HuggingFace 新模型数据，当发现某款模型在特定硬件上的性价比超过当前部署的模型时，自动发送通知提醒升级。
-   项目链接: https://github.com/Andyyyy64/whichllm
+   衍生灵感: 灵感1：开发一个 **电子病历自动脱敏系统**，集成 OpenMed 的 PII 检测与去标识化功能，用于医院内部科研数据共享前的自动化隐私保护处理，确保符合 GDPR/HIPAA 要求。; 灵感2：构建一个 **移动端临床辅助决策 App**，利用 OpenMedKit 在 iPhone 上实时解析医生输入的病历文本，自动高亮疾病、药物等实体，并关联药品说明书或临床指南，提升诊疗效率。; 灵感3：创建一个 **多语言医疗舆情监控平台**，结合 OpenMed 的多语言 PII 检测能力，对全球社交媒体上的患者评论进行匿名化聚合分析，帮助药企追踪药物不良反应信号而不侵犯用户隐私。
+   项目链接: https://github.com/maziyarpanahi/openmed
