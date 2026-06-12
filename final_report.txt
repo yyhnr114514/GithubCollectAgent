@@ -1,82 +1,32 @@
-1. mvanhorn/last30days-skill:
-   star: 29042  语言/技术: Python 3.12+, Node.js, yt-dlp, ScrapeCreators API, OpenRouter (Perplexity Sonar), SQLite, Agent Skills 标准, Claude Code 插件体系
-   项目简介: 一句话概括：/last30days 是一个由 AI Agent 驱动的多平台实时搜索引擎，它打通了 Reddit、X、YouTube、TikTok、Hacker News、Polymarket、GitHub 等十几个被围墙花园隔离的数据源，用真实用户的点赞、评论和真金白银的预测市场赔率作为评分权重，帮你获取过去30天内任何话题的真实社区声音，而非传统搜索引擎的 SEO 结果。它解决的核心痛点是：在信息碎片化时代，没有一个 AI 能同时搜索所有平台，而这个技能让 AI Agent 做到了。
-   亮点: 🔍 14+数据源并行搜索：Reddit、X、YouTube、TikTok、Instagram Reels、Hacker News、Polymarket、GitHub、Digg、Threads、Pinterest、Bluesky、Perplexity、Web，覆盖社交、视频、开发者、预测市场等全维度; 🧠 智能预研大脑（v3核心）：搜索前先解析话题——自动识别创始人推特账号、相关 subreddit、GitHub 仓库、TikTok 哈希标签，再发起搜索，大幅提升命中率; 🏆 真实参与度评分：用 Reddit 点赞数、TikTok 播放量、Polymarket 赔率（真金白银背书）代替 SEO 排名，告诉你什么才是真正重要的; 📊 交叉源聚类合并：同一事件在 Reddit、X、YouTube 出现时自动合并为一个信息簇，避免重复噪音; 🎭 Best Takes 趣味评分：第二个 AI 评判器专门打分幽默度和传播力，每个简报结尾附带最有趣的社区金句; 📄 可分享 HTML 简报：一键生成深色模式、离线可用的 HTML 文件，可直接丢进 Slack/邮件/Notion; 👤 GitHub 人肉模式：输入人名自动切换为作者维度查询，展示 PR 合并率、仓库星数、发布说明等开发者画像; 🔄 竞争对手自动发现与对比：--competitors 参数自动发现竞品并生成三向对比表; 📈 趋势监控与定时简报：SQLite 持久化 + watchlist.py 定时运行 + Slack/webhook 推送新发现; ✅ 1,012 个测试通过，MIT 零追踪开源
-   详细报告: 这个项目本质上是一个给 AI Agent 装上「全平台雷达」的技能包。传统搜索引擎（Google）依赖编辑和 SEO，各大 AI（ChatGPT、Gemini、Claude）各自只能访问部分平台的数据——ChatGPT 有 Reddit 合作但搜不了 X 和 TikTok，Gemini 有 YouTube 但没有 Reddit，Claude 原生一个都没有。/last30days 的突破在于：它不试图建一个更好的搜索引擎，而是用 AI Agent 作为桥梁，把十几个围墙花园的数据源串联起来，让用户自带 API Key 和浏览器会话后，一个 Agent 就能同时搜索所有平台。
+1. maziyarpanahi/openmed:
+   star: 2386  语言/技术: Python, Swift, PyTorch, Apple MLX, CoreML, Hugging Face Transformers, FastAPI, Docker, Faker, Tiktoken
+   项目简介: OpenMed 是一个本地优先的医疗 AI 工具包，专为在设备端运行而设计，无需将患者数据上传至云端。它提供超过 1,000 个专业的生物医学命名实体识别（NER）模型，支持疾病、药物、基因、解剖结构等实体提取，并具备强大的 PII 去标识化能力，覆盖 12 种语言和 247 个隐私检查点。通过 Python API、REST 服务或原生 iOS/macOS 应用（基于 Apple MLX 加速），开发者可轻松集成到医疗系统中，确保 HIPAA 合规并避免厂商锁定。
+   亮点: 1000+ 专业医疗 NER 模型，涵盖疾病、药物、基因、解剖等实体类型; 完全本地运行，患者数据永不离开设备，满足 HIPAA 合规要求; 支持 Apple Silicon MLX 加速，在 iPhone/iPad/Mac 上实现高性能推理; 多语言 PII 去标识化（12 种语言，247 个检查点），支持智能实体合并与格式保留伪造; 提供 Python API、REST 服务和原生 Swift 框架（OpenMedKit）三种集成方式
+   详细报告: OpenMed 是一个开源、本地优先的医疗 AI 平台，旨在解决医疗数据处理中的隐私与合规难题。其核心能力包括：1）**临床文本结构化**：通过一行 Python 代码调用 `analyze_text()` 函数，即可使用如 `disease_detection_superclinical` 或 `pharma_detection_superclinical` 等模型，从非结构化临床笔记中提取疾病、药物、治疗等关键信息；2）**PII 去标识化**：内置 `extract_pii()` 和 `deidentify()` 函数，支持掩码、替换（基于 Faker 的本地化假数据生成）、哈希、日期偏移等多种去标识化方法，覆盖姓名、地址、SSN、电话、邮箱等 18 类 HIPAA Safe Harbor 标识符；3）**跨平台部署**：不仅支持 Linux/macOS/Windows 上的 CPU/CUDA 运行，还深度集成 Apple MLX 框架，在 Apple Silicon 上实现 24–33 倍于 CPU 的加速，并通过 OpenMedKit 提供原生 Swift 支持，可直接嵌入 iOS/macOS 应用；4）**多语言支持**：PII 检测支持英语、中文、法语、德语、西班牙语、葡萄牙语、荷兰语、印地语、阿拉伯语、日语、土耳其语、泰卢固语共 12 种语言，每种语言均有针对性的 PII 检查点；5）**灵活部署模式**：除 Python SDK 外，还提供基于 FastAPI 的 REST 服务（支持 Docker 部署）和批处理管道，适用于大规模文档处理场景。项目采用 Apache-2.0 许可证，无厂商锁定，所有模型均可离线加载，适合医院、研究机构等对数据隐私要求极高的环境。
+   活跃度: 未知  社区健康: 文档未提及
+   商业潜力: 高。医疗 AI 市场快速增长，但数据隐私法规（如 HIPAA、GDPR）严格限制云端处理。OpenMed 的本地优先架构直击痛点，可面向医院、CRO、药企、健康科技公司提供合规即服务（Compliance-as-a-Service）解决方案，商业模式清晰。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：开发一个 **电子病历自动脱敏系统**，集成 OpenMed 的 PII 检测与去标识化功能，用于医院内部科研数据共享前的自动化隐私保护处理，确保符合 GDPR/HIPAA 要求。; 灵感2：构建一个 **移动端临床辅助决策 App**，利用 OpenMedKit 在 iPhone 上实时解析医生输入的病历文本，自动高亮疾病、药物等实体，并关联药品说明书或临床指南，提升诊疗效率。; 灵感3：创建一个 **多语言医疗舆情监控平台**，结合 OpenMed 的多语言 PII 检测能力，对全球社交媒体上的患者评论进行匿名化聚合分析，帮助药企追踪药物不良反应信号而不侵犯用户隐私。
+   项目链接: https://github.com/maziyarpanahi/openmed
 
-**核心工作流程（7步）：**
-1. 用户输入话题（人名/公司/产品/技术/对比）
-2. Agent 智能预研：解析话题对应的 X 账号、GitHub 仓库、subreddit、YouTube 频道、TikTok 标签（v3 新增的 Python 预研大脑，由 @j-sperling 开发）
-3. 所有数据源并行搜索，多查询扩展
-4. 深度挖掘：YouTube 完整转录稿、Reddit 顶级评论及点赞数、TikTok 字幕、Polymarket 赔率
-5. 交叉源聚类：同一事件在多个平台出现时合并为单一信息簇
-6. AI 综合评分：按参与度（点赞/播放量/真金白银）排序，而非 SEO 相关性
-7. 生成一份带引用的简报，之后该话题知识沉淀在对话上下文中，可继续追问
+2. NVIDIA/SkillSpector:
+   star: 2846  语言/技术: Python, AST分析, 正则表达式, LangGraph, OSV.dev API, YARA签名, LLM语义分析, OpenAI兼容API, Anthropic API, NVIDIA NIM
+   项目简介: SkillSpector 是由 NVIDIA 开源的一款专门针对 AI Agent Skills（技能包）的安全扫描工具。随着 Claude Code、Codex CLI、Gemini CLI 等 AI 编程助手的流行，Skills 市场迅速扩张，但研究表明 26.1% 的 Skills 存在漏洞，5.2% 具有恶意意图。SkillSpector 通过两阶段检测流水线（快速静态分析 + 可选 LLM 语义评估），覆盖 16 大类共 64 种漏洞模式，包括提示注入、数据外泄、权限提升、供应链攻击、MCP 权限滥用等，为开发者提供安装前的安全审查，堪称 AI 插件生态的'安检门'。
+   亮点: 64种漏洞模式覆盖16大安全类别，包括提示注入、数据外泄、权限提升、供应链攻击、MCP工具投毒等; 两阶段检测架构：快速静态分析（高召回率）+ LLM语义评估（精确率提升至约87%）; 实时CVE查询：通过 OSV.dev API 检查依赖项已知漏洞，支持离线回退; 多格式输入支持：Git仓库、URL、zip文件、目录、单文件均可扫描; 灵活的LLM后端：支持 OpenAI、Anthropic、NVIDIA build.nvidia.com、本地 Ollama/vLLM 等; 多种输出格式：终端、JSON、Markdown、SARIF，便于CI/CD集成
+   详细报告: SkillSpector 解决的核心痛点是 AI Agent Skills 生态中的信任危机。当前 AI 编程助手（如 Claude Code、Gemini CLI）允许用户安装第三方 Skills，这些 Skills 以隐式信任方式执行，缺乏充分的代码审查。NVIDIA 的研究团队在对 42,447 个 Skills 的大规模实证研究中发现，超过四分之一存在安全漏洞，5.2% 具有明确恶意意图。
 
-**v3 版本的重大升级：**
-- **智能预研（最大杀手锏）**：旧版搜关键词，新版先理解话题。搜 "OpenClaw" 会自动解析出创始人 @steipete、r/openclaw、r/ClaudeCode、相关 YouTube 频道和 TikTok 标签，再发起搜索。这意味着它能找到 v2 永远找不到的内容。
-- **Best Takes 趣味评判器**：第二个 AI 评判器专门打分幽默度和传播力，确保简报结尾附带最有趣的社区金句，而不是干巴巴的信息堆砌。
-- **交叉源聚类合并**：实体重叠检测，即使标题用词不同也能识别同一事件。
-- **单次对比搜索**："CLI vs MCP" 从三次串行（12分钟+）优化为单次并行（3分钟）。
-- **自动竞品发现**：--competitors 参数自动通过 WebSearch 发现竞品并生成三向对比。
-- **GitHub 人肉模式**：输入人名时切换为作者维度查询，展示 PR 合并率、仓库星数、发布说明。
-- **ELI5 模式**：一句话切换为通俗语言重写。
+该工具的技术架构分为两个阶段：第一阶段是静态分析引擎，使用 11 个基于正则表达式的分析器快速扫描所有文件，结合 AST（抽象语法树）分析检测 exec()、eval()、subprocess 等危险调用，并通过 OSV.dev API 实时查询依赖项的已知 CVE 漏洞，还集成了 YARA 规则匹配已知恶意软件特征。这一阶段追求高召回率，但可能产生一定误报。第二阶段是可选的 LLM 语义分析，通过大语言模型理解代码上下文和意图，过滤误报并提供人类可读的解释，将精确率提升至约 87%。值得注意的是，LLM 提示词中内置了反越狱防护机制，防止恶意 Skill 反向操纵分析过程。
 
-**数据源矩阵（14+）：**
-- Reddit：通过公开 JSON 免费获取，无需 API Key，含帖子+顶级评论+点赞数
-- X/Twitter：通过内置的 Bird 客户端搜索
-- YouTube：yt-dlp 获取完整转录稿，候选池扩大3倍以覆盖谈话/评测类内容
-- TikTok/Instagram Reels/Threads：通过 ScrapeCreators API（同一个 Key）
-- Hacker News：开发者共识
-- Polymarket：真金白银背书的预测市场赔率
-- GitHub：人的维度（PR 速度、仓库星数、发布说明）和话题维度（Issues 和讨论）
-- Digg：AI 1000 领袖榜精选的约1000个高信号 AI 账号，带可引用内联引用
-- Pinterest：按查询可选，视觉发现
-- Bluesky：去中心化社交层
-- Perplexity Sonar：带引用的网络搜索，通过 OpenRouter
-- Web：编辑报道和博客对比
-- Truth Social、小红书（RED）等正在接入中
+漏洞检测覆盖 16 个类别共 64 种模式：提示注入（5种）、数据外泄（4种）、权限提升（3种）、供应链攻击（6种）、过度代理（4种）、输出处理（3种）、系统提示泄露（3种）、记忆投毒（3种）、工具滥用（3种）、流氓代理（2种）、触发器滥用（3种）、行为AST分析（8种）、污点追踪（5种）、YARA签名匹配（4种）、MCP最小权限（4种）、MCP工具投毒（4种）。风险评分系统采用加权计分：CRITICAL +50、HIGH +25、MEDIUM +10、LOW +5，可执行脚本额外乘以 1.3 倍系数，最终输出 0-100 分值和对应的安全建议。
 
-**安装方式极其友好：**
-- Claude Code（推荐）：/plugin marketplace add mvanhorn/last30days-skill → /plugin install last30days，自动更新
-- Codex/Cursor/Copilot/Gemini CLI 等50+ Agent Skills 宿主：npx skills add mvanhorn/last30days-skill -g
-- claude.ai 网页端：下载 .skill 文件上传
-- OpenClaw：clawhub install last30days-official
-
-**配置要点：**
-- 零配置即可使用 Reddit、HN、Polymarket、GitHub
-- 设置 API Key 后解锁 X、YouTube、TikTok 等（30秒向导）
-- 研究文件默认保存到 ~/Documents/Last30Days/
-- 支持 --store 模式持久化到 SQLite，配合 watchlist.py 做定时监控和 Slack/webhook 推送
-
-**技术架构：**
-- Python 3.12+ 作为引擎核心
-- Node.js 内置 Bird 客户端用于 X 搜索
-- yt-dlp 处理 YouTube 转录稿
-- ScrapeCreators API 统一处理 TikTok/Instagram/Threads/Pinterest
-- SQLite 用于趋势监控持久化
-- 1,012 个测试保证稳定性
-- MIT 许可证，零追踪，数据全在本地
-
-**实际使用场景举例：**
-- 会议前：/last30days Peter Steinberger → 获取他加入 OpenAI Codex 团队、与 Anthropic 的代理之争、23个 PR 85%合并率、LobsterOS 项目、Reddit 569赞讨论等 LinkedIn 上绝对看不到的信息
-- 突发事件：/last30days Kanye West → 签证被拒、音乐节取消、赞助商跑路、但 BULLY 专辑 Billboard #2、Polymarket "还会发推吗" 86% Yes
-- 工具对比：/last30days OpenClaw vs Hermes vs Paperclip → 三层架构对比表，GitHub 实时星数
-- 世界局势：/last30days Iran vs USA → 战争第38天、油价$126、Polymarket 停火概率74%
-- 旅行规划：/last30days Universal Epic Universe → 扩建中、排队148分钟、年票未出本地人不满
-- 快速学习：/last30days Nano Banana Pro prompting → JSON结构化提示词替代标签汤、先编辑工作流优于重生成，然后直接帮你写一个生产级提示词
-
-**用户评价：**
-- @itsjasonai：「手动搜索 Reddit 和 X 做研究，每次90分钟。这个技能消灭了它。」
-- @itswilsoncharles：「一个技能替代了整个研究工作流。」
-- @yieldhunter95：「GitHub 今日10个热门仓库中有5个是 Claude 工具，#1 是 mvanhorn/last30days-skill」
-   活跃度: 未知  社区健康: 未知
+工具支持多种输入格式（Git仓库、URL、zip、目录、单文件）和输出格式（终端、JSON、Markdown、SARIF），既可作为独立 CLI 工具使用，也提供 Python API 供集成到其他系统中。LLM 后端支持 OpenAI、Anthropic、NVIDIA build.nvidia.com 以及任何 OpenAI 兼容的本地推理服务（Ollama、vLLM、llama.cpp），灵活性极高。
+   活跃度: 文档未提及  社区健康: 文档未提及
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目的多平台聚合能力，可以开发一个「竞品情报雷达」产品，自动监控竞品在 Reddit、X、HN、GitHub 上的社区讨论和开发者动态，通过 Slack/webhook 实时推送给产品团队，解决 PM 手动刷多个平台的信息收集痛点。; 灵感2：将其 Polymarket 预测市场数据源集成到金融/投资研究工具中，构建一个「真实市场情绪仪表盘」，用真金白银背书的赔率替代传统分析师预测，为对冲基金或散户投资者提供另类数据信号。; 灵感3：利用其 GitHub 人肉模式和交叉源聚类能力，开发一个「技术人才招聘背调助手」，自动聚合候选人在 GitHub 的 PR 合并率、Reddit 技术社区声誉、YouTube 演讲内容、X 上的行业观点，生成360度开发者画像报告。; 灵感4：基于其 ELI5 模式和 HTML 简报功能，可以做一个「企业知识库自动摘要引擎」，定期抓取内部技术栈相关的社区讨论，自动生成通俗易懂的周报推送给非技术管理层。; 灵感5：将其 TikTok/Instagram 视觉内容搜索能力与 Pinterest 视觉发现结合，开发一个「品牌社媒舆情监控系统」，追踪品牌在短视频平台的真实用户反馈和文化影响力，而非只看传统社媒管理平台覆盖的大 V 账号。
-   项目链接: https://github.com/mvanhorn/last30days-skill
+   衍生灵感: 灵感1：基于 SkillSpector 的核心检测引擎，可以开发一个通用的 AI 插件/扩展安全审查平台，不仅限于 Skills，还可扩展到 VS Code 扩展、浏览器插件、ChatGPT GPTs 等生态，构建一个'插件安全体检中心'。; 灵感2：将 SkillSpector 集成到 CI/CD 流水线中，作为 AI 应用部署前的安全门禁，特别是在企业环境中使用 AI Agent 时，自动扫描所有引入的 Skills 并生成 SARIF 格式报告，与 GitHub Advanced Security 等工具链打通。; 灵感3：利用 SkillSpector 的漏洞模式数据库和检测规则，开发一个 IDE 插件（如 VS Code 扩展），在开发者编写或编辑 Skills 时提供实时的安全提示和修复建议，将安全左移到开发阶段。; 灵感4：基于 SkillSpector 的 LLM 语义分析能力，可以构建一个 AI 代码安全培训工具，通过扫描开源项目中的真实漏洞案例，为开发者提供交互式安全教育和代码审查练习。
+   项目链接: https://github.com/NVIDIA/SkillSpector
 
-2. soxoj/maigret:
+3. soxoj/maigret:
    star: 32148  语言/技术: Python 3.10+, AsyncIO, Flask (Web UI), D3.js (Graph Visualization), OpenAI-compatible API, FlareSolverr, Tor/I2P, Docker, Selenium (implied via FlareSolverr)
    项目简介: Maigret 是一个强大的开源 OSINT（开源情报）工具，仅凭用户名就能在 3000+ 网站上搜索目标人物的所有公开账户信息，并自动提取个人资料、关联账号等数据。无需 API Key，支持递归搜索、AI 智能分析、Tor/I2P 代理、Cloudflare 绕过，还能生成 PDF/HTML/XMind 等多种格式的报告。堪称“数字时代的福尔摩斯”，适用于网络安全调查、背景核查、竞品分析等场景。
    亮点: 支持 3000+ 网站扫描，默认检查流量最高的 500 个站点，可按标签/国家过滤; 无需 API Key，开箱即用，支持命令行、Web UI、Python 库多种使用方式; 递归搜索：发现新用户名后自动继续追踪，构建完整社交图谱; AI 分析模式：集成 OpenAI 兼容 API，自动生成调查摘要（姓名、位置、职业等）; 支持 Tor/I2P 代理和 Cloudflare 绕过，具备一定反检测能力; 输出格式丰富：PDF、HTML、XMind、JSON、CSV、交互式 D3 图谱; 可嵌入 Python 项目，作为库调用，适合二次开发
@@ -104,30 +54,23 @@ Maigret 已被多个专业 OSINT 和商业产品采用，如 SocialLinks API、U
    衍生灵感: 灵感1：开发一个 '企业员工背景调查助手'，集成 Maigret 作为核心引擎，自动扫描候选人在公开平台的足迹，生成可视化背景报告，用于 HR 招聘流程中的初步筛查。; 灵感2：构建一个 '品牌舆情监控平台'，利用 Maigret 的递归搜索能力，追踪特定用户名或关键词在社交网络中的传播路径，识别水军账号和虚假信息扩散网络。; 灵感3：将其集成到 '威胁情报系统' 中，作为外部攻击面评估（EASM）模块，自动发现组织员工在公开平台泄露的敏感信息（如技术栈、内部项目名称），辅助安全团队进行风险预警。
    项目链接: https://github.com/soxoj/maigret
 
-3. harry0703/MoneyPrinterTurbo:
-   star: 85306  语言/技术: Python, Streamlit, MoviePy, Pillow, Edge TTS, faster-whisper, FFmpeg, Docker, uv, OpenAI, DeepSeek, Gemini, Azure Speech SDK
-   项目简介: MoneyPrinterTurbo 是一个全自动短视频生成神器，堪称“打工人神器”和“内容创作者印钞机”。只需输入一个视频主题或关键词，它就能一条龙服务：AI自动生成文案、匹配无版权高清素材、合成多语言语音字幕、添加背景音乐，最终输出横屏或竖屏的高清短视频。支持 OpenAI、DeepSeek、通义千问等 13+ 大模型接入，并提供 Web 界面和 API 接口，极大降低了视频制作门槛。
-   亮点: 全自动视频生成流水线：从文案到成片一键完成，支持中英文双语; 多模型兼容：支持 OpenAI、DeepSeek、通义千问、Gemini 等 13+ 主流大模型灵活切换; 无版权素材集成：内置 Pexels、Pixabay、Coverr 等免费高清/4K 视频素材源; 双模式字幕生成：Edge TTS 快速对齐 或 Whisper 高精度转写，满足不同质量需求; 完整 MVC 架构：提供 Web UI 和 REST API，易于二次开发与集成
-   详细报告: MoneyPrinterTurbo 是一个基于 Python 的全自动短视频生成系统，专为内容创作者、营销人员和自媒体运营者设计。其核心逻辑是构建了一个端到端的 AI 视频生产流水线：用户输入主题 → AI 生成文案 → 自动检索匹配的无版权视频片段 → 合成语音（支持多种 TTS 引擎）→ 生成精准时间轴字幕 → 混合背景音乐 → 输出高清短视频。
+4. hexo-ai/sia:
+   star: 1410  语言/技术: Python, Claude Agent SDK, OpenHands, Pydantic-AI, Triton (GPU kernel), Kaggle API, MLE-Bench, Anthropic API, OpenAI API, Gemini API
+   项目简介: SIA 是一个开源的“自我进化 AI 框架”，它通过协调 Meta-Agent、Target Agent 和 Feedback Agent 三个角色，让 AI 系统在特定任务上实现自主迭代优化。简单来说，就是让 AI 自己改自己的代码和策略，越跑越强——在 LawBench 法律判罚预测上准确率从 45% 提升到 70.1%，在 GPU 内核优化上提速 14 倍，堪称程序员的‘AI 自驱力引擎’。
+   亮点: 三代理协同架构（Meta-Agent 初始化、Target Agent 执行、Feedback Agent 改进）实现闭环自进化; 支持自定义任务接入，只需提供 task.md 和 evaluate.py 即可启动自优化循环; 内置 Web 可视化仪表盘，实时监控每代 Agent 的代码、日志、评分和改进路径; 在多个硬核基准测试中显著超越 SOTA：LawBench +56.6%、GPU 内核提速 14x、scRNA 去噪提升 502%
+   详细报告: SIA（Self-Improving AI）是 hexo-ai 团队于 2026 年发布的开源框架，核心思想是让 AI 系统能像人类工程师一样‘自我迭代’。它不是静态调用大模型，而是构建了一个由三个智能体组成的闭环系统：
 
-技术实现上，项目采用清晰的 MVC 架构，前端使用 Streamlit 快速搭建交互式 Web 界面，后端通过 FastAPI 提供标准化 API 服务。视频处理层依赖 MoviePy 2.x 和 Pillow 完成剪辑与字幕渲染（已弃用 ImageMagick），语音合成默认使用免费的 Edge TTS（在 UI 中显示为 Azure TTS V1），也支持付费的 Azure Speech SDK V2 以获得更自然音质。字幕生成提供两种模式：edge 模式利用 TTS 返回的时间戳快速对齐；whisper 模式则通过本地 faster-whisper 模型进行音频转写，精度更高但需下载约 3GB 模型文件。
+1. **Meta-Agent**：读取任务描述（如‘预测中国刑事案件罪名’），生成一个初始的 Target Agent（通常是 Python 脚本）；
+2. **Target Agent**：实际执行任务（比如训练模型、写 Triton 内核、处理生物数据），并记录执行轨迹；
+3. **Feedback Agent**：分析 Target Agent 的日志和评估结果，提出改进方案，并直接修改 Target Agent 的代码或配置。
 
-项目支持竖屏（9:16, 1080x1920）和横屏（16:9, 1920x1080）两种主流短视频比例，适配抖音、YouTube Shorts、Instagram Reels 等平台。素材来源整合 Pexels、Pixabay、Coverr 三大无版权视频库，避免侵权风险。部署方式极其友好：Windows 用户可使用一键启动包，Mac/Linux 推荐 uv 管理依赖，同时支持 Docker 容器化部署和 Google Colab 云端运行。
+这个过程循环进行多代（`--max_gen` 控制），每一代都比上一代更强。SIA 的评估机制非常严谨：每代输出会被自动评分（通过用户提供的 `evaluate.py`），分数反馈给下一代的 Feedback Agent，形成强化学习式的优化信号。
 
-配置灵活度高，所有关键参数（LLM 提供商、TTS 语音、字幕样式、背景音乐音量等）均可通过 config.toml 文件或 Web UI 实时调整。项目还贴心提供了国内用户无法访问 HuggingFace 时的手动模型下载方案（百度网盘/夸克网盘），体现了良好的本地化支持。
-   活跃度: 文档未提及  社区健康: 文档未提及
-   商业潜力: 该项目具有极强的商业化潜力，可作为 SaaS 服务（如录咖已实践）、电商营销工具、教育内容生产平台或本地生活服务插件。其低门槛、全自动的特性完美契合短视频时代的内容量产需求。
+技术实现上，SIA 支持多种 LLM 后端（Claude、OpenAI、Gemini 等），通过 JSON Profile 灵活配置不同 Agent 使用的模型和 API Key。它还集成了 MLE-Bench，可直接将 Kaggle 竞赛转化为自优化任务。开发者只需按规范组织任务目录（含 public/private 数据、参考 Agent 模板），即可一键启动自进化流程。
+
+文档提供了完整的 CLI 工具（`sia run` 和 `sia web`）、自定义 Profile 编写指南、评估脚本契约说明，甚至还有故障排查手册。虽然 GitHub 指标显示早期阶段（0 fork, 0 issue），但其论文成果和架构设计极具前瞻性，特别适合需要持续优化 AI 系统的研究团队或高级开发者。
+   活跃度: 未知（GitHub 指标显示近期无提交或发布）  社区健康: 早期阶段，社区活跃度低（0 fork, 0 issue），但文档完整、架构清晰，具备良好扩展基础。
+   商业潜力: 高潜力。可面向企业级 AI 工程团队提供‘自优化 AI 服务’，按任务复杂度收费；或作为 MLOps 工具链中的‘智能调优层’，与现有平台（如 MLflow、Kubeflow）集成。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个「跨境电商短视频营销平台」，集成 MoneyPrinterTurbo 的 API，为 Shopify 卖家自动生成多语言产品推广视频，一键发布到 TikTok、Instagram 和 YouTube Shorts。; 灵感2：将其封装为「教育内容自动化引擎」，教师输入知识点关键词，自动生成带讲解语音、动态字幕和示意图解的教学微课视频，用于在线教育平台。; 灵感3：构建「本地生活探店视频生成器」，商家上传店铺信息，系统自动结合 Pexels 素材库生成风格统一的探店短视频模板，用于美团、大众点评等平台的营销推广。
-   项目链接: https://github.com/harry0703/MoneyPrinterTurbo
-
-4. maziyarpanahi/openmed:
-   star: 2386  语言/技术: Python, Swift, PyTorch, Apple MLX, CoreML, Hugging Face Transformers, FastAPI, Docker, Faker, Tiktoken
-   项目简介: OpenMed 是一个本地优先的医疗 AI 工具包，专为在设备端运行而设计，无需将患者数据上传至云端。它提供超过 1,000 个专业的生物医学命名实体识别（NER）模型，支持疾病、药物、基因、解剖结构等实体提取，并具备强大的 PII 去标识化能力，覆盖 12 种语言和 247 个隐私检查点。通过 Python API、REST 服务或原生 iOS/macOS 应用（基于 Apple MLX 加速），开发者可轻松集成到医疗系统中，确保 HIPAA 合规并避免厂商锁定。
-   亮点: 1000+ 专业医疗 NER 模型，涵盖疾病、药物、基因、解剖等实体类型; 完全本地运行，患者数据永不离开设备，满足 HIPAA 合规要求; 支持 Apple Silicon MLX 加速，在 iPhone/iPad/Mac 上实现高性能推理; 多语言 PII 去标识化（12 种语言，247 个检查点），支持智能实体合并与格式保留伪造; 提供 Python API、REST 服务和原生 Swift 框架（OpenMedKit）三种集成方式
-   详细报告: OpenMed 是一个开源、本地优先的医疗 AI 平台，旨在解决医疗数据处理中的隐私与合规难题。其核心能力包括：1）**临床文本结构化**：通过一行 Python 代码调用 `analyze_text()` 函数，即可使用如 `disease_detection_superclinical` 或 `pharma_detection_superclinical` 等模型，从非结构化临床笔记中提取疾病、药物、治疗等关键信息；2）**PII 去标识化**：内置 `extract_pii()` 和 `deidentify()` 函数，支持掩码、替换（基于 Faker 的本地化假数据生成）、哈希、日期偏移等多种去标识化方法，覆盖姓名、地址、SSN、电话、邮箱等 18 类 HIPAA Safe Harbor 标识符；3）**跨平台部署**：不仅支持 Linux/macOS/Windows 上的 CPU/CUDA 运行，还深度集成 Apple MLX 框架，在 Apple Silicon 上实现 24–33 倍于 CPU 的加速，并通过 OpenMedKit 提供原生 Swift 支持，可直接嵌入 iOS/macOS 应用；4）**多语言支持**：PII 检测支持英语、中文、法语、德语、西班牙语、葡萄牙语、荷兰语、印地语、阿拉伯语、日语、土耳其语、泰卢固语共 12 种语言，每种语言均有针对性的 PII 检查点；5）**灵活部署模式**：除 Python SDK 外，还提供基于 FastAPI 的 REST 服务（支持 Docker 部署）和批处理管道，适用于大规模文档处理场景。项目采用 Apache-2.0 许可证，无厂商锁定，所有模型均可离线加载，适合医院、研究机构等对数据隐私要求极高的环境。
-   活跃度: 未知  社区健康: 文档未提及
-   商业潜力: 高。医疗 AI 市场快速增长，但数据隐私法规（如 HIPAA、GDPR）严格限制云端处理。OpenMed 的本地优先架构直击痛点，可面向医院、CRO、药企、健康科技公司提供合规即服务（Compliance-as-a-Service）解决方案，商业模式清晰。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个 **电子病历自动脱敏系统**，集成 OpenMed 的 PII 检测与去标识化功能，用于医院内部科研数据共享前的自动化隐私保护处理，确保符合 GDPR/HIPAA 要求。; 灵感2：构建一个 **移动端临床辅助决策 App**，利用 OpenMedKit 在 iPhone 上实时解析医生输入的病历文本，自动高亮疾病、药物等实体，并关联药品说明书或临床指南，提升诊疗效率。; 灵感3：创建一个 **多语言医疗舆情监控平台**，结合 OpenMed 的多语言 PII 检测能力，对全球社交媒体上的患者评论进行匿名化聚合分析，帮助药企追踪药物不良反应信号而不侵犯用户隐私。
-   项目链接: https://github.com/maziyarpanahi/openmed
+   衍生灵感: 灵感1：开发一个‘AutoML 自进化平台’，用户上传数据集和评估指标，SIA 自动迭代出最优模型架构和超参组合，适用于金融风控、医疗诊断等场景。; 灵感2：将其集成到 CI/CD 流水线中，作为‘AI 代码优化器’——每次提交后自动运行 SIA 循环，让测试脚本、性能关键模块或数据预处理逻辑持续自我改进。; 灵感3：构建‘科研助手 Agent’，针对特定领域（如生物信息学中的 scRNA-seq 分析），用 SIA 框架自动探索最佳去噪算法组合，加速论文实验迭代。
+   项目链接: https://github.com/hexo-ai/sia
