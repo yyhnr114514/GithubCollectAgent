@@ -15,18 +15,7 @@
    衍生灵感: 灵感1：基于此项目开发一个“智能背景音乐系统”，用于咖啡馆、书店等商业场所，根据客流或时间段自动切换音乐风格。; 灵感2：将其集成到企业办公系统中，实现会议室自动播放欢迎音乐或会议提醒音效，提升办公智能化水平。; 灵感3：开发一个“老人友好型语音音乐盒”，结合简单语音指令和预设歌单，帮助不熟悉智能设备的老年人轻松享受音乐。
    项目链接: https://github.com/music-assistant/server
 
-2. maziyarpanahi/openmed:
-   star: 2386  语言/技术: Python, Swift, PyTorch, Apple MLX, CoreML, Hugging Face Transformers, FastAPI, Docker, Faker, Tiktoken
-   项目简介: OpenMed 是一个本地优先的医疗 AI 工具包，专为在设备端运行而设计，无需将患者数据上传至云端。它提供超过 1,000 个专业的生物医学命名实体识别（NER）模型，支持疾病、药物、基因、解剖结构等实体提取，并具备强大的 PII 去标识化能力，覆盖 12 种语言和 247 个隐私检查点。通过 Python API、REST 服务或原生 iOS/macOS 应用（基于 Apple MLX 加速），开发者可轻松集成到医疗系统中，确保 HIPAA 合规并避免厂商锁定。
-   亮点: 1000+ 专业医疗 NER 模型，涵盖疾病、药物、基因、解剖等实体类型; 完全本地运行，患者数据永不离开设备，满足 HIPAA 合规要求; 支持 Apple Silicon MLX 加速，在 iPhone/iPad/Mac 上实现高性能推理; 多语言 PII 去标识化（12 种语言，247 个检查点），支持智能实体合并与格式保留伪造; 提供 Python API、REST 服务和原生 Swift 框架（OpenMedKit）三种集成方式
-   详细报告: OpenMed 是一个开源、本地优先的医疗 AI 平台，旨在解决医疗数据处理中的隐私与合规难题。其核心能力包括：1）**临床文本结构化**：通过一行 Python 代码调用 `analyze_text()` 函数，即可使用如 `disease_detection_superclinical` 或 `pharma_detection_superclinical` 等模型，从非结构化临床笔记中提取疾病、药物、治疗等关键信息；2）**PII 去标识化**：内置 `extract_pii()` 和 `deidentify()` 函数，支持掩码、替换（基于 Faker 的本地化假数据生成）、哈希、日期偏移等多种去标识化方法，覆盖姓名、地址、SSN、电话、邮箱等 18 类 HIPAA Safe Harbor 标识符；3）**跨平台部署**：不仅支持 Linux/macOS/Windows 上的 CPU/CUDA 运行，还深度集成 Apple MLX 框架，在 Apple Silicon 上实现 24–33 倍于 CPU 的加速，并通过 OpenMedKit 提供原生 Swift 支持，可直接嵌入 iOS/macOS 应用；4）**多语言支持**：PII 检测支持英语、中文、法语、德语、西班牙语、葡萄牙语、荷兰语、印地语、阿拉伯语、日语、土耳其语、泰卢固语共 12 种语言，每种语言均有针对性的 PII 检查点；5）**灵活部署模式**：除 Python SDK 外，还提供基于 FastAPI 的 REST 服务（支持 Docker 部署）和批处理管道，适用于大规模文档处理场景。项目采用 Apache-2.0 许可证，无厂商锁定，所有模型均可离线加载，适合医院、研究机构等对数据隐私要求极高的环境。
-   活跃度: 未知  社区健康: 文档未提及
-   商业潜力: 高。医疗 AI 市场快速增长，但数据隐私法规（如 HIPAA、GDPR）严格限制云端处理。OpenMed 的本地优先架构直击痛点，可面向医院、CRO、药企、健康科技公司提供合规即服务（Compliance-as-a-Service）解决方案，商业模式清晰。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个 **电子病历自动脱敏系统**，集成 OpenMed 的 PII 检测与去标识化功能，用于医院内部科研数据共享前的自动化隐私保护处理，确保符合 GDPR/HIPAA 要求。; 灵感2：构建一个 **移动端临床辅助决策 App**，利用 OpenMedKit 在 iPhone 上实时解析医生输入的病历文本，自动高亮疾病、药物等实体，并关联药品说明书或临床指南，提升诊疗效率。; 灵感3：创建一个 **多语言医疗舆情监控平台**，结合 OpenMed 的多语言 PII 检测能力，对全球社交媒体上的患者评论进行匿名化聚合分析，帮助药企追踪药物不良反应信号而不侵犯用户隐私。
-   项目链接: https://github.com/maziyarpanahi/openmed
-
-3. LMCache/LMCache:
+2. LMCache/LMCache:
    star: 8670  语言/技术: Python, C++, PyTorch, vLLM, NVIDIA Dynamo, Redis, Valkey, Mooncake, InfiniStore, S3, NIXL, GDS, NVLink, RDMA, TCP, Kubernetes
    项目简介: LMCache 是一个专为大语言模型（LLM）推理设计的 KV 缓存管理层。它将原本易失的 KV 缓存转变为可持久化存储、跨引擎复用、可监控的“AI原生知识”，通过分层存储（GPU/CPU/SSD/远程）和智能复用机制，显著降低首字延迟（TTFT）并提升吞吐量，尤其适用于长上下文、多轮对话和 RAG 等场景。
    亮点: 引擎无关的独立守护进程架构：KV 缓存与推理引擎解耦，即使引擎崩溃缓存也不会丢失（无命运共享）; 持久化分层 KV 缓存卸载与复用：支持将 KV 缓存从 GPU 内存卸载到 CPU、本地磁盘、Redis、S3 等多级存储，实现跨请求、跨会话、跨引擎实例的复用，大幅减少重复预填充计算; 生产级 KV 缓存可观测性：提供丰富的监控指标，包括请求级/令牌级前缀缓存命中率、生命周期、用户用量等，便于运维诊断; 非前缀 KV 复用（CacheBlend）：突破传统前缀缓存限制，支持复用提示中任意位置的 KV 块，并通过选择性重计算保证生成质量; PD 分离与 KV 传输：支持通过 NVLink、RDMA 或 TCP 在预填充与解码工作节点间传输 KV 缓存，提升分布式推理效率; 插件化存储与传输后端：统一接口支持多种远程存储和传输后端，用户可自由切换供应商而不丢失缓存; 插件式 KV 变换（SERDE）：提供灵活的序列化/反序列化接口，支持研究人员实现压缩、令牌丢弃等自定义逻辑
@@ -45,19 +34,42 @@ LMCache 已加入 PyTorch Foundation，并被 NVIDIA Dynamo、CoreWeave、Cohere
    衍生灵感: 灵感1：基于 LMCache 的跨会话缓存复用能力，可以开发一个‘企业级 AI 助手记忆持久化系统’，让客服机器人或编程助手在用户多次对话中自动复用历史上下文，实现‘越用越懂你’的体验，同时大幅降低推理成本。; 灵感2：结合 LMCache 的 PD 分离与 KV 传输能力，可以构建一个‘低成本高并发的 LLM 推理服务平台’，将预填充与解码部署在不同硬件上（如预填充用高内存 CPU，解码用 GPU），通过 RDMA 高速传输 KV 缓存，在资源受限环境下实现高性能推理。; 灵感3：利用 LMCache 的插件化 SERDE 接口，可以开发一个‘智能 KV 压缩引擎’，针对特定领域（如法律、医疗）的文本特征设计专用压缩算法，在保证生成质量的前提下将 KV 缓存体积减少 50% 以上，进一步降低存储和传输开销。; 灵感4：基于 LMCache 的多级存储架构，可以设计一个‘冷热数据自动分层的 LLM 缓存云服务’，对高频访问的 KV 缓存保留在 GPU/CPU，低频数据自动归档到 S3，按使用频率计费，为中小企业提供低成本的 LLM 推理缓存即服务（Cache-as-a-Service）。
    项目链接: https://github.com/LMCache/LMCache
 
+3. andrewyng/aisuite:
+   star: 14173  语言/技术: Python, OpenAI API, Anthropic API, Google Gemini API, Ollama, MCP (Model Context Protocol), Tool Calling, Agent Framework
+   项目简介: aisuite 是一个轻量级 Python 库，提供统一的 Chat Completions API 和 Agents API，让开发者用一个接口调用 OpenAI、Anthropic、Google、Ollama 等多种大模型。其衍生应用 OpenCoworker 是一个桌面 AI 智能体，能读写文件、收发消息、生成文档，并支持定时自动化任务，堪称打工人神器。
+   亮点: 统一多模型接口：一行代码切换不同 LLM 提供商，无需重写逻辑; Agents API 支持工具调用、MCP 集成和策略控制，适合构建复杂任务型 AI 智能体; OpenCoworker 提供桌面级 AI 助手，可执行文件操作、消息收发、报告生成等真实任务，数据本地运行保障隐私
+   详细报告: aisuite 的核心价值在于解决大模型开发中的碎片化问题。它通过两层抽象——底层是跨提供商的统一 Chat Completions API（支持 OpenAI、Anthropic、Google、Mistral、Hugging Face、AWS、Cohere、Ollama、OpenRouter 等），上层是带工具调用能力的 Agents API——让开发者摆脱厂商锁定。只需将模型名从 'openai:gpt-4o' 改为 'anthropic:claude-3-5-sonnet'，即可无缝切换。
+
+Agents API 进一步将 Python 函数直接转化为模型可用的工具，支持自动多轮交互（通过 max_turns 参数）、预置工具包（如文件读写、Git、Shell）、MCP 服务器集成，并提供工具审批策略、状态持久化和执行追踪等企业级功能。
+
+基于此框架构建的 OpenCoworker 是一个开箱即用的桌面 AI 助手，支持 macOS 和 Windows。它能理解上下文（读取本地文件）、执行跨平台任务（如发送 Slack/邮件）、生成 PDF/Excel 等交付物，并支持定时任务（如每日新闻摘要）。用户可选择云端 API 或完全本地运行（通过 Ollama），确保数据不出机器。
+
+项目采用 MIT 许可证，鼓励商业使用。其模块化设计也便于扩展新提供商，只需遵循命名规范（如 openai_provider.py 中的 OpenaiProvider 类）即可自动注册。
+   活跃度: 未知  社区健康: 文档未提及
+   商业潜力: 高。统一多模型接口降低企业 AI 集成成本；OpenCoworker 模式可复制到垂直领域（如法律、医疗、教育）打造行业专属 AI 助手。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 aisuite 的 Agents API，开发一个「跨平台客服自动回复助手」，集成企业微信、钉钉、邮件等渠道，自动处理常见问题并生成工单。; 灵感2：利用 OpenCoworker 的本地文件理解和定时任务能力，构建「个人知识库自动整理 Agent」，每天扫描笔记、论文、邮件，自动生成摘要并归档。; 灵感3：结合 MCP 和工具策略，打造「合规审计 AI 助手」，在金融或医疗场景中自动检查文档是否符合监管要求，并生成审计报告。
+   项目链接: https://github.com/andrewyng/aisuite
+
 4. NVIDIA/SkillSpector:
-   star: 2846  语言/技术: Python, AST分析, 正则表达式, LangGraph, OSV.dev API, YARA签名, LLM语义分析, OpenAI兼容API, Anthropic API, NVIDIA NIM
-   项目简介: SkillSpector 是由 NVIDIA 开源的一款专门针对 AI Agent Skills（技能包）的安全扫描工具。随着 Claude Code、Codex CLI、Gemini CLI 等 AI 编程助手的流行，Skills 市场迅速扩张，但研究表明 26.1% 的 Skills 存在漏洞，5.2% 具有恶意意图。SkillSpector 通过两阶段检测流水线（快速静态分析 + 可选 LLM 语义评估），覆盖 16 大类共 64 种漏洞模式，包括提示注入、数据外泄、权限提升、供应链攻击、MCP 权限滥用等，为开发者提供安装前的安全审查，堪称 AI 插件生态的'安检门'。
-   亮点: 64种漏洞模式覆盖16大安全类别，包括提示注入、数据外泄、权限提升、供应链攻击、MCP工具投毒等; 两阶段检测架构：快速静态分析（高召回率）+ LLM语义评估（精确率提升至约87%）; 实时CVE查询：通过 OSV.dev API 检查依赖项已知漏洞，支持离线回退; 多格式输入支持：Git仓库、URL、zip文件、目录、单文件均可扫描; 灵活的LLM后端：支持 OpenAI、Anthropic、NVIDIA build.nvidia.com、本地 Ollama/vLLM 等; 多种输出格式：终端、JSON、Markdown、SARIF，便于CI/CD集成
-   详细报告: SkillSpector 解决的核心痛点是 AI Agent Skills 生态中的信任危机。当前 AI 编程助手（如 Claude Code、Gemini CLI）允许用户安装第三方 Skills，这些 Skills 以隐式信任方式执行，缺乏充分的代码审查。NVIDIA 的研究团队在对 42,447 个 Skills 的大规模实证研究中发现，超过四分之一存在安全漏洞，5.2% 具有明确恶意意图。
+   star: 4587  语言/技术: Python, AST 分析, 正则表达式, LangGraph, YARA, OSV.dev API, Docker, OpenAI API, Anthropic API, NVIDIA Inference API, SARIF, Makefile
+   项目简介: SkillSpector 是 NVIDIA 开源的一款 AI Agent 技能安全扫描器，专门用于在安装前检测 Claude Code、Codex CLI、Gemini CLI 等平台上的 Agent Skill 中存在的漏洞、恶意模式和安全风险。它采用静态分析 + LLM 语义分析的双阶段检测管线，覆盖 64 种漏洞模式、16 个类别，提供 0-100 风险评分和多格式报告输出，帮助开发者回答一个核心问题：'这个 Skill 安全吗？'
+   亮点: 覆盖 64 种漏洞模式、16 个安全类别，包括提示注入、数据外泄、权限提升、供应链攻击、MCP 工具投毒等 AI Agent 特有的安全风险; 双阶段检测管线：快速静态分析（高召回率）+ 可选 LLM 语义分析（精度提升至约 87%），兼顾效率与准确性; 支持多种输入格式（Git 仓库、URL、zip、目录、单文件）和多种输出格式（终端、JSON、Markdown、SARIF），可无缝集成 CI/CD 流程; 内置 SC4 实时漏洞查询，通过 OSV.dev API 检查依赖项的已知 CVE，支持离线回退; 提供 Python API（LangGraph 工作流），可作为库集成到自动化安全审计系统中
+   详细报告: SkillSpector 解决的是一个随着 AI Agent 生态爆发而日益紧迫的安全问题：Agent Skill 以隐式信任方式执行，缺乏审查，而研究表明 26.1% 的 Skill 存在漏洞、5.2% 具有恶意意图。
 
-该工具的技术架构分为两个阶段：第一阶段是静态分析引擎，使用 11 个基于正则表达式的分析器快速扫描所有文件，结合 AST（抽象语法树）分析检测 exec()、eval()、subprocess 等危险调用，并通过 OSV.dev API 实时查询依赖项的已知 CVE 漏洞，还集成了 YARA 规则匹配已知恶意软件特征。这一阶段追求高召回率，但可能产生一定误报。第二阶段是可选的 LLM 语义分析，通过大语言模型理解代码上下文和意图，过滤误报并提供人类可读的解释，将精确率提升至约 87%。值得注意的是，LLM 提示词中内置了反越狱防护机制，防止恶意 Skill 反向操纵分析过程。
+**核心工作原理**：项目采用两阶段检测管线。第一阶段是静态分析，通过 11 个静态分析器进行正则匹配和 AST 行为分析，快速扫描所有文件，检测 exec/eval/subprocess 等危险调用、污点追踪、YARA 恶意软件签名匹配等，具有高召回率。第二阶段是可选的 LLM 语义分析，通过 OpenAI/Anthropic/NVIDIA 等提供商的模型评估上下文和意图，过滤误报，生成人类可读的解释，将精度提升至约 87%。LLM 提示中内置了反越狱防护，防止恶意 Skill 操纵分析过程。
 
-漏洞检测覆盖 16 个类别共 64 种模式：提示注入（5种）、数据外泄（4种）、权限提升（3种）、供应链攻击（6种）、过度代理（4种）、输出处理（3种）、系统提示泄露（3种）、记忆投毒（3种）、工具滥用（3种）、流氓代理（2种）、触发器滥用（3种）、行为AST分析（8种）、污点追踪（5种）、YARA签名匹配（4种）、MCP最小权限（4种）、MCP工具投毒（4种）。风险评分系统采用加权计分：CRITICAL +50、HIGH +25、MEDIUM +10、LOW +5，可执行脚本额外乘以 1.3 倍系数，最终输出 0-100 分值和对应的安全建议。
+**漏洞检测能力**：覆盖 16 个类别共 64 种模式——提示注入（5种）、数据外泄（4种）、权限提升（3种）、供应链（6种）、过度代理（4种）、输出处理（3种）、系统提示泄露（3种）、记忆投毒（3种）、工具滥用（3种）、流氓代理（2种）、触发器滥用（3种）、AST 行为分析（8种）、污点追踪（5种）、YARA 签名（4种）、MCP 最小权限（4种）、MCP 工具投毒（4种）。
 
-工具支持多种输入格式（Git仓库、URL、zip、目录、单文件）和输出格式（终端、JSON、Markdown、SARIF），既可作为独立 CLI 工具使用，也提供 Python API 供集成到其他系统中。LLM 后端支持 OpenAI、Anthropic、NVIDIA build.nvidia.com 以及任何 OpenAI 兼容的本地推理服务（Ollama、vLLM、llama.cpp），灵活性极高。
-   活跃度: 文档未提及  社区健康: 文档未提及
+**风险评分系统**：CRITICAL +50、HIGH +25、MEDIUM +10、LOW +5，可执行脚本乘以 1.3 倍系数，最终映射到 0-100 分数和四个严重级别（LOW/MEDIUM/HIGH/CRITICAL），给出明确的安装建议。
+
+**工程化支持**：提供 Docker 镜像（基于 Python 3.12-slim-bookworm）、Makefile 构建流程、完整的 CLI 工具、Python API（LangGraph 工作流集成）、多格式报告输出（终端/JSON/Markdown/SARIF），支持本地 Ollama/vLLM 等 OpenAI 兼容端点。
+
+**研究背书**：基于 Liu et al. 2026 的实证研究，分析了 42,447 个 Skill 的数据集，发现含可执行脚本的 Skill 存在漏洞的概率是普通 Skill 的 2.12 倍。
+
+**局限性**：不支持非英文内容分析、无法分析图片中的文本、无法处理加密/二进制代码、纯静态分析不执行代码、离线时 SC4 漏洞查询受限于静态回退列表。
+   活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 SkillSpector 的核心检测引擎，可以开发一个通用的 AI 插件/扩展安全审查平台，不仅限于 Skills，还可扩展到 VS Code 扩展、浏览器插件、ChatGPT GPTs 等生态，构建一个'插件安全体检中心'。; 灵感2：将 SkillSpector 集成到 CI/CD 流水线中，作为 AI 应用部署前的安全门禁，特别是在企业环境中使用 AI Agent 时，自动扫描所有引入的 Skills 并生成 SARIF 格式报告，与 GitHub Advanced Security 等工具链打通。; 灵感3：利用 SkillSpector 的漏洞模式数据库和检测规则，开发一个 IDE 插件（如 VS Code 扩展），在开发者编写或编辑 Skills 时提供实时的安全提示和修复建议，将安全左移到开发阶段。; 灵感4：基于 SkillSpector 的 LLM 语义分析能力，可以构建一个 AI 代码安全培训工具，通过扫描开源项目中的真实漏洞案例，为开发者提供交互式安全教育和代码审查练习。
+   衍生灵感: 灵感1：基于 SkillSpector 开发一个 'AI Skill 应用商店安全网关'，作为 Skill 上架前的自动化审核平台，为 Claude Code、Cursor、Windsurf 等 AI 编程工具的技能市场提供安全准入检测服务，按扫描次数收费。; 灵感2：将其集成到 CI/CD 流水线中，构建 'AI Agent 供应链安全门禁'，在每次 Skill 更新或引入新依赖时自动触发扫描，生成 SARIF 报告并上传到 GitHub Security Tab，阻断高风险 Skill 的部署。; 灵感3：扩展 SkillSpector 的 LLM 分析能力，开发一个 'AI 代码助手安全审计 SaaS'，不仅扫描 Skill，还能对 AI 生成的代码片段、自动化工作流进行实时安全评估，为企业的 AI 辅助开发提供安全合规保障。; 灵感4：基于其污点追踪和 AST 分析能力，开发一个通用的 'Python 项目安全预检工具'，面向开源项目维护者在 PR 合并前自动检测潜在的安全反模式，降低供应链攻击风险。
    项目链接: https://github.com/NVIDIA/SkillSpector
