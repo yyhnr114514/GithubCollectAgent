@@ -1,59 +1,4 @@
-1. music-assistant/server:
-   star: 1825  语言/技术: Python, Docker, Home Assistant Add-on, FFmpeg, 流媒体服务集成
-   项目简介: Music Assistant 是一个开源的媒体库管理器，旨在连接各种流媒体服务和智能音箱设备，实现统一的音乐管理与自动化播放控制。它专为智能家居场景设计，尤其与 Home Assistant 深度集成，适合部署在树莓派、NAS 等常开设备上，解决多平台音乐分散、设备割裂的痛点，是打造全屋智能音响系统的“中枢大脑”。
-   亮点: 统一管理多个流媒体平台（如 Spotify、Tidal 等）的音乐库; 支持多种网络音箱设备（如 Sonos、Google Cast、AirPlay 等）的集中控制; 深度集成 Home Assistant，支持自动化场景联动（如“回家自动播放音乐”）
-   详细报告: Music Assistant 是一个专为智能家居环境打造的开源音乐中枢系统。它的核心目标是打破不同流媒体服务和音响设备之间的壁垒，让用户能够通过一个界面统一管理所有音乐资源并控制全屋音响设备。项目主要运行在树莓派、NAS 或 Intel NUC 等低功耗常开设备上，作为后台服务持续运行。
-
-技术上，项目主体使用 Python 编写，但由于依赖 FFmpeg 处理音频转码、流媒体协议解析等底层操作，无法以纯 Python 包（pypi）形式分发，必须通过 Docker 容器或 Home Assistant 插件方式部署。这种架构保证了跨平台兼容性和稳定性，但也提高了部署门槛。
-
-其最大亮点在于与 Home Assistant 的无缝集成。用户可以通过 Home Assistant 的自动化引擎，设置基于时间、地理位置、传感器触发等条件的音乐播放场景，例如“早晨7点自动播放轻音乐”或“检测到有人进入客厅时启动 Spotify 播放列表”。此外，它支持多种主流音箱协议，包括 Google Cast、AirPlay、Sonos、UPnP 等，几乎覆盖市面上所有智能音箱品牌。
-
-虽然文档被截断，但从已有信息可推断其具备同步播放、多房间音频、播放队列管理、语音控制（通过 HA 的语音助手）等高级功能。对于追求全屋智能体验的技术爱好者而言，这是一个极具潜力的“打工人下班回家自动放歌”神器。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目开发一个“智能背景音乐系统”，用于咖啡馆、书店等商业场所，根据客流或时间段自动切换音乐风格。; 灵感2：将其集成到企业办公系统中，实现会议室自动播放欢迎音乐或会议提醒音效，提升办公智能化水平。; 灵感3：开发一个“老人友好型语音音乐盒”，结合简单语音指令和预设歌单，帮助不熟悉智能设备的老年人轻松享受音乐。
-   项目链接: https://github.com/music-assistant/server
-
-2. OpenBMB/VoxCPM:
-   star: 30243  语言/技术: Python, PyTorch, Diffusion Model, Autoregressive Model, AudioVAE, vLLM, Nano-vLLM, ONNX, Rust, ComfyUI
-   项目简介: VoxCPM2 是一款由 OpenBMB 开发的开源、无需分词器（Tokenizer-Free）的文本转语音（TTS）系统。它采用端到端的扩散自回归架构，直接生成连续语音表征，支持 30 种语言、声音设计、可控语音克隆以及 48kHz 录音室级音质输出。
-   亮点: 🌍 30 种语言多语言支持：无需语言标签，直接输入文本即可合成。; 🎨 声音设计：仅通过自然语言描述（如性别、年龄、语调）即可创造全新声音，无需参考音频。; 🎛️ 可控语音克隆：从短音频克隆音色，并可调节情感、语速等风格。; 🎙️ 终极克隆：提供参考音频及其转录文本，可完美复刻音色、节奏、情感等所有细节。; 🔊 48kHz 高质量音频：内置超分辨率，无需外部上采样器。; ⚡ 实时流式合成：在 RTX 4090 上 RTF 低至 0.3，使用 Nano-vLLM 可低至 0.13。; 📜 完全开源且商业友好：Apache-2.0 许可，权重和代码均可免费商用。
-   详细报告: VoxCPM2 是一个革命性的 TTS 系统，其核心创新在于摒弃了传统的离散分词器（Tokenizer），转而使用扩散自回归架构直接在潜在空间中生成连续语音表示。这种方法避免了量化带来的信息损失，从而实现了更自然、更具表现力的语音合成。
-
-项目基于 MiniCPM-4 骨干网络，训练数据超过 200 万小时的多语言语音。其技术栈包括 AudioVAE V2 用于音频编码/解码，以及 LocEnc、TSLM、RALM、LocDiT 四个阶段组成的流水线，支持 48kHz 原生音频输出。
-
-功能上，VoxCPM2 不仅支持基础的文本转语音，还提供了三大高级功能：
-1.  **声音设计（Voice Design）**：用户只需用自然语言描述想要的声音特征（如‘年轻女性，温柔甜美’），模型即可生成对应声音，无需任何参考音频。
-2.  **可控语音克隆（Controllable Voice Cloning）**：用户可以提供一段参考音频来克隆其音色，同时还能通过控制指令调整情感、语速等风格。
-3.  **终极克隆（Ultimate Cloning）**：这是最强大的克隆模式，用户需提供参考音频及其精确转录文本，模型能无缝延续参考音频的风格，忠实还原每一个声音细节。
-
-在部署方面，项目提供了多种选择：
-- **Python API 和 CLI**：适合快速集成和脚本化使用。
-- **Web Demo**：基于 Gradio 的简单网页界面。
-- **生产级部署**：支持 Nano-vLLM（高性能推理引擎）和 vLLM-Omni（官方 vLLM 扩展，提供 OpenAI 兼容 API），支持高并发、流式传输和多 GPU 部署。
-
-生态方面，社区已经贡献了多种后端实现，包括 VoxCPM.cpp（CPU/GPU 推理）、VoxCPM-ONNX、Apple Neural Engine 后端、Rust 重实现以及多个 ComfyUI 节点，极大地扩展了其应用场景。
-
-性能上，VoxCPM2 在 Seed-TTS-eval 等公开基准测试中达到了业界领先水平，尤其在零样本和可控 TTS 任务上表现优异。其 RTF（实时因子）在 RTX 4090 上可低至 0.13，完全满足实时交互需求。
-   活跃度: 高。项目持续更新，最新版本 VoxCPM2 于 2026 年 4 月发布，且社区生态不断扩展，表明项目处于活跃开发状态。  社区健康: 健康。项目拥有活跃的社区，提供飞书和 Discord 支持，并有多个社区贡献的扩展项目（如 ComfyUI 节点、ONNX 导出等）。文档齐全，包括快速入门、使用指南和 Cookbook。
-   商业潜力: 高。VoxCPM2 的开源商业友好许可（Apache-2.0）和强大功能使其在内容创作、虚拟人、智能客服、教育、无障碍技术等领域具有巨大商业价值。其低延迟和高音质特性尤其适合实时交互应用。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个 **AI 虚拟主播生成平台**，用户可通过文字描述快速创建专属虚拟人声音，用于短视频、直播、有声书等内容创作，解决中小创作者缺乏专业配音员的问题。; 灵感2：将其集成到 **智能客服系统** 中，实现高度个性化、情感丰富的语音交互，例如根据用户情绪自动调整客服语音的语调和语速，提升用户体验。; 灵感3：构建一个 **多语言无障碍阅读助手**，支持将任意语言的文本实时转换为高质量语音，并允许用户自定义声音风格，适用于教育、视障辅助、跨语言学习等场景。
-   项目链接: https://github.com/OpenBMB/VoxCPM
-
-3. Free-TV/IPTV:
-   star: 17356  语言/技术: M3U8, Python, Markdown
-   项目简介: Free TV 是一个全球免费电视频道的 M3U 播放列表项目，旨在为开发者提供经过筛选、高质量且合法的免费电视频道流媒体链接。它解决了用户在海量的网络电视资源中难以找到稳定、高清、真正免费频道的痛点，是打造个人 IPTV 应用或家庭影音系统的绝佳数据源。
-   亮点: 覆盖全球数十个国家和地区的免费电视频道，包括北美、欧洲、亚洲、南美、非洲等; 严格筛选原则：仅收录真正免费、非付费订阅、非成人/宗教/政治专属的主流频道; 支持多种来源：地面广播（DVB-T/S）、互联网平台（Pluto TV、Roku TV、YouTube Live 等）; 提供自动化脚本 `make_playlist.py` 从结构化 Markdown 文件生成标准 M3U8 播放列表
-   详细报告: Free TV 项目本质上是一个精心维护的免费电视频道数据库，以 M3U8 格式输出，可直接被 VLC、Kodi、IPTV Smarters 等主流播放器使用。其核心逻辑是通过 GitHub 协作模式，由社区贡献并验证各国免费频道的流媒体 URL，确保链接有效性和合规性。项目采用 Markdown 文件按国家分类管理频道信息，每个 .md 文件代表一个国家或地区组，包含频道名称、Logo、URL 及状态标记（如 HD、GeoIP 限制、YouTube 直播等）。通过 Python 脚本 `make_playlist.py` 自动解析这些文件并生成最终的 `playlist.m3u8`，实现了内容维护与格式输出的解耦。项目强调‘质量优于数量’，拒绝冗余链接（如 +1 频道、区域变体），只保留一个最优 URL。同时明确排除付费墙后的内容，坚持‘真正免费’原则，甚至将公共电视牌照费视为合法免费来源。此外，项目对地理封锁（GeoIP）和平台来源（如 YouTube、Dailymotion）有清晰标注，帮助用户规避访问问题。整个架构轻量但高效，依赖 GitHub 的 PR 机制进行内容审核，适合二次开发为全球 IPTV 应用的数据后端。
-   活跃度: 文档未提及  社区健康: 文档未提及
-   商业潜力: 该项目本身不直接盈利，但可作为免费增值（Freemium）模式的基础数据层，支撑广告支持的 IPTV 应用、海外内容聚合平台或智能电视预装服务。通过提供高质量、合规的免费频道资源，吸引用户流量后可通过推荐付费频道、本地化广告或高级功能（如云录制、多屏同步）实现变现。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个名为 'WorldTV Free' 的跨平台 IPTV 应用，集成自动更新播放列表、按国家/语言分类、离线缓存频道信息等功能，面向海外华人或国际旅行者提供一站式免费电视服务。; 灵感2：可以将其集成到智能家居系统中，作为家庭媒体中心的免费频道源，结合 EPG（电子节目指南）数据，实现类似传统有线电视的体验，但完全免费且无广告干扰。; 灵感3：构建一个 'Free TV Monitor' 监控平台，定期检测所有 M3U 链接的有效性，自动标记失效频道并通知维护者，提升播放列表的长期可用性，适用于企业级 IPTV 解决方案的稳定性保障。
-   项目链接: https://github.com/Free-TV/IPTV
-
-4. Panniantong/Agent-Reach:
+1. Panniantong/Agent-Reach:
    star: 32337  语言/技术: Python, Node.js, Shell, MCP, yt-dlp, feedparser, Jina Reader, Exa, gh CLI, OpenCLI, twitter-cli, bili-cli, rdt-cli, xiaohongshu-mcp, linkedin-scraper-mcp
    项目简介: Agent Reach 是一个为 AI Agent 提供互联网内容接入能力的开源工具集，解决 Agent 无法直接访问主流平台内容的痛点。它通过一键安装和自动配置，让 Claude Code、Cursor、OpenClaw 等主流 AI Agent 能够免费读取 Twitter、YouTube、B站、小红书、Reddit、GitHub 等平台内容，无需付费 API，支持多后端自动切换，是 AI Agent 的'互联网能力扩展包'。
    亮点: 一键安装：只需一条命令，Agent 自动完成所有工具安装和配置; 多平台覆盖：支持 Twitter、YouTube、B站、小红书、Reddit、GitHub、LinkedIn、V2EX、雪球、小宇宙播客等主流平台; 免费无 API Key：所有工具开源免费，无需付费 API，通过 Cookie 认证和开源工具实现; 多后端自动路由：每个平台配置首选+备选后端，失效时自动切换，用户无感知; 自带诊断工具：agent-reach doctor 一键检测各平台连通性和当前使用的后端; 安全设计：凭据本地存储、安全模式、Dry Run 预览、完全开源可审查
@@ -79,3 +24,87 @@
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于此项目，可以开发一个 'AI 竞品情报助手'，自动监控 Twitter、Reddit、小红书上对特定产品的讨论，生成每日舆情报告，用于解决品牌营销团队手动刷多个平台效率低的问题。; 灵感2：可以将其集成到 '个人知识库系统' 中，当用户保存链接时自动调用 Agent Reach 提取内容摘要和全文，实现一键收藏+自动解析，优化信息收集流程。; 灵感3：基于多后端路由架构，可以开发一个 'API 可用性监控平台'，自动检测多个免费 API 和开源工具的健康状态，当某个失效时自动切换到备选方案，为开发者提供稳定的免费数据源聚合服务。
    项目链接: https://github.com/Panniantong/Agent-Reach
+
+2. google-research/timesfm:
+   star: 22037  语言/技术: Python, PyTorch, Flax, JAX, HuggingFace Transformers, PEFT (LoRA), uv
+   项目简介: TimesFM 是 Google Research 开发的一款专为时间序列预测设计的预训练基础模型（Foundation Model），属于 AI 工具领域。它旨在解决传统时序预测需要大量标注数据和复杂特征工程的问题，通过一个统一的 decoder-only 架构，提供开箱即用的点预测和连续分位数预测能力，极大降低了时序预测的门槛。
+   亮点: 核心功能：提供 TimesFM 2.5 版本，参数量从 500M 优化至 200M，但上下文长度从 2048 大幅提升至 16k，支持更长的历史数据输入。; 解决了什么具体问题：支持连续分位数预测（Continuous Quantile Forecast），可输出高达 1000 步的预测 horizon，并提供不确定性量化，解决了传统点预测无法评估风险的问题。; 亮点3：原生支持协变量（Covariates）通过 XReg 模块，允许用户引入外部特征（如节假日、促销活动）来提升预测精度，增强了模型的实用性。
+   详细报告: TimesFM 是 Google Research 推出的时间序列预测基础模型，其核心是一个 decoder-only 架构的 Transformer。该项目的主要目标是提供一个通用、高性能且易于使用的时序预测解决方案。
+
+在技术实现上，TimesFM 2.5 版本进行了显著优化：模型参数量从 2.0 的 500M 减少到 200M，但上下文窗口从 2048 扩展到 16384，这意味着它可以处理更长的历史序列，捕捉更长期的依赖关系。此外，它引入了一个可选的 30M 参数分位数头（quantile head），能够输出连续的分位数预测（如 10th 到 90th 分位数），为预测结果提供不确定性估计，这对于金融、库存管理等风险敏感场景至关重要。
+
+项目支持多种后端（PyTorch 和 Flax/JAX），方便不同技术栈的开发者使用。安装方式灵活，可通过 PyPI 直接安装（`pip install timesfm[torch]` 或 `flax`），也支持本地开发模式。代码示例展示了其简洁的 API：加载预训练模型、配置预测参数（如 max_context, max_horizon）、调用 `forecast` 方法即可获得点预测和分位数预测结果。
+
+TimesFM 还集成了现代 MLOps 生态：支持通过 HuggingFace Transformers + PEFT (LoRA) 进行高效微调，适应特定领域的数据；提供了 Agent Skill 文档（SKILL.md），便于集成到 AI Agent 工作流中；并已在 Google 内部产品中落地，如 BigQuery ML（企业级 SQL 预测）、Google Sheets（电子表格预测）和 Vertex AI Model Garden（Docker 化端点），证明了其生产环境可用性。
+
+文档中还提到了社区贡献的单元测试和协变量支持（XReg），表明项目在持续迭代和增强。虽然 README 被截断，但已展示的信息足以说明这是一个功能强大、设计现代、且具备工业级应用潜力的时序预测基础模型。
+   活跃度: 高。根据更新日志，项目在 2025 年 9 月发布 2.5 版本后，持续在 2025 年 10 月至 2026 年 4 月间添加了协变量支持、Flax 版本、微调示例、单元测试和 Agent Skill，开发迭代非常活跃。  社区健康: 未知
+   商业潜力: 高。TimesFM 已被集成到 Google 的 BigQuery ML、Sheets 和 Vertex AI 等核心产品中，证明其具备企业级应用价值。其开箱即用、支持微调、提供不确定性预测的特性，使其在金融、零售、能源、供应链等多个高价值行业有广泛的应用前景，可作为 PaaS/SaaS 服务的基础组件。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目，可以开发一个 **智能库存预警系统**，用于零售或制造业，利用 TimesFM 的长上下文和分位数预测能力，精准预测未来数周甚至数月的商品需求，并结合不确定性量化自动触发补货或促销策略，解决库存积压或缺货问题。; 灵感2：可以将其集成到 **金融风控平台** 中，优化 **市场波动预测流程**。利用 TimesFM 的连续分位数输出，构建动态风险价值（VaR）模型，为投资组合提供更可靠的风险评估和压力测试。; 灵感X：开发一个 **能源消耗预测 SaaS 服务**，面向工厂或商业楼宇，结合天气、生产计划等协变量（通过 XReg），实现高精度的电力/燃气需求预测，帮助用户优化能源采购和降低成本。
+   项目链接: https://github.com/google-research/timesfm
+
+3. calesthio/OpenMontage:
+   star: 5516  语言/技术: Python, Node.js, React, Remotion, HyperFrames, FFmpeg, Piper TTS, WhisperX, GSAP, YAML, CLIP
+   项目简介: OpenMontage 是首个开源的、基于 AI Agent 的视频制作系统。它让你的 AI 编程助手（如 Claude Code、Cursor 等）变身成为完整的视频制作工作室——只需用自然语言描述需求，Agent 就能自动完成研究、脚本创作、素材生成、剪辑和最终合成。它不仅支持基于 AI 生成图片的视频，还能从免费素材库中检索真实视频片段进行剪辑，甚至支持本地 GPU 视频生成。
+   亮点: 首个开源 Agentic 视频生产系统，支持从自然语言到成片的全流程自动化; 双渲染引擎架构：Remotion（React 数据驱动）和 HyperFrames（HTML/GSAP 动态图形）; 支持真实视频素材剪辑（非仅图片动画），可从 Archive.org、NASA、Pexels 等免费源获取素材; 零 API Key 即可运行：内置 Piper TTS、免费素材库和 Remotion 渲染; 完整的预算控制与决策审计追踪，避免意外花费; 多平台 AI 助手兼容（Claude Code、Cursor、Copilot、Windsurf、Codex）
+   详细报告: OpenMontage 是一个革命性的开源视频制作框架，它将 AI Agent 的能力与专业视频制作流程深度整合。项目的核心理念是：用户只需用自然语言描述想要的视频，AI Agent 就能自动完成从研究到成片的全部工作。
+
+技术架构上，OpenMontage 采用三层设计：
+1. **Layer 1 - 工具层**：Python 实现的工具集，包括图像生成（FLUX、DALL-E）、视频生成（Veo、Kling、Runway）、TTS（Piper、ElevenLabs）、素材检索（Pexels、Archive.org）等，所有工具通过自动发现的注册表管理。
+2. **Layer 2 - 管道层**：YAML 定义的生产管道，每个管道包含研究、提案、脚本、场景计划、素材、编辑、合成等阶段，每个阶段有对应的导演技能（Markdown 指令文件）指导 Agent 执行。
+3. **Layer 3 - 渲染层**：双渲染引擎架构。Remotion 用于数据驱动的解释器视频和 React 场景；HyperFrames 用于动态图形和 SVG 角色动画。
+
+项目亮点包括：
+- **真实视频支持**：不同于大多数 AI 视频工具仅支持图片动画，OpenMontage 可以从免费素材库（Archive.org、NASA、Wikimedia、Pexels）检索真实视频片段进行剪辑。
+- **零成本运行**：无需任何 API Key 即可制作视频，使用 Piper TTS（离线语音合成）+ 免费素材 + Remotion 渲染。
+- **预算控制**：完整的成本估算、预留、对账系统，支持观察模式、警告模式和硬上限模式。
+- **决策审计**：每个创意和技术选择都有完整的决策日志，包括备选方案、置信度和推理过程。
+- **参考视频分析**：可以从 YouTube、TikTok 等参考视频出发，Agent 会分析其节奏、场景、风格并生成差异化创意。
+
+文档中展示了多个令人印象深刻的案例：
+- 科幻预告片 'SIGNAL FROM TOMORROW'：概念、脚本、Veo 生成片段、配乐、Remotion 合成
+- 60 秒皮克斯风格短片 'THE LAST BANANA'：成本仅 $1.33
+- 产品广告 'VOID — Neural Interface'：仅 $0.69，零手动素材工作
+- 吉卜力风格动画：成本仅 $0.15，无需视频生成 API
+
+项目采用 GNU AGPLv3 许可证，支持通过添加新工具和管道进行扩展。虽然目前 GitHub 指标显示项目较新（无 star、fork、issue），但其技术架构完整，文档详细，具有极高的实用价值。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：开发一个 '社交媒体视频自动生成器'，基于 OpenMontage 的 Clip Factory 管道，自动将长视频（如直播回放、会议记录）剪辑为适合 TikTok、Instagram Reels、YouTube Shorts 的短视频，解决内容创作者多平台分发效率低下的问题。; 灵感2：构建 '电商产品视频营销平台'，利用 OpenMontage 的 Avatar Spokesperson 和 Cinematic 管道，自动生成产品宣传视频、开箱视频、使用教程，商家只需上传产品图片和描述即可批量生成营销素材。; 灵感3：开发 '教育内容自动化生产系统'，结合 OpenMontage 的 Animated Explainer 管道和预算控制功能，为在线教育平台自动生成课程预告片、知识点讲解视频、课程总结视频，大幅降低教育视频制作成本。; 灵感4：创建 '本地新闻/自媒体视频助手'，利用 Documentary Montage 管道从免费素材库检索真实视频片段，自动生成新闻背景视频、专题报道视觉素材，解决小型媒体机构素材获取成本高的问题。
+   项目链接: https://github.com/calesthio/OpenMontage
+
+4. alexzhang13/rlm:
+   star: 4968  语言/技术: Python 3.11+, OpenAI API, Anthropic API, vLLM, Modal Sandboxes, Prime Intellect Sandboxes, Docker, IPython, verifiers, prime-rl, Node.js, shadcn/ui
+   项目简介: RLMs 是一个革命性的推理范式，让语言模型能够像程序员一样通过代码环境递归调用自身，处理近乎无限长的上下文。它用 `rlm.completion()` 替代传统的 `llm.completion()`，将上下文作为变量在REPL环境中管理，使LM能够编程式地检查、分解和递归处理输入。
+   亮点: 无限上下文处理：通过递归分解和REPL环境管理，突破传统LM的上下文长度限制; 代码即工具：采用CodeAct范式，所有工具调用和子代理都通过代码函数实现，告别JSON工具调用标准; 多环境支持：从本地exec到云端沙箱（Modal、Prime、Docker等），提供灵活的安全隔离选项; 完整训练框架：基于verifiers和prime-rl的训练环境，可训练自定义RLM并直接接入推理引擎
+   详细报告: RLMs（递归语言模型）是由MIT OASYS实验室提出的下一代语言模型推理范式。核心思想是将语言模型从被动的文本生成器转变为主动的'程序员'，使其能够在代码环境中递归调用自身来处理复杂任务。
+
+**核心创新：**
+1. **REPL环境架构**：将上下文作为变量存储在REPL环境中，LM可以像操作对象一样操作prompt和上下文，而不是将所有内容塞入单一prompt
+2. **递归自调用**：LM可以将复杂任务分解为子任务，通过代码函数调用自身（sub-RLM calls），形成递归处理链
+3. **CodeAct范式**：所有工具调用、子代理交互都通过代码函数实现，比传统的JSON工具调用更灵活、更强大
+
+**技术实现：**
+- 提供`rlm.completion()`API，完全兼容传统`llm.completion()`的使用方式
+- 支持多种REPL环境：本地exec、IPython（支持子进程隔离）、Docker容器、云端沙箱（Modal、Prime Intellect、Daytona、E2B）
+- 兼容主流模型提供商：OpenAI、Anthropic、OpenRouter、Portkey，以及本地vLLM部署
+- 内置训练框架：基于Prime Intellect的prime-rl和verifiers库，提供完整的RL训练流程
+- 轨迹记录与可视化：完整的日志系统记录每次递归调用的完整轨迹，提供可视化工具调试复杂推理链
+
+**解决的问题：**
+- 传统LM的上下文窗口限制（即使128K、1M token也有上限）
+- 长文档分析、大型代码库理解等需要处理海量信息的场景
+- 复杂多步骤任务的可靠分解与执行
+- JSON工具调用的局限性和脆弱性
+
+**安全考虑：**
+- 本地环境适合低风险任务和基准测试
+- 云端沙箱提供完全隔离，适合生产环境和不可信输入
+- IPython子进程模式提供超时强制和命名空间隔离
+   活跃度: 项目处于早期但活跃阶段，文档完整，提供PyPI安装和训练框架。GitHub API指标显示数据可能不完整，但从文档看项目功能完整且有实际用例。  社区健康: 项目由MIT OASYS实验室维护，已有DSPy、Ax等知名项目集成，Prime Intellect、Google Cloud等平台支持。虽然GitHub指标显示早期阶段，但学术背景强，工业界关注度高。
+   商业潜力: RLMs代表了语言模型推理的范式转变，具有巨大的商业潜力。在需要处理超长上下文的场景（法律、金融、医疗、软件工程）中，RLMs可以提供传统RAG和固定上下文LM无法实现的深度推理能力。随着模型能力的提升和训练方法的成熟，RLMs可能成为下一代AI应用的基础架构。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：开发一个'超长文档智能分析器'，用于法律合同、学术论文、技术文档的深度分析，自动提取关键信息、发现矛盾点、生成摘要，突破传统RAG的上下文限制; 灵感2：构建'代码库理解与重构助手'，能够递归分析大型代码库的架构、依赖关系，自动发现重构机会，生成重构方案并逐步执行; 灵感3：创建'多轮复杂任务自动化平台'，比如自动化的竞品分析系统——递归搜索、抓取、分析竞品信息，生成深度报告；或自动化的投资研究助手，递归分析财报、新闻、行业数据
+   项目链接: https://github.com/alexzhang13/rlm
