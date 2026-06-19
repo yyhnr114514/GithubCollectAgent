@@ -1,31 +1,4 @@
-1. Panniantong/Agent-Reach:
-   star: 32337  语言/技术: Python, Node.js, Shell, MCP, yt-dlp, feedparser, Jina Reader, Exa, gh CLI, OpenCLI, twitter-cli, bili-cli, rdt-cli, xiaohongshu-mcp, linkedin-scraper-mcp
-   项目简介: Agent Reach 是一个为 AI Agent 提供互联网内容接入能力的开源工具集，解决 Agent 无法直接访问主流平台内容的痛点。它通过一键安装和自动配置，让 Claude Code、Cursor、OpenClaw 等主流 AI Agent 能够免费读取 Twitter、YouTube、B站、小红书、Reddit、GitHub 等平台内容，无需付费 API，支持多后端自动切换，是 AI Agent 的'互联网能力扩展包'。
-   亮点: 一键安装：只需一条命令，Agent 自动完成所有工具安装和配置; 多平台覆盖：支持 Twitter、YouTube、B站、小红书、Reddit、GitHub、LinkedIn、V2EX、雪球、小宇宙播客等主流平台; 免费无 API Key：所有工具开源免费，无需付费 API，通过 Cookie 认证和开源工具实现; 多后端自动路由：每个平台配置首选+备选后端，失效时自动切换，用户无感知; 自带诊断工具：agent-reach doctor 一键检测各平台连通性和当前使用的后端; 安全设计：凭据本地存储、安全模式、Dry Run 预览、完全开源可审查
-   详细报告: Agent Reach 是一个专为 AI Agent 设计的互联网内容接入能力层（capability layer），核心目标是让 AI Agent 能够像人一样访问和读取主流互联网平台的内容。
-
-**核心痛点解决**：当前 AI Agent 虽然能写代码、改文档，但访问互联网内容时面临重重障碍——Twitter API 付费、Reddit 匿名接口被封、B站风控拦截通用工具、小红书需要登录、网页抓取返回无用 HTML 等。每个平台都需要单独踩坑配置，Agent Reach 将这些复杂性封装成一键安装。
-
-**技术架构**：项目采用'能力层'设计，本身不实现底层读取，而是负责选型、安装、体检和路由。每个平台对应一个独立渠道文件（channels/ 目录），包含首选和备选后端的有序列表。例如 B站使用 bili-cli 作为首选（yt-dlp 已被风控封死），Twitter 使用 twitter-cli 作为首选、OpenCLI 作为备选。
-
-**安装流程**：用户只需将安装链接发给 AI Agent，Agent 会自动执行：1) 安装 CLI 工具（pip install agent-reach）；2) 安装系统基建（Node.js、gh CLI、mcporter）；3) 配置搜索引擎（Exa via MCP）；4) 检测环境并给出配置建议；5) 注册 SKILL.md 到 Agent skills 目录；6) 询问是否需要配置需要登录的平台。
-
-**支持的平台能力**：
-- 零配置即用：网页阅读（Jina Reader）、YouTube 字幕提取、RSS 阅读、GitHub 公开仓库、B站搜索、V2EX、雪球股票行情
-- 配置后解锁：Twitter 搜索/时间线、Reddit 搜索/帖子、小红书搜索/笔记、LinkedIn 详情、小宇宙播客转录、全网语义搜索（Exa）
-
-**安全特性**：Cookie 和 Token 仅存储在本地 ~/.agent-reach/config.yaml（权限 600），支持安全模式（不自动修改系统）和 Dry Run 预览。建议使用专用小号配置 Cookie 以降低封号风险。
-
-**兼容性**：支持所有能运行命令行的 AI Agent，包括 Claude Code、Cursor、Windsurf、OpenClaw 等。OpenClaw 用户需先开启 exec 权限。
-
-**设计理念**：强调'当下最稳的接入方式，替你选好、装好、体检好'，平台封锁或工具停更时由维护者更新路由，用户无需操心。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个 'AI 竞品情报助手'，自动监控 Twitter、Reddit、小红书上对特定产品的讨论，生成每日舆情报告，用于解决品牌营销团队手动刷多个平台效率低的问题。; 灵感2：可以将其集成到 '个人知识库系统' 中，当用户保存链接时自动调用 Agent Reach 提取内容摘要和全文，实现一键收藏+自动解析，优化信息收集流程。; 灵感3：基于多后端路由架构，可以开发一个 'API 可用性监控平台'，自动检测多个免费 API 和开源工具的健康状态，当某个失效时自动切换到备选方案，为开发者提供稳定的免费数据源聚合服务。
-   项目链接: https://github.com/Panniantong/Agent-Reach
-
-2. google-research/timesfm:
+1. google-research/timesfm:
    star: 22037  语言/技术: Python, PyTorch, Flax, JAX, HuggingFace Transformers, PEFT (LoRA), uv
    项目简介: TimesFM 是 Google Research 开发的一款专为时间序列预测设计的预训练基础模型（Foundation Model），属于 AI 工具领域。它旨在解决传统时序预测需要大量标注数据和复杂特征工程的问题，通过一个统一的 decoder-only 架构，提供开箱即用的点预测和连续分位数预测能力，极大降低了时序预测的门槛。
    亮点: 核心功能：提供 TimesFM 2.5 版本，参数量从 500M 优化至 200M，但上下文长度从 2048 大幅提升至 16k，支持更长的历史数据输入。; 解决了什么具体问题：支持连续分位数预测（Continuous Quantile Forecast），可输出高达 1000 步的预测 horizon，并提供不确定性量化，解决了传统点预测无法评估风险的问题。; 亮点3：原生支持协变量（Covariates）通过 XReg 模块，允许用户引入外部特征（如节假日、促销活动）来提升预测精度，增强了模型的实用性。
@@ -44,67 +17,67 @@ TimesFM 还集成了现代 MLOps 生态：支持通过 HuggingFace Transformers 
    衍生灵感: 灵感1：基于此项目，可以开发一个 **智能库存预警系统**，用于零售或制造业，利用 TimesFM 的长上下文和分位数预测能力，精准预测未来数周甚至数月的商品需求，并结合不确定性量化自动触发补货或促销策略，解决库存积压或缺货问题。; 灵感2：可以将其集成到 **金融风控平台** 中，优化 **市场波动预测流程**。利用 TimesFM 的连续分位数输出，构建动态风险价值（VaR）模型，为投资组合提供更可靠的风险评估和压力测试。; 灵感X：开发一个 **能源消耗预测 SaaS 服务**，面向工厂或商业楼宇，结合天气、生产计划等协变量（通过 XReg），实现高精度的电力/燃气需求预测，帮助用户优化能源采购和降低成本。
    项目链接: https://github.com/google-research/timesfm
 
-3. calesthio/OpenMontage:
-   star: 5516  语言/技术: Python, Node.js, React, Remotion, HyperFrames, FFmpeg, Piper TTS, WhisperX, GSAP, YAML, CLIP
-   项目简介: OpenMontage 是首个开源的、基于 AI Agent 的视频制作系统。它让你的 AI 编程助手（如 Claude Code、Cursor 等）变身成为完整的视频制作工作室——只需用自然语言描述需求，Agent 就能自动完成研究、脚本创作、素材生成、剪辑和最终合成。它不仅支持基于 AI 生成图片的视频，还能从免费素材库中检索真实视频片段进行剪辑，甚至支持本地 GPU 视频生成。
-   亮点: 首个开源 Agentic 视频生产系统，支持从自然语言到成片的全流程自动化; 双渲染引擎架构：Remotion（React 数据驱动）和 HyperFrames（HTML/GSAP 动态图形）; 支持真实视频素材剪辑（非仅图片动画），可从 Archive.org、NASA、Pexels 等免费源获取素材; 零 API Key 即可运行：内置 Piper TTS、免费素材库和 Remotion 渲染; 完整的预算控制与决策审计追踪，避免意外花费; 多平台 AI 助手兼容（Claude Code、Cursor、Copilot、Windsurf、Codex）
-   详细报告: OpenMontage 是一个革命性的开源视频制作框架，它将 AI Agent 的能力与专业视频制作流程深度整合。项目的核心理念是：用户只需用自然语言描述想要的视频，AI Agent 就能自动完成从研究到成片的全部工作。
+2. Lightricks/LTX-2:
+   star: 7527  语言/技术: Python, PyTorch, DiT (Diffusion Transformer), HuggingFace Transformers, Gemma 3 (Text Encoder), LoRA / IC-LoRA, FP8 Quantization, FlashAttention 4, xFormers, ComfyUI, uv (Python Package Manager), safetensors, Monorepo
+   项目简介: LTX-2 是由 Lightricks 开发的首个基于 DiT（Diffusion Transformer）架构的音视频一体式基础模型，将现代视频生成的所有核心能力集成在一个模型中：音视频同步、高保真画质、多种性能模式、生产级输出、API 访问和开源开放。它支持文本/图像到视频、音频到视频、视频修复、HDR 输出、唇形同步等多种生成模式，并提供蒸馏加速、FP8 量化、空间/时间超分等优化方案，是视频生成领域的一体化生产力工具。
+   亮点: 首个 DiT 架构音视频一体式基础模型，单模型覆盖文本/图像到视频、音频到视频、视频修复、HDR、唇形同步等全场景; 提供多种 Pipeline（两阶段高质量、单阶段快速、蒸馏加速、IC-LoRA 控制、关键帧插值等），灵活适配不同需求; 支持 FP8 量化、FlashAttention 4、梯度估计等推理优化，显著降低显存占用和提升生成速度; 提供完整的训练与微调工具链（ltx-trainer），支持 LoRA、全参数微调及 IC-LoRA; 支持 ComfyUI 集成，便于工作流自动化; 提供空间超分（2x/1.5x）和时间超分模块，支持生产级高分辨率输出
+   详细报告: LTX-2 是一个功能极其全面的视频生成基础模型，其核心创新在于将音视频生成统一到一个 DiT 架构中，而非传统的视频生成+后配音分离流程。项目采用 Monorepo 结构，包含三个核心包：ltx-core（模型实现与推理栈）、ltx-pipelines（高层 Pipeline 实现）和 ltx-trainer（训练与微调工具）。
 
-技术架构上，OpenMontage 采用三层设计：
-1. **Layer 1 - 工具层**：Python 实现的工具集，包括图像生成（FLUX、DALL-E）、视频生成（Veo、Kling、Runway）、TTS（Piper、ElevenLabs）、素材检索（Pexels、Archive.org）等，所有工具通过自动发现的注册表管理。
-2. **Layer 2 - 管道层**：YAML 定义的生产管道，每个管道包含研究、提案、脚本、场景计划、素材、编辑、合成等阶段，每个阶段有对应的导演技能（Markdown 指令文件）指导 Agent 执行。
-3. **Layer 3 - 渲染层**：双渲染引擎架构。Remotion 用于数据驱动的解释器视频和 React 场景；HyperFrames 用于动态图形和 SVG 角色动画。
+在生成能力方面，LTX-2 提供了覆盖几乎所有主流视频生成场景的 Pipeline：TI2VidTwoStagesPipeline 用于生产级文本/图像到视频生成（带 2x 超分）；DistilledPipeline 通过 8 个预定义 sigma 实现最快推理；ICLoraPipeline 支持视频到视频和图像到视频的转换；A2VidPipelineTwoStage 实现音频驱动的视频生成；RetakePipeline 支持对已有视频特定时间段进行重生成；HDRICLoraPipeline 输出线性 float 帧，适合 EXR 导出和色调映射；LipDubPipeline 实现唇形同步和说话人身份匹配。
 
-项目亮点包括：
-- **真实视频支持**：不同于大多数 AI 视频工具仅支持图片动画，OpenMontage 可以从免费素材库（Archive.org、NASA、Wikimedia、Pexels）检索真实视频片段进行剪辑。
-- **零成本运行**：无需任何 API Key 即可制作视频，使用 Piper TTS（离线语音合成）+ 免费素材 + Remotion 渲染。
-- **预算控制**：完整的成本估算、预留、对账系统，支持观察模式、警告模式和硬上限模式。
-- **决策审计**：每个创意和技术选择都有完整的决策日志，包括备选方案、置信度和推理过程。
-- **参考视频分析**：可以从 YouTube、TikTok 等参考视频出发，Agent 会分析其节奏、场景、风格并生成差异化创意。
+在性能优化方面，项目提供了多层次的加速方案：FP8 量化（支持 bf16 即时下缩和 Hopper GPU 的 scaled matrix multiplication）；FlashAttention 4（针对 Blackwell B200 GPU）和 xFormers（其他 CUDA GPU）；梯度估计技术可将推理步数从 40 步降至 20-30 步而保持质量；单阶段 Pipeline 用于快速原型验证。
 
-文档中展示了多个令人印象深刻的案例：
-- 科幻预告片 'SIGNAL FROM TOMORROW'：概念、脚本、Veo 生成片段、配乐、Remotion 合成
-- 60 秒皮克斯风格短片 'THE LAST BANANA'：成本仅 $1.33
-- 产品广告 'VOID — Neural Interface'：仅 $0.69，零手动素材工作
-- 吉卜力风格动画：成本仅 $0.15，无需视频生成 API
+在控制能力方面，项目提供了丰富的 IC-LoRA 和 LoRA 模块：Union Control（综合控制）、Motion Track Control（运动跟踪）、Detailer（细节增强）、Pose Control（姿态控制）、多种 Camera Control（Dolly In/Out/Left/Right、Jib Up/Down、Static）以及 HDR 和 LipDub 专用 LoRA，用户可以通过组合不同的控制模块实现精细的视频生成控制。
 
-项目采用 GNU AGPLv3 许可证，支持通过添加新工具和管道进行扩展。虽然目前 GitHub 指标显示项目较新（无 star、fork、issue），但其技术架构完整，文档详细，具有极高的实用价值。
+在文本编码方面，使用 Google Gemma 3 作为文本编码器，并支持自动提示词增强功能。模型权重以 safetensors 格式发布在 HuggingFace 上，包括 22B 参数的开发版和蒸馏版检查点。
+
+项目还提供了 ComfyUI 集成支持，便于与现有工作流工具链对接。整体而言，LTX-2 是一个从研究到生产、从训练到部署、从基础生成到精细化控制的完整视频生成解决方案。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个 '社交媒体视频自动生成器'，基于 OpenMontage 的 Clip Factory 管道，自动将长视频（如直播回放、会议记录）剪辑为适合 TikTok、Instagram Reels、YouTube Shorts 的短视频，解决内容创作者多平台分发效率低下的问题。; 灵感2：构建 '电商产品视频营销平台'，利用 OpenMontage 的 Avatar Spokesperson 和 Cinematic 管道，自动生成产品宣传视频、开箱视频、使用教程，商家只需上传产品图片和描述即可批量生成营销素材。; 灵感3：开发 '教育内容自动化生产系统'，结合 OpenMontage 的 Animated Explainer 管道和预算控制功能，为在线教育平台自动生成课程预告片、知识点讲解视频、课程总结视频，大幅降低教育视频制作成本。; 灵感4：创建 '本地新闻/自媒体视频助手'，利用 Documentary Montage 管道从免费素材库检索真实视频片段，自动生成新闻背景视频、专题报道视觉素材，解决小型媒体机构素材获取成本高的问题。
-   项目链接: https://github.com/calesthio/OpenMontage
+   衍生灵感: 灵感1：基于 LTX-2 的 A2VidPipeline 和 LipDubPipeline，可以开发一个 AI 虚拟主播系统，输入音频即可自动生成匹配的虚拟人视频，适用于在线教育、新闻播报、电商直播等场景。; 灵感2：利用 LTX-2 的 RetakePipeline 和 ICLoraPipeline，可以构建一个 AI 视频后期编辑工具，支持对已有视频片段进行局部重生成、风格迁移、HDR 增强等操作，大幅降低视频制作门槛。; 灵感3：结合 LTX-2 的 Camera Control LoRAs 和关键帧插值能力，可以开发一个 AI 分镜/预演工具，导演输入文字描述后自动生成带镜头运动的动态预览视频，用于影视前期策划。; 灵感4：基于 LTX-2 的蒸馏模型和 FP8 量化优化，可以构建一个面向中小企业的云端视频生成 API 服务，以低成本提供高质量的产品宣传视频、社交媒体内容自动生成。
+   项目链接: https://github.com/Lightricks/LTX-2
 
-4. alexzhang13/rlm:
-   star: 4968  语言/技术: Python 3.11+, OpenAI API, Anthropic API, vLLM, Modal Sandboxes, Prime Intellect Sandboxes, Docker, IPython, verifiers, prime-rl, Node.js, shadcn/ui
-   项目简介: RLMs 是一个革命性的推理范式，让语言模型能够像程序员一样通过代码环境递归调用自身，处理近乎无限长的上下文。它用 `rlm.completion()` 替代传统的 `llm.completion()`，将上下文作为变量在REPL环境中管理，使LM能够编程式地检查、分解和递归处理输入。
-   亮点: 无限上下文处理：通过递归分解和REPL环境管理，突破传统LM的上下文长度限制; 代码即工具：采用CodeAct范式，所有工具调用和子代理都通过代码函数实现，告别JSON工具调用标准; 多环境支持：从本地exec到云端沙箱（Modal、Prime、Docker等），提供灵活的安全隔离选项; 完整训练框架：基于verifiers和prime-rl的训练环境，可训练自定义RLM并直接接入推理引擎
-   详细报告: RLMs（递归语言模型）是由MIT OASYS实验室提出的下一代语言模型推理范式。核心思想是将语言模型从被动的文本生成器转变为主动的'程序员'，使其能够在代码环境中递归调用自身来处理复杂任务。
+3. LibreTranslate/LibreTranslate:
+   star: 15030  语言/技术: Python, Argos Translate, Docker, REST API
+   项目简介: LibreTranslate 是一个免费且开源的机器翻译 API，支持完全自托管。它不依赖 Google 或 Azure 等专有翻译服务，而是基于开源的 Argos Translate 库构建翻译引擎，为开发者提供隐私可控、可本地部署的多语言翻译能力。
+   亮点: 完全自托管的机器翻译 API，无需依赖 Google、Azure 等第三方商业服务; 基于开源 Argos Translate 引擎，保障数据隐私与合规性; 提供标准 REST API，易于集成到各类应用中
+   详细报告: LibreTranslate 是一个面向开发者和企业的开源机器翻译解决方案，其核心优势在于‘去中心化’和‘隐私优先’。与市面上大多数翻译 API（如 Google Translate API、Azure Translator）不同，LibreTranslate 允许用户在自己的服务器上部署完整的翻译服务，所有翻译请求均在本地处理，不会将用户数据发送至第三方平台。这对于医疗、金融、政府等对数据隐私要求极高的行业尤为重要。
 
-**核心创新：**
-1. **REPL环境架构**：将上下文作为变量存储在REPL环境中，LM可以像操作对象一样操作prompt和上下文，而不是将所有内容塞入单一prompt
-2. **递归自调用**：LM可以将复杂任务分解为子任务，通过代码函数调用自身（sub-RLM calls），形成递归处理链
-3. **CodeAct范式**：所有工具调用、子代理交互都通过代码函数实现，比传统的JSON工具调用更灵活、更强大
+项目的技术栈主要基于 Python 开发，翻译引擎由 Argos Translate 驱动——这是一个基于 OpenNMT 的开源神经机器翻译框架，支持多种语言对之间的互译。LibreTranslate 封装了 Argos Translate 的能力，并通过 RESTful API 对外提供服务，使得前端、移动端或后端系统均可轻松调用。
 
-**技术实现：**
-- 提供`rlm.completion()`API，完全兼容传统`llm.completion()`的使用方式
-- 支持多种REPL环境：本地exec、IPython（支持子进程隔离）、Docker容器、云端沙箱（Modal、Prime Intellect、Daytona、E2B）
-- 兼容主流模型提供商：OpenAI、Anthropic、OpenRouter、Portkey，以及本地vLLM部署
-- 内置训练框架：基于Prime Intellect的prime-rl和verifiers库，提供完整的RL训练流程
-- 轨迹记录与可视化：完整的日志系统记录每次递归调用的完整轨迹，提供可视化工具调试复杂推理链
+此外，项目支持 Docker 部署，极大简化了安装和运维流程。开发者只需一条命令即可启动翻译服务，适合快速集成到微服务架构或私有云环境中。项目还提供了在线演示站点（libretranslate.com）和详细的 API 文档，降低了使用门槛。
 
-**解决的问题：**
-- 传统LM的上下文窗口限制（即使128K、1M token也有上限）
-- 长文档分析、大型代码库理解等需要处理海量信息的场景
-- 复杂多步骤任务的可靠分解与执行
-- JSON工具调用的局限性和脆弱性
-
-**安全考虑：**
-- 本地环境适合低风险任务和基准测试
-- 云端沙箱提供完全隔离，适合生产环境和不可信输入
-- IPython子进程模式提供超时强制和命名空间隔离
-   活跃度: 项目处于早期但活跃阶段，文档完整，提供PyPI安装和训练框架。GitHub API指标显示数据可能不完整，但从文档看项目功能完整且有实际用例。  社区健康: 项目由MIT OASYS实验室维护，已有DSPy、Ax等知名项目集成，Prime Intellect、Google Cloud等平台支持。虽然GitHub指标显示早期阶段，但学术背景强，工业界关注度高。
-   商业潜力: RLMs代表了语言模型推理的范式转变，具有巨大的商业潜力。在需要处理超长上下文的场景（法律、金融、医疗、软件工程）中，RLMs可以提供传统RAG和固定上下文LM无法实现的深度推理能力。随着模型能力的提升和训练方法的成熟，RLMs可能成为下一代AI应用的基础架构。
+尽管当前 GitHub 指标显示近期活跃度较低（无近期提交、无关闭 issue、无 release），但项目本身功能完整，社区论坛和文档资源仍在维护，说明其仍具备实际可用性。对于希望摆脱商业 API 依赖、构建自主可控翻译能力的团队来说，LibreTranslate 是一个极具价值的选择。
+   活跃度: 低。根据 GitHub API 指标，近期无提交、无关闭 issue、无新版本发布，项目可能处于维护模式或开发停滞状态。  社区健康: 中等。项目拥有社区论坛和文档支持，但 GitHub 近期无提交或 issue 处理，表明核心开发可能放缓，社区活跃度有待观察。
+   商业潜力: 高。随着全球数据隐私法规（如 GDPR、CCPA）日益严格，企业对自托管 AI 服务的需求持续增长。LibreTranslate 可作为 SaaS 翻译服务的合规替代方案，尤其适合医疗、法律、金融等敏感行业。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个'超长文档智能分析器'，用于法律合同、学术论文、技术文档的深度分析，自动提取关键信息、发现矛盾点、生成摘要，突破传统RAG的上下文限制; 灵感2：构建'代码库理解与重构助手'，能够递归分析大型代码库的架构、依赖关系，自动发现重构机会，生成重构方案并逐步执行; 灵感3：创建'多轮复杂任务自动化平台'，比如自动化的竞品分析系统——递归搜索、抓取、分析竞品信息，生成深度报告；或自动化的投资研究助手，递归分析财报、新闻、行业数据
-   项目链接: https://github.com/alexzhang13/rlm
+   衍生灵感: 灵感1：基于此项目，可以开发一个‘企业内部多语言文档自动翻译系统’，用于跨国团队间的邮件、报告、知识库内容的实时本地化，避免敏感信息外泄。; 灵感2：可以将其集成到开源 CMS（如 WordPress 或 Ghost）中，为博客或新闻网站提供一键多语言发布功能，打造真正去中心化的多语言内容平台。; 灵感3：结合语音识别与 TTS 技术，构建一个离线可用的‘便携式翻译设备’原型，适用于野外考察、国际旅行等无网络环境下的跨语言沟通场景。
+   项目链接: https://github.com/LibreTranslate/LibreTranslate
+
+4. anthropics/financial-services:
+   star: 31900  语言/技术: Claude API, Claude Cowork, Claude Managed Agents API, MCP (Model Context Protocol), Markdown, YAML, Python (辅助脚本), Apache 2.0
+   项目简介: Anthropic 官方推出的金融垂直解决方案库，打包了一整套面向投行、行研、私募股权和财富管理场景的 Agent、技能与数据连接器。核心思路是把金融白领最吃香的几类脏活累活——LBO 建模、财报会议纪要、GL 对账、KYC 筛查——拆成可插拔的 Claude 技能包，既能在 Claude Cowork 里当插件秒级调用，也能通过 Managed Agents API 部署到自家工作流引擎。所有技能基于 Markdown/YAML 文件，零构建步骤，支持一键替换 MCP 数据源，相当于给金融打工人配了一队数字分析师实习生。
+   亮点: 官方背书：Anthropic 亲自下场做的金融模板库，不是社区玩具; 双模复用：同一套系统提示词和技能，既能当 Cowork 插件用，也能走 Managed Agents API 无头部署; 开箱即用：每个 Agent 都是自包含插件，安装即自动绑定所需技能和连接器; 数据生态豪华：预置了 11 个 MCP 连接器，覆盖 PitchBook、S&P Global、FactSet、Bloomberg LSEG 等顶级金融数据源; 合规友好：所有输出都标注为草稿，强制要求人工复核，不构成投资/法律/税务建议; 零构建步骤：纯 Markdown/YAML 文件结构，改配置就能定制，无需编译
+   详细报告: 这个项目本质上是把金融服务业里最耗人力的几类分析工作，用 Claude 的 Agent 框架做了标准化封装。整个仓库按“垂直插件 + 端到端 Agent + 托管模板”三层架构组织。
+
+**核心能力模块：**
+1. **金融分析底座 (financial-analysis)**：这是所有垂直能力的基石，包含 DCF 估值、LBO 模型、三张表建模、可比公司分析、Excel 审计、PPT 自动生成等硬核技能。每个技能都对应斜杠命令，比如输入 `/dcf` 就能触发 DCF 估值流程，`/comps` 跑可比公司分析。
+2. **投行套件 (investment-banking)**：覆盖 CIM 撰写、投资意向书、买方名单筛选、并购模型、流程跟踪等投行前台常见场景。Pitch Agent 能从头到尾生成带品牌格式的 pitch deck。
+3. **行研套件 (equity-research)**：财报会后速记、首次覆盖报告、投资论点追踪、催化剂日历。Earnings Reviewer 能自动把财报电话会议记录转化为模型更新和研究草稿。
+4. **私募股权套件 (private-equity)**：从项目筛选、尽职调查清单、IC 备忘录到投后监控和 AI 就绪度评估，形成完整闭环。
+5. **财富管理套件 (wealth-management)**：客户会议准备、财务规划、税损收割、投资组合再平衡。
+6. **基金财务与运营 (fund-admin / operations)**：GL 对账找断点、月末应计结转、LP 报表审计、KYC 文件解析。
+
+**技术实现亮点：**
+- **MCP 集成**：通过 Model Context Protocol 直连 Daloopa、Morningstar、S&P Global、FactSet、Moody's、LSEG、PitchBook 等 11 个数据源，相当于给 Claude 装上了金融数据万能钥匙。
+- **双部署模式**：Cowork 插件模式适合个人用户快速体验；Managed Agents API 模式适合机构部署到自有工作流引擎，支持子代理委派和 steering 事件路由。
+- **文件即配置**：所有技能、提示词、连接器定义都是 Markdown 和 JSON，改个文件就能换数据源或加公司内部术语。
+- **微软 365 集成**：附带管理员工具，可以把 Claude 部署到 Excel、PowerPoint、Word 和 Outlook 中，并支持 Vertex AI、Bedrock 或内部 LLM 网关作为后端。
+
+**合规设计：** 项目特别强调所有输出都是“分析师工作底稿”，需要持证专业人士复核，不构成投资建议、不执行交易、不记账、不审批开户。这种设计既保护了用户，也让机构敢用。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目的技能包结构，可以开发一个“法律服务业 Claude 技能库”，把合同审查、尽职调查清单、案件法律研究、诉讼策略备忘录等封装成 Agent，直连 Westlaw、LexisNexis 等法律数据库 MCP。; 灵感2：可以将其集成到私募股权公司的内部投资管理系统中，把 deal-sourcing 和 dd-checklist 技能与内部 CRM 打通，实现项目来源自动抓取、自动初筛、自动生成交付物。; 灵感3：参考它的 MCP 连接器架构，为医疗、制造或零售等行业构建类似的“行业数据直连”技能包，把行业数据源（如 IMS 健康数据、供应链数据库）接入通用 Agent 框架。; 灵感4：利用它的 Managed Agents API 模式，开发一个“多 Agent 协作的金融工作台”，让 Pitch Agent、Market Researcher 和 Model Builder 在同一个项目里自动流转，完成从行业研究到估值建模的全流程。
+   项目链接: https://github.com/anthropics/financial-services
