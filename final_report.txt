@@ -17,49 +17,55 @@
    衍生灵感: 灵感1：基于此项目开发一个“电商产品宣传视频自动生成器”——用户提供产品链接或描述，系统自动生成30秒介绍视频，包含产品图片、关键卖点字幕、背景音乐和语音解说，适用于淘宝、亚马逊等平台。; 灵感2：将其集成到新闻系统中，实现“文本新闻秒变视频”——从RSS或API抓取新闻文章，自动生成简短的新闻快报视频，包含相关图片/视频素材、AI语音播报和字幕，适合社交媒体分发。; 灵感3：构建“教育课程视频工厂”——根据课程大纲（如PPT或教材文本），自动生成系列讲解视频，每个章节对应一个视频，包含讲师头像动画、关键概念图解、随堂测验弹窗，降低教育机构制作成本。
    项目链接: https://github.com/calesthio/OpenMontage
 
-2. google-research/timesfm:
-   star: 24328  语言/技术: Python, PyTorch, Flax, HuggingFace Transformers, PEFT (LoRA), XReg (协变量支持), uv (包管理)
-   项目简介: TimesFM（Time Series Foundation Model）是谷歌研究院开发的时间序列基础模型，专为时间序列预测设计。它采用解码器架构，支持高达16k上下文长度和连续分位数预测，参数仅200M，性能优于旧版本。项目提供了PyTorch和Flax两种后端，支持协变量、微调（LoRA）、Agent技能等，旨在成为时间序列预测的通用解决方案。
-   亮点: 支持高达16k的上下文长度，可处理长时间序列数据; 200M参数模型，体积轻量但预测能力强; 提供连续分位数预测头，可输出概率分布（10th-90th分位数）; 可通过协变量（XReg）增强预测准确性; 支持微调（LoRA）和Agent集成，易于定制
-   详细报告: TimesFM 是一个由谷歌研究院开发的时间序列基础模型，旨在为时间序列预测提供预训练解决方案。其核心是一个解码器架构的神经网络，类似于大语言模型，但专门针对数值序列设计。最新版本 2.5 于 2025 年 9 月发布，相比 2.0 在多个维度进行了改进：
-- **模型压缩**：从 500M 参数降至 200M，推理更高效；
-- **上下文长度**：从 2048 扩展至 16384，可处理更长的历史数据；
-- **分位数预测**：新增一个 30M 参数的分位数头，支持连续分位数输出（如 10th 到 90th），不仅提供点预测，还可进行不确定性量化；
-- **频率指示器移除**：简化输入，不再需要显式指定频率；
-- **新增标志**：如 `force_flip_invariance`（正反向不变性）、`infer_is_positive`（推断正性）等，提升预测鲁棒性。
-
-技术实现上，TimesFM 支持 PyTorch 和 Flax（JAX 生态）两种后端，用户可根据硬件选择。安装简便：`pip install timesfm[torch]` 或 `[flax]`。提供官方预训练权重（托管于 HuggingFace），通过 `from_pretrained` 加载。还支持协变量（XReg）输入，例如外生特征（节假日、促销等）以提升预测精度。近期更新包括：
-- 提供了基于 HuggingFace Transformers + PEFT 的 LoRA 微调示例（在 `examples/finetuning/` 中）；
-- 新增 Agent 技能（`SKILL.md`），可集成到多智能体系统中；
-- 添加了单元测试（`tests/`）。
-
-代码示例显示，使用非常简单：加载模型、配置预测参数（上下文长度、预测范围等）、调用 `forecast` 方法输入 numpy 数组，即可获得点预测和分位数预测。
-
-该项目的 GitHub 页面未提供详尽的 API 指标（forks、issues 等均为 0），可能是新迁移或内部项目开源版。但从 README 更新的频率（2025-2026 多次更新）来看，项目维护较为活跃。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
+2. chopratejas/headroom:
+   star: 45178  语言/技术: Python, TypeScript, Rust, ONNX Runtime, HuggingFace Transformers, OpenAI, Anthropic, LangChain, MCP
+   项目简介: Headroom是一个AI agent上下文压缩层，能在保持答案质量的同时将token消耗降低60-95%。它通过智能压缩工具输出、日志、RAG块、文件和对话历史，减少LLM调用的token数，从而降低成本和延迟，特别适用于日常使用AI编码agent的开发者。
+   亮点: token减少60-95%，准确率保持不变甚至提升（如TruthfulQA +3%）; 支持多种集成方式：Python/TypeScript库、透明代理（零代码变更）、MCP服务器、agent wrap; 可逆压缩（CCR）：原始内容本地缓存，LLM可按需检索，保障信息不失真
+   详细报告: Headroom是AI agent的上下文压缩层，它像是一个聪明的“瘦身教练”，在LLM读取之前，将工具输出、日志、RAG结果、文件内容、对话历史等一切上下文进行压缩，最高可减少95%的token，同时保证答案质量。它的核心机制包括：ContentRouter自动识别内容类型并选择最佳压缩器（SmartCrusher处理JSON、CodeCompressor基于AST压缩代码、Kompress-base模型压缩文本）；CacheAligner稳定前缀以利用LLM提供商的KV缓存；CCR（可逆压缩）将原始内容本地缓存，LLM可通过headroom_retrieve工具按需获取，确保压缩不丢失信息。此外，还有跨agent共享记忆、自动去重、output token reduction（减少模型输出中的废话）、headroom learn从失败会话中学习自动修正agent行为等高级功能。它提供多种使用方式：作为Python/TypeScript库`compress()`、透明代理`headroom proxy`（零代码改动）、`headroom wrap claude`等一键包装、MCP服务器。兼容Claude Code、Codex、Cursor、Aider、Copilot CLI等主流agent，以及LangChain、Agno、Vercel AI SDK等框架。文档详尽，有基准测试、架构说明和限制讨论。
+   活跃度: 未知（commits_recent=0，pushed_at=null）  社区健康: 未知（GitHub指标显示 forks=0, issues=0，但README活跃，有Discord社区和文档）
+   商业潜力: 文档提及企业版但未详述；基于降低API成本的特性，具有很高的商业化潜力，适合AI应用基础架构工具
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 TimesFM 开发一个金融资产价格波动预测系统，输入历史价格和交易量（作为协变量），输出未来一段时间内的价格区间和置信水平，用于量化交易策略的风控模块。; 灵感2：将 TimesFM 集成到物联网平台中，对传感器时序数据（如温度、湿度、设备负载）进行实时预测，设定阈值触发器，在异常发生前预警，提升工业运维效率。; 灵感3：利用其分位数预测能力，构建电商销量预测工具，不仅给出未来销量点估计，还能预测库存短缺或过剩的概率，辅助供应链决策。
-   项目链接: https://github.com/google-research/timesfm
-
-3. chopratejas/headroom:
-   star: 40754  语言/技术: Python, TypeScript, Rust, ONNX Runtime, HuggingFace Transformers, MCP, AST, JSON
-   项目简介: Headroom 是一个 AI 代理的上下文压缩层，能在不改变代码的情况下，将代理读取的工具输出、日志、RAG 块、文件、对话历史等压缩 60-95%，节省大量 token 费用，同时保持回答质量。支持库、代理、MCP 等多种集成方式，还能跨代理共享记忆。程序员救星，打工人神器！
-   亮点: 支持库、代理、MCP 等多种模式，零代码集成; 节省 47-92% 的输入 token，输出 token 也可缩减 30%+; 可逆压缩（CCR），需要时能检索原始内容; 跨代理共享记忆和自动去重; 内置学习机制，从失败会话自动优化提示
-   详细报告: Headroom 是一个开源项目，旨在解决 AI 代理（如 Claude Code、Cursor、Codex 等）在使用 LLM 时上下文过大、token 消耗高的问题。它在代理与 LLM 之间插入一层，对输入内容进行智能压缩，大幅减少 token 用量，而不会显著影响回答质量。核心流程包括：ContentRouter 检测内容类型并选择压缩器（SmartCrusher 用于通用JSON、CodeCompressor 基于AST压缩代码、Kompress-base 是 HuggingFace 模型用于文本）；CacheAligner 稳定前缀以便利用LLM的KV缓存；CCR 可逆压缩将原始内容缓存到本地，LLM 可通过检索工具按需获取。此外，Headroom 还提供输出 token 缩减功能，通过控制模型回答的冗长度进一步节省成本（估计可减少 30%+ 输出 token）。其代理包装模式（`headroom wrap`）可一键集成到 Claude Code、Codex、Cursor、Aider、Copilot 等常用代理中；MCP 服务模式允许任何 MCP 客户端使用；代理模式和库模式则提供最大灵活性。另外，“headroom learn”功能能分析历史会话中失败的交互，自动将修正写入代理的系统提示文件（如 CLAUDE.md）。该项目的技术栈涵盖 Python、TypeScript（Node）、Rust（用于核心性能和ONNX运行时）、HuggingFace 模型、AST 解析等，支持多种安装方式（pip、npm、Docker）。文档详细，包括架构、基准测试、限制等，但目前GitHub指标显示是全新项目，无提交和发布记录，可能处于早期阶段。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：打造一个企业级 AI 客服成本优化网关，集成 Headroom 压缩层，在接入 ChatGPT、Claude 等 API 时自动压缩上下文，每月节省 60%+ 的 API 费用，同时保留可审计的原始对话记录。; 灵感2：开发一个跨平台 AI 辅助编程插件（如 VS Code 扩展），底层使用 Headroom 的代理包装模式，让日常编码中的上下文（报错信息、文件内容）自动压缩，提升响应速度并减少 token 消耗。; 灵感3：构建一个多 Agent 协作平台，利用 Headroom 的跨代理记忆和共享上下文功能，让不同 AI 代理（如客服、销售、技术支持）共享压缩后记忆，避免重复计算和冗余存储，降低整体运营成本。
+   衍生灵感: 灵感1：基于Headroom开发企业级AI API代理中间件，自动压缩所有出站LLM请求，为企业节省大量API费用，同时保留完整的可审计日志（通过CCR）。; 灵感2：将Headroom集成到RAG（检索增强生成）系统中，在将检索到的文档块送入LLM前进行压缩，显著降低处理长文档的成本和延迟，尤其适合知识库问答应用。; 灵感3：利用Headroom的跨agent记忆和headroom learn功能，构建一个持续自我优化的AI开发助手，能跨会话学习用户的编程习惯和项目规范，自动修正错误模式，提升编码效率。
    项目链接: https://github.com/chopratejas/headroom
 
-4. public-apis/public-apis:
-   star: 443081  语言/技术: REST API, JSON, OAuth, API Key
-   项目简介: 这是一个由社区精心整理和维护的免费公共 API 资源列表，涵盖动物、动漫、反恶意软件、艺术设计、区块链、书籍、商业、天气等数十个领域，共计数百个 API。开发者可以在此找到各种免费、开源的 API 接口，用于开发原型、学习或集成到自己的产品中。项目本身是一个 Markdown 文件集合，便于浏览和贡献。
-   亮点: 涵盖数十个领域的数百个免费公共 API，是开发者的百宝箱; 每个 API 都有简要描述、认证方式、HTTPS 支持和 CORS 状态，方便筛选; 社区维护，持续更新，贡献者可以轻松添加新的 API
-   详细报告: 这个项目本质上是一个 Markdown 文件，但可以说是程序员最实用的『免费 API 大全』。README 中按照类别列出了大量公开的 RESTful API，每个 API 条目都包含了名称、描述、认证方式（如无、API Key、OAuth）、是否支持 HTTPS 以及跨域支持情况。类别从动物（如 Cat Facts、Dog API）到天气（如 OpenWeatherMap、Weatherstack）等约 40 个分类，几乎覆盖了常见的开发需求。项目本身不包含代码，但提供了一个非常方便的导航和索引结构，并且有完整的贡献指南。对于想要快速寻找免费数据接口的开发者来说，这是一个宝藏仓库。注意：部分 API 需要注册获取 API Key 或有使用限制，具体请查看各 API 的官方文档。由于内容是截断的，部分类别的详细列表未完全展示，但已能看到项目的规模和丰富度。
-   活跃度: 未知（无提交时间等数据）  社区健康: 未知（README 提及社区维护，但无具体指标）
-   商业潜力: 作为免费 API 的集合，其商业价值在于可以为开发者节省调研时间，间接促进依赖这些 API 的商业产品开发。同时，该项目本身可以通过赞助或广告（如 APILayer 的推广链接）实现盈利。
+3. ZhuLinsen/daily_stock_analysis:
+   star: 44934  语言/技术: Python, GitHub Actions, Docker, FastAPI, AkShare, Tushare, Pytdx, Baostock, YFinance, Longbridge, Anspire, AIHubMix, Gemini, OpenAI, DeepSeek, 通义千问, Claude, Ollama, SerpAPI, Tavily, Bocha, Brave, MiniMax, SearXNG, 企业微信机器人, 飞书机器人, Telegram Bot, Discord Webhook, Slack Bot, 邮件推送
+   项目简介: 这是一个基于 AI 大模型的 A股/港股/美股/日股/韩股自选股智能分析系统。它每天自动抓取行情、资金流、新闻、公告等多维数据，调用大模型生成包含核心结论、评分、买卖点位、风险警报等内容的决策仪表盘，并通过企业微信、飞书、Telegram、Discord、Slack、邮件等渠道推送给用户。支持 Web/桌面工作台、Agent 策略问股、智能导入、回测等高级功能，可零成本通过 GitHub Actions 一键部署。堪称“打工人神器”，拯救每日盯盘焦虑。
+   亮点: 每日自动生成AI决策仪表盘，包含评分、买卖点、风险警报、催化因素等; 支持A股、港股、美股、日股、韩股等多个市场，自动降级不适用的指标; 零成本部署：GitHub Actions + 免费额度即可运行，无需服务器; Agent策略问股：支持均线、缠论、波浪、趋势等15种内置策略，可多轮追问; 多推送渠道：企业微信、飞书、Telegram、Discord、Slack、邮件全覆盖; 智能导入：图片、CSV/Excel、剪贴板导入股票列表，代码/名称/拼音自动补全
+   详细报告: 这个项目叫 Daily Stock Analysis（简称DSA），是一个为普通投资者打造的“全能型股票分析助手”。它主要解决了上班族没时间盯盘、信息过载、难以综合判断的痛点。每天定时（默认工作日18:00）自动拉取你自选股的最新行情、K线、技术指标、资金流向、筹码分布、新闻公告、基本面数据，然后把这些海量数据丢给AI大模型（如Gemini、Claude、DeepSeek、通义千问等），让它生成一份结构化的决策仪表盘。仪表盘包含：核心结论（买入/观望/卖出）、综合评分（0-100）、趋势判断、买卖点位、风险警报（比如主力资金大幅流出）、催化因素（比如业绩超预期）、操作检查清单等。
+
+从技术上看，这个项目非常“拼装”但很实用。数据源方面，A股用AkShare、Tushare等，美股用YFinance，港股用Longbridge，新闻搜索支持SerpAPI、Tavily、Brave等。AI模型方面，它设计了一个灵活的接口，可以对接几乎任何主流大模型（OpenAI兼容、Gemini、Claude、Ollama本地模型等），还支持多个API Key轮询或混合使用。
+
+部署极其简单：推荐使用GitHub Actions，Fork仓库、配置几个API Key和自选股代码、启用Action即可。也可以本地运行或Docker部署。项目还提供了一个Web UI（FastAPI），可以手动分析、查看历史报告、进行Agent策略问股（支持多轮对话，内置15种策略如均线金叉、缠论、波浪理论等）。
+
+推送效果非常直观：类似券商APP的决策简报，但更聚焦AI分析。支持企业微信、飞书、Telegram、Discord、Slack、邮件，基本覆盖主流通讯工具。
+
+因为是个人项目，issue少、没有最新release，但文档极其详尽（有完整指南、LLM配置指南、市场支持边界等），社区活跃度较低但项目本身成熟度较高。
+   活跃度: 未知（最新提交和发行版未提及）  社区健康: 未知（API指标显示forks、issues均为0，但文档齐全）
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此 API 列表，可以开发一个『API 聚合搜索平台』，让开发者按关键词、认证方式、领域等快速过滤出合适的免费 API，并提供一键测试和代码示例。; 灵感2：可以集成多个天气 API（如 Open-Meteo、Weatherstack、WeatherAPI）构建一个『多源天气聚合应用』，通过对比或加权平均提供更准确的天气预报。; 灵感3：利用其中的动物图片 API（如 Dog API、Cat API）和域名画像 API（如 Icon Horse），开发一个『宠物社交平台』，用户上传宠物照片，自动补充品种信息和可爱的表情包。
-   项目链接: https://github.com/public-apis/public-apis
+   衍生灵感: 灵感1：基于此项目，可以开发一个“大宗商品智能分析系统”，替换股票数据源为期货、原油、黄金等行情数据，AI模型改为分析供需基本面与宏观经济指标，推送给期货交易者或企业采购部门。; 灵感2：可以将其集成到“企业微信/飞书智能助手”中，用户直接在聊天框发送“分析腾讯”或上传截图，后端调用DSA的Agent策略生成实时分析，实现移动端随时随地问股。; 灵感3：扩展为“基金持仓智能监控系统”，用户输入基金代码，系统自动跟踪其前十大重仓股的每日变化，生成基金持仓调仓分析报告，推送给基金投资者或理财顾问。
+   项目链接: https://github.com/ZhuLinsen/daily_stock_analysis
+
+4. bytedance/deer-flow:
+   star: 72780  语言/技术: Python, LangChain, LangGraph, Docker, Kubernetes, Node.js, Nginx, OpenAI API, Anthropic API, vLLM, pnpm, uv, MCP Server
+   项目简介: DeerFlow 是一个开源的超级代理框架，能够编排子代理、记忆和沙箱来执行几乎任何任务，由可扩展技能驱动。它由字节跳动开发，2.0 版本完全重写，支持一键设置、多种模型提供商、Docker/Kubernetes 沙箱执行、长期记忆、MCP 服务器集成以及 IM 频道接入，旨在将人工智能代理从简单的问答提升为复杂的自动化工作流。
+   亮点: 一键设置与配置向导：通过 make setup 快速配置 LLM 提供商、搜索偏好和沙箱模式，极大降低入门门槛。; 子代理编排：支持动态创建和协调多个子代理，实现多步推理与协作。; 长期记忆：集成持久化记忆机制，保留对话上下文和用户偏好，提升交互连续性。; 多沙箱执行模式：支持本地、Docker 和 Kubernetes 三种沙箱，满足不同安全与资源隔离需求。; 可扩展技能与 MCP 集成：通过技能文件和 MCP 服务器扩展功能，支持自定义工具调用。
+   详细报告: DeerFlow 是一个由字节跳动推出的开源超级代理框架，旨在解决传统 AI 代理能力单一、难以扩展和缺乏持久记忆等问题。其核心创新在于将子代理、记忆系统和安全沙箱三者有机整合，并通过可扩展的技能系统赋予代理几乎无限的能力。
+
+技术层面，DeerFlow 基于 Python 构建，深度依赖 LangChain 和 LangGraph 进行 LLM 交互和流程编排，支持多种模型提供商（如 OpenAI、Anthropic、vLLM 等），并提供了灵活的配置方式。前端采用 Node.js 和 pnpm 技术栈，后端通过 nginx 统一路由。部署方式涵盖本地开发（使用 uv 和 pre-commit）和 Docker 生产部署，支持 Kubernetes 以扩展沙箱能力。
+
+核心功能包括：
+1. **子代理系统**：允许主代理动态创建和管理多个子代理，每个子代理可以拥有独立的模型、工具和上下文，适合复杂任务分解。
+2. **长期记忆**：通过持久化存储（如文件或数据库）保留代理的历史交互信息，使得跨会话的上下文连贯，支持个性化服务。
+3. **沙箱执行**：提供三种沙箱模式——本地直接执行、Docker 容器隔离、Kubernetes Pod 编排，有效防止恶意代码对宿主机的攻击，同时保证执行环境的一致性。
+4. **技能与 MCP 服务器**：通过技能文件夹和 MCP（Model Context Protocol）服务器扩展代理能力，例如集成代码执行、网络搜索、文件操作等自定义工具。
+5. **IM 频道接入**：支持从飞书、Slack 等即时通讯应用接收任务，实现无界面交互。
+6. **安全警告**：项目明确提醒用户，若部署在公共网络可能被恶意利用，建议结合 IP 白名单、认证网关等安全措施。
+
+由于文档内容被截断，部分高级功能如 LangSmith 跟踪、自定义模型提供商的详细配置未能完全展示，但整体架构和核心能力已足够清晰。
+   活跃度: 非常高 (2026 年 2 月 28 日登上 GitHub Trending #1，持续更新中)  社区健康: 活跃 (有贡献指南和欢迎贡献的声明，并有核心维护者团队)
+   商业潜力: 文档未提及详细商业模式，但从功能看，适用于企业自动化研究、客户服务、代码审查、数据分析等场景，具有较高的商业化潜力，例如提供 SaaS 托管服务或企业级定制部署。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 DeerFlow 开发一个「企业智能知识助手」，连接内部文档库和数据库，通过子代理分工进行多步检索与推理，自动回答员工复杂问题，并利用长期记忆记住用户偏好和历史提问。; 灵感2：将其集成到「代码审查流水线」中，利用 DeerFlow 的子代理同时分析代码质量、安全漏洞和性能瓶颈，自动生成审查报告，并执行沙箱中的测试用例验证修复建议。; 灵感3：构建一个「跨境电商全自动运营 Agent」，结合 IM 频道接收订单提醒，通过技能调用 API 管理库存、生成营销文案、分析竞品数据，并在沙箱中运行模拟促销活动。
+   项目链接: https://github.com/bytedance/deer-flow
