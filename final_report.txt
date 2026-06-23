@@ -1,34 +1,63 @@
 1. calesthio/OpenMontage:
-   star: 6689  语言/技术: Python, Node.js, FFmpeg, Remotion, HyperFrames, Piper TTS, FAL, OpenAI, ElevenLabs, WhisperX, GSAP, CLIP, AGPLv3
-   项目简介: 首个开源智能体视频制作系统。你只需用自然语言描述需求，AI编码助手（如Claude Code、Cursor）就会自动完成研究、脚本、素材生成、剪辑、合成全流程。支持从参考视频学习风格、零API密钥免费制作、多种生产管线（动画、纪录片、头像主播等），并提供预算控制和决策审计。
-   亮点: 首个开源智能体视频制作系统，AI编码助理直接编排全流程; 支持从参考视频（YouTube、TikTok等）分析风格并生成新概念; 零API密钥也能制作视频：Piper TTS离线配音 + 免费素材库（Archive.org、Pexels等） + Remotion动画; 内置预算控制、决策审计和自检机制，防止意外高额费用; 提供多种生产管线：动画讲解、纪录片蒙太奇、头像主播、屏幕演示等
-   详细报告: OpenMontage是一个革命性的开源项目，它将AI编码助手（如Claude Code、Cursor、Copilot等）转变为全功能视频工作室。用户只需要以自然语言描述需求，例如“制作一个60秒的动画讲解片，解释神经网络如何学习”，智能体就会自动执行完整的工作流：1) 研究主题（Web搜索获取事实和数据）；2) 生成视频提案（包括结构、风格、成本估算）；3) 编写脚本并决定画外音风格；4) 规划场景和镜头；5) 生成素材（AI图像、AI视频、免费素材）；6) 编辑和合成（使用Remotion或HyperFrames渲染最终视频）。
+   star: 12753  语言/技术: Python, Node.js, Remotion, FFmpeg, Piper TTS, HyperFrames, FAL API, Pexels API, Pixabay API, Unsplash API, Suno API, ElevenLabs API, OpenAI API, xAI API, Google API, HeyGen API, Runway API, WhisperX, CLIP
+   项目简介: OpenMontage 是全球首个开源、智能体驱动的视频制作系统。你只需用自然语言描述想法，AI 编码助手（如 Claude Code、Cursor）就能自动完成研究、脚本撰写、素材生成（包括 AI 图片/视频、免费素材库实拍片段）、剪辑、字幕、配乐、渲染等全流程。它不仅仅是将静态图片拼接成视频，而是能真正检索并剪辑实拍运动素材，生成高质量的纪录片、动画解说、产品宣传片等。
+   亮点: 真正的视频视频：不只是动画图片，而是从免费素材库中检索实拍运动片段并剪辑成片。; 零 API 密钥也可用：免费离线 TTS（Piper）、免费素材库（Archive.org、NASA、Pexels 等）、Remotion 合成，无需付费即可制作视频。; 管道化生产：提供 11 种预设管道（动画解说、纪录片蒙太奇、电影预告片、屏幕演示等），每个阶段都有导演技能文件引导智能体执行。
+   详细报告: OpenMontage 是一个革命性的开源项目，将 AI 编码助手变成了一个完整的视频制作工作室。其核心创新在于将视频制作流程拆解为 research → proposal → script → scene_plan → assets → edit → compose 七个阶段，每个阶段都有专门的 director skill（Markdown 指令文件）指导智能体如何使用工具、进行自审并请求用户批准。
 
-项目最大的亮点是“真实视频”能力——它不仅仅是通过图片轮播生成“伪视频”，而是能从免费素材库（Archive.org、NASA、Wikimedia Commons、Pexels等）中检索真实运动片段，剪辑出真正的纪录片式视频。此外，它还支持从参考视频（YouTube Shorts、Reels等）出发，通过分析其转写文本、节奏、关键帧等，生成2-3个差异化概念，并给出诚实的技术路径和成本估算。
+系统支持两种视频路径：一种是基于 AI 生成图片的动画视频（通过 Remotion 或 HyperFrames 合成），另一种是真正的实拍视频——系统从 Archive.org、NASA、Wikimedia Commons、Pexels 等免费素材库中构建可搜索的 CLIP 索引，检索实际运动片段并剪辑成纪录片或蒙太奇。
 
-技术栈方面，OpenMontage采用Python和Node.js混合架构。后端使用Python实现工具注册、管线编排、媒体处理；前端渲染使用React（Remotion）或HTML/GSAP（HyperFrames）。它集成了大量AI服务：图像生成（FLUX、DALL-E、Stable Diffusion）、视频生成（Veo、Kling、Runway）、语音合成（Piper TTS、ElevenLabs、OpenAI TTS）、音乐生成（Suno）、字幕（WhisperX）等，所有API密钥均为可选项。
+技术栈涉及 Python、Node.js、FFmpeg、Remotion（React 渲染）、HyperFrames（HTML/GSAP 渲染）、Piper TTS（离线语音）、WhisperX（词级字幕）等。可选集成多种付费 AI 服务：FAL（FLUX、Veo、Kling）、ElevenLabs、OpenAI、Suno 等，但所有 API 密钥都是可选的——免费路径已经能产出不错的成果。
 
-项目提供了详细的多平台指令文件（Claude.md、Cursor.md等）和完整的代理指南（AGENT_GUIDE.md），使AI助手能够立即上手。其核心创新在于“管线驱动”架构：每个视频类型对应一个管线（YAML清单），每个阶段（研究、提案、脚本等）都有专门的指导技能文件，智能体读取后按步骤执行。内置的预算控制、决策审计和自检机制确保视频质量并防止意外费用。
+项目还包含智能预算控制：预估成本、预留资金、实际消费核对，默认总预算上限 $10，超过 $0.50 需要用户确认。每个决策都有审计追踪，记录备选方案和推理过程。
 
-总而言之，OpenMontage降低了专业视频制作的门槛，让任何人都能通过简单的文字描述生成高质量视频，尤其适合内容创作者、市场营销人员、教育工作者等。
+文档极为详尽，包括快速开始、多种提示示例、管道说明、代理指南、架构文档等，降低了使用门槛。但根据 GitHub API 客观指标，该项目目前 forks 为 0、未发布 release、最近提交数为 0，可能处于早期或沉寂状态，请留意。
    活跃度: 未知  社区健康: 未知
-   商业潜力: 高。视频内容是当前最流行的信息传播方式，本系统可帮助企业高效生成营销视频、内部培训视频、产品演示视频，显著降低制作成本和时间。潜在的商业模式包括SaaS平台（提供托管视频生成服务）、API服务、或定制化企业解决方案。
+   商业潜力: 文档未提及，但显然可用于视频营销、教育培训、内容创作等领域的自动化，有商业化潜力。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目开发一个“电商产品宣传视频自动生成器”——用户提供产品链接或描述，系统自动生成30秒介绍视频，包含产品图片、关键卖点字幕、背景音乐和语音解说，适用于淘宝、亚马逊等平台。; 灵感2：将其集成到新闻系统中，实现“文本新闻秒变视频”——从RSS或API抓取新闻文章，自动生成简短的新闻快报视频，包含相关图片/视频素材、AI语音播报和字幕，适合社交媒体分发。; 灵感3：构建“教育课程视频工厂”——根据课程大纲（如PPT或教材文本），自动生成系列讲解视频，每个章节对应一个视频，包含讲师头像动画、关键概念图解、随堂测验弹窗，降低教育机构制作成本。
+   衍生灵感: 灵感1：基于 OpenMontage 的多管道特性，开发一个「社交媒体内容工厂」，自动将博客文章或长视频转成 TikTok/Reels 风格的短视频，一键批量发布。; 灵感2：将 OpenMontage 集成到在线教育平台，根据课程知识点自动生成动画讲解视频，附带字幕和配乐，大幅降低内容制作成本。; 灵感3：利用其「纪录片蒙太奇」管道，构建一个「开源新闻视频生成器」，从新闻网站抓取文本，自动匹配 Archive.org 的历史素材，生成 60 秒新闻综述视频。
    项目链接: https://github.com/calesthio/OpenMontage
 
-2. chopratejas/headroom:
-   star: 45178  语言/技术: Python, TypeScript, Rust, ONNX Runtime, HuggingFace Transformers, OpenAI, Anthropic, LangChain, MCP
-   项目简介: Headroom是一个AI agent上下文压缩层，能在保持答案质量的同时将token消耗降低60-95%。它通过智能压缩工具输出、日志、RAG块、文件和对话历史，减少LLM调用的token数，从而降低成本和延迟，特别适用于日常使用AI编码agent的开发者。
-   亮点: token减少60-95%，准确率保持不变甚至提升（如TruthfulQA +3%）; 支持多种集成方式：Python/TypeScript库、透明代理（零代码变更）、MCP服务器、agent wrap; 可逆压缩（CCR）：原始内容本地缓存，LLM可按需检索，保障信息不失真
-   详细报告: Headroom是AI agent的上下文压缩层，它像是一个聪明的“瘦身教练”，在LLM读取之前，将工具输出、日志、RAG结果、文件内容、对话历史等一切上下文进行压缩，最高可减少95%的token，同时保证答案质量。它的核心机制包括：ContentRouter自动识别内容类型并选择最佳压缩器（SmartCrusher处理JSON、CodeCompressor基于AST压缩代码、Kompress-base模型压缩文本）；CacheAligner稳定前缀以利用LLM提供商的KV缓存；CCR（可逆压缩）将原始内容本地缓存，LLM可通过headroom_retrieve工具按需获取，确保压缩不丢失信息。此外，还有跨agent共享记忆、自动去重、output token reduction（减少模型输出中的废话）、headroom learn从失败会话中学习自动修正agent行为等高级功能。它提供多种使用方式：作为Python/TypeScript库`compress()`、透明代理`headroom proxy`（零代码改动）、`headroom wrap claude`等一键包装、MCP服务器。兼容Claude Code、Codex、Cursor、Aider、Copilot CLI等主流agent，以及LangChain、Agno、Vercel AI SDK等框架。文档详尽，有基准测试、架构说明和限制讨论。
-   活跃度: 未知（commits_recent=0，pushed_at=null）  社区健康: 未知（GitHub指标显示 forks=0, issues=0，但README活跃，有Discord社区和文档）
-   商业潜力: 文档提及企业版但未详述；基于降低API成本的特性，具有很高的商业化潜力，适合AI应用基础架构工具
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于Headroom开发企业级AI API代理中间件，自动压缩所有出站LLM请求，为企业节省大量API费用，同时保留完整的可审计日志（通过CCR）。; 灵感2：将Headroom集成到RAG（检索增强生成）系统中，在将检索到的文档块送入LLM前进行压缩，显著降低处理长文档的成本和延迟，尤其适合知识库问答应用。; 灵感3：利用Headroom的跨agent记忆和headroom learn功能，构建一个持续自我优化的AI开发助手，能跨会话学习用户的编程习惯和项目规范，自动修正错误模式，提升编码效率。
-   项目链接: https://github.com/chopratejas/headroom
+2. mukul975/Anthropic-Cybersecurity-Skills:
+   star: 18888  语言/技术: YAML, Markdown, Python, agentskills.io标准
+   项目简介: 这是目前最大的开源网络安全技能库，专为AI代理设计。它包含了817个结构化技能，覆盖29个安全领域，并映射到MITRE ATT&CK、NIST CSF 2.0、MITRE ATLAS、MITRE D3FEND、NIST AI RMF和MITRE Fight Fraud Framework等6个行业框架。项目旨在弥补AI代理缺乏安全领域知识的短板，让任何AI代理都能像高级安全分析师一样执行威胁狩猎、数字取证、事件响应等任务。每个技能以YAML frontmatter和结构化Markdown编写，包含触发条件、前提、工作流和验证步骤，支持渐进式加载，AI代理可高效搜索和执行。
+   亮点: 817个生产级网络安全技能，覆盖29个安全领域，如云安全、威胁狩猎、数字取证等; 唯一同时映射6个行业框架的技能库，包括最新的MITRE Fight Fraud Framework; AI-native知识库设计，每个技能仅需30 tokens扫描，支持渐进式加载，不爆上下文窗口
+   详细报告: 该项目是一个社区驱动的开源项目，为AI代理提供结构化的网络安全技能。核心痛点是当前AI代理（如Claude、GPT、Copilot等）虽然能写代码、搜索网络，但缺乏安全从业者的实战知识——比如何时使用Volatility3插件、如何检测Kerberoasting、如何跨云平台进行入侵范围界定。项目通过817个技能解决了这一问题，每个技能包含YAML frontmatter（用于快速元数据搜索）和Markdown body（包含工作流、前置条件、验证步骤等）。
 
-3. ZhuLinsen/daily_stock_analysis:
+技能库按29个安全领域组织，包括云安全(66个)、威胁狩猎(58个)、威胁情报(52个)、网络钓鱼防御(15个)等。每个技能都映射到MITRE ATT&CK v19.1的所有15个战术和286个技术，以及NIST CSF 2.0的6个功能、MITRE ATLAS、D3FEND、AI RMF和最新的F3欺诈框架。例如，一个“分析网络流量中的恶意软件”技能同时映射了ATT&CK T1071、NIST CSF DE.CM、ATLAS AML.T0047等。
+
+技术架构上，技能以文件系统组织：每个技能一个目录，包含SKILL.md、references/、scripts/、assets/等。SKILL.md的YAML frontmatter包含name、description、tags、以及六个框架的技术映射ID，Markdown正文包含When to Use、Prerequisites、Workflow、Verification四部分。这种设计允许AI代理在一轮扫描中遍历所有817个技能的前端元数据（约30 tokens每个），然后根据匹配加载完整工作流（500-2000 tokens），实现高效的渐进式知识检索。项目兼容Claude Code、GitHub Copilot、OpenAI Codex CLI、Cursor、Gemini CLI等主流AI平台，安装方式简单（npx skills add或git clone）。
+
+此外，项目还提供了ATT&CK Navigator层文件、NIST CSF 2.0对齐表格、详细的F3映射文档等。社区贡献活跃，已有v1.0.0版本发布（734技能，26领域），当前main分支已增长至817技能，并持续增加新映射。贡献指南完善，支持添加技能、改进现有技能、报告问题等。由于文档详尽且结构清晰，该项目的文档质量和实用性极高，是AI安全领域不可多得的资源。
+   活跃度: 中等。项目有v1.0.0发布（2026年3月11日），且持续增加技能和框架映射，但GitHub API指标未显示近期提交，可能仓库近期未活跃更新。  社区健康: 良好。项目有明确的贡献指南、行为准则、讨论区和问题跟踪。README中提到了多个社区相关项目和星历史，表明已获得一定关注。但GitHub指标显示近期活动较少（forks=0, issues=0, commits=0），可能需要更多社区参与。
+   商业潜力: 高。全球网络安全人才缺口达480万，企业亟需自动化安全工具。该项目可转化为SaaS产品（如安全分析自动化平台）、企业级AI安全助手、或培训解决方案。通过提供增值服务（如私有部署、定制技能、合规报告）实现商业化。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此技能库，构建一个企业级AI安全副驾（AI Security Co-pilot），集成到SIEM/EDR平台中，自动分析告警、生成响应建议，甚至自动执行部分缓解操作，如隔离主机、阻断IP等。; 灵感2：将此技能库与LangChain或AutoGPT等AI框架结合，开发一个自动化的渗透测试助理，能够根据目标环境自动选择并执行渗透测试技能，生成报告。; 灵感3：基于技能库的训练数据，打造一个互动式的网络安全入门培训平台，让初学者通过与AI代理对话学习安全知识，模拟实战场景。
+   项目链接: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
+
+3. bytedance/deer-flow:
+   star: 73404  语言/技术: Python, Node.js, Docker, LangChain, LangGraph, Nginx, PostgreSQL（推测）, vLLM, Claude Code, Kubernetes
+   项目简介: DeerFlow 2.0 是字节跳动开源的一款超级智能体编排框架，旨在通过子智能体、长期记忆和沙箱执行环境，让开发者快速构建复杂、自主的 AI 工作流。它解决了传统 Agent 框架在可扩展性、安全性和易用性上的痛点，提供了一站式配置、多模型支持（包括 OpenAI、Claude、vLLM 等）以及灵活的部署方式（本地/Docker/K8s）。项目从最初的深度研究方向演变为通用的智能体框架，核心亮点包括可扩展的技能系统、MCP 服务器集成、IM 频道对接（如 Telegram）以及强大的上下文工程。文档详尽，有交互式配置向导，适合快速上手。
+   亮点: 超级智能体编排：通过子智能体、记忆和沙箱实现复杂任务自动化; 一键配置向导：make setup 交互式生成配置，2分钟上手; 多模型与多部署支持：可对接 OpenAI、Claude、vLLM 等，支持本地、Docker 和 K8s
+   详细报告: DeerFlow 是一个基于 LangGraph 和 LangChain 构建的超级智能体编排框架。其核心使用 Python 编写，前端基于 Node.js，后端架构采用模块化设计，支持通过技能（Skills）和 MCP 服务器扩展 Agent 能力。项目提供了两种主要运行模式：本地开发模式和 Docker 生产模式，并通过 nginx 统一网关暴露 API。
+
+核心功能包括：
+1. **子智能体编排**：可以根据任务拆分子 Agent，并行或串行执行，支持记忆共享和沙箱隔离。
+2. **长期记忆**：通过持久化存储（如 SQLite 或 Postgres）保存用户交互记录，实现个性化响应。
+3. **沙箱执行**：支持本地、Docker 和 Kubernetes 三种沙箱模式，确保代码执行安全。
+4. **IM 通道集成**：支持 Telegram 等即时通讯工具，无需公网 IP 即可接收任务。
+5. **MCP 服务器**：可集成外部 HTTP/SSE 服务，扩展 Agent 工具集。
+6. **上下文工程**：自动管理对话历史和资源，优化 LLM 推理效果。
+
+技术栈方面，后端主要使用 Python + LangChain/LangGraph，前端使用 React（推测），开发依赖 pnpm 和 uv。模型层支持通过配置接入多种 LLM Provider，包括 OpenAI（含 Responses API）、Claude Code OAuth、vLLM 等。项目还集成了 BytePlus 的 InfoQuest 搜索工具。
+
+安全方面，项目强调仅应在本地可信环境部署，并给出了 IP 白名单、认证网关等建议。文档非常详尽，包含配置示例、部署指南、安全警告等，代码注释和测试覆盖也较完善。由于 README 被截断，部分细节（如数据库具体实现、前端框架等）未提及，但整体结构清晰，适合开发者和团队评估使用。
+   活跃度: 高。文档显示项目在持续迭代，有 2.0 重大版本重写，且提供多个开发分支。  社区健康: 活跃。项目曾获 GitHub Trending #1，有多个语言版本的 README，贡献指南详细，且有持续更新。
+   商业潜力: 高。可用于企业自动化、客服、教育、代码生成等多个领域，字节跳动背书和活跃社区提升了商业落地可能性。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 DeerFlow 构建企业内部智能助手平台，通过子智能体实现不同业务模块（如 IT 支持、HR 问答、代码审查）的自动化，并集成企业微信或钉钉作为 IM 通道。; 灵感2：将 DeerFlow 的沙箱和记忆能力用于在线教育场景，作为学生编程作业的自动评判和辅导 Agent，支持多轮对话和代码执行隔离。; 灵感3：结合 MCP 服务器扩展功能，例如接入电商 API 实现自动订单处理、物流查询与售后响应，打造电商客服超级智能体。
+   项目链接: https://github.com/bytedance/deer-flow
+
+4. ZhuLinsen/daily_stock_analysis:
    star: 44934  语言/技术: Python, GitHub Actions, Docker, FastAPI, AkShare, Tushare, Pytdx, Baostock, YFinance, Longbridge, Anspire, AIHubMix, Gemini, OpenAI, DeepSeek, 通义千问, Claude, Ollama, SerpAPI, Tavily, Bocha, Brave, MiniMax, SearXNG, 企业微信机器人, 飞书机器人, Telegram Bot, Discord Webhook, Slack Bot, 邮件推送
    项目简介: 这是一个基于 AI 大模型的 A股/港股/美股/日股/韩股自选股智能分析系统。它每天自动抓取行情、资金流、新闻、公告等多维数据，调用大模型生成包含核心结论、评分、买卖点位、风险警报等内容的决策仪表盘，并通过企业微信、飞书、Telegram、Discord、Slack、邮件等渠道推送给用户。支持 Web/桌面工作台、Agent 策略问股、智能导入、回测等高级功能，可零成本通过 GitHub Actions 一键部署。堪称“打工人神器”，拯救每日盯盘焦虑。
    亮点: 每日自动生成AI决策仪表盘，包含评分、买卖点、风险警报、催化因素等; 支持A股、港股、美股、日股、韩股等多个市场，自动降级不适用的指标; 零成本部署：GitHub Actions + 免费额度即可运行，无需服务器; Agent策略问股：支持均线、缠论、波浪、趋势等15种内置策略，可多轮追问; 多推送渠道：企业微信、飞书、Telegram、Discord、Slack、邮件全覆盖; 智能导入：图片、CSV/Excel、剪贴板导入股票列表，代码/名称/拼音自动补全
@@ -46,26 +75,3 @@
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于此项目，可以开发一个“大宗商品智能分析系统”，替换股票数据源为期货、原油、黄金等行情数据，AI模型改为分析供需基本面与宏观经济指标，推送给期货交易者或企业采购部门。; 灵感2：可以将其集成到“企业微信/飞书智能助手”中，用户直接在聊天框发送“分析腾讯”或上传截图，后端调用DSA的Agent策略生成实时分析，实现移动端随时随地问股。; 灵感3：扩展为“基金持仓智能监控系统”，用户输入基金代码，系统自动跟踪其前十大重仓股的每日变化，生成基金持仓调仓分析报告，推送给基金投资者或理财顾问。
    项目链接: https://github.com/ZhuLinsen/daily_stock_analysis
-
-4. bytedance/deer-flow:
-   star: 72780  语言/技术: Python, LangChain, LangGraph, Docker, Kubernetes, Node.js, Nginx, OpenAI API, Anthropic API, vLLM, pnpm, uv, MCP Server
-   项目简介: DeerFlow 是一个开源的超级代理框架，能够编排子代理、记忆和沙箱来执行几乎任何任务，由可扩展技能驱动。它由字节跳动开发，2.0 版本完全重写，支持一键设置、多种模型提供商、Docker/Kubernetes 沙箱执行、长期记忆、MCP 服务器集成以及 IM 频道接入，旨在将人工智能代理从简单的问答提升为复杂的自动化工作流。
-   亮点: 一键设置与配置向导：通过 make setup 快速配置 LLM 提供商、搜索偏好和沙箱模式，极大降低入门门槛。; 子代理编排：支持动态创建和协调多个子代理，实现多步推理与协作。; 长期记忆：集成持久化记忆机制，保留对话上下文和用户偏好，提升交互连续性。; 多沙箱执行模式：支持本地、Docker 和 Kubernetes 三种沙箱，满足不同安全与资源隔离需求。; 可扩展技能与 MCP 集成：通过技能文件和 MCP 服务器扩展功能，支持自定义工具调用。
-   详细报告: DeerFlow 是一个由字节跳动推出的开源超级代理框架，旨在解决传统 AI 代理能力单一、难以扩展和缺乏持久记忆等问题。其核心创新在于将子代理、记忆系统和安全沙箱三者有机整合，并通过可扩展的技能系统赋予代理几乎无限的能力。
-
-技术层面，DeerFlow 基于 Python 构建，深度依赖 LangChain 和 LangGraph 进行 LLM 交互和流程编排，支持多种模型提供商（如 OpenAI、Anthropic、vLLM 等），并提供了灵活的配置方式。前端采用 Node.js 和 pnpm 技术栈，后端通过 nginx 统一路由。部署方式涵盖本地开发（使用 uv 和 pre-commit）和 Docker 生产部署，支持 Kubernetes 以扩展沙箱能力。
-
-核心功能包括：
-1. **子代理系统**：允许主代理动态创建和管理多个子代理，每个子代理可以拥有独立的模型、工具和上下文，适合复杂任务分解。
-2. **长期记忆**：通过持久化存储（如文件或数据库）保留代理的历史交互信息，使得跨会话的上下文连贯，支持个性化服务。
-3. **沙箱执行**：提供三种沙箱模式——本地直接执行、Docker 容器隔离、Kubernetes Pod 编排，有效防止恶意代码对宿主机的攻击，同时保证执行环境的一致性。
-4. **技能与 MCP 服务器**：通过技能文件夹和 MCP（Model Context Protocol）服务器扩展代理能力，例如集成代码执行、网络搜索、文件操作等自定义工具。
-5. **IM 频道接入**：支持从飞书、Slack 等即时通讯应用接收任务，实现无界面交互。
-6. **安全警告**：项目明确提醒用户，若部署在公共网络可能被恶意利用，建议结合 IP 白名单、认证网关等安全措施。
-
-由于文档内容被截断，部分高级功能如 LangSmith 跟踪、自定义模型提供商的详细配置未能完全展示，但整体架构和核心能力已足够清晰。
-   活跃度: 非常高 (2026 年 2 月 28 日登上 GitHub Trending #1，持续更新中)  社区健康: 活跃 (有贡献指南和欢迎贡献的声明，并有核心维护者团队)
-   商业潜力: 文档未提及详细商业模式，但从功能看，适用于企业自动化研究、客户服务、代码审查、数据分析等场景，具有较高的商业化潜力，例如提供 SaaS 托管服务或企业级定制部署。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 DeerFlow 开发一个「企业智能知识助手」，连接内部文档库和数据库，通过子代理分工进行多步检索与推理，自动回答员工复杂问题，并利用长期记忆记住用户偏好和历史提问。; 灵感2：将其集成到「代码审查流水线」中，利用 DeerFlow 的子代理同时分析代码质量、安全漏洞和性能瓶颈，自动生成审查报告，并执行沙箱中的测试用例验证修复建议。; 灵感3：构建一个「跨境电商全自动运营 Agent」，结合 IM 频道接收订单提醒，通过技能调用 API 管理库存、生成营销文案、分析竞品数据，并在沙箱中运行模拟促销活动。
-   项目链接: https://github.com/bytedance/deer-flow
