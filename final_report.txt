@@ -17,51 +17,47 @@
    衍生灵感: 灵感1：基于 OpenMontage 的智能体管道，开发一个「社交媒体短视频自动工厂」——只需输入一个主题或链接，就能批量生成不同风格（讲解、搞笑、种草）的短视频，并自动适配 TikTok、Reels、Shorts 的格式和时长。; 灵感2：将 OpenMontage 集成到「企业培训内容管理系统」中，把内部文档、技术教程通过 AI 自动转化为带有配音和字幕的教学视频，减少人工制作成本。; 灵感3：基于其「真实素材检索+蒙太奇」能力，构建一个「新闻事实核查短视频生成器」——输入新闻事件，自动从开放档案库检索相关历史画面，生成具有旁白的客观报道视频。
    项目链接: https://github.com/calesthio/OpenMontage
 
-2. ZhuLinsen/daily_stock_analysis:
-   star: 44934  语言/技术: Python, GitHub Actions, Docker, FastAPI, AkShare, Tushare, Pytdx, Baostock, YFinance, Longbridge, Anspire, AIHubMix, Gemini, OpenAI, DeepSeek, 通义千问, Claude, Ollama, SerpAPI, Tavily, Bocha, Brave, MiniMax, SearXNG, 企业微信机器人, 飞书机器人, Telegram Bot, Discord Webhook, Slack Bot, 邮件推送
-   项目简介: 这是一个基于 AI 大模型的 A股/港股/美股/日股/韩股自选股智能分析系统。它每天自动抓取行情、资金流、新闻、公告等多维数据，调用大模型生成包含核心结论、评分、买卖点位、风险警报等内容的决策仪表盘，并通过企业微信、飞书、Telegram、Discord、Slack、邮件等渠道推送给用户。支持 Web/桌面工作台、Agent 策略问股、智能导入、回测等高级功能，可零成本通过 GitHub Actions 一键部署。堪称“打工人神器”，拯救每日盯盘焦虑。
-   亮点: 每日自动生成AI决策仪表盘，包含评分、买卖点、风险警报、催化因素等; 支持A股、港股、美股、日股、韩股等多个市场，自动降级不适用的指标; 零成本部署：GitHub Actions + 免费额度即可运行，无需服务器; Agent策略问股：支持均线、缠论、波浪、趋势等15种内置策略，可多轮追问; 多推送渠道：企业微信、飞书、Telegram、Discord、Slack、邮件全覆盖; 智能导入：图片、CSV/Excel、剪贴板导入股票列表，代码/名称/拼音自动补全
-   详细报告: 这个项目叫 Daily Stock Analysis（简称DSA），是一个为普通投资者打造的“全能型股票分析助手”。它主要解决了上班族没时间盯盘、信息过载、难以综合判断的痛点。每天定时（默认工作日18:00）自动拉取你自选股的最新行情、K线、技术指标、资金流向、筹码分布、新闻公告、基本面数据，然后把这些海量数据丢给AI大模型（如Gemini、Claude、DeepSeek、通义千问等），让它生成一份结构化的决策仪表盘。仪表盘包含：核心结论（买入/观望/卖出）、综合评分（0-100）、趋势判断、买卖点位、风险警报（比如主力资金大幅流出）、催化因素（比如业绩超预期）、操作检查清单等。
-
-从技术上看，这个项目非常“拼装”但很实用。数据源方面，A股用AkShare、Tushare等，美股用YFinance，港股用Longbridge，新闻搜索支持SerpAPI、Tavily、Brave等。AI模型方面，它设计了一个灵活的接口，可以对接几乎任何主流大模型（OpenAI兼容、Gemini、Claude、Ollama本地模型等），还支持多个API Key轮询或混合使用。
-
-部署极其简单：推荐使用GitHub Actions，Fork仓库、配置几个API Key和自选股代码、启用Action即可。也可以本地运行或Docker部署。项目还提供了一个Web UI（FastAPI），可以手动分析、查看历史报告、进行Agent策略问股（支持多轮对话，内置15种策略如均线金叉、缠论、波浪理论等）。
-
-推送效果非常直观：类似券商APP的决策简报，但更聚焦AI分析。支持企业微信、飞书、Telegram、Discord、Slack、邮件，基本覆盖主流通讯工具。
-
-因为是个人项目，issue少、没有最新release，但文档极其详尽（有完整指南、LLM配置指南、市场支持边界等），社区活跃度较低但项目本身成熟度较高。
-   活跃度: 未知（最新提交和发行版未提及）  社区健康: 未知（API指标显示forks、issues均为0，但文档齐全）
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个“大宗商品智能分析系统”，替换股票数据源为期货、原油、黄金等行情数据，AI模型改为分析供需基本面与宏观经济指标，推送给期货交易者或企业采购部门。; 灵感2：可以将其集成到“企业微信/飞书智能助手”中，用户直接在聊天框发送“分析腾讯”或上传截图，后端调用DSA的Agent策略生成实时分析，实现移动端随时随地问股。; 灵感3：扩展为“基金持仓智能监控系统”，用户输入基金代码，系统自动跟踪其前十大重仓股的每日变化，生成基金持仓调仓分析报告，推送给基金投资者或理财顾问。
-   项目链接: https://github.com/ZhuLinsen/daily_stock_analysis
-
-3. interviewstreet/hiring-agent:
-   star: 2366  语言/技术: Python 3.11+, PyMuPDF, Ollama, Google Gemini, Jinja2, Pydantic, GitHub API, CSV
-   项目简介: 面试评分自动化pipeline：解析PDF简历为Markdown，利用本地或云端LLM提取结构化信息，再通过GitHub信号丰富候选人数据，最终输出公平、可解释的评分报告。解决了传统简历筛选主观性强、效率低、缺乏验证的痛点。
-   亮点: 支持完全本地运行（Ollama）或云端API（Gemini），保护数据隐私; 自动从GitHub抓取profile和仓库，分析项目类型和质量，作为客观评估依据; 基于Jinja模板的模块化prompt设计，易于自定义评分规则; 输出结构化JSON和CSV报告，方便集成到招聘系统
-   详细报告: Hiring Agent是一个由HackerRank开源的简历评分自动化工具。它首先通过PyMuPDF将PDF简历转换为Markdown文本，然后按章节（基础信息、工作经历、教育、技能、项目、奖项）使用LLM提取为结构化JSON（基于JSON Resume标准）。LLM支持Ollama本地模型（如gemma3）和Google Gemini，通过统一的provider接口切换。提取完成后，系统会自动检测简历中的GitHub用户名，拉取用户公开的profile和仓库信息，由LLM分类并选择最相关的7个项目，验证候选人的实际贡献（如commit数量）。最后，评估模块根据预设的公平评分规则（包括开源贡献、自研项目、生产经验、技术技能等维度）打分，并生成带证据的评估报告。整个流程可缓存中间结果，开发模式下输出CSV便于批量处理。项目采用MIT协议，适合对招聘流程进行自动化改造或二次开发。
+2. xbtlin/ai-berkshire:
+   star: 2227  语言/技术: Claude Code (AI Agent框架), Python (金融计算工具), Markdown (Skill定义), decimal (精确十进制计算), Mermaid (架构图)
+   项目简介: 一套基于 Claude Code 的投资研究 Skill 合集，将巴菲特、芒格、段永平、李录四位价值投资大师的方法论系统化、结构化，通过多 Agent 并行实现专业级投资研究。解决了直接问 AI 分析质量低、无决策纪律的痛点，强制输出结论、多视角对抗、内置反偏见机制，并附带金融精确计算工具。实盘收益显著，两年累计收益超 146 万元，大幅跑赢主要指数。
+   亮点: 实盘验证：2024 年收益 +69.29%，2025 年至今 +66.38%，连续两年大幅跑赢主要指数; 多 Agent 并行研究：4 个独立 Agent 同时对一家公司进行广度+深度分析，模拟真实投研团队; 金融严谨性工具：内置市值验算、多源交叉验证、Benford 定律检测，避免 AI 常见计算错误
+   详细报告: AI Berkshire 是一套以价值投资为核心方法论、基于 Claude Code 平台构建的投资研究 Skill 合集。它的目标不是替代 AI 的基础分析能力，而是解决直接问 AI 时常见的分析质量不足、缺乏决策纪律、输出不一致等问题。项目通过将四位大师（巴菲特、芒格、段永平、李录）的思考框架系统化为 16 个 Skill，覆盖深度研究、财报分析、行业筛选、持仓管理、思维工具五大场景。每个 Skill 内部通常采用多 Agent 架构，例如 `investment-team` 启动 4 个独立 Agent 分别从商业模式、财务估值、行业竞争、管理层风险四个视角并行研究，再由 Team Lead 综合输出。这相当于让四个“分析师”独立工作，避免单一视角的盲点。输出强制给出明确结论（通过/不通过/灰色地带）和具体价格区间。项目还内置了多层反偏见机制，如信息丰富度评级、芒格式逆向检验、快速否决清单、反共识检查等。金融数据计算使用 Python 的 decimal 模块，确保精度，并提供了 tools/financial_rigor.py 工具集进行市值验算、多源交叉验证、Benford 定律检测等。项目的 Skill 清单包括 16 个，如 `/investment-research`（四大师综合分析）、`/earnings-review`（财报精读）、`/industry-funnel`（行业漏斗筛选）等。每个 Skill 有详细的 Markdown 文档，定义了输入输出格式和流程。项目还公布了真实实盘收益记录，2024 年收益 69.29%，2025 年至今 66.38%，两年累计收益超 146 万元，远超标普 500 等指数。免责声明指出历史收益不代表未来表现。安装方式为将 Skill 文件复制到 Claude Code 的 commands 目录。整体设计理念是让普通投资者拥有自己的 AI 投研团队。
    活跃度: 未知  社区健康: 未知
-   商业潜力: 可直接用于企业招聘流程自动化，降低筛选成本；也可作为SAAS服务提供给中小企业，按简历量收费。文档中未提及具体商业模式。
+   商业潜力: 高。项目本身展示了 AI 在专业投资研究领域的应用潜力，可商业化提供增值服务（如定制 Skill、私有化部署、研究报告订阅）。但需注意合规和免责问题。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目构建一个'实习候选人自动筛选系统'，针对校招海量简历，自动提取技能和项目经验，结合GitHub活跃度排序，极大减少HR人工初筛时间。; 灵感2：集成到公司内部ATS（应聘者追踪系统）中，当新简历上传时自动触发评分，将结果存入数据库，并生成候选人能力雷达图，辅助面试官快速定位考察重点。; 灵感3：扩展为'开源贡献者评估平台'，不仅用于招聘，还可用于开源社区贡献者积分体系，自动评估PR、issue、commit质量，奖励活跃开发者。
-   项目链接: https://github.com/interviewstreet/hiring-agent
+   衍生灵感: 灵感1：将这套 Skill 框架适配到其他 AI 平台（如 ChatGPT Plugin 或 Custom GPT），让更多人无需 Claude Code 也能使用价值投资分析方法。; 灵感2：基于金融严谨性工具，开发一个独立的财务数据验证和估值计算 API，供量化交易系统或投资管理软件调用，确保关键指标精确无误。; 灵感3：利用其多 Agent 并行研究的设计模式，构建一个通用的“多视角决策系统”，不仅用于投资，也可用于商业战略评估、产品可行性分析等需要多维度交叉验证的场景。
+   项目链接: https://github.com/xbtlin/ai-berkshire
 
-4. NousResearch/hermes-agent:
-   star: 202249  语言/技术: Python 3.11, Node.js, uv (Python 包管理器), ripgrep, ffmpeg, Git Bash (MinGit), OpenAI, OpenRouter, Nous Portal, NovitaAI, NVIDIA NIM, Xiaomi MiMo, z.ai/GLM, Kimi/Moonshot, MiniMax, Hugging Face, Telegram Bot API, Discord API, Slack API, WhatsApp API, Signal API, Docker, SSH, Singularity, Modal, Daytona, FTS5 (SQLite 全文搜索), Honcho (用户建模), MCP (Model Context Protocol), agentskills.io (技能标准)
-   项目简介: Hermes Agent 是一个由 Nous Research 构建的自改进 AI 代理，具备内置学习循环：它从经验中创建技能，在使用中自我改进，主动记忆知识，跨会话搜索对话历史，并建立用户模型。支持 200+ 模型，兼容多种 LLM 提供商，可在本地终端、云 VM、消息平台（Telegram、Discord 等）运行，基于一个统一的网关进程。集成了定时任务、子代理并行、MCP 协议、40+ 工具集等，适用于个人助手、自动化工作流、研究实验等场景。
-   亮点: 自改进学习循环：自动从经验创建技能并在使用中优化; 跨平台消息网关：Telegram、Discord、Slack、WhatsApp、Signal 统一接入; 定时自动化：内置 cron 调度器，支持自然语言任务设定; 子代理并行：可派生隔离子代理处理工作流; 多模型自由切换：支持 200+ 模型，无需改代码; 服务器持久化：支持 Modal 和 Daytona 的无服务器休眠/唤醒机制，近乎零闲置成本; 研究就绪：批量轨迹生成与压缩，用于训练下一代工具调用模型
-   详细报告: Hermes Agent 是一个全能型 AI 代理，它最核心的创新是自改进的学习循环。普通 AI 代理只能单次执行任务，而 Hermes 能像人类一样从经验中提炼技能：当你完成一个复杂操作后，它会主动总结并保存为可复用的技能（Skill），后续使用中还会根据实际效果自动调整。此外，它拥有持久记忆系统，使用 FTS5 全文搜索和 LLM 总结实现跨会话回忆，同时结合 Honcho 框架构建用户模型，让代理越来越懂你。
+3. aws/agent-toolkit-for-aws:
+   star: 1181  语言/技术: MCP (Model Context Protocol), AWS SDK, Python, Node.js, uv, Claude Code, Codex, Cursor, Kiro, Amazon Bedrock, AgentCore, AWS Glue, Amazon Athena, CDK, CloudFormation
+   项目简介: AWS官方出品的AI编码代理工具箱，让AI编码代理（如Claude Code、Codex、Cursor、Kiro）轻松构建、部署和管理AWS应用。提供插件（技能包+MCP服务器配置）、独立技能资源和规则文件，支持300+ AWS服务API调用、沙箱脚本执行和实时文档检索，并内置IAM条件键、CloudWatch监控等企业级管控能力。
+   亮点: 多平台插件：为Claude Code、Codex、Cursor等主流AI编码代理提供一键安装插件，降低使用门槛。; AWS MCP服务器：通过单一授权端点覆盖300+ AWS服务，支持沙箱Python脚本执行和实时文档搜索。; 企业级管控：IAM条件键区分代理与人类操作，CloudTrail审计日志和CloudWatch监控确保安全合规。
+   详细报告: Agent Toolkit for AWS 是 AWS 官方发布的一套工具集，旨在赋能 AI 编码代理在 AWS 云上高效工作。核心组件包括：
+1. **插件（Plugins）**：按功能域打包了 MCP 服务器配置和代理技能，用户可像安装 IDE 扩展一样在 Claude Code、Codex、Cursor 中安装。目前提供 `aws-core`（核心AWS操作，如CDK、Serverless、容器、存储、可观测性等）、`aws-agents`（基于Bedrock和AgentCore构建AI代理）、`aws-data-analytics`（数据湖、ETL等）、`aws-agents-for-devsecops`（DevSecOps，包括事件调查、代码审查、漏洞扫描、渗透测试）。
+2. **技能（Skills）**：独立的指令和参考材料包，按需加载，代理仅检索当前任务相关的技能。
+3. **规则文件（Rules）**：项目级配置文件，指导代理如何有效使用AWS，比如优先使用MCP服务器、发现技能等。
+4. **AWS MCP服务器**：通过 Model Context Protocol 提供统一入口，支持所有AWS API调用、沙箱脚本执行、实时文档检索，并内置IAM条件键和审计日志。
 
-技术上，它采用插件式设计，支持丰富的 LLM 提供商（OpenAI、OpenRouter、Nous Portal 等 200+ 模型），只需一个命令切换。消息网关让你可以从 Telegram、Discord、Slack、WhatsApp、Signal 等平台与代理交互，所有平台共享同一个会话历史。终端后端的多样性是另一大亮点：你可以选择本地 Docker、SSH、Singularity，甚至使用 Modal 或 Daytona 的无服务器环境，这些环境可休眠恢复，几乎零闲置成本。
-
-代理内置了 40+ 工具集，包括网络搜索、图片生成、文本转语音、云浏览器等，并且通过 MCP 协议可以无限扩展。定时任务系统允许用户用自然语言设定定期报告或备份。子代理机制支持并行工作，通过 Python RPC 调用工具，大幅降低上下文占用。对于研究人员，它还提供了批量轨迹生成和压缩功能，可用于训练下一代模型。
-
-部署极为简单：一条 curl 命令即可在 Linux/macOS/WSL2 上安装，Windows 原生也支持 PowerShell 安装。安装程序会自动处理 Python 3.11、Node.js、ripgrep、ffmpeg 等依赖，并打包便携 Git Bash。首次运行可通过 `hermes setup` 向导或 `hermes setup --portal` 一键配置所有服务。此外，它还提供了从 OpenClaw 的迁移工具，方便老用户平滑过渡。
-
-文档非常完善，涵盖了从快速入门到架构详解、贡献指南，甚至还提供了环境变量参考。社区方面有 Discord 和 Skills Hub，第三方还开发了 Linux 桌面控制 MCP 服务器和微信桥接工具。整体来看，这是一个成熟度高、实用性强、扩展性极佳的 AI 代理框架。
-   活跃度: 活跃：文档显示近期持续更新，有完整的 CI/CD 和测试脚本，但 GitHub API 指标显示近期提交数为 0，可能仓库刚迁移或处于稳定期。  社区健康: 良好：提供 Discord 社区、Skills Hub、GitHub Issues 和贡献指南，文档完善，有第三方集成项目活跃。
-   商业潜力: 文档未提及具体商业模式，但可提供托管版代理服务（基于 Modal/Daytona 后端）、企业级私有部署、技能市场（Skills Hub）抽成、模型 API 聚合订阅（类似 Nous Portal）等方向。
+该工具集解决了AI编码代理在AWS上操作时面临的权限碎片化、工具链复杂、安全管控缺失等痛点，让开发者可以专注于应用逻辑而非基础设施细节。对于其他代理（如Kiro），直接配置MCP服务器并安装技能即可。项目目前处于早期阶段，但作为AWS官方项目，未来潜力巨大。
+   活跃度: 未知  社区健康: 未知（项目新发布，暂无社区活动数据）
+   商业潜力: 极高。AWS生态庞大，该工具可降低AI代理开发门槛，吸引更多企业采用AI辅助云运维，潜在商业场景包括自动化DevOps、云成本优化、安全审计等。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于其自改进技能系统，可以开发一个「个性化编程助手」，自动学习用户的代码风格和常用模式，在项目开发中提供更精准的补全和建议。; 灵感2：利用跨平台消息网关和定时任务，可以构建「企业统一客服平台」，集成 Telegram、微信、邮件等渠道，让一个 AI 代理集中处理客户咨询，并自动生成工单和知识库。; 灵感3：结合子代理并行能力，可以开发「自动化 DevOps 调度器」，用于管理多云环境的部署监控、日志分析、故障恢复，让一个主代理协调多个子代理同时执行不同任务。
-   项目链接: https://github.com/NousResearch/hermes-agent
+   衍生灵感: 灵感1：基于aws-agents插件开发一个企业级“云资源合规检查Agent”，自动扫描AWS账户中的资源是否满足内部安全基线，并生成修复建议。; 灵感2：将aws-core插件集成到现有的CI/CD流水线中，让AI代理自动选择最优的AWS服务（比如根据负载类型推荐EC2实例或Lambda），并生成CloudFormation模板。; 灵感3：结合aws-agents-for-devsecops插件，打造一个“全自动安全事件响应系统”，当CloudTrail检测到可疑操作时，由Agent自动取证、隔离资源、并提交工单。
+   项目链接: https://github.com/aws/agent-toolkit-for-aws
+
+4. mukul975/Anthropic-Cybersecurity-Skills:
+   star: 18888  语言/技术: YAML, Markdown, Python, agentskills.io标准
+   项目简介: 这是目前最大的开源网络安全技能库，专为AI代理设计。它包含了817个结构化技能，覆盖29个安全领域，并映射到MITRE ATT&CK、NIST CSF 2.0、MITRE ATLAS、MITRE D3FEND、NIST AI RMF和MITRE Fight Fraud Framework等6个行业框架。项目旨在弥补AI代理缺乏安全领域知识的短板，让任何AI代理都能像高级安全分析师一样执行威胁狩猎、数字取证、事件响应等任务。每个技能以YAML frontmatter和结构化Markdown编写，包含触发条件、前提、工作流和验证步骤，支持渐进式加载，AI代理可高效搜索和执行。
+   亮点: 817个生产级网络安全技能，覆盖29个安全领域，如云安全、威胁狩猎、数字取证等; 唯一同时映射6个行业框架的技能库，包括最新的MITRE Fight Fraud Framework; AI-native知识库设计，每个技能仅需30 tokens扫描，支持渐进式加载，不爆上下文窗口
+   详细报告: 该项目是一个社区驱动的开源项目，为AI代理提供结构化的网络安全技能。核心痛点是当前AI代理（如Claude、GPT、Copilot等）虽然能写代码、搜索网络，但缺乏安全从业者的实战知识——比如何时使用Volatility3插件、如何检测Kerberoasting、如何跨云平台进行入侵范围界定。项目通过817个技能解决了这一问题，每个技能包含YAML frontmatter（用于快速元数据搜索）和Markdown body（包含工作流、前置条件、验证步骤等）。
+
+技能库按29个安全领域组织，包括云安全(66个)、威胁狩猎(58个)、威胁情报(52个)、网络钓鱼防御(15个)等。每个技能都映射到MITRE ATT&CK v19.1的所有15个战术和286个技术，以及NIST CSF 2.0的6个功能、MITRE ATLAS、D3FEND、AI RMF和最新的F3欺诈框架。例如，一个“分析网络流量中的恶意软件”技能同时映射了ATT&CK T1071、NIST CSF DE.CM、ATLAS AML.T0047等。
+
+技术架构上，技能以文件系统组织：每个技能一个目录，包含SKILL.md、references/、scripts/、assets/等。SKILL.md的YAML frontmatter包含name、description、tags、以及六个框架的技术映射ID，Markdown正文包含When to Use、Prerequisites、Workflow、Verification四部分。这种设计允许AI代理在一轮扫描中遍历所有817个技能的前端元数据（约30 tokens每个），然后根据匹配加载完整工作流（500-2000 tokens），实现高效的渐进式知识检索。项目兼容Claude Code、GitHub Copilot、OpenAI Codex CLI、Cursor、Gemini CLI等主流AI平台，安装方式简单（npx skills add或git clone）。
+
+此外，项目还提供了ATT&CK Navigator层文件、NIST CSF 2.0对齐表格、详细的F3映射文档等。社区贡献活跃，已有v1.0.0版本发布（734技能，26领域），当前main分支已增长至817技能，并持续增加新映射。贡献指南完善，支持添加技能、改进现有技能、报告问题等。由于文档详尽且结构清晰，该项目的文档质量和实用性极高，是AI安全领域不可多得的资源。
+   活跃度: 中等。项目有v1.0.0发布（2026年3月11日），且持续增加技能和框架映射，但GitHub API指标未显示近期提交，可能仓库近期未活跃更新。  社区健康: 良好。项目有明确的贡献指南、行为准则、讨论区和问题跟踪。README中提到了多个社区相关项目和星历史，表明已获得一定关注。但GitHub指标显示近期活动较少（forks=0, issues=0, commits=0），可能需要更多社区参与。
+   商业潜力: 高。全球网络安全人才缺口达480万，企业亟需自动化安全工具。该项目可转化为SaaS产品（如安全分析自动化平台）、企业级AI安全助手、或培训解决方案。通过提供增值服务（如私有部署、定制技能、合规报告）实现商业化。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此技能库，构建一个企业级AI安全副驾（AI Security Co-pilot），集成到SIEM/EDR平台中，自动分析告警、生成响应建议，甚至自动执行部分缓解操作，如隔离主机、阻断IP等。; 灵感2：将此技能库与LangChain或AutoGPT等AI框架结合，开发一个自动化的渗透测试助理，能够根据目标环境自动选择并执行渗透测试技能，生成报告。; 灵感3：基于技能库的训练数据，打造一个互动式的网络安全入门培训平台，让初学者通过与AI代理对话学习安全知识，模拟实战场景。
+   项目链接: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
