@@ -1,4 +1,41 @@
-1. calesthio/OpenMontage:
+1. commaai/openpilot:
+   star: 61837  语言/技术: Python, C, CAN, GPS, IMU, 机器学习, 计算机视觉
+   项目简介: openpilot 是一个开源的机器人操作系统，目前主要用于升级 300 多款汽车的驾驶辅助系统，提供自适应巡航、车道保持、自动变道等功能。它通过特定的硬件（comma four/3X）和汽车线束连接车辆，实现了部分自动驾驶能力。项目遵循 ISO26262 安全标准，具有严格的安全模型和测试流程。开发者可以参与贡献，社区活跃，有招聘和赏金计划。
+   亮点: 支持 300+ 车型的驾驶辅助系统升级; 遵循 ISO26262 功能安全标准，安全模型用 C 编写; 多分支发布策略：稳定版、测试版、开发版
+   详细报告: openpilot 是 comma.ai 开发的一个开源机器人操作系统，目前主要应用于汽车辅助驾驶领域。它能够将普通汽车升级为具备部分自动驾驶能力的智能汽车，支持自适应巡航、车道保持、自动变道等功能。项目需要特定的硬件支持，如 comma four 或 comma 3X 设备，以及对应的汽车线束来连接车辆。软件方面，openpilot 提供了多种分支：release 为稳定版，staging 为预发布版，nightly 为开发版，用户可根据需求选择。
+
+技术栈方面，openpilot 主要使用 Python 进行高级控制逻辑和机器学习模型的开发，而底层安全模型则用 C 语言实现，部署在 panda 硬件上，确保实时性和可靠性。系统集成了多种传感器数据，包括摄像头、CAN 总线、GPS、IMU、磁力计等，用于环境感知和车辆控制。openpilot 还通过陌陌（comma）服务器收集驾驶数据，用于模型训练和改进。
+
+安全方面，openpilot 遵循 ISO26262 功能安全标准，有软件在环测试和硬件在环测试，包括持续的重放测试。项目还提供了详细的贡献指南和代码文档，方便开发者参与。社区活跃，有 Discord 讨论组和官方文档网站。
+   活跃度: 未知（API 指标无近期提交数据，但项目持续有 release）  社区健康: 活跃：有 Discord、GitHub Issues/PR、招聘和赏金计划，但 API 指标显示近期无新 issue 和 commit，需进一步确认。
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 openpilot 的传感器融合和车辆控制能力，可以开发一个通用的机器人平台操作系统，用于无人驾驶物流车、扫地机器人等场景，只需适配不同的硬件和控制接口。; 灵感2：利用 openpilot 的数据收集和机器学习 pipeline，构建一个模拟驾驶数据合成工具，用于生成极端驾驶场景的仿真数据，辅助自动驾驶算法测试。; 灵感3：将 openpilot 的安全模型（C 语言实现的 panda）独立出来，作为一个通用的功能安全框架，用于其他嵌入式系统（如无人机、工业机器人）的实时安全监控。
+   项目链接: https://github.com/commaai/openpilot
+
+2. opendatalab/MinerU:
+   star: 70536  语言/技术: Python, PyTorch, PaddleOCR, vLLM, LMDeploy, Gradio, FastAPI, Docker, MCP Server, LangChain, LlamaIndex, RAGFlow, Dify, FastGPT, CLI, REST API, Go SDK, TypeScript SDK
+   项目简介: MinerU 是一个高精度文档解析引擎，专为 LLM、RAG 和 Agent 工作流设计。它能将 PDF、图片、DOCX、PPTX、XLSX 和网页等输入转换为结构化的 Markdown 或 JSON 格式，支持 109 种语言 OCR，并内置 VLM+OCR 双引擎。核心亮点包括公式转 LaTeX、表格转 HTML、智能布局重建、去页眉页脚、跨页表格合并等。项目提供了丰富的集成方式：MCP Server、LangChain/Dify/FastGPT 原生集成、Python/Go/TypeScript SDK、CLI、REST API、Docker 以及在线无代码版本。支持本地私有化部署（纯 CPU 或 GPU/MPS 加速），并兼容多种国产 AI 芯片。从 2026 年的版本日志看，项目持续迭代，3.4 版本升级了 OCR 模型（PP-OCRv6）并优化了下载逻辑；3.3 版本引入了混合解析的 'effort' 参数以平衡速度与精度；3.1 版本支持了 PPTX 和 XLSX 原生解析；3.0 版本进行了架构和工程化重大升级。MinerU 解决了传统文档解析工具精度低、速度慢、不支持多格式、难以集成等痛点，是文档数据处理领域的“程序员救星”。
+   亮点: 支持 PDF、图片、DOCX、PPTX、XLSX、网页等多种输入格式，输出结构化 Markdown/JSON。; VLM + OCR 双引擎，109 种语言识别，公式转 LaTeX，表格转 HTML，智能布局重建。; 丰富的集成生态：MCP Server、LangChain/Dify/FastGPT 原生集成、多种 SDK 和 API。; 支持本地私有化部署，兼容 CPU/GPU/MPS 及国产 AI 芯片。
+   详细报告: MinerU 是一个开源的高精度文档解析工具，最初源于 InternLM 预训练过程中的科学文献符号转换需求。它不仅仅是一个 PDF 解析器，而是能处理多种文档格式（PDF、图片、DOCX、PPTX、XLSX、网页）的全能型解析引擎。其核心能力包括：自动去除页眉页脚等无关元素，保持语义连贯；按人类阅读顺序输出文本，支持单栏、多栏和复杂布局；保留标题、段落、列表等文档结构；提取图片、图片描述、表格、表格标题和脚注；自动将公式转换为 LaTeX 格式，表格转换为 HTML 格式；支持扫描件和乱码 PDF 自动启用 OCR；OCR 支持 109 种语言的检测与识别；输出格式包括多模态 Markdown、按阅读顺序排序的 JSON 以及丰富的中间格式。技术方面，MinerU 提供了多种推理后端：pipeline（快速稳定，无幻觉，可运行在 CPU 或 GPU 上）、vlm-engine（高精度，支持 vLLM/LMDeploy/mlx 生态）、hybrid-engine（高精度，原生文本提取，低幻觉）。从 3.0 版本起，项目进行了系统级升级：支持原生 DOCX 解析（速度比传统 DOCX→PDF→解析快数十倍），pipeline 后端在 OmniDocBench 上达到 86.2 分，超过了前代主流 VLM 模型；新增 mineru-router 用于多服务多 GPU 的统一入口和任务路由，支持高并发场景；优化了长文档解析的内存占用（滑动窗口机制），实现了流式写入磁盘；完全移除了 AGPLv3 和 CC-BY-NC-SA 4.0 模型，改用更开放的 MinerU 开源许可证（基于 Apache 2.0）。3.1 版本增加了 PPTX 和 XLSX 原生解析，3.3 版本引入了 'effort' 参数（medium/high），允许用户在解析速度和精度之间权衡，3.4 版本将 OCR 模型升级为 PP-OCRv6，准确率提升约 11%，处理速度提升约 100%，并优化了模型下载和缓存逻辑。项目提供了多种部署方式：命令行 CLI、FastAPI 服务、Gradio WebUI、Docker 容器、MCP Server（AI 编程工具集成）、以及在线无代码版本 mineru.net。文档中还介绍了与各类 RAG 框架（LangChain、LlamaIndex、RAGFlow、Dify、FastGPT）的集成方案。根据 README，MinerU 致力于成为大规模文档解析基础设施，适合企业级高并发、高吞吐场景。
+   活跃度: 高。从 2026 年密集的版本发布（3.0、3.1、3.3、3.4）可见开发非常活跃。  社区健康: 良好。拥有 Discord 和微信群，发布多个学术论文，贡献者活跃，版本迭代频繁。
+   商业潜力: 高。文档解析是 RAG、知识管理、自动化办公等场景的核心需求，MinerU 提供开源基础，可构建收费 SaaS 或企业私有化部署解决方案。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 MinerU 构建企业级智能文档知识库系统。通过解析内部 PDF、Word、PPT 等文档，自动提取结构化内容并接入 RAG 框架，实现高效的企业知识检索和问答。; 灵感2：开发金融/法律领域的合同条款自动提取工具。利用 MinerU 的公式和表格解析能力，自动从扫描版合同或 PDF 中提取关键条款、数字和签名，结合 LLM 进行合规性分析。; 灵感3：打造多语种印刷品数字化平台。利用 MinerU 的 109 种语言 OCR 和布局重建能力，将历史文献、外文书籍、多语种手册等批量转换为结构化电子文档，支持全文搜索和翻译。
+   项目链接: https://github.com/opendatalab/MinerU
+
+3. xbtlin/ai-berkshire:
+   star: 2227  语言/技术: Claude Code (AI Agent框架), Python (金融计算工具), Markdown (Skill定义), decimal (精确十进制计算), Mermaid (架构图)
+   项目简介: 一套基于 Claude Code 的投资研究 Skill 合集，将巴菲特、芒格、段永平、李录四位价值投资大师的方法论系统化、结构化，通过多 Agent 并行实现专业级投资研究。解决了直接问 AI 分析质量低、无决策纪律的痛点，强制输出结论、多视角对抗、内置反偏见机制，并附带金融精确计算工具。实盘收益显著，两年累计收益超 146 万元，大幅跑赢主要指数。
+   亮点: 实盘验证：2024 年收益 +69.29%，2025 年至今 +66.38%，连续两年大幅跑赢主要指数; 多 Agent 并行研究：4 个独立 Agent 同时对一家公司进行广度+深度分析，模拟真实投研团队; 金融严谨性工具：内置市值验算、多源交叉验证、Benford 定律检测，避免 AI 常见计算错误
+   详细报告: AI Berkshire 是一套以价值投资为核心方法论、基于 Claude Code 平台构建的投资研究 Skill 合集。它的目标不是替代 AI 的基础分析能力，而是解决直接问 AI 时常见的分析质量不足、缺乏决策纪律、输出不一致等问题。项目通过将四位大师（巴菲特、芒格、段永平、李录）的思考框架系统化为 16 个 Skill，覆盖深度研究、财报分析、行业筛选、持仓管理、思维工具五大场景。每个 Skill 内部通常采用多 Agent 架构，例如 `investment-team` 启动 4 个独立 Agent 分别从商业模式、财务估值、行业竞争、管理层风险四个视角并行研究，再由 Team Lead 综合输出。这相当于让四个“分析师”独立工作，避免单一视角的盲点。输出强制给出明确结论（通过/不通过/灰色地带）和具体价格区间。项目还内置了多层反偏见机制，如信息丰富度评级、芒格式逆向检验、快速否决清单、反共识检查等。金融数据计算使用 Python 的 decimal 模块，确保精度，并提供了 tools/financial_rigor.py 工具集进行市值验算、多源交叉验证、Benford 定律检测等。项目的 Skill 清单包括 16 个，如 `/investment-research`（四大师综合分析）、`/earnings-review`（财报精读）、`/industry-funnel`（行业漏斗筛选）等。每个 Skill 有详细的 Markdown 文档，定义了输入输出格式和流程。项目还公布了真实实盘收益记录，2024 年收益 69.29%，2025 年至今 66.38%，两年累计收益超 146 万元，远超标普 500 等指数。免责声明指出历史收益不代表未来表现。安装方式为将 Skill 文件复制到 Claude Code 的 commands 目录。整体设计理念是让普通投资者拥有自己的 AI 投研团队。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 高。项目本身展示了 AI 在专业投资研究领域的应用潜力，可商业化提供增值服务（如定制 Skill、私有化部署、研究报告订阅）。但需注意合规和免责问题。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：将这套 Skill 框架适配到其他 AI 平台（如 ChatGPT Plugin 或 Custom GPT），让更多人无需 Claude Code 也能使用价值投资分析方法。; 灵感2：基于金融严谨性工具，开发一个独立的财务数据验证和估值计算 API，供量化交易系统或投资管理软件调用，确保关键指标精确无误。; 灵感3：利用其多 Agent 并行研究的设计模式，构建一个通用的“多视角决策系统”，不仅用于投资，也可用于商业战略评估、产品可行性分析等需要多维度交叉验证的场景。
+   项目链接: https://github.com/xbtlin/ai-berkshire
+
+4. calesthio/OpenMontage:
    star: 20076  语言/技术: Python, FFmpeg, Node.js, Remotion, HyperFrames, Piper TTS, Pexels API, Pixabay API, Unsplash API, Google Veo, Kling, FLUX, WhisperX, CLIP, GSAP
    项目简介: OpenMontage 是首个开源、智能体驱动的视频制作系统。你只需用自然语言描述需求，AI 编码助手就能自动完成调研、脚本撰写、素材生成、剪辑和最终合成。它支持从参考视频开始，零 API 密钥也能制作真实视频（利用免费开源素材和本地工具），并提供了多种生产管道（如动画讲解、纪录片蒙太奇、真人解说等）。核心亮点包括：决策审计追踪、预算控制、智能体兼容性（Claude Code、Cursor 等），以及通过 Remotion 和 HyperFrames 实现高质量合成。
    亮点: 从参考视频开始：粘贴 YouTube/TikTok 链接即可生成差异化概念和成本估算; 零 API 密钥也能用：内置 Piper TTS 离线语音、Remotion 动画、免费档案库素材; 多种生产管道：动画讲解、纪录片蒙太奇、真人头像、电影预告、播客复用等; 决策审计追踪：每次创作和技术选择都有日志记录原因和替代方案; 预算控制：执行前预估、预留、事后对账，支持观察/警告/硬上限模式
@@ -16,48 +53,3 @@
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于 OpenMontage 的智能体管道，开发一个「社交媒体短视频自动工厂」——只需输入一个主题或链接，就能批量生成不同风格（讲解、搞笑、种草）的短视频，并自动适配 TikTok、Reels、Shorts 的格式和时长。; 灵感2：将 OpenMontage 集成到「企业培训内容管理系统」中，把内部文档、技术教程通过 AI 自动转化为带有配音和字幕的教学视频，减少人工制作成本。; 灵感3：基于其「真实素材检索+蒙太奇」能力，构建一个「新闻事实核查短视频生成器」——输入新闻事件，自动从开放档案库检索相关历史画面，生成具有旁白的客观报道视频。
    项目链接: https://github.com/calesthio/OpenMontage
-
-2. xbtlin/ai-berkshire:
-   star: 2227  语言/技术: Claude Code (AI Agent框架), Python (金融计算工具), Markdown (Skill定义), decimal (精确十进制计算), Mermaid (架构图)
-   项目简介: 一套基于 Claude Code 的投资研究 Skill 合集，将巴菲特、芒格、段永平、李录四位价值投资大师的方法论系统化、结构化，通过多 Agent 并行实现专业级投资研究。解决了直接问 AI 分析质量低、无决策纪律的痛点，强制输出结论、多视角对抗、内置反偏见机制，并附带金融精确计算工具。实盘收益显著，两年累计收益超 146 万元，大幅跑赢主要指数。
-   亮点: 实盘验证：2024 年收益 +69.29%，2025 年至今 +66.38%，连续两年大幅跑赢主要指数; 多 Agent 并行研究：4 个独立 Agent 同时对一家公司进行广度+深度分析，模拟真实投研团队; 金融严谨性工具：内置市值验算、多源交叉验证、Benford 定律检测，避免 AI 常见计算错误
-   详细报告: AI Berkshire 是一套以价值投资为核心方法论、基于 Claude Code 平台构建的投资研究 Skill 合集。它的目标不是替代 AI 的基础分析能力，而是解决直接问 AI 时常见的分析质量不足、缺乏决策纪律、输出不一致等问题。项目通过将四位大师（巴菲特、芒格、段永平、李录）的思考框架系统化为 16 个 Skill，覆盖深度研究、财报分析、行业筛选、持仓管理、思维工具五大场景。每个 Skill 内部通常采用多 Agent 架构，例如 `investment-team` 启动 4 个独立 Agent 分别从商业模式、财务估值、行业竞争、管理层风险四个视角并行研究，再由 Team Lead 综合输出。这相当于让四个“分析师”独立工作，避免单一视角的盲点。输出强制给出明确结论（通过/不通过/灰色地带）和具体价格区间。项目还内置了多层反偏见机制，如信息丰富度评级、芒格式逆向检验、快速否决清单、反共识检查等。金融数据计算使用 Python 的 decimal 模块，确保精度，并提供了 tools/financial_rigor.py 工具集进行市值验算、多源交叉验证、Benford 定律检测等。项目的 Skill 清单包括 16 个，如 `/investment-research`（四大师综合分析）、`/earnings-review`（财报精读）、`/industry-funnel`（行业漏斗筛选）等。每个 Skill 有详细的 Markdown 文档，定义了输入输出格式和流程。项目还公布了真实实盘收益记录，2024 年收益 69.29%，2025 年至今 66.38%，两年累计收益超 146 万元，远超标普 500 等指数。免责声明指出历史收益不代表未来表现。安装方式为将 Skill 文件复制到 Claude Code 的 commands 目录。整体设计理念是让普通投资者拥有自己的 AI 投研团队。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 高。项目本身展示了 AI 在专业投资研究领域的应用潜力，可商业化提供增值服务（如定制 Skill、私有化部署、研究报告订阅）。但需注意合规和免责问题。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：将这套 Skill 框架适配到其他 AI 平台（如 ChatGPT Plugin 或 Custom GPT），让更多人无需 Claude Code 也能使用价值投资分析方法。; 灵感2：基于金融严谨性工具，开发一个独立的财务数据验证和估值计算 API，供量化交易系统或投资管理软件调用，确保关键指标精确无误。; 灵感3：利用其多 Agent 并行研究的设计模式，构建一个通用的“多视角决策系统”，不仅用于投资，也可用于商业战略评估、产品可行性分析等需要多维度交叉验证的场景。
-   项目链接: https://github.com/xbtlin/ai-berkshire
-
-3. aws/agent-toolkit-for-aws:
-   star: 1181  语言/技术: MCP (Model Context Protocol), AWS SDK, Python, Node.js, uv, Claude Code, Codex, Cursor, Kiro, Amazon Bedrock, AgentCore, AWS Glue, Amazon Athena, CDK, CloudFormation
-   项目简介: AWS官方出品的AI编码代理工具箱，让AI编码代理（如Claude Code、Codex、Cursor、Kiro）轻松构建、部署和管理AWS应用。提供插件（技能包+MCP服务器配置）、独立技能资源和规则文件，支持300+ AWS服务API调用、沙箱脚本执行和实时文档检索，并内置IAM条件键、CloudWatch监控等企业级管控能力。
-   亮点: 多平台插件：为Claude Code、Codex、Cursor等主流AI编码代理提供一键安装插件，降低使用门槛。; AWS MCP服务器：通过单一授权端点覆盖300+ AWS服务，支持沙箱Python脚本执行和实时文档搜索。; 企业级管控：IAM条件键区分代理与人类操作，CloudTrail审计日志和CloudWatch监控确保安全合规。
-   详细报告: Agent Toolkit for AWS 是 AWS 官方发布的一套工具集，旨在赋能 AI 编码代理在 AWS 云上高效工作。核心组件包括：
-1. **插件（Plugins）**：按功能域打包了 MCP 服务器配置和代理技能，用户可像安装 IDE 扩展一样在 Claude Code、Codex、Cursor 中安装。目前提供 `aws-core`（核心AWS操作，如CDK、Serverless、容器、存储、可观测性等）、`aws-agents`（基于Bedrock和AgentCore构建AI代理）、`aws-data-analytics`（数据湖、ETL等）、`aws-agents-for-devsecops`（DevSecOps，包括事件调查、代码审查、漏洞扫描、渗透测试）。
-2. **技能（Skills）**：独立的指令和参考材料包，按需加载，代理仅检索当前任务相关的技能。
-3. **规则文件（Rules）**：项目级配置文件，指导代理如何有效使用AWS，比如优先使用MCP服务器、发现技能等。
-4. **AWS MCP服务器**：通过 Model Context Protocol 提供统一入口，支持所有AWS API调用、沙箱脚本执行、实时文档检索，并内置IAM条件键和审计日志。
-
-该工具集解决了AI编码代理在AWS上操作时面临的权限碎片化、工具链复杂、安全管控缺失等痛点，让开发者可以专注于应用逻辑而非基础设施细节。对于其他代理（如Kiro），直接配置MCP服务器并安装技能即可。项目目前处于早期阶段，但作为AWS官方项目，未来潜力巨大。
-   活跃度: 未知  社区健康: 未知（项目新发布，暂无社区活动数据）
-   商业潜力: 极高。AWS生态庞大，该工具可降低AI代理开发门槛，吸引更多企业采用AI辅助云运维，潜在商业场景包括自动化DevOps、云成本优化、安全审计等。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于aws-agents插件开发一个企业级“云资源合规检查Agent”，自动扫描AWS账户中的资源是否满足内部安全基线，并生成修复建议。; 灵感2：将aws-core插件集成到现有的CI/CD流水线中，让AI代理自动选择最优的AWS服务（比如根据负载类型推荐EC2实例或Lambda），并生成CloudFormation模板。; 灵感3：结合aws-agents-for-devsecops插件，打造一个“全自动安全事件响应系统”，当CloudTrail检测到可疑操作时，由Agent自动取证、隔离资源、并提交工单。
-   项目链接: https://github.com/aws/agent-toolkit-for-aws
-
-4. mukul975/Anthropic-Cybersecurity-Skills:
-   star: 18888  语言/技术: YAML, Markdown, Python, agentskills.io标准
-   项目简介: 这是目前最大的开源网络安全技能库，专为AI代理设计。它包含了817个结构化技能，覆盖29个安全领域，并映射到MITRE ATT&CK、NIST CSF 2.0、MITRE ATLAS、MITRE D3FEND、NIST AI RMF和MITRE Fight Fraud Framework等6个行业框架。项目旨在弥补AI代理缺乏安全领域知识的短板，让任何AI代理都能像高级安全分析师一样执行威胁狩猎、数字取证、事件响应等任务。每个技能以YAML frontmatter和结构化Markdown编写，包含触发条件、前提、工作流和验证步骤，支持渐进式加载，AI代理可高效搜索和执行。
-   亮点: 817个生产级网络安全技能，覆盖29个安全领域，如云安全、威胁狩猎、数字取证等; 唯一同时映射6个行业框架的技能库，包括最新的MITRE Fight Fraud Framework; AI-native知识库设计，每个技能仅需30 tokens扫描，支持渐进式加载，不爆上下文窗口
-   详细报告: 该项目是一个社区驱动的开源项目，为AI代理提供结构化的网络安全技能。核心痛点是当前AI代理（如Claude、GPT、Copilot等）虽然能写代码、搜索网络，但缺乏安全从业者的实战知识——比如何时使用Volatility3插件、如何检测Kerberoasting、如何跨云平台进行入侵范围界定。项目通过817个技能解决了这一问题，每个技能包含YAML frontmatter（用于快速元数据搜索）和Markdown body（包含工作流、前置条件、验证步骤等）。
-
-技能库按29个安全领域组织，包括云安全(66个)、威胁狩猎(58个)、威胁情报(52个)、网络钓鱼防御(15个)等。每个技能都映射到MITRE ATT&CK v19.1的所有15个战术和286个技术，以及NIST CSF 2.0的6个功能、MITRE ATLAS、D3FEND、AI RMF和最新的F3欺诈框架。例如，一个“分析网络流量中的恶意软件”技能同时映射了ATT&CK T1071、NIST CSF DE.CM、ATLAS AML.T0047等。
-
-技术架构上，技能以文件系统组织：每个技能一个目录，包含SKILL.md、references/、scripts/、assets/等。SKILL.md的YAML frontmatter包含name、description、tags、以及六个框架的技术映射ID，Markdown正文包含When to Use、Prerequisites、Workflow、Verification四部分。这种设计允许AI代理在一轮扫描中遍历所有817个技能的前端元数据（约30 tokens每个），然后根据匹配加载完整工作流（500-2000 tokens），实现高效的渐进式知识检索。项目兼容Claude Code、GitHub Copilot、OpenAI Codex CLI、Cursor、Gemini CLI等主流AI平台，安装方式简单（npx skills add或git clone）。
-
-此外，项目还提供了ATT&CK Navigator层文件、NIST CSF 2.0对齐表格、详细的F3映射文档等。社区贡献活跃，已有v1.0.0版本发布（734技能，26领域），当前main分支已增长至817技能，并持续增加新映射。贡献指南完善，支持添加技能、改进现有技能、报告问题等。由于文档详尽且结构清晰，该项目的文档质量和实用性极高，是AI安全领域不可多得的资源。
-   活跃度: 中等。项目有v1.0.0发布（2026年3月11日），且持续增加技能和框架映射，但GitHub API指标未显示近期提交，可能仓库近期未活跃更新。  社区健康: 良好。项目有明确的贡献指南、行为准则、讨论区和问题跟踪。README中提到了多个社区相关项目和星历史，表明已获得一定关注。但GitHub指标显示近期活动较少（forks=0, issues=0, commits=0），可能需要更多社区参与。
-   商业潜力: 高。全球网络安全人才缺口达480万，企业亟需自动化安全工具。该项目可转化为SaaS产品（如安全分析自动化平台）、企业级AI安全助手、或培训解决方案。通过提供增值服务（如私有部署、定制技能、合规报告）实现商业化。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此技能库，构建一个企业级AI安全副驾（AI Security Co-pilot），集成到SIEM/EDR平台中，自动分析告警、生成响应建议，甚至自动执行部分缓解操作，如隔离主机、阻断IP等。; 灵感2：将此技能库与LangChain或AutoGPT等AI框架结合，开发一个自动化的渗透测试助理，能够根据目标环境自动选择并执行渗透测试技能，生成报告。; 灵感3：基于技能库的训练数据，打造一个互动式的网络安全入门培训平台，让初学者通过与AI代理对话学习安全知识，模拟实战场景。
-   项目链接: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
