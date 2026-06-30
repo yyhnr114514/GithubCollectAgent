@@ -1,4 +1,64 @@
-1. commaai/openpilot:
+1. cupy/cupy:
+   star: 11586  语言/技术: Python, NumPy, SciPy, CUDA, ROCm, C++
+   项目简介: CuPy 是一个与 NumPy/SciPy 兼容的 GPU 加速计算库，旨在作为现有 NumPy/SciPy 代码的即插即用替代品，在 NVIDIA CUDA 或 AMD ROCm 平台上运行。它让 Python 开发者无需学习 CUDA C/C++ 即可利用 GPU 的并行计算能力，大幅提升数值计算、科学计算和机器学习预处理等任务的性能。
+   亮点: 与 NumPy/SciPy API 高度兼容，代码迁移成本极低; 支持 NVIDIA CUDA 和 AMD ROCm 双平台，覆盖主流 GPU; 提供低级 CUDA 功能，如 RawKernels、Streams、CUDA Runtime API
+   详细报告: CuPy 是一个专为 GPU 加速设计的 Python 数组计算库，其核心设计理念是作为 NumPy 和 SciPy 的即插即用替代品。开发者只需将 `import numpy as np` 替换为 `import cupy as cp`，现有的大部分 NumPy/SciPy 代码就能自动在 GPU 上运行，无需修改底层逻辑。这极大地降低了 GPU 编程的门槛，让专注于数据科学和机器学习的开发者能够轻松享受 GPU 带来的性能红利。
+
+CuPy 的核心在于其实现了与 NumPy 几乎一致的 API，包括数组创建、数学运算、线性代数、随机数生成等常用功能。同时，它支持广播、花式索引、数据类型转换等 NumPy 特性，确保代码的兼容性。对于 SciPy，CuPy 也实现了部分常用模块，如 `cupyx.scipy.signal`、`cupyx.scipy.linalg` 等，以满足信号处理、线性代数等更复杂的需求。
+
+除了高层 API，CuPy 还提供了对底层 CUDA 的访问能力。用户可以通过 RawKernels 将自定义的 CUDA C/C++ 代码与 CuPy ndarray 结合，实现极致性能优化；利用 Streams 实现异步计算和流水线处理；甚至可以直接调用 CUDA Runtime API 进行底层控制。这种分层设计使得 CuPy 既适合快速开发，也适合高性能调优。
+
+安装方面，CuPy 提供了预编译的二进制包（wheels），支持 CUDA 12.x、13.x 以及 ROCm 7.0（实验性），通过 pip 即可安装。此外，还支持 conda 和 Docker 部署。文档和教程齐全，社区活跃，并有大量项目基于 CuPy 构建，如 cuSignal（已并入 CuPy v13.0.0）。
+
+总之，CuPy 是 Python GPU 加速领域的标杆项目，解决了科学计算和机器学习中“CPU 算力不足”的痛点，让 GPU 成为大众工具。
+   活跃度: 高（定期发布新版本，支持最新CUDA/ROCm，有持续贡献者）  社区健康: 活跃（文档齐全，社区论坛活跃，有多个发布版本）
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 CuPy 开发一个“即时财务风险计算器”，利用 GPU 并行计算 Monte Carlo 模拟或 VaR（风险价值）模型，实现毫秒级风险评估，适用于高频交易或金融风控场景。; 灵感2：将 CuPy 集成到现有的“分子动力学模拟”框架中，加速力场计算和轨迹分析，解决传统 CPU 版本计算耗时的问题，可用于药物研发中的虚拟筛选。; 灵感3：利用 CuPy 的 RawKernels 特性，构建一个“自定义图像滤波器生成器”，用户可以拖拽式组合 CUDA 核函数实现特效，如实时美颜、风格迁移，并导出为可复用的滤镜包。
+   项目链接: https://github.com/cupy/cupy
+
+2. soxoj/maigret:
+   star: 34495  语言/技术: Python, 异步编程 (asyncio), 正则表达式, Web 抓取 (requests, aiohttp), OpenAI API (AI 分析), FlareSolverr (Cloudflare 绕过), Tor/I2P 代理支持, 报告生成 (HTML, PDF, XMind, CSV, JSON, Neo4j)
+   项目简介: Maigret 是一个专注于 OSINT（开源情报）的强大工具，仅通过一个用户名就能在 3000 多个网站上搜索并收集个人公开信息，无需任何 API 密钥。它像一个“数字侦探”，能自动挖掘出该用户名在不同平台上的账号、个人资料、社交网络链接等，并生成结构化的报告（HTML、PDF、CSV、JSON、XMind 等）。内置AI分析功能可自动生成调查摘要，大大提升了信息整合效率。主要解决安全研究人员、记者、招聘人员等在背景调查、账号关联分析、身份验证等场景下的痛点。
+   亮点: 支持 3000+ 网站，默认扫描流量前 500 名网站; 递归搜索：根据已发现的用户名和 ID 进一步搜索; AI 分析：使用 OpenAI API 生成调查摘要; 可嵌入 Python 项目，作为库使用; 内置 Web 界面，支持图形化结果查看; 多种报告导出格式，满足不同需求
+   详细报告: Maigret 是一个用 Python 编写的命令行工具，其核心理念是“通过用户名搜遍全网”。用户只需提供目标用户名，Maigret 就会异步并发地向数千个已知网站发送请求，检测该用户名是否被注册，并抓取公开的个人信息（如头像、简介、位置、其他账号链接等）。
+
+**技术实现：**
+- 基于 Python 的异步编程模型（asyncio + aiohttp），实现高速并发检测。
+- 内置一个包含 3000+ 网站检测规则的数据库（data.json），每个规则定义了如何检测用户名、提取信息等。
+- 通过正则表达式和 CSS 选择器解析网页内容，提取结构化数据。
+- 支持多种代理方式（HTTP/SOCKS、Tor、I2P），用于绕过限制或访问暗网。
+- 可选集成 FlareSolverr 来破解 Cloudflare 的 JavaScript 验证。
+- AI 分析功能通过调用 OpenAI 兼容的 API，将原始发现整理成一份简短、中立的调查摘要。
+
+**核心功能：**
+1. **用户名检测**：检查目标用户名在各大平台是否已被注册。
+2. **信息提取**：从个人资料页面提取头像、简介、位置、社会化链接等。
+3. **递归搜索**：利用提取到的其他用户名或 ID，自动进行下一轮搜索。
+4. **标签过滤**：可按站点类别（如社交、约会、美国站点等）筛选检测范围。
+5. **报告导出**：支持 HTML、PDF、XMind（思维导图）、CSV、JSON、Neo4j 图数据库等多种格式。
+6. **内置 Web 界面**：以图形化方式展示结果，并支持一键下载报告。
+
+**使用方式：**
+- 命令行：`maigret johndoe`，支持丰富参数。
+- Python 库：`from maigret import Maigret` 后调用搜索函数。
+- Docker：直接拉取镜像运行。
+- Web UI：`maigret --web 5000` 启动本地服务。
+
+**适用场景：**
+- 安全研究人员进行社工或账户关联分析。
+- 记者核实信息来源。
+- 招聘方做背景调查。
+- 个人监控自己的数字足迹。
+
+因文档不全无法详细点评 AI 分析的具体模型参数或性能优化细节，但整体功能已非常完备。
+   活跃度: 未知（根据提供的 API 指标，commits_recent、pushed_at 等均为空，但 README 表明项目仍在维护中）  社区健康: 有详细的贡献指南、开发文档和多个沟通渠道（GitHub Issues、Discussions、Telegram），社区活跃度较高。
+   商业潜力: 文档明确提及商业版提供每日更新的 5000+ 站点数据库和稳定的用户名检查 API，适合需要高可靠性服务的商业客户。开源版本 MIT 许可，可在产品中免费使用，但站点数据库需要自行维护。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：开发一个“社交媒体监控器”，定时扫描指定用户名列表，并推送新发现的账号或信息变更到 Slack/Telegram，适用于品牌保护或威胁情报。; 灵感2：将其集成到企业员工入职安全评估系统中，自动对候选人的在线账号进行合规性检查，输出背景调查报告。; 灵感3：结合大语言模型（如 GPT-4）构建一个“智能调查助手”，允许自然语言查询（例如“找出所有提及过‘隐私’的账号”），Maigret 作为数据采集引擎。
+   项目链接: https://github.com/soxoj/maigret
+
+3. commaai/openpilot:
    star: 61837  语言/技术: Python, C, CAN, GPS, IMU, 机器学习, 计算机视觉
    项目简介: openpilot 是一个开源的机器人操作系统，目前主要用于升级 300 多款汽车的驾驶辅助系统，提供自适应巡航、车道保持、自动变道等功能。它通过特定的硬件（comma four/3X）和汽车线束连接车辆，实现了部分自动驾驶能力。项目遵循 ISO26262 安全标准，具有严格的安全模型和测试流程。开发者可以参与贡献，社区活跃，有招聘和赏金计划。
    亮点: 支持 300+ 车型的驾驶辅助系统升级; 遵循 ISO26262 功能安全标准，安全模型用 C 编写; 多分支发布策略：稳定版、测试版、开发版
@@ -13,7 +73,7 @@
    衍生灵感: 灵感1：基于 openpilot 的传感器融合和车辆控制能力，可以开发一个通用的机器人平台操作系统，用于无人驾驶物流车、扫地机器人等场景，只需适配不同的硬件和控制接口。; 灵感2：利用 openpilot 的数据收集和机器学习 pipeline，构建一个模拟驾驶数据合成工具，用于生成极端驾驶场景的仿真数据，辅助自动驾驶算法测试。; 灵感3：将 openpilot 的安全模型（C 语言实现的 panda）独立出来，作为一个通用的功能安全框架，用于其他嵌入式系统（如无人机、工业机器人）的实时安全监控。
    项目链接: https://github.com/commaai/openpilot
 
-2. xbtlin/ai-berkshire:
+4. xbtlin/ai-berkshire:
    star: 4401  语言/技术: Python, Claude Code, Codex (OpenAI), Mermaid, Shell脚本
    项目简介: AI Berkshire 是一套将巴菲特、芒格、段永平、李录四位价值投资大师的方法论系统化为 AI Agent 技能（Skill）的开源项目，兼容 Claude Code 与 Codex。它提供 18 个标准化投研命令（如 /investment-research、/investment-team），通过多 Agent 并行研究、结构化反偏见机制、金融数据精确校验（如 decimal 运算、多源交叉验证），输出可决策的投研报告，而非泛泛而谈。项目附有实盘收益记录（2024 年 +69.29%，2025 年至今 +66.38%），解决普通 AI 咨询“分析模糊、无决策结论、无纪律”的痛点。
    亮点: 实盘收益连续大幅跑赢全球主要指数，2024年+69.29%，2025年至今+66.38%; 18个标准化投研Skill，覆盖深度研究、财报分析、行业筛选、持仓管理等全流程; 多Agent并行研究（4个独立Agent同时工作），模拟真实投研团队协作; 内置金融严谨性工具（Decimal精确计算、多源交叉验证、Benford定律检测），杜绝LLM心算错误; 结构化反偏见机制（信息评级、逆向检验、快速否决清单、留白原则），提升决策质量
@@ -37,33 +97,3 @@
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于AI Berkshire框架，可以开发一个【个人AI投资助理应用】，集成到微信或Telegram，用户发送公司名称即可获得结构化的投研报告，包含四大师评分、估值区间、操作建议，适合散户投资者快速决策。; 灵感2：将AI Berkshire的Skill机制和反偏见流程抽取为通用模板，用于【企业战略决策辅助系统】，例如分析新业务进入、并购标的评估，通过多Agent对抗和清单筛选减少决策偏见。; 灵感3：利用其多Agent并行研究架构，构建一个【金融教育模拟平台】，学生可以模拟四大师视角分析公司，系统输出对比报告和决策打分，帮助用户学习价值投资方法论。
    项目链接: https://github.com/xbtlin/ai-berkshire
-
-3. Robbyant/lingbot-map:
-   star: 8335  语言/技术: Python, PyTorch, CUDA, FlashInfer, NVIDIA Kaolin, ONNX, Open3D, viser, FFmpeg, DINOv2, VGGT
-   项目简介: LingBot-Map是一个用于流式3D重建的前馈3D基础模型，通过几何上下文变换器（Geometric Context Transformer）统一了坐标定位、密集几何线索和长程漂移校正，支持超过10,000帧的长序列实时重建（约20 FPS），在多个基准上达到SOTA性能。它提供了交互式浏览器可视化（viser）和离线渲染管线，适合大规模室内外场景的3D重建。
-   亮点: 几何上下文变换器：统一了坐标定位、密集几何线索和长程漂移校正的流式框架。; 高效流式推理：基于分页KV缓存注意力，在518×378分辨率下以~20 FPS处理超过10,000帧的长序列。; SOTA重建性能：在KITTI、Oxford Spires等多个基准上优于现有流式和迭代优化方法。; 提供交互式演示（viser）和离线批量渲染管线，支持自定义相机轨迹和场景配置。
-   详细报告: LingBot-Map是一个前馈式3D重建模型，专为流式场景设计。其核心创新是几何上下文变换器（Geometric Context Transformer），该架构通过锚点上下文（anchor context）、姿态参考窗口（pose-reference window）和轨迹记忆（trajectory memory）三个组件，将坐标定位、密集几何线索和长程漂移校正统一在一个流式框架中。模型采用前馈架构，并实现了分页KV缓存注意力机制（paged KV cache attention），使得在长序列（超过10,000帧）上仍能保持约20 FPS的稳定推理速度。项目提供了完整的安装指南，包括PyTorch 2.8.0、FlashInfer（用于高效注意力）、NVIDIA Kaolin（用于离线渲染的GPU体素化）以及ONNX（用于天空分割）。交互式演示demo.py通过viser库在浏览器中可视化点云重建结果，支持关键帧间隔、窗口式推理（用于超长序列）、天空掩码等高级选项。离线渲染管线demo_render/batch_demo.py支持从视频或图像序列生成飞行穿越MP4，并允许通过YAML配置文件自定义相机轨迹（跟随、鸟瞰、静态等模式）。模型权重可从HuggingFace和ModelScope下载，提供三个变体：long版（适合长序列和大场景）、平衡版和stage1版（用于双向推理）。项目还发布了在KITTI、Oxford Spires等多个数据集上的评估基准。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个机器人实时建图与导航系统，利用LingBot-Map的流式重建能力，在机器人移动过程中实时构建环境3D地图，用于避障和路径规划。; 灵感2：可以将其集成到AR/VR设备中，实现实时场景理解与物体重建，例如通过头戴设备摄像头捕捉的环境流，实时生成3D模型，支持虚拟物体交互。; 灵感3：用于自动驾驶的环境感知与高精地图构建，将多个车辆采集的视频流输入模型，在线生成大规模城市场景的3D点云，并自动校正长距离漂移。
-   项目链接: https://github.com/Robbyant/lingbot-map
-
-4. cupy/cupy:
-   star: 11586  语言/技术: Python, NumPy, SciPy, CUDA, ROCm, C++
-   项目简介: CuPy 是一个与 NumPy/SciPy 兼容的 GPU 加速计算库，旨在作为现有 NumPy/SciPy 代码的即插即用替代品，在 NVIDIA CUDA 或 AMD ROCm 平台上运行。它让 Python 开发者无需学习 CUDA C/C++ 即可利用 GPU 的并行计算能力，大幅提升数值计算、科学计算和机器学习预处理等任务的性能。
-   亮点: 与 NumPy/SciPy API 高度兼容，代码迁移成本极低; 支持 NVIDIA CUDA 和 AMD ROCm 双平台，覆盖主流 GPU; 提供低级 CUDA 功能，如 RawKernels、Streams、CUDA Runtime API
-   详细报告: CuPy 是一个专为 GPU 加速设计的 Python 数组计算库，其核心设计理念是作为 NumPy 和 SciPy 的即插即用替代品。开发者只需将 `import numpy as np` 替换为 `import cupy as cp`，现有的大部分 NumPy/SciPy 代码就能自动在 GPU 上运行，无需修改底层逻辑。这极大地降低了 GPU 编程的门槛，让专注于数据科学和机器学习的开发者能够轻松享受 GPU 带来的性能红利。
-
-CuPy 的核心在于其实现了与 NumPy 几乎一致的 API，包括数组创建、数学运算、线性代数、随机数生成等常用功能。同时，它支持广播、花式索引、数据类型转换等 NumPy 特性，确保代码的兼容性。对于 SciPy，CuPy 也实现了部分常用模块，如 `cupyx.scipy.signal`、`cupyx.scipy.linalg` 等，以满足信号处理、线性代数等更复杂的需求。
-
-除了高层 API，CuPy 还提供了对底层 CUDA 的访问能力。用户可以通过 RawKernels 将自定义的 CUDA C/C++ 代码与 CuPy ndarray 结合，实现极致性能优化；利用 Streams 实现异步计算和流水线处理；甚至可以直接调用 CUDA Runtime API 进行底层控制。这种分层设计使得 CuPy 既适合快速开发，也适合高性能调优。
-
-安装方面，CuPy 提供了预编译的二进制包（wheels），支持 CUDA 12.x、13.x 以及 ROCm 7.0（实验性），通过 pip 即可安装。此外，还支持 conda 和 Docker 部署。文档和教程齐全，社区活跃，并有大量项目基于 CuPy 构建，如 cuSignal（已并入 CuPy v13.0.0）。
-
-总之，CuPy 是 Python GPU 加速领域的标杆项目，解决了科学计算和机器学习中“CPU 算力不足”的痛点，让 GPU 成为大众工具。
-   活跃度: 高（定期发布新版本，支持最新CUDA/ROCm，有持续贡献者）  社区健康: 活跃（文档齐全，社区论坛活跃，有多个发布版本）
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 CuPy 开发一个“即时财务风险计算器”，利用 GPU 并行计算 Monte Carlo 模拟或 VaR（风险价值）模型，实现毫秒级风险评估，适用于高频交易或金融风控场景。; 灵感2：将 CuPy 集成到现有的“分子动力学模拟”框架中，加速力场计算和轨迹分析，解决传统 CPU 版本计算耗时的问题，可用于药物研发中的虚拟筛选。; 灵感3：利用 CuPy 的 RawKernels 特性，构建一个“自定义图像滤波器生成器”，用户可以拖拽式组合 CUDA 核函数实现特效，如实时美颜、风格迁移，并导出为可复用的滤镜包。
-   项目链接: https://github.com/cupy/cupy
