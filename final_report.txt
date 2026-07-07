@@ -1,76 +1,43 @@
 1. alirezarezvani/claude-skills:
-   star: 20712  语言/技术: Python, Markdown, JSON, Shell, Git, CLI
-   项目简介: 一个全面的开源技能库，包含354个生产就绪的Claude Code技能/插件，同时兼容OpenAI Codex、Gemini CLI、Cursor等13种AI编码工具。每个技能由SKILL.md指令、593个零依赖Python CLI脚本和711个模板文档组成，覆盖工程、营销、安全、合规、C级顾问、学术研究等18个领域，并支持通过转换脚本一键部署到多款AI编码助手。
-   亮点: 354个预制技能覆盖18个领域，即装即用; 兼容13种主流AI编码工具，无需手动适配; 593个Python CLI脚本全部使用标准库，零外部依赖; 提供安全审计器，可在安装前扫描技能风险; 内置Persona系统和编排模式，支持复杂工作流
-   详细报告: 该项目本质上是一个“AI编码助手的放大器”——它通过模块化的指令包（Skills）为Claude Code、OpenAI Codex、Gemini CLI等13种AI编码工具注入领域专长。每个Skill包含三部分：SKILL.md（结构化的执行指令和工作流）、Python工具（593个纯标准库脚本，无任何pip依赖）、参考文档（711个模板、清单和领域知识文件）。
-
-仓库按领域划分为18个大类：工程核心（52个）、工程高级POWERFUL（80个）、产品（17个）、营销（48个）、生产力（7个）、学术研究（9个）、研究运营（5个，v2.9.0新增）、项目管理（9个）、法规质量（19个）、合规OS（9个）、C级顾问（68个）、商业与增长（5个）、商业运营（7个）、商务（8个）、财务（4个）、循环库（1个）、Markdown转HTML（5个）。其中POWERFUL层级包含25个深度技能（如Agent设计师、RAG架构师、安全审计器、CI/CD生成器等），适合生产级场景。
-
-安装方式多样：Claude Code用户可直接通过/plugin命令安装；OpenAI Codex用户通过npx agent-skills-cli；其他工具运行./scripts/convert.sh --tool all即可生成兼容格式。Python工具可直接使用，例如SaaS指标计算器、技术债分析器、品牌声音分析器等。
-
-此外，项目还预配置了3个Persona（创业CTO、增长黑客、独立创始人），以及4种编排模式（单人冲刺、领域深潜、多Agent移交、技能链），让多技能协作更简单。安全方面提供Skill Security Auditor，可扫描命令注入、数据外泄等风险。
-   活跃度: 未知  社区健康: 良好
-   商业潜力: 高
+   star: 21254  语言/技术: Python, Markdown, CLI, SKILL.md
+   项目简介: 这是一个为Claude Code、OpenAI Codex、Gemini CLI等13种AI编码工具打造的355个职业技能包（skills/plugins）的开源仓库。每个技能包含结构化的指令、零依赖的Python工具和参考文档，让AI代理瞬间拥有架构、营销、安全、合规等专业能力，无需手动调教。
+   亮点: 跨13种AI编码工具兼容（Claude Code/Codex/Gemini CLI/Cursor等）; 355个即用技能覆盖18个领域（工程、营销、安全、合规、C级咨询等）; 602个零依赖（stdlib-only）Python工具脚本
+   详细报告: 该项目是一个AI编码代理（coding agent）的“技能商店”，提供了355个模块化的指令包（每个技能包含SKILL.md、Python脚本和参考文档），让AI工具获得领域专业知识。覆盖的领域极其广泛：从核心工程（架构、前端、后端、DevOps、安全审计等）到营销（包含AEO——面向LLM的答案引擎优化、本地SEO等）、产品管理、项目管理、监管合规（ISO/MDR/FDA等）、C级顾问（CEO/CTO/CFO等18种角色）、学术研究（文献综述、资助申请、专利等）、企业研发运营（临床研究、市场研究等）。所有Python工具均使用标准库，无需任何pip安装。项目通过统一的SKILL.md标准实现跨工具兼容，并提供脚本一键转换到Cursor、Aider、Windsurf等9种工具格式。还包括预配置的Persona（如Startup CTO、Growth Marketer）和编排协议（Orchestration），用于组合多个技能解决跨领域问题。安全方面内置了技能安全审计器，可扫描技能中的恶意代码。项目还包含一个loop-library，用于设计AI代理的循环工作流。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个「企业合规自动化Agent」——将法规质量（RA-QM）技能与合规OS技能结合，自动审计代码库的GDPR/SOC2合规性并生成整改报告。; 灵感2：将其集成到CI/CD流水线中，作为「代码审查与文档生成插件」——每次PR自动触发安全审计、技术债分析、变更日志生成，并更新知识库。; 灵感3：针对特定行业（如医疗、金融）构建行业专属技能包，例如「医疗设备MDR合规技能包」，帮助开发团队快速通过法规检查。
+   衍生灵感: 灵感1：基于此项目，可以开发一个【企业级AI合规审计助手】，针对特定行业（如医疗、金融）将ISO、GDPR、SOC2等技能打包，自动扫描代码和文档并生成合规报告。; 灵感2：可以将其集成到【企业内部AI开发平台】中，作为插件市场，允许不同团队（工程、市场、法务）按需安装技能，实现AI代理的“岗位培训”。; 灵感3：可以创建一个【一键部署多工具AI技能平台】，利用项目的convert.sh脚本，将同一套技能同时部署到Cursor、Windsurf、Aider等工具，实现开发团队统一AI行为。
    项目链接: https://github.com/alirezarezvani/claude-skills
 
-2. rommapp/romm:
-   star: 9861  语言/技术: 自托管, Web 前端, IGDB API, Screenscraper API, MobyGames API, SteamGridDB API, Retroachievements API, EmulatorJS, RuffleRS, Docker
-   项目简介: RomM 是一款自托管的 ROM 游戏管理器和播放器，能够扫描、丰富元数据、浏览和游玩游戏集合。它支持多种平台、命名方案和自定义标签，并集成了 IGDB、Screenscraper 等元数据服务，还可以通过浏览器直接模拟游戏。对于拥有大量 ROM 的玩家来说，它是管理、美化、分享和游玩游戏的一站式神器。
-   亮点: 从 IGDB、Screenscraper 等平台自动获取游戏元数据和封面，告别手动整理; 支持在浏览器中直接游玩游戏（EmulatorJS 和 RuffleRS），无需额外模拟器; 多用户支持，可分享库给朋友，并控制访问权限
-   详细报告: RomM 本质上是一个 ROM 管理平台，采用自托管方式部署（推荐 Docker），让用户完全掌控自己的游戏数据。它解决了传统 ROM 管理混乱、元数据缺失、无法直接在线游玩的痛点。核心功能包括：
-- **自动化扫描**：扫描本地文件夹中的 ROM，通过文件名匹配并自动从 IGDB、Screenscraper 等数据源拉取游戏名称、发行年份、开发商、封面图等元数据，甚至支持 SteamGridDB 的自定义图片。
-- **多平台支持**：官方宣称支持 400+ 游戏平台，涵盖从 Atari 到 Switch 的几乎所有模拟器平台。
-- **在线游玩**：集成了 EmulatorJS（通用模拟器）和 RuffleRS（Flash 模拟器），用户可以直接在浏览器中玩游戏，无需额外安装模拟器。
-- **社区生态**：拥有官方和社区开发的多种客户端，如 Playnite 插件、Android 应用（Argosy）、iOS 应用、SteamOS 同步工具等，拓展了使用场景。
-- **标签与过滤**：支持文件名中的标签（如 [hack]、[mod]），方便分类管理修改版、多盘游戏等。
-- **管理功能**：支持上传、更新、删除游戏，以及管理 DLC、补丁、说明书等附件。
-技术栈方面，后端使用 Docker 容器部署，前端为响应式 Web 界面，集成了多个第三方 API 用于元数据和图像。由于 README 未明确说明后端语言，根据常见自托管项目推测可能使用 Python（FastAPI）或 Node.js，但无法确认。
-   活跃度: 未知（GitHub API 指标显示为 0，可能为初始数据，但项目长期存在且有多版本发布）  社区健康: 活跃（有 Discord 社区、贡献指南、第三方开发者生态）
+2. mvanhorn/last30days-skill:
+   star: 49898  语言/技术: Python 3.12+, Node.js (vendored Bird client for X search), yt-dlp, ScrapeCreators API, SQLite, HTML/CSS (inline CSS生成分享简报), Agent Skills (npx skills add), Claude Code 插件系统
+   项目简介: 这是一个AI代理驱动的搜索引擎，通过并行搜索Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub等多个平台最近30天的用户互动数据（点赞、评论、投票、真实货币押注等），由AI裁判合成一份摘要，并按真实参与度而非SEO排名。解决了传统搜索引擎无法获取各平台内部孤立数据的痛点，让你快速了解某人、某产品、某话题的实时社区反应。
+   亮点: 多平台并行搜索：一次性搜索Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub等，AI代理自动解析实体并定向搜索正确社区和账号。; 智能实体解析：预研究大脑自动将主题词映射到具体作者、仓库、子区、话题标签，确保精准命中。; 跨源聚类：相同故事跨平台自动合并，避免重复；最佳取抽取：额外幽默评分，筛选出最有趣的热门评论。; 无配置零门槛：Reddit、HN、GitHub直接可用；可选配置X、YouTube等，30秒设置向导。; 分享简报：可生成离线可用的暗色模式HTML文件，直接粘贴到Slack、邮件或Notion。
+   详细报告: last30days-skill是一个被设计为Claude Code插件或通用Agent Skills的工具，核心价值在于打破信息孤岛。传统搜索引擎（如Google）只能索引公开网页，而Reddit的评论、X的帖子、YouTube的完整转录、TikTok的标题、Polymarket的预测赔率等各自封闭，单个AI（如ChatGPT、Gemini）也仅能访问部分平台。本项目通过代理机制，让AI可以同时调用多个平台的API或公共接口，将分散的信息汇聚，再用参与度（点赞数、评论数、播放量、投注金额等）作为权重排序，最后由AI裁判合成一份简明的、带有来源引用的报告。技术实现上，使用Python 3.12+作为主引擎，利用yt-dlp下载YouTube转录，Node.js实现X搜索（vendored Bird client），ScrapeCreators API用于获取TikTok、Instagram、Threads等受限平台的数据。支持安装方式包括Claude Code市场、npx全局安装、手动上传skill文件等。v3版本显著提升了智能搜索能力：预研究模块会自动解析实体（如话题“OpenClaw”会映射到创始人@steipete、子区r/openclaw、GitHub仓库等），然后并行发起多源查询。新功能还包括跨源聚类、最佳取抽取（幽默评分）、ELI5模式、GitHub用户模式（按作者搜索PR和提交）、趋势监控（SQLite持久化+watchlist/briefing脚本）。项目本身开源（MIT许可证），且完全本地运行，无需外部追踪。文档极为详尽，从安装、配置、使用场景到架构说明均有覆盖。虽然GitHub API显示当前指标为零（可能为私有仓库或近期无活动），但README版本明确标有1,012个测试通过，显示其成熟度。
+   活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 RomM 的元数据扫描和展示能力，可以开发一个“数字藏品管理平台”，用于管理其他数字媒体（如电子书、漫画、音乐），加入对应的元数据源（如 Goodreads、Comic Vine）。; 灵感2：将 RomM 集成到家庭私有云中，配合 NAS 使用，打造一个“全家人共享的复古游戏厅”，并添加家长控制功能，限制孩子游玩时间或内容。; 灵感3：扩展 RomM 的 EmulatorJS 集成，增加云端存档同步功能，让玩家在不同设备（手机、平板、PC）间无缝继续游戏进度。
-   项目链接: https://github.com/rommapp/romm
+   衍生灵感: 灵感1：基于此项目，可以开发一个「竞品情报实时监控平台」，集成到企业Slack/飞书机器人，每日自动推送指定竞品（如OpenAI vs Anthropic）的Reddit讨论、X帖子、YouTube评测和招聘信号，帮助产品经理和战略团队快速反应。; 灵感2：可以将其集成到「个人品牌舆情系统」中，为KOL或企业高管提供“上周你在社交媒体上的声量分析”，包括正面/负面情绪、热门话题、关键影响者等，支持定制化报告。; 灵感3：利用其多源实体解析和聚类能力，构建一个「突发事件追踪仪表盘」，当出现突发新闻（如名人去世、公司收购、产品发布）时，自动聚合各平台的第一手反应、预测市场赔率、GitHub提交等，生成时间线摘要。
+   项目链接: https://github.com/mvanhorn/last30days-skill
 
-3. harvard-edge/cs249r_book:
-   star: 26247  语言/技术: Python, Marimo, Arduino, Raspberry Pi
-   项目简介: 这是一个面向AI工程（AI Engineering）的综合性开源课程，由哈佛大学边缘实验室维护。它提供两卷教科书、从零构建的ML框架TinyTorch、交互式Marimo实验室、硬件部署套件（Arduino/Raspberry Pi）、基础设施模拟器MLSys·im、面试准备题库StaffML、教师中心及讲座幻灯片。项目旨在填补当前AI领域重模型轻系统的空白，帮助学习者理解如何设计、优化和部署端到端的智能系统，而非仅仅训练模型。
-   亮点: 完整课程体系：教科书+动手实验+硬件部署+模拟器+面试准备，实现闭环学习; TinyTorch：从零构建ML框架，深入理解自动微分和系统原理; MLSys·im：模拟基础设施瓶颈，无需实际资源即可推理大规模系统; 硬件套件：在真实边缘设备上部署ML，体会内存、功耗和延迟约束
-   详细报告: 该项目（Machine Learning Systems）由哈佛大学Vijay Janapa Reddi教授领导，旨在将AI工程建立为一门与软件工程、计算机工程并列的基础学科。其核心使命是：世界正在匆忙构建AI系统，却没有在工程化它们。项目通过一个集成的课程体系来解决这一差距。
-
-课程包含六大核心组件：
-1. **教科书**：两卷MIT出版社级别教材。第一卷（Build, Optimize, Deploy）聚焦单机ML系统（1-8 GPUs）；第二卷（Scale, Distribute, Govern）覆盖分布式系统、容错和治理。
-2. **TinyTorch**：20个渐进模块，学生从零搭建自己的深度学习框架，真正理解autograd和反向传播。
-3. **交互式实验室（Labs）**：基于Marimo notebooks，允许学生通过调整参数探索权衡，底层由MLSys·im驱动。
-4. **硬件套件（Kits）**：支持Arduino、Seeed、Grove、Raspberry Pi等设备，让学生直面真实部署中的内存、功耗和延迟限制。
-5. **MLSys·im**：一个建模引擎，模拟内存瓶颈、网络饱和和调度限制，可用于无法实际租用的基础设施规模。
-6. **StaffML**：基于物理学的ML系统面试题库，包含练习、模拟面试和进度追踪。
-
-此外还有教师中心（含教学大纲、评分标准、助教手册）、可定制的Beamer幻灯片、新闻通讯以及实验性项目（Socratiq、MLPerf EDU、设计语法）。
-
-项目的关键区别在于：不同于深度学习书（重在模型）或MLOps书（重在工具链），它教授底层物理原理和量化推理——为什么带宽、延迟、功耗和故障率不可逃避。它遵循Hennessy & Patterson教学法，从单机到集群，循序渐进。
-
-技术栈方面，主要使用Python（TinyTorch和实验室），Marimo用于交互式笔记本，硬件涉及C/C++（Arduino）和Raspberry Pi Linux环境。项目文档详尽，包含FAQ、贡献指南、路线图，并鼓励社区参与。
-   活跃度: 高  社区健康: 活跃（基于文档显示的社区贡献和讨论）
+3. bradautomates/claude-video:
+   star: 4418  语言/技术: Python, yt-dlp, ffmpeg, Whisper (Groq/OpenAI), Claude Read tool, Agent Skills framework
+   项目简介: 这是一个让 Claude 能够“看”视频的开源工具。粘贴 YouTube 链接或本地视频文件，它自动下载视频、提取字幕和关键帧，让 Claude 基于视觉和听觉内容回答问题，解决了大模型无法直接理解视频的痛点。
+   亮点: 支持YouTube、Loom、TikTok等数百种视频源及本地文件; 自动优先使用免费字幕，无字幕时调用Whisper转写; 场景感知帧提取，多种细节模式（transcript/efficient/balanced/token-burner）平衡速度与质量; 帧去重机制避免重复帧浪费token
+   详细报告: 该项目的核心是赋予Claude视频理解能力。传统上，大语言模型无法直接处理视频内容。该项目通过在本地运行yt-dlp下载视频（支持YouTube、TikTok、本地文件等数百种格式），使用ffmpeg提取关键帧或场景变化帧，并优先抓取视频自带字幕（免费），若无字幕则通过Whisper（Groq或OpenAI API）转录音频。帧提取支持多种细节模式：transcript模式仅返回字幕，不下载视频；efficient模式使用关键帧（速度极快但帧数较少，上限50帧）；balanced模式检测场景变化（上限100帧，默认推荐）；token-burner模式无上限，适合对长视频进行完整分析。帧去重功能通过比较相邻帧的灰度差异，丢弃视觉上相似的帧（如静止的幻灯片），节省token。最终，帧图像和带时间戳的字幕一并交给Claude的Read工具，Claude可以“看到”画面并“听到”文字，从而回答关于视频内容的具体问题，例如“第30秒发生了什么”、“这个视频的钩子是什么”、“UI何时崩溃”等。项目安装方便，支持Claude Code、Codex、Cursor、Copilot、Gemini CLI等50+平台，并提供了详细的CLI参数（如--start/--end聚焦时间段，--resolution提高分辨率以阅读屏幕文字）。缺点是长视频在默认模式下帧数稀疏，建议对长视频使用token-burner模式或聚焦时间段。项目文档非常详尽，示例丰富。
+   活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于TinyTorch开发一个可视化的自动微分教学工具，通过实时计算图展示梯度传播，帮助初学者直观理解。; 灵感2：将MLSys·im模拟器封装为SaaS服务，企业可用它评估不同GPU集群配置的成本和性能，优化训练支出。; 灵感3：结合硬件套件和实验室，开发一套面向物联网边缘AI的快速原型平台，自动生成从训练到部署的最佳方案。
-   项目链接: https://github.com/harvard-edge/cs249r_book
+   衍生灵感: 灵感1：基于此项目开发一个「自动会议纪要生成器」，输入团队会议录像，自动提取关键讨论点、决策和待办事项，并生成结构化笔记。; 灵感2：将其集成到「视频课程学习助手」中，用户可上传教学视频，AI自动总结知识点、提取代码片段，并生成习题。; 灵感3：构建「广告创意分析平台」，自动分析竞品视频广告的钩子、节奏、视觉元素，输出可复用的创意策略报告。
+   项目链接: https://github.com/bradautomates/claude-video
 
-4. usestrix/strix:
-   star: 32612  语言/技术: Python, Docker, OpenAI GPT, Anthropic Claude, Google Gemini, LiteLLM, Caido, Playwright, Textual, Nuclei
-   项目简介: Strix 是一个开源的 AI 渗透测试工具，它利用自主的 AI 黑客代理来模拟真实攻击，动态扫描应用漏洞并生成可验证的利用证明（PoC）。它解决了传统安全测试工具误报率高、人工渗透测试耗时长的问题，为开发者和安全团队提供快速、准确的自动化安全评估。核心亮点包括全栈渗透测试工具包、多代理协同、CI/CD 集成、自动修复和合规报告生成。技术栈基于 Docker 沙箱、多种 LLM 提供商（OpenAI、Anthropic 等），并集成了 Caido、Playwright、Textual 等开源组件。
-   亮点: 自主 AI 渗透测试代理：自动执行侦察、漏洞利用和验证，并生成 PoC。; 多代理协作：多个 AI 代理像红队一样协同工作，覆盖更多攻击面。; CI/CD 集成：无缝接入 GitHub Actions，在 PR 阶段自动扫描并拦截漏洞。; 自动修复：基于漏洞发现生成安全补丁，一键合并。; 合规报告：生成符合 SOC 2、ISO 27001 等标准的渗透测试报告。
-   详细报告: Strix 是一个面向开发者和安全团队的 AI 渗透测试平台，它重新定义了自动化安全测试。与传统静态分析工具（SAST）或动态扫描工具（DAST）不同，Strix 的 AI 代理能够像真实黑客一样思考和执行攻击：它们动态运行目标代码，使用内置的渗透测试工具包（包括 HTTP 代理 Caido、浏览器自动化 Playwright、Shell 执行环境等）进行侦察、漏洞利用和后渗透。每个发现的漏洞都会生成可复现的 PoC，杜绝误报。
-
-Strix 支持多种扫描模式：本地代码库、远程 GitHub 仓库、线上 Web 应用（黑盒/白盒），并可通过指令文件指定测试范围。其核心武器库覆盖 OWASP Top 10 及更广泛的漏洞类型，包括注入攻击、访问控制缺陷、业务逻辑漏洞、API 安全问题等。
-
-技术层面，Strix 基于 Docker 沙箱隔离运行环境，通过 LLM API（如 GPT-5.4、Claude Sonnet 4.6、Gemini 3 Pro）驱动 AI 决策，支持多模型切换。它还集成了 LiteLLM 进行模型统一调用，使用 Textual 构建命令行界面。在 CI/CD 场景中，Strix 能自动识别 PR 变更的文件范围，仅对增量代码进行快速扫描，提升效率。
-
-Strix 还提供了云平台版本（app.strix.ai），支持持续渗透测试、DevSecOps 集成（GitHub、GitLab、Slack、Jira 等），并具备持续学习能力，自适应代码库，减少误报。企业版额外提供 SSO、自定义合规报告、BYOK 模型支持、专属 SLA 等高级功能。
-   活跃度: 未知（根据 GitHub 指标无最近提交，但 README 显示活跃迭代）  社区健康: 未知（GitHub 指标显示零活跃度，但 README 提及 Discord 社区和贡献指南，可能项目初期或指标未及时更新）
-   商业潜力: 高。安全测试是刚需，特别是 DevSecOps 趋势下，自动化渗透测试工具市场需求大。Strix 提供免费开源版本引流，云平台和企业版变现，商业模式清晰。
+4. TauricResearch/TradingAgents:
+   star: 91430  语言/技术: Python, LangGraph, OpenAI, Google, Anthropic, DeepSeek, Qwen, GLM, Docker, Alpha Vantage, Yahoo Finance
+   项目简介: TradingAgents 是一个多智能体金融交易框架，通过部署多个专业化 LLM 代理（基本分析师、情绪分析师、技术分析师、交易员、风险管理团队等）模拟真实交易公司的运作，协同评估市场条件并做出交易决策。
+   亮点: 多智能体协作：模拟真实交易公司，包含基本面、情绪、新闻、技术分析师，以及多头/空头研究员、交易员、风险管理和投资组合经理。; 广泛的LLM支持：兼容 OpenAI、Google、Anthropic、xAI、DeepSeek、Qwen、GLM、MiniMax、OpenRouter、Ollama 等数十种模型，支持本地和云端部署。; 持久化与恢复：自动记录决策日志，支持检查点恢复，中断后可从最后成功步骤继续运行，无需重新开始。
+   详细报告: TradingAgents 是一个基于 LangGraph 构建的多智能体金融交易框架，其核心思想是将复杂的交易任务分解为多个专业化角色，每个角色由独立的 LLM 驱动。框架包含分析师团队（基本面分析师、情绪分析师、新闻分析师、技术分析师）、研究员团队（多头和空头研究员，通过结构化辩论平衡收益与风险）、交易员（综合分析师和研究员报告做出交易决策）以及风险管理和投资组合经理（持续评估风险，批准或拒绝交易提案）。该框架支持多个市场（美股、港股、日股、欧股、印度、加拿大、澳洲、中国A股及加密货币），通过 Yahoo Finance 获取数据，并集成了 Alpha Vantage、FRED、Polymarket 等数据提供商。LLM 提供商方面，除了主流的 OpenAI、Google、Anthropic、xAI 外，还支持 DeepSeek、Qwen、GLM、MiniMax、OpenRouter、Ollama 以及 Azure OpenAI 和 AWS Bedrock，几乎涵盖了所有主流和国产模型。此外，框架提供了 Docker 部署选项，支持 Windows 和跨平台运行。TradingAgents 具有持久化机制：每次运行后自动追加决策到 `trading_memory.md`，下次分析同股票时会引用历史表现；启用检查点后，LangGraph 会在每个节点后保存状态，中断后可恢复。配置灵活，可以通过环境变量或配置文件调整 LLM 提供商、温度、辩论轮数等参数。注意，框架出于研究目的设计，交易表现取决于多种因素，不可作为投资建议。
+   活跃度: 高（从 CHANGELOG 可见持续频繁更新）  社区健康: 未知
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：构建一个内部安全审计机器人，将 Strix 集成到公司 CI/CD 流水线中，每次代码提交自动触发渗透测试，并生成带 PoC 的漏洞报告，直接推送到 Jira 或企微群。; 灵感2：基于 Strix 的多代理能力，开发一个“红蓝对抗演练平台”，设定模拟攻击场景（如金融交易流程），让 AI 代理持续攻击，同时另一个 AI 代理负责防御，以评估安全成熟度。; 灵感3：将 Strix 与漏洞赏金平台（如 HackerOne）结合，自动化提交高质量 PoC 报告，帮助白帽子节省人工重复验证的时间，专注挖掘高危漏洞。
-   项目链接: https://github.com/usestrix/strix
+   衍生灵感: 灵感1：基于 TradingAgents 的多智能体架构，可以开发一个“加密货币市场情绪监控与自动交易系统”，整合 Twitter、Reddit 和新闻源，针对 BTC/ETH 等主流币种进行实时情绪分析和自动交易。; 灵感2：将其集成到现有的量化交易平台中，利用其研究功能作为辅助决策模块——例如在回测系统中调用 TradingAgents 生成交易建议，与原有的技术指标策略进行对比或融合。; 灵感3：扩展为一个“多市场跨资产投资策略研究平台”，让不同分析师团队分别评估股票、债券、商品等不同资产类别，并由投资组合经理进行全局资产配置优化。
+   项目链接: https://github.com/TauricResearch/TradingAgents
