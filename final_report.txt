@@ -1,26 +1,4 @@
-1. alirezarezvani/claude-skills:
-   star: 21254  语言/技术: Python, Markdown, CLI, SKILL.md
-   项目简介: 这是一个为Claude Code、OpenAI Codex、Gemini CLI等13种AI编码工具打造的355个职业技能包（skills/plugins）的开源仓库。每个技能包含结构化的指令、零依赖的Python工具和参考文档，让AI代理瞬间拥有架构、营销、安全、合规等专业能力，无需手动调教。
-   亮点: 跨13种AI编码工具兼容（Claude Code/Codex/Gemini CLI/Cursor等）; 355个即用技能覆盖18个领域（工程、营销、安全、合规、C级咨询等）; 602个零依赖（stdlib-only）Python工具脚本
-   详细报告: 该项目是一个AI编码代理（coding agent）的“技能商店”，提供了355个模块化的指令包（每个技能包含SKILL.md、Python脚本和参考文档），让AI工具获得领域专业知识。覆盖的领域极其广泛：从核心工程（架构、前端、后端、DevOps、安全审计等）到营销（包含AEO——面向LLM的答案引擎优化、本地SEO等）、产品管理、项目管理、监管合规（ISO/MDR/FDA等）、C级顾问（CEO/CTO/CFO等18种角色）、学术研究（文献综述、资助申请、专利等）、企业研发运营（临床研究、市场研究等）。所有Python工具均使用标准库，无需任何pip安装。项目通过统一的SKILL.md标准实现跨工具兼容，并提供脚本一键转换到Cursor、Aider、Windsurf等9种工具格式。还包括预配置的Persona（如Startup CTO、Growth Marketer）和编排协议（Orchestration），用于组合多个技能解决跨领域问题。安全方面内置了技能安全审计器，可扫描技能中的恶意代码。项目还包含一个loop-library，用于设计AI代理的循环工作流。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个【企业级AI合规审计助手】，针对特定行业（如医疗、金融）将ISO、GDPR、SOC2等技能打包，自动扫描代码和文档并生成合规报告。; 灵感2：可以将其集成到【企业内部AI开发平台】中，作为插件市场，允许不同团队（工程、市场、法务）按需安装技能，实现AI代理的“岗位培训”。; 灵感3：可以创建一个【一键部署多工具AI技能平台】，利用项目的convert.sh脚本，将同一套技能同时部署到Cursor、Windsurf、Aider等工具，实现开发团队统一AI行为。
-   项目链接: https://github.com/alirezarezvani/claude-skills
-
-2. mvanhorn/last30days-skill:
-   star: 49898  语言/技术: Python 3.12+, Node.js (vendored Bird client for X search), yt-dlp, ScrapeCreators API, SQLite, HTML/CSS (inline CSS生成分享简报), Agent Skills (npx skills add), Claude Code 插件系统
-   项目简介: 这是一个AI代理驱动的搜索引擎，通过并行搜索Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub等多个平台最近30天的用户互动数据（点赞、评论、投票、真实货币押注等），由AI裁判合成一份摘要，并按真实参与度而非SEO排名。解决了传统搜索引擎无法获取各平台内部孤立数据的痛点，让你快速了解某人、某产品、某话题的实时社区反应。
-   亮点: 多平台并行搜索：一次性搜索Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub等，AI代理自动解析实体并定向搜索正确社区和账号。; 智能实体解析：预研究大脑自动将主题词映射到具体作者、仓库、子区、话题标签，确保精准命中。; 跨源聚类：相同故事跨平台自动合并，避免重复；最佳取抽取：额外幽默评分，筛选出最有趣的热门评论。; 无配置零门槛：Reddit、HN、GitHub直接可用；可选配置X、YouTube等，30秒设置向导。; 分享简报：可生成离线可用的暗色模式HTML文件，直接粘贴到Slack、邮件或Notion。
-   详细报告: last30days-skill是一个被设计为Claude Code插件或通用Agent Skills的工具，核心价值在于打破信息孤岛。传统搜索引擎（如Google）只能索引公开网页，而Reddit的评论、X的帖子、YouTube的完整转录、TikTok的标题、Polymarket的预测赔率等各自封闭，单个AI（如ChatGPT、Gemini）也仅能访问部分平台。本项目通过代理机制，让AI可以同时调用多个平台的API或公共接口，将分散的信息汇聚，再用参与度（点赞数、评论数、播放量、投注金额等）作为权重排序，最后由AI裁判合成一份简明的、带有来源引用的报告。技术实现上，使用Python 3.12+作为主引擎，利用yt-dlp下载YouTube转录，Node.js实现X搜索（vendored Bird client），ScrapeCreators API用于获取TikTok、Instagram、Threads等受限平台的数据。支持安装方式包括Claude Code市场、npx全局安装、手动上传skill文件等。v3版本显著提升了智能搜索能力：预研究模块会自动解析实体（如话题“OpenClaw”会映射到创始人@steipete、子区r/openclaw、GitHub仓库等），然后并行发起多源查询。新功能还包括跨源聚类、最佳取抽取（幽默评分）、ELI5模式、GitHub用户模式（按作者搜索PR和提交）、趋势监控（SQLite持久化+watchlist/briefing脚本）。项目本身开源（MIT许可证），且完全本地运行，无需外部追踪。文档极为详尽，从安装、配置、使用场景到架构说明均有覆盖。虽然GitHub API显示当前指标为零（可能为私有仓库或近期无活动），但README版本明确标有1,012个测试通过，显示其成熟度。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个「竞品情报实时监控平台」，集成到企业Slack/飞书机器人，每日自动推送指定竞品（如OpenAI vs Anthropic）的Reddit讨论、X帖子、YouTube评测和招聘信号，帮助产品经理和战略团队快速反应。; 灵感2：可以将其集成到「个人品牌舆情系统」中，为KOL或企业高管提供“上周你在社交媒体上的声量分析”，包括正面/负面情绪、热门话题、关键影响者等，支持定制化报告。; 灵感3：利用其多源实体解析和聚类能力，构建一个「突发事件追踪仪表盘」，当出现突发新闻（如名人去世、公司收购、产品发布）时，自动聚合各平台的第一手反应、预测市场赔率、GitHub提交等，生成时间线摘要。
-   项目链接: https://github.com/mvanhorn/last30days-skill
-
-3. bradautomates/claude-video:
+1. bradautomates/claude-video:
    star: 4418  语言/技术: Python, yt-dlp, ffmpeg, Whisper (Groq/OpenAI), Claude Read tool, Agent Skills framework
    项目简介: 这是一个让 Claude 能够“看”视频的开源工具。粘贴 YouTube 链接或本地视频文件，它自动下载视频、提取字幕和关键帧，让 Claude 基于视觉和听觉内容回答问题，解决了大模型无法直接理解视频的痛点。
    亮点: 支持YouTube、Loom、TikTok等数百种视频源及本地文件; 自动优先使用免费字幕，无字幕时调用Whisper转写; 场景感知帧提取，多种细节模式（transcript/efficient/balanced/token-burner）平衡速度与质量; 帧去重机制避免重复帧浪费token
@@ -31,13 +9,46 @@
    衍生灵感: 灵感1：基于此项目开发一个「自动会议纪要生成器」，输入团队会议录像，自动提取关键讨论点、决策和待办事项，并生成结构化笔记。; 灵感2：将其集成到「视频课程学习助手」中，用户可上传教学视频，AI自动总结知识点、提取代码片段，并生成习题。; 灵感3：构建「广告创意分析平台」，自动分析竞品视频广告的钩子、节奏、视觉元素，输出可复用的创意策略报告。
    项目链接: https://github.com/bradautomates/claude-video
 
-4. TauricResearch/TradingAgents:
-   star: 91430  语言/技术: Python, LangGraph, OpenAI, Google, Anthropic, DeepSeek, Qwen, GLM, Docker, Alpha Vantage, Yahoo Finance
-   项目简介: TradingAgents 是一个多智能体金融交易框架，通过部署多个专业化 LLM 代理（基本分析师、情绪分析师、技术分析师、交易员、风险管理团队等）模拟真实交易公司的运作，协同评估市场条件并做出交易决策。
-   亮点: 多智能体协作：模拟真实交易公司，包含基本面、情绪、新闻、技术分析师，以及多头/空头研究员、交易员、风险管理和投资组合经理。; 广泛的LLM支持：兼容 OpenAI、Google、Anthropic、xAI、DeepSeek、Qwen、GLM、MiniMax、OpenRouter、Ollama 等数十种模型，支持本地和云端部署。; 持久化与恢复：自动记录决策日志，支持检查点恢复，中断后可从最后成功步骤继续运行，无需重新开始。
-   详细报告: TradingAgents 是一个基于 LangGraph 构建的多智能体金融交易框架，其核心思想是将复杂的交易任务分解为多个专业化角色，每个角色由独立的 LLM 驱动。框架包含分析师团队（基本面分析师、情绪分析师、新闻分析师、技术分析师）、研究员团队（多头和空头研究员，通过结构化辩论平衡收益与风险）、交易员（综合分析师和研究员报告做出交易决策）以及风险管理和投资组合经理（持续评估风险，批准或拒绝交易提案）。该框架支持多个市场（美股、港股、日股、欧股、印度、加拿大、澳洲、中国A股及加密货币），通过 Yahoo Finance 获取数据，并集成了 Alpha Vantage、FRED、Polymarket 等数据提供商。LLM 提供商方面，除了主流的 OpenAI、Google、Anthropic、xAI 外，还支持 DeepSeek、Qwen、GLM、MiniMax、OpenRouter、Ollama 以及 Azure OpenAI 和 AWS Bedrock，几乎涵盖了所有主流和国产模型。此外，框架提供了 Docker 部署选项，支持 Windows 和跨平台运行。TradingAgents 具有持久化机制：每次运行后自动追加决策到 `trading_memory.md`，下次分析同股票时会引用历史表现；启用检查点后，LangGraph 会在每个节点后保存状态，中断后可恢复。配置灵活，可以通过环境变量或配置文件调整 LLM 提供商、温度、辩论轮数等参数。注意，框架出于研究目的设计，交易表现取决于多种因素，不可作为投资建议。
-   活跃度: 高（从 CHANGELOG 可见持续频繁更新）  社区健康: 未知
+2. kyutai-labs/pocket-tts:
+   star: 6291  语言/技术: Python, PyTorch, CLI, ONNX (社区移植), WebAssembly (社区), Rust (社区), C++ (社区), Core ML (社区)
+   项目简介: Pocket TTS 是一个超轻量级、专为CPU优化的文本转语音（TTS）应用。它只有1亿参数，无需GPU，就能在普通电脑上实现接近实时的语音合成（延迟约200ms，速度可达实时6倍）。支持英语、法语、德语、葡萄牙语、意大利语、西班牙语六种语言，并能通过音频样本进行语音克隆。提供Python API、命令行工具和本地Web界面，安装只需pip install pocket-tts。社区已移植到Rust、C++、.NET、Unity、浏览器等多种平台，堪称“程序员救星”——告别昂贵的GPU和无尽的API账单，轻松拥有本地TTS能力。
+   亮点: 可在CPU上以极低延迟（~200ms）和实时6倍速度运行，仅用2个CPU核心; 模型仅1亿参数，极小且高效，支持语音克隆和多语言; 提供Python API和CLI，一键安装即用，也支持本地Web服务和流式输出; 社区生态丰富，已有Rust、C++、.NET、Unity、浏览器、macOS原生应用等移植
+   详细报告: Pocket TTS 由Kyutai实验室开发，核心是为缓解传统TTS模型依赖GPU或云API的痛点。它基于PyTorch实现，专门在CPU上优化推理，实测在MacBook Air M4上可达6倍实时速度。模型输入文本，输出16kHz PCM音频数据。其架构使用变压器和语音编码器，通过“voice state”实现多语音管理，支持从wav文件或预置语音快速克隆。
+
+核心功能包括：
+- **快速生成**：`pocket-tts generate` 命令行即可生成音频，支持`--voice`选择语音（预置20+种）或自定义wav文件进行克隆，`--language`选择语言（英语、法语等），`--config`加载自定义权重。
+- **本地服务**：`pocket-tts serve` 启动HTTP服务器，访问`localhost:8000`即可通过Web界面交互，模型常驻内存，适合多次调用。
+- **语音导出**：`export-voice` 将音频文件预处理为safetensors格式，加速后续加载。
+- **Python库**：通过`TTSModel`类加载模型，`get_state_for_audio_prompt`获取语音状态，`generate_audio`生成音频，并支持多语音状态并发。
+- **无限文本**：支持极长文本的流式生成，不会因长度受限。
+
+技术细节：模型使用transformer解码器，结合条件音频编码器进行语音克隆。推理时采用KV缓存机制，降低重复计算。社区实现了多种替代后端（MLX、ONNX、Candle、C++等），甚至能在浏览器中通过WebAssembly运行。
+
+注意：目前不支持在文本中插入静音来生成停顿（需等待PR）。另外，在GPU上并未观察到加速，因此官方推荐CPU使用。
+   活跃度: 未知  社区健康: 活跃
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 TradingAgents 的多智能体架构，可以开发一个“加密货币市场情绪监控与自动交易系统”，整合 Twitter、Reddit 和新闻源，针对 BTC/ETH 等主流币种进行实时情绪分析和自动交易。; 灵感2：将其集成到现有的量化交易平台中，利用其研究功能作为辅助决策模块——例如在回测系统中调用 TradingAgents 生成交易建议，与原有的技术指标策略进行对比或融合。; 灵感3：扩展为一个“多市场跨资产投资策略研究平台”，让不同分析师团队分别评估股票、债券、商品等不同资产类别，并由投资组合经理进行全局资产配置优化。
-   项目链接: https://github.com/TauricResearch/TradingAgents
+   衍生灵感: 灵感1：离线智能家居语音助手。利用Pocket TTS的CPU友好特性，将其嵌入树莓派或NAS，实现完全本地化的语音播报（如朗读新闻、天气、日程），避免隐私泄露。结合语音克隆功能，让助手用家人的声音交流，提升亲切感。; 灵感2：游戏实时配音引擎。借助Unity或Unreal的社区集成，允许玩家输入自定义文本并选择角色语音，生成游戏内对白。可结合对话树，实现动态剧情。甚至可以克隆玩家自己的声音，让游戏角色“说”出玩家想说的话。; 灵感3：多语言有声读物生成器。利用其多语言支持和无限文本能力，构建一个自动将电子书转为有声读物的工具。用户可选择不同语言的叙述者声音，支持流式播放和断点续听。配合语音克隆，甚至可以由作者本人录制少量样本后“朗读”整本书。
+   项目链接: https://github.com/kyutai-labs/pocket-tts
+
+3. hesreallyhim/awesome-claude-code:
+   star: 49242  语言/技术: Claude Code, Markdown, JSON, MCP, Rust, Python, JavaScript, React, SQLite, Docker, SwiftUI
+   项目简介: 一个精选的Claude Code资源列表，包含各种插件、技能、指南、工具，帮助开发者充分利用Claude Code这一AI编码助手。
+   亮点: 一网打尽Claude Code生态：从官方资源到社区贡献，插件、技能、钩子、代理编排应有尽有。; 分类清晰：涵盖教学、文档、研究、基础设施、安全、监控等多个维度。; 收录了大量高质量插件和工具，如cxpak（依赖图打包）、Flue（桌面应用桥接）等。
+   详细报告: 这是一个由Anthropic官方维护的Awesome列表，旨在收集与Claude Code相关的优质资源。Claude Code是Anthropic推出的AI编码助手，能够理解代码库、执行命令、生成代码。该列表分为多个章节，包括：开始指南、官方资源、文档知识、研究科学、提供商与运行时、远程控制、替代客户端、状态行、设计UI、写作、创意媒体、基础设施与DevOps、安全、多智能体编排、技能、记忆与上下文持久化、使用与成本监控、可观测性、代码检查等。每个条目都包含项目名称、链接、作者和简短描述。虽然内容非常丰富，但由于README被截断，后半部分（如具体插件细节）无法完整评估。项目本身是一个索引，不包含源码，因此技术栈主要基于被收录项目的技术。该列表持续更新，适合所有使用Claude Code的开发者作为参考手册。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此列表的“技能”分类，可以构建一个Claude Code技能市场网站，让开发者上传、评分、推荐技能。; 灵感2：将其中的“监控与可观测性”工具集成到一个统一的Claude Code仪表盘中，实时追踪多个代理的成本、令牌和性能。; 灵感3：利用列表中提到的MCP插件，开发一个通用的企业级知识库连接器，支持Confluence、Notion、Google Docs等多种数据源。
+   项目链接: https://github.com/hesreallyhim/awesome-claude-code
+
+4. mvanhorn/last30days-skill:
+   star: 49898  语言/技术: Python 3.12+, Node.js (vendored Bird client for X search), yt-dlp, ScrapeCreators API, SQLite, HTML/CSS (inline CSS生成分享简报), Agent Skills (npx skills add), Claude Code 插件系统
+   项目简介: 这是一个AI代理驱动的搜索引擎，通过并行搜索Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub等多个平台最近30天的用户互动数据（点赞、评论、投票、真实货币押注等），由AI裁判合成一份摘要，并按真实参与度而非SEO排名。解决了传统搜索引擎无法获取各平台内部孤立数据的痛点，让你快速了解某人、某产品、某话题的实时社区反应。
+   亮点: 多平台并行搜索：一次性搜索Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub等，AI代理自动解析实体并定向搜索正确社区和账号。; 智能实体解析：预研究大脑自动将主题词映射到具体作者、仓库、子区、话题标签，确保精准命中。; 跨源聚类：相同故事跨平台自动合并，避免重复；最佳取抽取：额外幽默评分，筛选出最有趣的热门评论。; 无配置零门槛：Reddit、HN、GitHub直接可用；可选配置X、YouTube等，30秒设置向导。; 分享简报：可生成离线可用的暗色模式HTML文件，直接粘贴到Slack、邮件或Notion。
+   详细报告: last30days-skill是一个被设计为Claude Code插件或通用Agent Skills的工具，核心价值在于打破信息孤岛。传统搜索引擎（如Google）只能索引公开网页，而Reddit的评论、X的帖子、YouTube的完整转录、TikTok的标题、Polymarket的预测赔率等各自封闭，单个AI（如ChatGPT、Gemini）也仅能访问部分平台。本项目通过代理机制，让AI可以同时调用多个平台的API或公共接口，将分散的信息汇聚，再用参与度（点赞数、评论数、播放量、投注金额等）作为权重排序，最后由AI裁判合成一份简明的、带有来源引用的报告。技术实现上，使用Python 3.12+作为主引擎，利用yt-dlp下载YouTube转录，Node.js实现X搜索（vendored Bird client），ScrapeCreators API用于获取TikTok、Instagram、Threads等受限平台的数据。支持安装方式包括Claude Code市场、npx全局安装、手动上传skill文件等。v3版本显著提升了智能搜索能力：预研究模块会自动解析实体（如话题“OpenClaw”会映射到创始人@steipete、子区r/openclaw、GitHub仓库等），然后并行发起多源查询。新功能还包括跨源聚类、最佳取抽取（幽默评分）、ELI5模式、GitHub用户模式（按作者搜索PR和提交）、趋势监控（SQLite持久化+watchlist/briefing脚本）。项目本身开源（MIT许可证），且完全本地运行，无需外部追踪。文档极为详尽，从安装、配置、使用场景到架构说明均有覆盖。虽然GitHub API显示当前指标为零（可能为私有仓库或近期无活动），但README版本明确标有1,012个测试通过，显示其成熟度。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目，可以开发一个「竞品情报实时监控平台」，集成到企业Slack/飞书机器人，每日自动推送指定竞品（如OpenAI vs Anthropic）的Reddit讨论、X帖子、YouTube评测和招聘信号，帮助产品经理和战略团队快速反应。; 灵感2：可以将其集成到「个人品牌舆情系统」中，为KOL或企业高管提供“上周你在社交媒体上的声量分析”，包括正面/负面情绪、热门话题、关键影响者等，支持定制化报告。; 灵感3：利用其多源实体解析和聚类能力，构建一个「突发事件追踪仪表盘」，当出现突发新闻（如名人去世、公司收购、产品发布）时，自动聚合各平台的第一手反应、预测市场赔率、GitHub提交等，生成时间线摘要。
+   项目链接: https://github.com/mvanhorn/last30days-skill
