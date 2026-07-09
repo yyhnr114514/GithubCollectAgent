@@ -1,4 +1,25 @@
-1. bradautomates/claude-video:
+1. mvanhorn/last30days-skill:
+   star: 50893  语言/技术: Python 3.12+, Node.js (Bird client for X搜索), yt-dlp, ScrapeCreators API, Claude Code SDK, Agent Skills CLI
+   项目简介: 一个AI agent驱动的搜索引擎，聚合Reddit、X、YouTube、TikTok、GitHub等数十个平台的最新内容，根据用户真实参与度（点赞、投币、真实金钱）而非编辑推荐进行评分，通过AI合成生成一份有引用的摘要简报，帮助开发者快速了解任何话题在过去30天的社区热点。零配置安装，支持Claude Code、Codex、Cursor等主流AI编码助手。
+   亮点: 跨平台聚合搜索：同时检索Reddit、X、YouTube、TikTok、GitHub、Polymarket等，按用户真实参与度评分。; AI自动合成：预解析主题涉及的人物和关键词，并行搜索，合并相同故事，最终生成有引用来源的摘要简报。; 零配置多宿主：一行命令安装在50+种AI编码助手或终端中，开箱即用。; 社区驱动：175+合并PR，52位贡献者，活跃开发中。
+   详细报告: last30days-skill 是一个AI agent主导的搜索引擎插件，核心逻辑是“搜索人，而非编辑”。它通过代理同时访问多个封闭平台（如Reddit、X、YouTube等），抓取最新帖子、评论、转录、赔率等，然后根据真实用户参与度（点赞数、投币量、交易金额）进行评分与排序，最后由AI agent合成一份简洁的简报。
+
+**工作原理**：用户输入一个主题（人物、公司、产品、对比等），agent首先进行预研究，识别相关的X账号、GitHub仓库、subreddit、TikTok标签等。然后同时所有来源发送查询，扩展关键词，获取结果。同一件事（如某次发布）在不同平台的讨论会被自动合并为一个集群。随后，agent根据参与度指标（如Reddit upvotes、X likes、YouTube观看次数、Polymarket赔率）评分，并排序输出。最终结果以结构化简报呈现，包含引用来源。
+
+**支持来源**（部分需API key或浏览器session）：Reddit、X/Twitter、YouTube、TikTok、Instagram Reels、Hacker News、Polymarket、GitHub、Digg、arXiv、Techmeme、LinkedIn、StockTwits、Threads、Pinterest、Bluesky、Perplexity、Web等。
+
+**使用场景**：会前调研（了解一个人最近的动态）、招聘信号分析（通过职位发布推测公司方向）、工具对比（社区真实反馈）、旅行规划（景点实时评价）、快速学习（社区最新prompt技巧）等。
+
+**安装方式**：推荐在Claude Code中使用市场插件命令，或通过`npx skills`在50+种AI编码助手（如Cursor、Copilot、Gemini CLI等）中安装。支持Windows、macOS、Linux。
+
+**开源与社区**：MIT许可，无追踪分析。代码公开在GitHub，拥有超过2700个测试。社区贡献活跃，安全方面经过多次审查加固。
+   活跃度: 活跃。README记载截至2026年7月有v3.11.1版本，频繁迭代，近期增加了多个新来源和功能。  社区健康: 活跃。项目有52位社区贡献者，175+合并PR，测试覆盖率达84%，安全审计严格。
+   商业潜力: 高。该项目直接解决个人和企业快速获取多平台社区情报的痛点。可包装为SaaS服务（如企业版定时监控、白标报告），适用于销售情报、竞争分析、品牌舆情、投资者关系等领域。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：开发一个“竞品情报监控看板”，定时（如每日）调用last30days-skill生成特定公司或产品的社区动态报告，并通过Slack/邮件推送，帮助市场团队快速响应舆论变化。; 灵感2：集成到企业CRM系统中，在销售代表会见客户前自动生成客户的社交动态摘要（包括其X帖子、YouTube访谈、Reddit讨论），提升沟通效率与准备度。; 灵感3：创建一个“行业热点追踪器”，用户维护一个主题列表（如“AI agents”、“量子计算”等），last30days-skill每日自动运行并生成聚合简报，可定制输出格式并支持多语言。
+   项目链接: https://github.com/mvanhorn/last30days-skill
+
+2. bradautomates/claude-video:
    star: 4418  语言/技术: Python, yt-dlp, ffmpeg, Whisper (Groq/OpenAI), Claude Read tool, Agent Skills framework
    项目简介: 这是一个让 Claude 能够“看”视频的开源工具。粘贴 YouTube 链接或本地视频文件，它自动下载视频、提取字幕和关键帧，让 Claude 基于视觉和听觉内容回答问题，解决了大模型无法直接理解视频的痛点。
    亮点: 支持YouTube、Loom、TikTok等数百种视频源及本地文件; 自动优先使用免费字幕，无字幕时调用Whisper转写; 场景感知帧提取，多种细节模式（transcript/efficient/balanced/token-burner）平衡速度与质量; 帧去重机制避免重复帧浪费token
@@ -9,7 +30,7 @@
    衍生灵感: 灵感1：基于此项目开发一个「自动会议纪要生成器」，输入团队会议录像，自动提取关键讨论点、决策和待办事项，并生成结构化笔记。; 灵感2：将其集成到「视频课程学习助手」中，用户可上传教学视频，AI自动总结知识点、提取代码片段，并生成习题。; 灵感3：构建「广告创意分析平台」，自动分析竞品视频广告的钩子、节奏、视觉元素，输出可复用的创意策略报告。
    项目链接: https://github.com/bradautomates/claude-video
 
-2. kyutai-labs/pocket-tts:
+3. kyutai-labs/pocket-tts:
    star: 6291  语言/技术: Python, PyTorch, CLI, ONNX (社区移植), WebAssembly (社区), Rust (社区), C++ (社区), Core ML (社区)
    项目简介: Pocket TTS 是一个超轻量级、专为CPU优化的文本转语音（TTS）应用。它只有1亿参数，无需GPU，就能在普通电脑上实现接近实时的语音合成（延迟约200ms，速度可达实时6倍）。支持英语、法语、德语、葡萄牙语、意大利语、西班牙语六种语言，并能通过音频样本进行语音克隆。提供Python API、命令行工具和本地Web界面，安装只需pip install pocket-tts。社区已移植到Rust、C++、.NET、Unity、浏览器等多种平台，堪称“程序员救星”——告别昂贵的GPU和无尽的API账单，轻松拥有本地TTS能力。
    亮点: 可在CPU上以极低延迟（~200ms）和实时6倍速度运行，仅用2个CPU核心; 模型仅1亿参数，极小且高效，支持语音克隆和多语言; 提供Python API和CLI，一键安装即用，也支持本地Web服务和流式输出; 社区生态丰富，已有Rust、C++、.NET、Unity、浏览器、macOS原生应用等移植
@@ -31,24 +52,13 @@
    衍生灵感: 灵感1：离线智能家居语音助手。利用Pocket TTS的CPU友好特性，将其嵌入树莓派或NAS，实现完全本地化的语音播报（如朗读新闻、天气、日程），避免隐私泄露。结合语音克隆功能，让助手用家人的声音交流，提升亲切感。; 灵感2：游戏实时配音引擎。借助Unity或Unreal的社区集成，允许玩家输入自定义文本并选择角色语音，生成游戏内对白。可结合对话树，实现动态剧情。甚至可以克隆玩家自己的声音，让游戏角色“说”出玩家想说的话。; 灵感3：多语言有声读物生成器。利用其多语言支持和无限文本能力，构建一个自动将电子书转为有声读物的工具。用户可选择不同语言的叙述者声音，支持流式播放和断点续听。配合语音克隆，甚至可以由作者本人录制少量样本后“朗读”整本书。
    项目链接: https://github.com/kyutai-labs/pocket-tts
 
-3. hesreallyhim/awesome-claude-code:
-   star: 49242  语言/技术: Claude Code, Markdown, JSON, MCP, Rust, Python, JavaScript, React, SQLite, Docker, SwiftUI
-   项目简介: 一个精选的Claude Code资源列表，包含各种插件、技能、指南、工具，帮助开发者充分利用Claude Code这一AI编码助手。
-   亮点: 一网打尽Claude Code生态：从官方资源到社区贡献，插件、技能、钩子、代理编排应有尽有。; 分类清晰：涵盖教学、文档、研究、基础设施、安全、监控等多个维度。; 收录了大量高质量插件和工具，如cxpak（依赖图打包）、Flue（桌面应用桥接）等。
-   详细报告: 这是一个由Anthropic官方维护的Awesome列表，旨在收集与Claude Code相关的优质资源。Claude Code是Anthropic推出的AI编码助手，能够理解代码库、执行命令、生成代码。该列表分为多个章节，包括：开始指南、官方资源、文档知识、研究科学、提供商与运行时、远程控制、替代客户端、状态行、设计UI、写作、创意媒体、基础设施与DevOps、安全、多智能体编排、技能、记忆与上下文持久化、使用与成本监控、可观测性、代码检查等。每个条目都包含项目名称、链接、作者和简短描述。虽然内容非常丰富，但由于README被截断，后半部分（如具体插件细节）无法完整评估。项目本身是一个索引，不包含源码，因此技术栈主要基于被收录项目的技术。该列表持续更新，适合所有使用Claude Code的开发者作为参考手册。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
+4. jingyaogong/minimind:
+   star: 53034  语言/技术: Python, PyTorch, CUDA, DeepSpeed, DDP, LoRA, MoE, Qwen3, Transformers, trl, peft, vllm, ollama, llama.cpp, Streamlit, SwanLab, Jupyter
+   项目简介: MiniMind是一个从零开始训练超小语言模型的开源项目，仅需3块钱成本和2小时训练时间即可训练出约64M参数的模型。项目覆盖了从数据清洗、预训练、监督微调、LoRA、RLHF（DPO/PPO/GRPO等）、Tool Use、Agentic RL、模型蒸馏等完整训练链路，所有核心算法均用PyTorch从零原生实现，不依赖第三方高层封装。它还拓展了视觉模态、多模态Omni、扩散语言模型等。该项目既是教程也是可复现的起点，旨在降低LLM学习门槛。
+   亮点: 极低成本训练：仅需3元GPU租用成本，2小时即可训练64M参数模型; 完整训练链路：覆盖Pretrain、SFT、LoRA、RLHF（DPO/PPO/GRPO）、Tool Use、Agentic RL、模型蒸馏等全部阶段; 从零原生实现：所有核心算法代码均使用PyTorch从零实现，不依赖Transformers、trl等高级封装，便于深入理解; 多模态拓展：已扩展视觉模型MiniMind-V、多模态Omni模型MiniMind-O、扩散语言模型等; 兼容主流生态：支持Transformers、vllm、ollama、llama.cpp等推理框架，提供OpenAI API兼容接口
+   详细报告: MiniMind是一个旨在降低大语言模型（LLM）入门门槛的开源项目，其核心思想是“大道至简”——从零开始，用极低的成本（3块钱、2小时）训练一个仅64M参数的小模型。项目不仅提供了轻量级的Dense和MoE架构（主线对齐Qwen3/Qwen3-MoE），还完整实现了LLM训练的整个流程：包括分词器训练（BPE+ByteLevel）、预训练、指令微调、LoRA、DPO、PPO、GRPO、CISPO等强化学习算法、工具调用（Tool Use）、Agentic强化学习、自适应思考、模型蒸馏等。所有算法均使用PyTorch从零原生实现，不依赖任何第三方库的高层抽象接口，这为学习者提供了彻底理解底层机制的机会。项目开源了高质量数据集（除用户隐私外，均为公开许可数据或蒸馏合成数据），支持单卡/多卡训练（DDP、DeepSpeed），兼容wandb/SwanLab可视化。此外，项目还提供了兼容OpenAI API的服务端、Streamlit WebUI，以及第三方推理框架（vllm、ollama、llama.cpp）集成。MiniMind还有多个拓展版本：视觉模型MiniMind-V、多模态Omni模型MiniMind-O、扩散语言模型（dLM）、线性注意力模型等。项目文档详尽，包括更新日志、快速开始、数据介绍、训练说明等，并有许多社区贡献和相关学术论文引用。总之，MiniMind是一个适合LLM学习和研究的一站式平台，让开发者能够以最小成本亲手构建和理解语言模型。
+   活跃度: 活跃。项目持续更新，发布多个版本，最近更新日志为2026-04-01，并有多个拓展子项目。  社区健康: 良好。项目有多个贡献者，相关学术论文引用，GitHub Discussion活跃，并提供在线体验Demo。
+   商业潜力: 高。项目提供了低成本训练私有化小模型的完整方案，适合需要数据合规或定制化AI的企业，例如金融、医疗、法律等行业的内部助手。同时，可作为教育产品商业化。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此列表的“技能”分类，可以构建一个Claude Code技能市场网站，让开发者上传、评分、推荐技能。; 灵感2：将其中的“监控与可观测性”工具集成到一个统一的Claude Code仪表盘中，实时追踪多个代理的成本、令牌和性能。; 灵感3：利用列表中提到的MCP插件，开发一个通用的企业级知识库连接器，支持Confluence、Notion、Google Docs等多种数据源。
-   项目链接: https://github.com/hesreallyhim/awesome-claude-code
-
-4. mvanhorn/last30days-skill:
-   star: 49898  语言/技术: Python 3.12+, Node.js (vendored Bird client for X search), yt-dlp, ScrapeCreators API, SQLite, HTML/CSS (inline CSS生成分享简报), Agent Skills (npx skills add), Claude Code 插件系统
-   项目简介: 这是一个AI代理驱动的搜索引擎，通过并行搜索Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub等多个平台最近30天的用户互动数据（点赞、评论、投票、真实货币押注等），由AI裁判合成一份摘要，并按真实参与度而非SEO排名。解决了传统搜索引擎无法获取各平台内部孤立数据的痛点，让你快速了解某人、某产品、某话题的实时社区反应。
-   亮点: 多平台并行搜索：一次性搜索Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub等，AI代理自动解析实体并定向搜索正确社区和账号。; 智能实体解析：预研究大脑自动将主题词映射到具体作者、仓库、子区、话题标签，确保精准命中。; 跨源聚类：相同故事跨平台自动合并，避免重复；最佳取抽取：额外幽默评分，筛选出最有趣的热门评论。; 无配置零门槛：Reddit、HN、GitHub直接可用；可选配置X、YouTube等，30秒设置向导。; 分享简报：可生成离线可用的暗色模式HTML文件，直接粘贴到Slack、邮件或Notion。
-   详细报告: last30days-skill是一个被设计为Claude Code插件或通用Agent Skills的工具，核心价值在于打破信息孤岛。传统搜索引擎（如Google）只能索引公开网页，而Reddit的评论、X的帖子、YouTube的完整转录、TikTok的标题、Polymarket的预测赔率等各自封闭，单个AI（如ChatGPT、Gemini）也仅能访问部分平台。本项目通过代理机制，让AI可以同时调用多个平台的API或公共接口，将分散的信息汇聚，再用参与度（点赞数、评论数、播放量、投注金额等）作为权重排序，最后由AI裁判合成一份简明的、带有来源引用的报告。技术实现上，使用Python 3.12+作为主引擎，利用yt-dlp下载YouTube转录，Node.js实现X搜索（vendored Bird client），ScrapeCreators API用于获取TikTok、Instagram、Threads等受限平台的数据。支持安装方式包括Claude Code市场、npx全局安装、手动上传skill文件等。v3版本显著提升了智能搜索能力：预研究模块会自动解析实体（如话题“OpenClaw”会映射到创始人@steipete、子区r/openclaw、GitHub仓库等），然后并行发起多源查询。新功能还包括跨源聚类、最佳取抽取（幽默评分）、ELI5模式、GitHub用户模式（按作者搜索PR和提交）、趋势监控（SQLite持久化+watchlist/briefing脚本）。项目本身开源（MIT许可证），且完全本地运行，无需外部追踪。文档极为详尽，从安装、配置、使用场景到架构说明均有覆盖。虽然GitHub API显示当前指标为零（可能为私有仓库或近期无活动），但README版本明确标有1,012个测试通过，显示其成熟度。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个「竞品情报实时监控平台」，集成到企业Slack/飞书机器人，每日自动推送指定竞品（如OpenAI vs Anthropic）的Reddit讨论、X帖子、YouTube评测和招聘信号，帮助产品经理和战略团队快速反应。; 灵感2：可以将其集成到「个人品牌舆情系统」中，为KOL或企业高管提供“上周你在社交媒体上的声量分析”，包括正面/负面情绪、热门话题、关键影响者等，支持定制化报告。; 灵感3：利用其多源实体解析和聚类能力，构建一个「突发事件追踪仪表盘」，当出现突发新闻（如名人去世、公司收购、产品发布）时，自动聚合各平台的第一手反应、预测市场赔率、GitHub提交等，生成时间线摘要。
-   项目链接: https://github.com/mvanhorn/last30days-skill
+   衍生灵感: 灵感1：基于MiniMind的极低成本训练流程，可以开发一个【面向高校教学的小型LLM实验平台】，让学生们亲手训练自己的对话机器人，用于AI课程实践或毕业设计。; 灵感2：利用MiniMind的轻量级模型和Agentic RL能力，构建一个【嵌入式设备上的智能助手】，例如智能家居的离线语音助手，在资源受限的硬件上实现基础对话和简单任务执行。; 灵感3：结合MiniMind的Tool Use和多轮对话能力，可以开发一个【特定领域的自动化客服系统】，例如企业内部的IT工单处理助手，通过调用API完成报修、查询等任务，降低人工成本。
+   项目链接: https://github.com/jingyaogong/minimind
