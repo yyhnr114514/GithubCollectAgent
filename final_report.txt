@@ -1,23 +1,24 @@
-1. mvanhorn/last30days-skill:
-   star: 50893  语言/技术: Python 3.12+, Node.js (Bird client for X搜索), yt-dlp, ScrapeCreators API, Claude Code SDK, Agent Skills CLI
-   项目简介: 一个AI agent驱动的搜索引擎，聚合Reddit、X、YouTube、TikTok、GitHub等数十个平台的最新内容，根据用户真实参与度（点赞、投币、真实金钱）而非编辑推荐进行评分，通过AI合成生成一份有引用的摘要简报，帮助开发者快速了解任何话题在过去30天的社区热点。零配置安装，支持Claude Code、Codex、Cursor等主流AI编码助手。
-   亮点: 跨平台聚合搜索：同时检索Reddit、X、YouTube、TikTok、GitHub、Polymarket等，按用户真实参与度评分。; AI自动合成：预解析主题涉及的人物和关键词，并行搜索，合并相同故事，最终生成有引用来源的摘要简报。; 零配置多宿主：一行命令安装在50+种AI编码助手或终端中，开箱即用。; 社区驱动：175+合并PR，52位贡献者，活跃开发中。
-   详细报告: last30days-skill 是一个AI agent主导的搜索引擎插件，核心逻辑是“搜索人，而非编辑”。它通过代理同时访问多个封闭平台（如Reddit、X、YouTube等），抓取最新帖子、评论、转录、赔率等，然后根据真实用户参与度（点赞数、投币量、交易金额）进行评分与排序，最后由AI agent合成一份简洁的简报。
+1. unclecode/crawl4ai:
+   star: 71938  语言/技术: Python, Playwright, Selenium, FastAPI, Docker, Chromium, Firefox, WebKit, BM25, LLM
+   项目简介: Crawl4AI 是一个开源的、面向 LLM 友好的网络爬虫和数据抓取工具，能将网页内容高效转换为干净的 Markdown 格式，专为 RAG、AI Agent 和数据管道设计。它解决了传统爬虫输出混乱、难以被大模型直接使用的问题，同时提供丰富的控制能力（如会话管理、代理、自定义钩子）和部署选项（Docker、云平台），是打工人和 AI 开发者的“摸鱼神器”。
+   亮点: LLM 就绪输出：自动生成带标题、表格、代码和引用提示的智能 Markdown，让大模型直接啃。; 全栈控制：支持浏览器池、代理、Cookie、用户脚本和钩子，爬取过程完全在手。; 自适应智能：学习站点模式，只抓取相关内容，不浪费流量和时间。
+   详细报告: Crawl4AI 是一个由 UncleCode 开发的，拥有 50k+ Star 的开源网络爬虫与抓取框架。它的核心使命是把杂乱无章的网页变成 LLM 喜欢的 Markdown 格式，彻底解决“爬下来的数据大模型读不懂”的痛点。
 
-**工作原理**：用户输入一个主题（人物、公司、产品、对比等），agent首先进行预研究，识别相关的X账号、GitHub仓库、subreddit、TikTok标签等。然后同时所有来源发送查询，扩展关键词，获取结果。同一件事（如某次发布）在不同平台的讨论会被自动合并为一个集群。随后，agent根据参与度指标（如Reddit upvotes、X likes、YouTube观看次数、Polymarket赔率）评分，并排序输出。最终结果以结构化简报呈现，包含引用来源。
+**主要功能模块：**
+1. **Markdown 生成**：提供干净的 Markdown（Clean Markdown）、拟合 Markdown（Fit Markdown，使用 BM25 算法过滤噪声）、引用式 Markdown（将链接转为编号列表）等多种输出策略。支持自定义生成器，开发者可写自己的策略。
+2. **结构化数据提取**：支持基于 LLM 的提取（可接任何开源或闭源 LLM），也支持纯 CSS/XPath 的快速提取。内置分块策略（主题、正则、句子级）和余弦相似度检索，方便做语义提取。
+3. **浏览器集成**：深度整合 Playwright 和 Selenium，支持 Chromium、Firefox、WebKit 三大浏览器。可托管自有浏览器、远程控制、持久化会话、多代理认证，还能动态调整视口、模拟滚动、处理懒加载。
+4. **爬取能力**：动态内容执行 JS、截图、媒体提取、缓存、IFrame 内容、全页面扫描（无限滚动）。支持 raw HTML 和本地文件的直接处理。
+5. **部署方案**：提供 Docker 镜像（含 FastAPI 服务器和实时监控面板）、JWT 认证、API 网关，适合生产环境。也支持云平台一键部署。
 
-**支持来源**（部分需API key或浏览器session）：Reddit、X/Twitter、YouTube、TikTok、Instagram Reels、Hacker News、Polymarket、GitHub、Digg、arXiv、Techmeme、LinkedIn、StockTwits、Threads、Pinterest、Bluesky、Perplexity、Web等。
+技术实现上，Crawl4AI 用了异步 Playwright 实现高性能浏览器池，结合缓存和预取模式可提速 5-10 倍。架构设计灵活，所有组件可替换。文档详尽，示例丰富，社区活跃。
 
-**使用场景**：会前调研（了解一个人最近的动态）、招聘信号分析（通过职位发布推测公司方向）、工具对比（社区真实反馈）、旅行规划（景点实时评价）、快速学习（社区最新prompt技巧）等。
-
-**安装方式**：推荐在Claude Code中使用市场插件命令，或通过`npx skills`在50+种AI编码助手（如Cursor、Copilot、Gemini CLI等）中安装。支持Windows、macOS、Linux。
-
-**开源与社区**：MIT许可，无追踪分析。代码公开在GitHub，拥有超过2700个测试。社区贡献活跃，安全方面经过多次审查加固。
-   活跃度: 活跃。README记载截至2026年7月有v3.11.1版本，频繁迭代，近期增加了多个新来源和功能。  社区健康: 活跃。项目有52位社区贡献者，175+合并PR，测试覆盖率达84%，安全审计严格。
-   商业潜力: 高。该项目直接解决个人和企业快速获取多平台社区情报的痛点。可包装为SaaS服务（如企业版定时监控、白标报告），适用于销售情报、竞争分析、品牌舆情、投资者关系等领域。
+注意：由于 README 内容被截断，部分高级用法和完整 API 细节未能覆盖，建议查阅官方文档。
+   活跃度: 非常活跃（近期频繁发布补丁和安全更新）  社区健康: 优秀（50k+ Star，活跃的 Discord 和 GitHub 社区，定期发布版本）
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个“竞品情报监控看板”，定时（如每日）调用last30days-skill生成特定公司或产品的社区动态报告，并通过Slack/邮件推送，帮助市场团队快速响应舆论变化。; 灵感2：集成到企业CRM系统中，在销售代表会见客户前自动生成客户的社交动态摘要（包括其X帖子、YouTube访谈、Reddit讨论），提升沟通效率与准备度。; 灵感3：创建一个“行业热点追踪器”，用户维护一个主题列表（如“AI agents”、“量子计算”等），last30days-skill每日自动运行并生成聚合简报，可定制输出格式并支持多语言。
-   项目链接: https://github.com/mvanhorn/last30days-skill
+   衍生灵感: 灵感1：基于 Crawl4AI 开发一个“竞品价格监控 Bot”，定时爬取竞争对手电商页面，自动提取产品价格并生成 Markdown 报告，集成到钉钉/飞书通知。; 灵感2：将 Crawl4AI 集成到“企业知识问答系统”中，用于自动爬取内部 Wiki 或行业新闻，构建 RAG 知识库，让 AI 助手能回答最新信息。; 灵感3：利用其 LLM 提取能力，做一个“网页数据转结构化 API”，输入任意商品详情页 URL，输出规范化 JSON（如名称、价格、规格），供其他系统调用。
+   项目链接: https://github.com/unclecode/crawl4ai
 
 2. bradautomates/claude-video:
    star: 4418  语言/技术: Python, yt-dlp, ffmpeg, Whisper (Groq/OpenAI), Claude Read tool, Agent Skills framework
@@ -52,13 +53,13 @@
    衍生灵感: 灵感1：离线智能家居语音助手。利用Pocket TTS的CPU友好特性，将其嵌入树莓派或NAS，实现完全本地化的语音播报（如朗读新闻、天气、日程），避免隐私泄露。结合语音克隆功能，让助手用家人的声音交流，提升亲切感。; 灵感2：游戏实时配音引擎。借助Unity或Unreal的社区集成，允许玩家输入自定义文本并选择角色语音，生成游戏内对白。可结合对话树，实现动态剧情。甚至可以克隆玩家自己的声音，让游戏角色“说”出玩家想说的话。; 灵感3：多语言有声读物生成器。利用其多语言支持和无限文本能力，构建一个自动将电子书转为有声读物的工具。用户可选择不同语言的叙述者声音，支持流式播放和断点续听。配合语音克隆，甚至可以由作者本人录制少量样本后“朗读”整本书。
    项目链接: https://github.com/kyutai-labs/pocket-tts
 
-4. jingyaogong/minimind:
-   star: 53034  语言/技术: Python, PyTorch, CUDA, DeepSpeed, DDP, LoRA, MoE, Qwen3, Transformers, trl, peft, vllm, ollama, llama.cpp, Streamlit, SwanLab, Jupyter
-   项目简介: MiniMind是一个从零开始训练超小语言模型的开源项目，仅需3块钱成本和2小时训练时间即可训练出约64M参数的模型。项目覆盖了从数据清洗、预训练、监督微调、LoRA、RLHF（DPO/PPO/GRPO等）、Tool Use、Agentic RL、模型蒸馏等完整训练链路，所有核心算法均用PyTorch从零原生实现，不依赖第三方高层封装。它还拓展了视觉模态、多模态Omni、扩散语言模型等。该项目既是教程也是可复现的起点，旨在降低LLM学习门槛。
-   亮点: 极低成本训练：仅需3元GPU租用成本，2小时即可训练64M参数模型; 完整训练链路：覆盖Pretrain、SFT、LoRA、RLHF（DPO/PPO/GRPO）、Tool Use、Agentic RL、模型蒸馏等全部阶段; 从零原生实现：所有核心算法代码均使用PyTorch从零实现，不依赖Transformers、trl等高级封装，便于深入理解; 多模态拓展：已扩展视觉模型MiniMind-V、多模态Omni模型MiniMind-O、扩散语言模型等; 兼容主流生态：支持Transformers、vllm、ollama、llama.cpp等推理框架，提供OpenAI API兼容接口
-   详细报告: MiniMind是一个旨在降低大语言模型（LLM）入门门槛的开源项目，其核心思想是“大道至简”——从零开始，用极低的成本（3块钱、2小时）训练一个仅64M参数的小模型。项目不仅提供了轻量级的Dense和MoE架构（主线对齐Qwen3/Qwen3-MoE），还完整实现了LLM训练的整个流程：包括分词器训练（BPE+ByteLevel）、预训练、指令微调、LoRA、DPO、PPO、GRPO、CISPO等强化学习算法、工具调用（Tool Use）、Agentic强化学习、自适应思考、模型蒸馏等。所有算法均使用PyTorch从零原生实现，不依赖任何第三方库的高层抽象接口，这为学习者提供了彻底理解底层机制的机会。项目开源了高质量数据集（除用户隐私外，均为公开许可数据或蒸馏合成数据），支持单卡/多卡训练（DDP、DeepSpeed），兼容wandb/SwanLab可视化。此外，项目还提供了兼容OpenAI API的服务端、Streamlit WebUI，以及第三方推理框架（vllm、ollama、llama.cpp）集成。MiniMind还有多个拓展版本：视觉模型MiniMind-V、多模态Omni模型MiniMind-O、扩散语言模型（dLM）、线性注意力模型等。项目文档详尽，包括更新日志、快速开始、数据介绍、训练说明等，并有许多社区贡献和相关学术论文引用。总之，MiniMind是一个适合LLM学习和研究的一站式平台，让开发者能够以最小成本亲手构建和理解语言模型。
-   活跃度: 活跃。项目持续更新，发布多个版本，最近更新日志为2026-04-01，并有多个拓展子项目。  社区健康: 良好。项目有多个贡献者，相关学术论文引用，GitHub Discussion活跃，并提供在线体验Demo。
-   商业潜力: 高。项目提供了低成本训练私有化小模型的完整方案，适合需要数据合规或定制化AI的企业，例如金融、医疗、法律等行业的内部助手。同时，可作为教育产品商业化。
+4. microsoft/SkillOpt:
+   star: 11988  语言/技术: Python, OpenAI API, Claude API, Qwen API, MiniMax API, Gradio, PyPI, GitHub Actions, Markdown
+   项目简介: SkillOpt 是一个微软开源的框架，它将代理技能（Agent Skills）的训练过程类比为神经网络训练，使用 epoch、batch size、学习率等概念，但不动模型权重。通过一个优化器模型生成对技能文档的编辑操作（添加、删除、替换），只有在验证集上严格提升分数时才接受。最终产出一个紧凑的 best_skill.md 文件，部署时零额外推理调用。在 52 个评估组合中取得最佳或并列最佳，平均提升 23.5 个准确率点。支持多种后端（OpenAI、Claude、Qwen、MiniMax 等）和 WebUI 监控仪表板。
+   亮点: 像训练神经网络一样训练代理技能，但不动模型权重，实现技能自动进化; 跨模型、跨执行环境（直接对话、Codex CLI、Claude Code CLI）迁移，无需重新优化; 零额外推理成本：优化后只需一个轻量级 best_skill.md 文件，无运行时开销
+   详细报告: SkillOpt 的核心创新是将技能文档视为可训练的状态，通过一个独立的优化器模型（通常是较强的基础 LLM）对其进行迭代编辑。优化过程包括：rollout（在训练数据上执行当前技能，收集评分）、reflect（生成修改反馈）、aggregate（汇总多个修改候选）、select（选择最佳编辑）、update（应用编辑，若验证集分数提升则保留）、evaluate（在 validation gate 上评估）。为防止过拟合，引入了文本学习率预算（限制每次编辑的 token 数）、拒绝编辑缓冲区（记录并惩罚被拒绝的编辑）、epoch 级慢更新（meta update）等机制。最终产物 best_skill.md 通常 300-2000 token，可直接用于任何兼容的底层模型。在 SearchQA、Codex 等六个基准测试上，结合 GPT-5.5、Claude 等多种模型，SkillOpt 在所有 52 个测试单元中均持平或优于基线，最高提升 24.8 个点。此外，SkillOpt 提供了扩展接口，可添加新的后端（如自定义模型）和新的基准测试。v0.2.0 新增 SkillOpt-Sleep 组件，实现夜间离线自进化（harvest → mine → replay → consolidate）。文档非常详尽，有论文、使用指南、API 参考和视频演示。
+   活跃度: 未知（API 无近期提交数据，但新闻显示 v0.2.0 发布于 2026-07-02，较为活跃）  社区健康: 未知（API 指标显示 forks=0, open_issues=0，但项目来自微软且文档完整，预计有长期维护）
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于MiniMind的极低成本训练流程，可以开发一个【面向高校教学的小型LLM实验平台】，让学生们亲手训练自己的对话机器人，用于AI课程实践或毕业设计。; 灵感2：利用MiniMind的轻量级模型和Agentic RL能力，构建一个【嵌入式设备上的智能助手】，例如智能家居的离线语音助手，在资源受限的硬件上实现基础对话和简单任务执行。; 灵感3：结合MiniMind的Tool Use和多轮对话能力，可以开发一个【特定领域的自动化客服系统】，例如企业内部的IT工单处理助手，通过调用API完成报修、查询等任务，降低人工成本。
-   项目链接: https://github.com/jingyaogong/minimind
+   衍生灵感: 灵感1：基于 SkillOpt 构建“企业知识库问答技能自动优化器”，让 AI 客服技能根据用户反馈和对话日志自动迭代，无需人工调 prompt。; 灵感2：将 SkillOpt 集成到 CI/CD 流水线，每次代码库更新后自动优化代码助手（如 GitHub Copilot）的技能文件，使提示词随项目进化。; 灵感3：开发一个“多 Agent 技能市场”，允许用户上传、优化和交易技能文档，SkillOpt 作为底层优化引擎，提供技能验证和评分服务。
+   项目链接: https://github.com/microsoft/SkillOpt
