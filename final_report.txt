@@ -1,65 +1,54 @@
-1. unclecode/crawl4ai:
-   star: 71938  语言/技术: Python, Playwright, Selenium, FastAPI, Docker, Chromium, Firefox, WebKit, BM25, LLM
-   项目简介: Crawl4AI 是一个开源的、面向 LLM 友好的网络爬虫和数据抓取工具，能将网页内容高效转换为干净的 Markdown 格式，专为 RAG、AI Agent 和数据管道设计。它解决了传统爬虫输出混乱、难以被大模型直接使用的问题，同时提供丰富的控制能力（如会话管理、代理、自定义钩子）和部署选项（Docker、云平台），是打工人和 AI 开发者的“摸鱼神器”。
-   亮点: LLM 就绪输出：自动生成带标题、表格、代码和引用提示的智能 Markdown，让大模型直接啃。; 全栈控制：支持浏览器池、代理、Cookie、用户脚本和钩子，爬取过程完全在手。; 自适应智能：学习站点模式，只抓取相关内容，不浪费流量和时间。
-   详细报告: Crawl4AI 是一个由 UncleCode 开发的，拥有 50k+ Star 的开源网络爬虫与抓取框架。它的核心使命是把杂乱无章的网页变成 LLM 喜欢的 Markdown 格式，彻底解决“爬下来的数据大模型读不懂”的痛点。
-
-**主要功能模块：**
-1. **Markdown 生成**：提供干净的 Markdown（Clean Markdown）、拟合 Markdown（Fit Markdown，使用 BM25 算法过滤噪声）、引用式 Markdown（将链接转为编号列表）等多种输出策略。支持自定义生成器，开发者可写自己的策略。
-2. **结构化数据提取**：支持基于 LLM 的提取（可接任何开源或闭源 LLM），也支持纯 CSS/XPath 的快速提取。内置分块策略（主题、正则、句子级）和余弦相似度检索，方便做语义提取。
-3. **浏览器集成**：深度整合 Playwright 和 Selenium，支持 Chromium、Firefox、WebKit 三大浏览器。可托管自有浏览器、远程控制、持久化会话、多代理认证，还能动态调整视口、模拟滚动、处理懒加载。
-4. **爬取能力**：动态内容执行 JS、截图、媒体提取、缓存、IFrame 内容、全页面扫描（无限滚动）。支持 raw HTML 和本地文件的直接处理。
-5. **部署方案**：提供 Docker 镜像（含 FastAPI 服务器和实时监控面板）、JWT 认证、API 网关，适合生产环境。也支持云平台一键部署。
-
-技术实现上，Crawl4AI 用了异步 Playwright 实现高性能浏览器池，结合缓存和预取模式可提速 5-10 倍。架构设计灵活，所有组件可替换。文档详尽，示例丰富，社区活跃。
-
-注意：由于 README 内容被截断，部分高级用法和完整 API 细节未能覆盖，建议查阅官方文档。
-   活跃度: 非常活跃（近期频繁发布补丁和安全更新）  社区健康: 优秀（50k+ Star，活跃的 Discord 和 GitHub 社区，定期发布版本）
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 Crawl4AI 开发一个“竞品价格监控 Bot”，定时爬取竞争对手电商页面，自动提取产品价格并生成 Markdown 报告，集成到钉钉/飞书通知。; 灵感2：将 Crawl4AI 集成到“企业知识问答系统”中，用于自动爬取内部 Wiki 或行业新闻，构建 RAG 知识库，让 AI 助手能回答最新信息。; 灵感3：利用其 LLM 提取能力，做一个“网页数据转结构化 API”，输入任意商品详情页 URL，输出规范化 JSON（如名称、价格、规格），供其他系统调用。
-   项目链接: https://github.com/unclecode/crawl4ai
-
-2. bradautomates/claude-video:
-   star: 4418  语言/技术: Python, yt-dlp, ffmpeg, Whisper (Groq/OpenAI), Claude Read tool, Agent Skills framework
-   项目简介: 这是一个让 Claude 能够“看”视频的开源工具。粘贴 YouTube 链接或本地视频文件，它自动下载视频、提取字幕和关键帧，让 Claude 基于视觉和听觉内容回答问题，解决了大模型无法直接理解视频的痛点。
-   亮点: 支持YouTube、Loom、TikTok等数百种视频源及本地文件; 自动优先使用免费字幕，无字幕时调用Whisper转写; 场景感知帧提取，多种细节模式（transcript/efficient/balanced/token-burner）平衡速度与质量; 帧去重机制避免重复帧浪费token
-   详细报告: 该项目的核心是赋予Claude视频理解能力。传统上，大语言模型无法直接处理视频内容。该项目通过在本地运行yt-dlp下载视频（支持YouTube、TikTok、本地文件等数百种格式），使用ffmpeg提取关键帧或场景变化帧，并优先抓取视频自带字幕（免费），若无字幕则通过Whisper（Groq或OpenAI API）转录音频。帧提取支持多种细节模式：transcript模式仅返回字幕，不下载视频；efficient模式使用关键帧（速度极快但帧数较少，上限50帧）；balanced模式检测场景变化（上限100帧，默认推荐）；token-burner模式无上限，适合对长视频进行完整分析。帧去重功能通过比较相邻帧的灰度差异，丢弃视觉上相似的帧（如静止的幻灯片），节省token。最终，帧图像和带时间戳的字幕一并交给Claude的Read工具，Claude可以“看到”画面并“听到”文字，从而回答关于视频内容的具体问题，例如“第30秒发生了什么”、“这个视频的钩子是什么”、“UI何时崩溃”等。项目安装方便，支持Claude Code、Codex、Cursor、Copilot、Gemini CLI等50+平台，并提供了详细的CLI参数（如--start/--end聚焦时间段，--resolution提高分辨率以阅读屏幕文字）。缺点是长视频在默认模式下帧数稀疏，建议对长视频使用token-burner模式或聚焦时间段。项目文档非常详尽，示例丰富。
+1. davila7/claude-code-templates:
+   star: 28795  语言/技术: Node.js, npx, Claude Code, MCP协议, Cloudflare Tunnel, JavaScript
+   项目简介: 一个面向 Claude Code 的即用型配置集合，包含 AI 代理、自定义命令、设置、钩子、MCP 外部集成和项目模板，旨在提升开发工作流效率。开发者可通过 npx 一键安装各种组件，或通过交互式网页浏览和安装。
+   亮点: 提供 100+ 预配置的 AI 代理、命令、设置、钩子和 MCP 集成，覆盖开发、测试、安全等领域; 支持 npx 一键安装，无需手动配置，降低上手门槛; 内置 Claude Code Analytics、Conversation Monitor、Health Check 等辅助工具，实时监控和诊断开发会话
+   详细报告: Claude Code Templates 是一个为 Anthropic 的 Claude Code 打造的组件库和工具集。它把常用的 AI 能力封装成可复用的模块，包括：Agent（AI 专家，如安全审计员、React 性能优化师）、Command（自定义斜杠命令，如 `/generate-tests`）、MCP（外部服务集成，如 GitHub、PostgreSQL）、Setting（Claude Code 配置）、Hook（自动化触发器，如提交前校验）和 Skill（可渐进式公开的复用能力）。这些组件可以通过 `npx claude-code-templates@latest` 交互式安装或命令行指定安装。项目还提供了几个实用工具：Analytics 用于实时监控 AI 开发会话状态；Conversation Monitor 用于手机端查看 Claude 响应；Health Check 用于诊断 Claude Code 安装是否优化；Plugin Dashboard 用于统一管理插件和权限。所有组件均来自社区贡献，并保留原始许可证。该项目旨在让 Claude Code 的使用更高效、更个性化，解决开发者重复配置和集成外部服务的痛点。由于 README 主要介绍功能，技术实现细节（如具体如何打包 MCP 服务）未提及，但可见其核心是围绕 npm 包分发和 Claude Code 的扩展机制。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目开发一个「自动会议纪要生成器」，输入团队会议录像，自动提取关键讨论点、决策和待办事项，并生成结构化笔记。; 灵感2：将其集成到「视频课程学习助手」中，用户可上传教学视频，AI自动总结知识点、提取代码片段，并生成习题。; 灵感3：构建「广告创意分析平台」，自动分析竞品视频广告的钩子、节奏、视觉元素，输出可复用的创意策略报告。
-   项目链接: https://github.com/bradautomates/claude-video
+   衍生灵感: 灵感1：基于此项目，可以开发一个企业级 AI 开发助手市场，内部员工可以像安装插件一样安装公司专属的 Agent（如代码规范检查、微服务部署），并统一管理权限和版本。; 灵感2：可以将其集成到 CI/CD 流水线中，例如在 PR 提交时自动运行 Claude Code 的 Health Check，检测代码质量并生成报告；或者利用 Hook 在合并前自动执行安全性审计。; 灵感3：利用 MCP 集成扩展，构建一个跨平台的开发环境管理工具，例如一键配置本地开发环境（数据库、云服务凭据等），并自动生成对应的 Claude Code 配置，让新成员快速上手。
+   项目链接: https://github.com/davila7/claude-code-templates
 
-3. kyutai-labs/pocket-tts:
-   star: 6291  语言/技术: Python, PyTorch, CLI, ONNX (社区移植), WebAssembly (社区), Rust (社区), C++ (社区), Core ML (社区)
-   项目简介: Pocket TTS 是一个超轻量级、专为CPU优化的文本转语音（TTS）应用。它只有1亿参数，无需GPU，就能在普通电脑上实现接近实时的语音合成（延迟约200ms，速度可达实时6倍）。支持英语、法语、德语、葡萄牙语、意大利语、西班牙语六种语言，并能通过音频样本进行语音克隆。提供Python API、命令行工具和本地Web界面，安装只需pip install pocket-tts。社区已移植到Rust、C++、.NET、Unity、浏览器等多种平台，堪称“程序员救星”——告别昂贵的GPU和无尽的API账单，轻松拥有本地TTS能力。
-   亮点: 可在CPU上以极低延迟（~200ms）和实时6倍速度运行，仅用2个CPU核心; 模型仅1亿参数，极小且高效，支持语音克隆和多语言; 提供Python API和CLI，一键安装即用，也支持本地Web服务和流式输出; 社区生态丰富，已有Rust、C++、.NET、Unity、浏览器、macOS原生应用等移植
-   详细报告: Pocket TTS 由Kyutai实验室开发，核心是为缓解传统TTS模型依赖GPU或云API的痛点。它基于PyTorch实现，专门在CPU上优化推理，实测在MacBook Air M4上可达6倍实时速度。模型输入文本，输出16kHz PCM音频数据。其架构使用变压器和语音编码器，通过“voice state”实现多语音管理，支持从wav文件或预置语音快速克隆。
+2. mvanhorn/last30days-skill:
+   star: 51492  语言/技术: Python 3.12+, Node.js, yt-dlp, ScrapeCreators API, Agent Skills, GitHub API, SQLite（趋势监控）, Reddit RSS, Bird client（X搜索）, arXiv CLI, Techmeme CLI, Digg CLI
+   项目简介: 一个 AI Agent 驱动的搜索引擎，同时搜索 Reddit、X、YouTube、TikTok、Polymarket 等数十个封闭平台，按真实用户参与度（点赞、上票、金钱投注）而非编辑推荐来评分，并通过 AI 合成一份简洁的情报简报。解决的信息痛点：Google 搜不到 Reddit 热帖、X 专家推文、YouTube 深度内容；ChatGPT 只能访问 Reddit；Claude 原生访问全无。它把孤岛数据桥接在一起，让你在开会、背调、购物前花 30 秒就能知道“过去 30 天真实的人在关注什么”。
+   亮点: 并行搜索 15+ 个平台（Reddit、X、YouTube、TikTok、Polymarket、GitHub、arXiv 等），按真实用户参与度评分合成一份简报。; 一次命令即可安装到 Claude Code、Codex、Cursor、Copilot、Gemini CLI 等 50+ 种Agent主机。; 社区非常活跃：175 个合并 PR，其中 122 个来自 52 位贡献者；安全测试覆盖率达 84%，清除所有 CRITICAL 漏洞。
+   详细报告: 这个项目本质上是一个跨平台社交搜索的智能体桥接器。你输入一个话题（人名、公司、产品、技术等），Agent 会自动解析出相关的 X 账号、子版块、YouTube 频道、GitHub 仓库等，然后并行发起搜索。每个源的结果按照点赞数、评论数、观点多样性等维度评分，最后再由一个 AI 评判器合成一份有引用、有优先级的简报。
 
-核心功能包括：
-- **快速生成**：`pocket-tts generate` 命令行即可生成音频，支持`--voice`选择语音（预置20+种）或自定义wav文件进行克隆，`--language`选择语言（英语、法语等），`--config`加载自定义权重。
-- **本地服务**：`pocket-tts serve` 启动HTTP服务器，访问`localhost:8000`即可通过Web界面交互，模型常驻内存，适合多次调用。
-- **语音导出**：`export-voice` 将音频文件预处理为safetensors格式，加速后续加载。
-- **Python库**：通过`TTSModel`类加载模型，`get_state_for_audio_prompt`获取语音状态，`generate_audio`生成音频，并支持多语音状态并发。
-- **无限文本**：支持极长文本的流式生成，不会因长度受限。
+核心技术亮点：
+- 多 query 扩展：比如搜“Kanye West”，会自动扩展到 r/hiphopheads、@kanyewest、YouTube 的 “bully review” 等。
+- 深度内容：不只是标题链接，还能获取 YouTube 完整转录、Reddit 高赞评论、TikTok 字幕、Polymarket 赔率（真金白银，非意见）。
+- 跨源聚类：同一个事件（比如音乐节取消）在 Reddit 上讨论、X 上热推、TikTok 有门票价格，会被合并成一个 cluster。
+- 技术栈：Python 为主体，yt-dlp 处理 YouTube 转录，Node.js 处理 X 搜索（通过 Bird 客户端），ScrapeCreators API 处理 Instagram/LinkedIn 等需要 cookies 的源。
+- 安装门类：支持 Claude Code 原生插件、npx skills、Grok Build、Claude Desktop MCP 等多种方式。
 
-技术细节：模型使用transformer解码器，结合条件音频编码器进行语音克隆。推理时采用KV缓存机制，降低重复计算。社区实现了多种替代后端（MLX、ONNX、Candle、C++等），甚至能在浏览器中通过WebAssembly运行。
+用户真实使用场景：面试前背调（搜工程师的 GitHub、推文、Reddit 讨论）、企业竞品分析（搜产品名下的所有平台反馈）、旅行前规划（搜主题公园最近 30 天等待时间和攻略）、技术选型对比（X vs Y，比 12 次独立搜索快 4 倍）。
 
-注意：目前不支持在文本中插入静音来生成停顿（需等待PR）。另外，在GPU上并未观察到加速，因此官方推荐CPU使用。
-   活跃度: 未知  社区健康: 活跃
+项目本身是开源的（MIT），社区贡献丰富，有 2700+ 测试用例，还集成了安全扫描工具。值得注意的风险：部分源需要用户提供 API Key 或浏览器 Cookie（尤其是 X、YouTube、TikTok 等），如果配置不全则功能受限。但作者设计了零配置免费源（Reddit、arXiv、Techmeme）和一键诊断命令。
+   活跃度: 高（根据 README，v3.11.1 于 2026 年 7 月发布，持续更新）。  社区健康: 非常活跃。52 位贡献者，175 个合并 PR，安全测试覆盖率 84%，有 CONTRIBUTORS.md 和 CHANGELOG.md。
+   商业潜力: 高。可直接作为付费的企业情报 SaaS 插件卖给销售、市场、投资机构；也可作为 Claude/Codex 的增值功能由 IDE 厂商采购。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 /last30days 的插件协议，可以开发一个“企业舆情监控 AI 专员”，将它接入钉钉/飞书/企业微信，定时对预设关键词生成舆情简报并推送。; 灵感2：可以将其搜索 + 合成能力封装成一个 API 服务，集成到 CRM 系统中，让销售在打电话前自动生成对方公司或个人的“30 天动态小抄”。; 灵感3：结合事件驱动架构，开发一个“政策变化检测器”，专门搜索 GitHub Issues、Reddit、X 上关于某政策（如欧盟 AI 法案）的最新讨论，自动生成合规建议报告。
+   项目链接: https://github.com/mvanhorn/last30days-skill
+
+3. huggingface/speech-to-speech:
+   star: 6025  语言/技术: Python, PyTorch, Transformers, MLX, llama.cpp, vLLM, Silero VAD, Parakeet TDT, Whisper, Faster Whisper, Qwen3-TTS, Kokoro-82M, Pocket TTS, ChatTTS, MMS TTS, Paraformer, OpenAI Realtime API
+   项目简介: 一个低延迟、完全模块化的语音代理流水线，实现 VAD → STT → LLM → TTS 全链路，并通过 OpenAI Realtime 兼容的 WebSocket API 暴露服务。所有组件均可互换，LLM 支持 OpenAI 兼容协议，可对接托管服务、Hugging Face 推理提供商或自托管服务器（如 vLLM、llama.cpp），实现全本地或全开源部署。已投入生产，支撑数千个 Reachy Mini 机器人对话后端。
+   亮点: 低延迟模块化流水线：VAD、STT、LLM、TTS 各自独立线程+队列，支持实时交互; 完全可互换组件：每个阶段多种后端可选，通过 CLI 灵活切换; OpenAI Realtime 兼容：任何兼容客户端均可连接，降低集成门槛; 全本地运行：支持 llama.cpp、MLX 等，无需云端依赖; 多语言支持：TTS 支持多种语言，STT 覆盖广泛
+   详细报告: 该项目的核心是一个四阶段语音处理流水线：Voice Activity Detection (VAD) 使用 Silero VAD v5 检测语音边界；Speech to Text (STT) 提供 Parakeet TDT、Whisper、Faster Whisper、MLX Audio Whisper、Paraformer 等多种后端；Language Model (LLM) 支持 OpenAI 兼容 API、Transformers、mlx-lm，可连接托管服务或自托管服务器（如 vLLM、llama.cpp）；Text to Speech (TTS) 支持 Qwen3-TTS、Kokoro、Pocket TTS、ChatTTS、MMS TTS 等。流水线通过队列连接各线程，实现低延迟流式处理。项目提供多种运行模式：realtime（WebSocket，OpenAI Realtime 协议）、local（本地麦克风/扬声器）、websocket（原始 PCM over WebSocket）、socket（TCP 原始 PCM）。默认使用 Parakeet TDT 进行 STT、OpenAI 兼容 LLM、Qwen3-TTS 进行 TTS。安装简单，通过 pip 即可，支持 CUDA、Apple Silicon。文档详细，包含 CLI 参考、组件表格、多语言支持说明。整体设计注重模块化和易用性，适合构建语音智能体、客服机器人、实时语音助手等场景。
+   活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：离线智能家居语音助手。利用Pocket TTS的CPU友好特性，将其嵌入树莓派或NAS，实现完全本地化的语音播报（如朗读新闻、天气、日程），避免隐私泄露。结合语音克隆功能，让助手用家人的声音交流，提升亲切感。; 灵感2：游戏实时配音引擎。借助Unity或Unreal的社区集成，允许玩家输入自定义文本并选择角色语音，生成游戏内对白。可结合对话树，实现动态剧情。甚至可以克隆玩家自己的声音，让游戏角色“说”出玩家想说的话。; 灵感3：多语言有声读物生成器。利用其多语言支持和无限文本能力，构建一个自动将电子书转为有声读物的工具。用户可选择不同语言的叙述者声音，支持流式播放和断点续听。配合语音克隆，甚至可以由作者本人录制少量样本后“朗读”整本书。
-   项目链接: https://github.com/kyutai-labs/pocket-tts
+   衍生灵感: 灵感1：基于此流水线开发一个「智能客服语音代理」，集成到企业官网，自动接听用户电话并回答问题，支持挂断后生成工单。; 灵感2：将此项目集成到「智能家居中控系统」，通过本地语音指令控制设备，结合私有 LLM 保障隐私，支持自然语言对话。; 灵感3：改造为「多语言实时翻译耳机」，在 STT 和 TTS 之间插入翻译模块，实现多语言双向语音对话。
+   项目链接: https://github.com/huggingface/speech-to-speech
 
-4. microsoft/SkillOpt:
-   star: 11988  语言/技术: Python, OpenAI API, Claude API, Qwen API, MiniMax API, Gradio, PyPI, GitHub Actions, Markdown
-   项目简介: SkillOpt 是一个微软开源的框架，它将代理技能（Agent Skills）的训练过程类比为神经网络训练，使用 epoch、batch size、学习率等概念，但不动模型权重。通过一个优化器模型生成对技能文档的编辑操作（添加、删除、替换），只有在验证集上严格提升分数时才接受。最终产出一个紧凑的 best_skill.md 文件，部署时零额外推理调用。在 52 个评估组合中取得最佳或并列最佳，平均提升 23.5 个准确率点。支持多种后端（OpenAI、Claude、Qwen、MiniMax 等）和 WebUI 监控仪表板。
-   亮点: 像训练神经网络一样训练代理技能，但不动模型权重，实现技能自动进化; 跨模型、跨执行环境（直接对话、Codex CLI、Claude Code CLI）迁移，无需重新优化; 零额外推理成本：优化后只需一个轻量级 best_skill.md 文件，无运行时开销
-   详细报告: SkillOpt 的核心创新是将技能文档视为可训练的状态，通过一个独立的优化器模型（通常是较强的基础 LLM）对其进行迭代编辑。优化过程包括：rollout（在训练数据上执行当前技能，收集评分）、reflect（生成修改反馈）、aggregate（汇总多个修改候选）、select（选择最佳编辑）、update（应用编辑，若验证集分数提升则保留）、evaluate（在 validation gate 上评估）。为防止过拟合，引入了文本学习率预算（限制每次编辑的 token 数）、拒绝编辑缓冲区（记录并惩罚被拒绝的编辑）、epoch 级慢更新（meta update）等机制。最终产物 best_skill.md 通常 300-2000 token，可直接用于任何兼容的底层模型。在 SearchQA、Codex 等六个基准测试上，结合 GPT-5.5、Claude 等多种模型，SkillOpt 在所有 52 个测试单元中均持平或优于基线，最高提升 24.8 个点。此外，SkillOpt 提供了扩展接口，可添加新的后端（如自定义模型）和新的基准测试。v0.2.0 新增 SkillOpt-Sleep 组件，实现夜间离线自进化（harvest → mine → replay → consolidate）。文档非常详尽，有论文、使用指南、API 参考和视频演示。
-   活跃度: 未知（API 无近期提交数据，但新闻显示 v0.2.0 发布于 2026-07-02，较为活跃）  社区健康: 未知（API 指标显示 forks=0, open_issues=0，但项目来自微软且文档完整，预计有长期维护）
+4. roboflow/supervision:
+   star: 47777  语言/技术: Python, Ultralytics, Transformers, MMDetection, Inference, rfdetr, Pillow, OpenCV, Roboflow
+   项目简介: supervision是一个模型无关的计算机视觉工具包，提供从数据加载、模型推理到结果可视化和数据集管理的全套工具，让开发者专注于构建应用而非底层细节。
+   亮点: 模型无关：支持任意分类、检测、分割模型，并内置Ultralytics、Transformers等流行库的连接器; 丰富的标注器：提供高度可定制的BoxAnnotator、MaskAnnotator等，轻松实现专业可视化; 数据集工具箱：支持COCO、YOLO、PASCAL VOC格式的加载、分割、合并、转换和保存
+   详细报告: supervision是Roboflow推出的计算机视觉辅助库，旨在降低CV应用开发门槛。其核心设计是模型无关——无论是Ultralytics的YOLO、Hugging Face的Transformers、OpenMMLab的MMDetection还是Roboflow自家的Inference，都能通过统一的sv.Detections对象接入。例如，使用rfdetr模型只需两行代码即可获得检测结果。注释器方面，提供了BoxAnnotator、MaskAnnotator、LabelAnnotator、TraceAnnotator等十多种可视化工具，支持颜色、透明度、文本样式等精细控制，甚至能组合出动态追踪效果。数据集工具是另一大亮点：sv.DetectionDataset支持从COCO、YOLO、PASCAL VOC加载，并提供了split、merge、as_yolo/as_pascal_voc/as_coco等链式操作，方便数据预处理和格式转换。此外，项目附带了详细的如何使用指南、端到端示例、速查表和cookbook，以及多个视频教程（如停留时间分析、车辆速度估计），手把手教开发者搭建实际应用。由于输入内容被截断，关于分布式处理、追踪算法等高级功能无法详细点评。
+   活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 SkillOpt 构建“企业知识库问答技能自动优化器”，让 AI 客服技能根据用户反馈和对话日志自动迭代，无需人工调 prompt。; 灵感2：将 SkillOpt 集成到 CI/CD 流水线，每次代码库更新后自动优化代码助手（如 GitHub Copilot）的技能文件，使提示词随项目进化。; 灵感3：开发一个“多 Agent 技能市场”，允许用户上传、优化和交易技能文档，SkillOpt 作为底层优化引擎，提供技能验证和评分服务。
-   项目链接: https://github.com/microsoft/SkillOpt
+   衍生灵感: 灵感1：零售客流分析系统：结合YOLO行人检测和ZoneCounting，实时统计各区域停留时间，优化货架布局。; 灵感2：自动驾驶数据标注流水线：利用数据集转换工具，自动将原始车载摄像头视频转为COCO格式，并集成标注工具进行半自动标注。; 灵感3：工业质检可视化平台：使用supervision的标注器将缺陷检测结果叠加到产品图像上，生成带标注的报告，方便人工复核。
+   项目链接: https://github.com/roboflow/supervision
