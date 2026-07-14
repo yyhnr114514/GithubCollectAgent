@@ -1,40 +1,15 @@
 1. HKUDS/Vibe-Trading:
-   star: 20756  语言/技术: Python, FastAPI, LangChain, LangGraph, pandas, numpy, bottleneck, OpenAI API, GLM, Gemini, Tushare, yfinance, OKX API, Binance API, Trading 212, Shoonya, Dhan, QVeris, Docker, MCP, WebSocket, Telegram Bot API, Discord API, Slack API, WeChat/WeCom, Feishu/Lark, DingTalk, Teams, Signal, Matrix, WhatsApp, QQ/NapCat, Mochat
-   项目简介: Vibe-Trading 是一个基于 AI 的个人交易代理，支持从数据获取、策略开发、回测到实盘交易的全流程自动化。它集成了多种金融数据源（如 yfinance、Tushare、OKX、Trading 212 等）和 10+ 券商 SDK，并可通过自然语言与代理交互。项目特色包括 AI 驱动的策略开发管理器（Strategy Development Manager）、影子账户（Shadow Account）用于模拟交易、多消息通道（Telegram、Discord 等）以及丰富的因子库（460+ 个 alpha 因子）。它旨在降低量化交易的门槛，让普通投资者也能享受 AI 辅助的交易决策。
-   亮点: 一键部署可定制化的 AI 交易代理，支持自然语言交互; 集成 18+ 免费数据源和 10+ 券商连接器，覆盖全球主流市场; 内置 460+ 个 alpha 因子（Alpha Zoo）和策略开发管理器，支持从论文到策略的自动转化; 影子账户（Shadow Account）功能，支持无风险模拟交易; 16 种消息通道接入（IM Channel Runtime），可通过 Telegram、Discord 等直接管理交易
-   详细报告: Vibe-Trading 是一个开源的 AI 交易代理系统，旨在为量化交易者和普通投资者提供一个强大、易用的自动化交易平台。项目的核心是一个基于大语言模型的智能代理，能够理解用户的自然语言指令，执行复杂的交易策略。它采用模块化架构，主要包括以下部分：
-
-1. **数据层**：支持从多个数据源获取市场数据，包括免费的 yfinance、Tushare、OKX、Binance 等，以及付费的 QVeris 高级数据。数据加载器（Loader）支持 OHLCV、因子数据等，并且对印度 NSE/BSE 市场做了专门的适配（T+1 交割、电路带等）。
-
-2. **策略层**：内置了 460+ 个经过校验的 alpha 因子（Alpha Zoo），覆盖价值、质量、动量等多个维度。策略开发管理器（Strategy Development Manager）可以将学术论文或券商研究报告转化为可注册的因子和策略，并自动监控 IC/Sharpe 衰减。支持回测（Backtest）和优化（Optimizer），包括 turnover-aware 优化。
-
-3. **交易执行层**：通过统一的 Broker 连接器（Connector）支持 10+ 券商，包括 Robinhood（实验性）、Trading 212（只读）、Longbridge 等。交易执行前会经过 PreTradeAdvisoryInterface（可选）进行风险评估，并强制经过 Mandate Gate（委托门）和 Kill Switch（紧急停止）。支持实盘交易和影子账户（Shadow Account）模拟。
-
-4. **AI 代理层**：基于 LangChain/LangGraph 构建，支持多种大模型（OpenAI、GLM、Gemini、Codex 等）。代理可以调用各种工具（如数据查询、因子计算、下单、IM 通知等），并支持多代理协作（Swarm）。
-
-5. **交互层**：提供 CLI、Web UI（基于 FastAPI）、REST API 和 MCP（Model Context Protocol）接口。16 种即时消息通道（IM Channels）可以接入代理，包括 Telegram、Discord、Slack、微信、企业微信、飞书、钉钉、Teams、电子邮件等，实现移动端交易管理。
-
-6. **安全与合规**：包括 OAuth 认证、SSRF 防护、环境变量集中配置（EnvConfig）、Docker 安全加固等。项目明确声明不提供投资建议，不持有资金，交易风险由用户自行承担。
-
-该项目由于 README 内容截断，部分功能（如具体因子列表、API 细节）未能完整呈现，但整体架构清晰，代码活跃度高（2026年7月仍有频繁更新）。
-   活跃度: 高（截至2026年7月仍有每日更新）  社区健康: 文档显示有大量贡献者（如 @shadowinlife、@Robin1987China、@warren618 等）和讨论（Discord），但未提供具体的社区活跃数据。
+   star: 21988  语言/技术: Python, FastAPI, Docker, LangChain, LangGraph, OpenAI, Gemini, Pydantic, NumPy, Pandas, Yahoo Finance, Tushare, QVeris, MCP协议
+   项目简介: Vibe-Trading 是一个个人交易代理（Personal Trading Agent），旨在通过一行命令赋予AI代理全面的交易能力，包括策略回测、数据加载、因子分析、实盘交易等。项目支持多市场（美股、A股、印度NSE/BSE等）、多数据源（Yahoo Finance、Tushare等），内置大量Alpha因子库（460+），并提供影子账户、IM频道（QQ、Discord等）、安全审计等功能。适合量化交易爱好者和开发者快速搭建自己的交易系统。
+   亮点: 一键部署个人交易代理，集成数据、回测、执行全流程; 内置460+ Alpha因子库，支持因子的声明、衰减监控与生命周期管理; 影子账户（Shadow Account）用于模拟交易策略，不投入真金白银; 多交易所支持：美股、A股、印度NSE/BSE、币安等; 安全审计强化：沙箱回测、SSRF防护、Docker镜像摘要锁定
+   详细报告: Vibe-Trading 是一个开源的个人交易代理框架，目标是将交易策略开发、回测、因子研究和实盘执行整合到一个由AI驱动的系统中。核心架构基于Python，使用FastAPI作为Web服务后端，支持Docker容器化部署。项目集成了多种数据源（Yahoo Finance、Tushare、QVeris等），并提供统一的加载器接口，允许用户定制数据接入。其因子库（Alpha Zoo）包含超过460个经过时间验证的因子，覆盖动量和基本面等多个类别，并具有PIT（Point-in-Time）安全性，避免未来数据泄漏。策略开发管理器（Strategy Development Manager）可以从学术论文和经纪商研究中自动注册因子和策略，并监控其IC（Information Coefficient）和夏普比的衰减情况，实现生命周期管理。影子账户功能允许用户在不投入真实资金的情况下验证策略，支持模拟交易、查看模拟投资组合和绩效指标。此外，项目提供16个IM通道（包括QQ、Discord等），用户可以通过聊天界面与代理交互，执行交易指令、查询报告等。安全性方面，项目经过外部审计，所有高风险漏洞已修复，包括Docker多阶段构建镜像摘要锁定、回测沙箱（AST加固）、一次性SSE认证票据、权限最小化等。项目也支持Robinhood等券商的实盘交易（需用户明确授权），但声明此为实验性功能。社区活跃，贡献者众多，有中文文档和教程。
+   活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 Vibe-Trading 的 AI 代理和 IM 通道，开发一个「个人投资助理」微信/Telegram 机器人，用户通过发送消息即可查询持仓、生成日报、接收异动提醒，并执行简单的交易指令。; 灵感2：将 Vibe-Trading 的策略开发管理器与因子库集成到现有的量化研究平台（如 QuantConnect 或自研系统），提供一个 AI 辅助的策略生成和回测模块，自动从研报中提取因子并进行衰减监控。; 灵感3：利用 Vibe-Trading 的多数据源和因子计算能力，构建一个「市场情绪监控仪表盘」，结合新闻情感分析和因子模型，实时输出多市场多周期的交易信号，并通过 WebSocket 推送给用户。
+   衍生灵感: 灵感1：基于Vibe-Trading的因子库和影子账户，开发一个"ETF轮动策略监控系统"，自动评估不同ETF因子的表现，并通过IM频道推送调仓建议。; 灵感2：集成Vibe-Trading的数据加载器和回测引擎，构建一个"多因子选股平台"，用于A股量化选股，支持自定义因子组合和绩效分析。; 灵感3：利用Vibe-Trading的策略开发管理器，建立"学术论文策略复现平台"，自动从新发布的量化论文中提取策略并注册到系统中，跟踪其衰减情况。
    项目链接: https://github.com/HKUDS/Vibe-Trading
 
-2. PrefectHQ/prefect:
-   star: 23212  语言/技术: Python, httpx
-   项目简介: Prefect 是一个 Python 工作流编排框架，旨在将简单的脚本转化为生产级数据管道。它通过装饰器（@flow、@task）让开发者轻松定义任务和流程，并内置调度、缓存、重试、事件驱动自动化等特性，同时提供自托管服务器或托管云监控界面，帮助数据团队构建弹性、动态、可观测的数据管道。
-   亮点: 使用 @flow 和 @task 装饰器简化工作流定义; 支持调度、缓存、重试和事件驱动自动化; 提供自托管 Prefect 服务器或托管 Prefect Cloud 仪表盘进行监控
-   详细报告: Prefect 是一个用于 Python 数据管道的工作流编排框架，其核心理念是让开发者能够以最少的代码将脚本升级为生产级工作流。用户只需在函数上添加 @flow 和 @task 装饰器即可定义流程和任务，例如示例中获取 GitHub 星标的简单脚本。Prefect 自动处理重试、依赖关系和复杂分支逻辑。它还支持通过 cron 表达式调度工作流（如每分钟执行），并允许通过事件触发自动化。工作流的运行状态会被跟踪，用户可以通过本地启动的 Prefect 服务器（UI 地址 http://localhost:4200）或 Prefect Cloud 进行监控。此外，Prefect 提供了丰富的集成，支持与现有工具（如数据库、消息队列等）结合。根据文档，Prefect 还支持部署到生产环境、添加错误处理和重试、以及团队协作功能。由于 README 被截断，更多关于技术细节（如缓存实现、具体集成列表）无法展开，但核心功能已明确。
-   活跃度: 未知  社区健康: 文档未提及
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 Prefect 构建一个数据质量监控平台，自动定期检查数据仓库中的表级完整性、一致性和时效性，当检测到异常时通过 Slack 或邮件告警。; 灵感2：将 Prefect 集成到机器学习训练流程中，编排数据预处理、模型训练、评估和部署的完整流水线，利用缓存避免重复计算，并自动重试失败的训练任务。; 灵感3：利用 Prefect 的事件驱动能力开发一个微服务编排器，用于协调多个 API 调用的依赖顺序和失败回滚，例如电商下单流程中的库存检查、支付、发货等步骤。
-   项目链接: https://github.com/PrefectHQ/prefect
-
-3. Shubhamsaboo/awesome-llm-apps:
+2. Shubhamsaboo/awesome-llm-apps:
    star: 118764  语言/技术: Python, Streamlit, Claude, Gemini, OpenAI, xAI, Qwen, Llama, Google ADK, OpenAI Agents SDK, CrewAI, MCP (Model Context Protocol), RAG, Fine-tuning
    项目简介: 一个包含100多个可直接运行的AI Agent和RAG应用的模板集合，覆盖AI Agent、多智能体团队、MCP Agent、语音AI、RAG、智能体技能、微调等领域。所有模板均为原创，提供完整源码和3步运行指南，支持切换多种LLM提供商（Claude、Gemini、OpenAI、xAI、Qwen、Llama），并附带免费教程。旨在让开发者无需从零构建LLM应用，直接克隆、定制、部署。
    亮点: 100+即开即用的LLM应用模板，覆盖15个类别，从入门到高级; 支持多种LLM提供商切换，供应商无关，灵活配置; 所有模板均附带免费分步教程和完整源码，Apache-2.0许可，可商用
@@ -61,13 +36,39 @@
    衍生灵感: 灵感1：基于项目中的AI Travel Agent模板，可以开发一个企业差旅管理助手，集成公司报销政策和实时航班酒店数据，自动生成出差计划并提交审批。; 灵感2：利用Multi-agent Teams中的AI Competitor Intelligence Agent Team，构建一个竞品监控平台，定时抓取竞品网站、社交媒体和新闻，生成周报并发送邮件。; 灵感3：将RAG教程中的Hybrid Search RAG整合到内部知识库系统，支持员工以自然语言查询公司文档、流程和政策，并返回引用来源。
    项目链接: https://github.com/Shubhamsaboo/awesome-llm-apps
 
-4. home-assistant/core:
-   star: 88739  语言/技术: Python, RESTful API, WebSocket, YAML, MQTT
-   项目简介: Home Assistant 是一个开源的家居自动化平台，将本地控制与隐私保护放在首位。它由全球 DIY 爱好者和开发者社区驱动，可以在树莓派或本地服务器上运行，通过模块化设计集成各种设备与服务，实现智能家居自动化。
-   亮点: 本地控制与隐私优先：无需云服务，数据留存在本地，保障用户隐私。; 模块化架构：支持超过 2000 种设备与服务的集成，可轻松扩展。; 强大的自动化引擎：通过规则引擎或 YAML 配置实现复杂的家居自动化场景。
-   详细报告: Home Assistant 是一个开源的家庭自动化平台，旨在让用户完全掌控自己的智能家居设备。其核心卖点是本地运行，所有数据处理都在本地完成，无需依赖外部云服务，从而最大限度保护用户隐私。项目采用模块化设计，核心部分与设备集成解耦，用户可以通过安装官方或第三方集成组件，轻松连接数千种智能设备，包括灯、开关、传感器、窗帘、门锁、摄像头等。自动化功能极为灵活，支持基于时间、状态、事件等触发条件，执行一系列动作，例如“当门磁传感器检测到门打开时，自动开灯并发送通知”。系统还提供直观的 Web 界面（前端基于 React 或 Polymer，文档未明确）进行设备管理和仪表板定制。技术栈方面，后端主要使用 Python，支持 RESTful API 和 WebSocket 进行通信，集成组件可通过 MQTT、HTTP 等协议与设备交互。用户配置文件以 YAML 格式编写，便于版本管理和手动调整。此外，Home Assistant 拥有活跃的社区和丰富的文档，包括入门教程、自动化指南和开发者 API 文档。由于 README 内容被截断，部分技术细节（如具体的前端框架）未能明确，建议查阅完整文档。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
+3. Graphify-Labs/graphify:
+   star: 85003  语言/技术: Python, tree-sitter, Leiden 社区检测, Neo4j（可选）, FalkorDB（可选）, Ollama（可选）, OpenAI / Gemini / Anthropic API（可选）, faster-whisper（可选的视频/音频转录）, jieba（可选中文分词）
+   项目简介: graphify 是一个将整个项目（代码、文档、PDF、图片、视频）映射成知识图谱的工具，开发者可以通过自然语言查询而非 grep 来理解代码库。它使用 tree-sitter AST 进行本地代码解析（无需 LLM，确保隐私），对文档、媒体等调用 AI 模型进行语义分析。输出交互式 HTML 图、Markdown 报告和可查询的 JSON 图。支持 40+ 编程语言和多种 AI 编码助手（Claude Code、Cursor 等）。每个连接带有 EXTRACTED（显式）或 INFERRED（推断）标签，区分直接引用和解析结果。不是向量索引，而是真正的图遍历。
+   亮点: 完全本地优先：代码解析使用 tree-sitter AST，不调用任何 LLM，数据不出本地。; 可解释的边：每条连接标记为 EXTRACTED（显式）或 INFERRED（推断），让你知道哪些是直接从源码读取的，哪些是解析推导的。; 支持 40+ 编程语言：通过 tree-sitter 解析跨文件关系（调用、导入、继承等）。; 多种输出格式：交互式 HTML 图、Markdown 报告、JSON 图，可查询路径和解释概念。; 集成 20+ AI 编码助手：覆盖 Claude Code、Cursor、GitHub Copilot 等主流工具。
+   详细报告: graphify 是一个开源的知识图谱生成工具，专门解决开发者理解大型代码库时的痛点（如 grep 效率低、文档零散）。它的核心流程是：用户运行 `graphify .` 命令后，工具会遍历整个项目目录，对代码文件使用 tree-sitter 进行 AST 解析（纯本地，无 LLM，确保隐私），提取跨文件的调用、导入、继承等关系；对文档（Markdown/PDF）、图片和视频则调用用户配置的 AI 模型（如 Claude、GPT-4）进行语义分析。最终生成三个文件：graph.html（可交互的力导向图，支持搜索、过滤、点击节点查看详情）、GRAPH_REPORT.md（关键概念、社群、建议问题）、graph.json（完整图结构，可供后续查询）。用户可以在 AI 编码助手中通过 `/graphify` 命令或后续的 `graphify query`、`graphify path`、`graphify explain` 来用自然语言探索代码库。graphify 还支持多种可选插件：PDF 提取、Office 文档、Google Sheets、视频/音频转录、Neo4j 推送等。社群检测使用 Leiden 算法，可自动为概念分组命名。项目还内置了基准测试（LOCOMO、LongMemEval-S），在代码知识召回和质量上表现出色。社区方面，有 Discord 和 Twitter 账号，但 GitHub 指标显示 forks=0、open_issues=0，推测可能是新项目或未公开活动。文档非常详尽，包括安装、平台配置、命令参考、架构说明。
+   活跃度: 未知（文档显示开发活跃，但 GitHub API 无最近提交数据）  社区健康: 未知（文档有 Discord 和 Twitter，但 GitHub 指标为 0，社区活跃度无法判断）
+   商业潜力: 可作为企业级代码知识管理工具的底层引擎，商业化方向包括：SaaS 知识图谱服务（私有化部署）、IDE 插件增值功能、大型项目审计合规辅助等。目前处于早期，未提及商业模式。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 Home Assistant 的开放 API，可以开发一个“智能家居安全守护”插件，通过集成门磁、运动传感器和摄像头，实现入侵检测与自动报警，并联动智能灯光和警笛。; 灵感2：可以将其集成到“老年人独立生活辅助系统”中，通过监测传感器数据（如活动量、门窗开关）判断老人起居异常，自动触发紧急联系人通知或社区服务。; 灵感3：利用其自动化引擎和丰富的设备支持，构建“节能管家”系统，根据室内外温度、电价时段自动调节恒温器、窗帘和灯光，降低能耗成本。
-   项目链接: https://github.com/home-assistant/core
+   衍生灵感: 灵感1：可以基于 graphify 开发一个「代码库新手引导系统」，自动为新加入项目的工程师生成交互式知识图谱，标记核心模块、常见入口点和依赖关系，加速 onboarding。; 灵感2：集成到 CI/CD 流水线中，每次代码提交后自动更新知识图谱，并生成「变更影响分析报告」，高亮哪些概念、文件被修改，以及可能影响的上下游模块。; 灵感3：结合 LLM 和 graphify 的查询能力，构建一个「智能代码评审助手」，在 PR 时自动提取相关代码上下文，为 reviewer 提供精准的依赖关系和设计决策说明。
+   项目链接: https://github.com/Graphify-Labs/graphify
+
+4. github/spec-kit:
+   star: 120739  语言/技术: Python, uv, Markdown, YAML, Git
+   项目简介: Spec Kit 是一个由 GitHub 推出的开源工具包，旨在实现规范驱动开发（Spec-Driven Development），让开发者通过编写自然语言规范，由 AI 编码助手自动生成实现代码，从而减少“盲目编码”（vibe coding），提升软件质量。它提供 CLI 工具 specify 和一系列 slash 命令，与 30+ 种 AI 编码代理（如 Claude Code、GitHub Copilot）集成，支持扩展、预设和角色绑定包，方便团队定制开发流程。
+   亮点: 规范即代码：将规范变为可执行，直接驱动 AI 生成符合需求的实现。; 零摩擦集成：与 30+ AI 编码代理深度集成，提供统一的 slash 命令工作流。; 灵活扩展：通过扩展（新增命令/模板）和预设（定制现有模板）满足不同团队需求，支持角色绑定包一键部署。
+   详细报告: Spec Kit 是一个革命性的开发工具包，它重新定义了软件开发中规范与代码的关系。传统开发中，规范往往是“写后即弃”的文档，而 Spec Kit 将规范提升为一等公民，使其直接成为可执行的驱动源。
+
+核心工具是 specify CLI，基于 Python 实现，通过 uv 工具安装。项目初始化后，开发者通过与 AI 编码代理交互使用一系列 slash 命令：
+- `/speckit.constitution` 创建项目治理原则和开发指南；
+- `/speckit.specify` 描述需求（仅关注“做什么”和“为什么”，不涉及技术栈）；
+- `/speckit.plan` 指定技术栈和架构选择，生成实现计划；
+- `/speckit.tasks` 将计划拆解为具体的任务列表，包含依赖关系和并行执行标记；
+- `/speckit.implement` 按任务顺序自动执行编码。
+
+这些命令会生成对应的 Markdown 文件（如 constitution.md、spec.md、plan.md、tasks.md），AI 代理根据这些文件逐步生成代码。支持 TDD 模式，先写测试再实现。
+
+Spec Kit 的扩展系统允许社区贡献新命令、钩子和功能；预设系统可覆盖默认模板，适用于合规性、术语定制等场景；角色绑定包（Bundles）将扩展和预设打包，一键配置产品经理、分析师、开发者等不同角色的工具链。
+
+技术方面，CLI 使用 Python，配置采用 YAML（如 bundle.yml），规范文件使用 Markdown。支持的 AI 代理包括 Claude Code、GitHub Copilot、Codex CLI 等 30 多种，通过插件机制集成。
+
+由于 README 被截断，关于详细流程的后续步骤（如收敛、测试等）未能完整呈现，但核心工作流已清晰。项目文档完整，安装指南详细，社区贡献入口明确，但 API 指标显示暂无星标和提交，可能是仓库刚公开或处于早期阶段。
+   活跃度: 未知（API 指标显示 commits_recent 为 0，pushed_at 为 null，可能尚无活跃开发）  社区健康: 未知（项目较新，无公开活动数据，但文档完善，有社区贡献指引）
+   商业潜力: 文档未提及具体商业模式，但可为软件团队提供标准化开发流程，降低沟通成本，提升效率，适合作为企业级开发平台的基础组件。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 Spec Kit 构建一个“合规开发流水线”，例如为金融或医疗行业定制预设，自动生成符合 PCI DSS 或 HIPAA 的规范模板，使 AI 代码自然满足合规要求。; 灵感2：将 Spec Kit 与 Jira 或 GitHub Projects 集成，开发一个扩展，使任务列表自动同步为 Issue，实现需求—任务—代码的端到端追踪，减少手动同步。; 灵感3：扩展 Spec Kit 支持国内主流 AI 编码助手（如通义灵码、文心快码），降低国内开发者的使用门槛，并增加中文提示词优化预设。
+   项目链接: https://github.com/github/spec-kit
