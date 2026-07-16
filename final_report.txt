@@ -1,4 +1,37 @@
-1. Shubhamsaboo/awesome-llm-apps:
+1. HKUDS/Vibe-Trading:
+   star: 23806  语言/技术: Python, FastAPI, Docker, MCP, LLM (OpenAI, Anthropic, etc.), yfinance, Tushare, Alpaca, Longbridge, Binance, Alpha Zoo (因子库), Pydantic, LangChain, LangGraph
+   项目简介: Vibe-Trading 是一个开源的个人交易代理，旨在通过一条命令部署具备全面交易能力的 AI 代理。它集成了市场研究、策略开发、回测、因子分析、组合管理以及实际交易执行等功能，支持多种数据源和券商接口，并且通过 LLM（大语言模型）实现智能决策。该项目解决了量化交易门槛高、工具分散的问题，为个人投资者提供了一站式的自动交易解决方案。
+   亮点: 一键部署：通过单一命令即可启动功能完整的交易代理，降低使用门槛。; 全面的交易能力：支持市场研究、策略定义、回测、因子分析、组合优化和实际交易执行。; 丰富的因子库：内置 460+ 个因子（Alpha Zoo），覆盖基本面、动量、质量等多种类型，并支持自定义因子。; 多数据源与券商支持：集成 18+ 免费数据源（如 yfinance、Tushare）和 10+ 券商 SDK（如 Alpaca、Robinhood），覆盖股票、加密货币等。
+   详细报告: Vibe-Trading 是一个专为个人投资者设计的开源交易代理平台。它的核心是一个由 LLM 驱动的智能代理，能够理解自然语言指令，并执行一系列复杂的交易任务。项目的主要功能模块包括：
+
+1. **市场研究**：代理可以从多个数据源（如 yfinance、Tushare、Binance 等）获取实时和历史数据，并利用 web 搜索功能进行信息收集。
+2. **策略开发与回测**：用户可以用自然语言描述交易策略，代理将其转化为代码并执行回测。回测引擎支持多种优化器（如均值-方差、风险平价等），并提供了严格的正确性验证（如无前瞻偏差）。
+3. **因子分析**：内置了 460+ 个金融因子（Alpha Zoo），涵盖动量、反转、质量、价值等类别。用户可以通过因子分析功能评估因子的表现，并基于因子构建组合。
+4. **组合管理**：支持多资产组合的构建、再平衡和优化。提供了 Portfolio Studio 用于设计和管理投资组合。
+5. **实际交易**：代理可以连接到券商（如 Alpaca、Robinhood）执行交易。交易功能是实验性的，需要用户明确授权并设置限制，且所有操作均可随时暂停。
+6. **安全与合规**：项目经过外部安全审计，修复了所有发现的问题（如 Docker 容器加固、沙箱隔离、认证机制）。免责声明明确项目不构成投资建议，风险自负。
+
+技术栈方面，后端使用 Python 和 FastAPI 构建 RESTful API，前端（未提供详细内容）可能使用 React 等框架。代理通过 MCP（Machine Control Protocol）与 LLM 交互，支持 OpenAI、Anthropic、Google Gemini 等多种模型。数据层提供了统一的加载器接口，支持多种数据源的自由切换。项目使用 Docker 进行容器化部署，并且有活跃的社区贡献（包括印度股市支持、中国 A 股支持等）。
+
+根据 README，项目的版本已迭代到 v0.1.11，更新频率很高（几乎每天都有多个 PR 合并）。社区健康，有大量贡献者参与。
+   活跃度: 高，每日都有多个 PR 合并，版本迭代迅速。  社区健康: 活跃，有大量贡献者提交 PR，维护者积极响应。
+   商业潜力: 项目本身开源，但可以衍生出付费服务如高级数据源订阅、托管部署、定制化策略开发等。面向个人投资者、量化爱好者、小型投资机构。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：构建一个“个人财务管家”应用，基于 Vibe-Trading 的代理能力，增加账单分析、预算管理、财务报告生成等功能，面向普通家庭用户。; 灵感2：将其集成到 Telegram/微信等即时通讯平台，作为投资助手机器人，用户可以通过聊天发送指令执行策略回测、查看持仓、接收市场警报。; 灵感3：用于量化交易教育平台，学生可以通过自然语言描述策略并立即看到回测结果，降低学习门槛；同时可以封装成 SaaS 服务，为中小私募提供低成本交易基础设施。
+   项目链接: https://github.com/HKUDS/Vibe-Trading
+
+2. HKUDS/DeepTutor:
+   star: 26391  语言/技术: Python, TypeScript, React, Next.js, LlamaIndex, LightRAG, GraphRAG, FAISS, Docker, OpenAI API, Anthropic API, Gemini API, MCP, Obsidian
+   项目简介: DeepTutor 是一个终身个性化辅导系统，基于代理原生的学习工作空间，将聊天、测验、研究、可视化、解题和掌握路径统一在单一可扩展架构中，支持多引擎知识库、子代理伙伴和社区技能生态。
+   亮点: 统一代理循环：聊天、解题、测验、研究、可视化等所有模式共享同一智能体引擎，上下文连贯迁移; 多引擎知识库：支持 LlamaIndex、PageIndex、GraphRAG、LightRAG 及 Obsidian 仓库，可插拔文档解析; 子代理与伙伴：可实时调用 Claude Code、Codex 或自定义伙伴，持久化 IM 伴侣运行相同大脑
+   详细报告: DeepTutor 是一个由香港大学数据智能实验室（HKUDS）主导的开源项目，致力于构建终身个性化辅导系统。其核心架构采用代理原生（agent-native）设计，所有学习工作流（聊天、测验、解题、研究、可视化、掌握路径）运行在同一个智能体循环上，用户切换任务时无需更换引擎，上下文随学习者流动。项目集成了多种知识检索引擎，包括基于 LlamaIndex 的 RAG 管道、PageIndex、GraphRAG、LightRAG 以及直接链接的 Obsidian 仓库，支持版本化管理和多种文档解析器（如 PyMuPDF4LLM、Docling）。DeepTutor 还引入了「伙伴」（Partners）概念，允许用户连接本地或远程的 AI 代理（如 Claude Code、Codex）或预设的虚拟角色，在聊天中实时协作，且每个伙伴拥有独立的记忆和技能库。技能系统支持安装社区技能（来自 EduHub 或 ClawHub），通过沙盒安全门控进行审计。项目提供了 CLI 工具（deeptutor）用于启动、管理知识库和安装技能，以及完整的 Docker 部署支持。技术栈方面，后端主要使用 Python，前端基于 Next.js 和 React，RAG 组件深度依赖 LlamaIndex，向量检索使用 FAISS 等，并支持多种 LLM 提供商（OpenAI、Anthropic、Google Gemini、本地模型等）。社区活跃，截至2026年5月已获得20000+星标，更新频繁（日更版本），并有详细的贡献指南和路线图。
+   活跃度: 极高，每天发布多个版本，近一个月有超过30次发布。  社区健康: 活跃，由学术团队主导，社区贡献多，有 Discord、微信、讨论区，贡献指南完善。
+   商业潜力: 高，可商业化落地于教育科技、企业培训、知识管理等领域，但项目申明目前无付费产品。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 企业培训平台：基于 DeepTutor 的个性化辅导能力，开发面向企业内部员工培训的智能导师系统，支持自动生成课程、测验和掌握路径，集成企业知识库。; 科研协作助手：利用其多引擎知识库和伙伴系统，构建一个研究团队使用的文献阅读与实验设计助手，可实时调用 Claude Code 分析代码或从 ArXiv 检索论文。; 开放教育社区：搭建一个内容创作者平台，允许教师创建和共享学习技能包（Skills），学生通过社区市场安装并个性化学习，结合用户贡献的题库和可视化资源。
+   项目链接: https://github.com/HKUDS/DeepTutor
+
+3. Shubhamsaboo/awesome-llm-apps:
    star: 121031  语言/技术: Python, Streamlit, OpenAI Agents SDK, Gemini API, Claude API, DeepSeek API, LangGraph, CrewAI, AG2, Qdrant, Unsloth, Firecrawl, Yahoo Finance API
    项目简介: 一个包含100+个开源AI智能体、智能体技能和RAG应用的模板集合，覆盖从入门级到生产级的多种场景，支持Claude、Gemini、GPT、DeepSeek、Llama、Qwen等主流模型。所有模板均可直接克隆、修改、部署，Apache-2.0协议商用友好。
    亮点: 100+个即拿即用的AI智能体模板，覆盖智能体技能、单/多智能体、语音、RAG、生成式UI等类别; 支持Claude、Gemini、GPT、DeepSeek、Llama、Qwen等多种模型，大部分模板只需API Key即可运行; Apache-2.0开源协议，可自由克隆、分发、商用，附赠逐步教程
@@ -25,67 +58,35 @@
    衍生灵感: 灵感1：基于“AI Travel Agent”模板，可以开发一个“企业差旅管理助手”，结合公司差旅政策数据库（如PDF或Notion），自动生成符合预算的行程方案，并集成日历和报销系统。; 灵感2：利用“Voice RAG Agent”模板，构建一个“企业知识库语音客服”，用户可以通过电话或语音助手口头提问，系统从 FAQ、产品手册中检索答案并语音回复，适用于售后支持场景。; 灵感3：将“Multi-Agent Finance Team”模板与实时市场数据（如东方财富API）结合，做一个“A股量化分析团队”，由多个智能体分别负责技术面、基本面、新闻情绪分析，最终输出投资建议。
    项目链接: https://github.com/Shubhamsaboo/awesome-llm-apps
 
-2. virattt/ai-hedge-fund:
-   star: 61935  语言/技术: Python, Poetry, OpenAI API, Financial Datasets API, Ollama (可选)
-   项目简介: AI Hedge Fund 是一个概念验证项目，旨在利用 AI 模拟多位著名投资者的决策逻辑，共同完成股票交易分析。系统包含多个智能体（如沃伦·巴菲特、本杰明·格雷厄姆等），每个智能体都模拟其独特的投资哲学，并结合估值、情绪、基本面、技术面等分析生成综合交易信号。项目仅供教育和研究使用，不适用于真实交易。
-   亮点: 19个AI智能体模拟不同投资大师的决策逻辑; 支持命令行和Web界面两种运行方式; 内置回测功能，可验证策略历史表现
-   详细报告: AI Hedge Fund 是一个开源的 AI 驱动对冲基金概念验证项目。其核心是多智能体协作系统，集成了13位不同风格的投资者智能体（如价值投资的沃伦·巴菲特、增长投资的凯西·伍德、逆向投资的迈克尔·伯里等）以及6个分析模块智能体（估值、情绪、基本面、技术面、风险管理和投资组合管理）。每个智能体都根据预设的投资哲学分析股票数据并生成交易信号，最后由投资组合经理综合决策。
+4. github/spec-kit:
+   star: 121631  语言/技术: Python, uv (Python包管理器), Markdown, GitHub API, AI编码代理集成 (Claude Code, Copilot等)
+   项目简介: Spec Kit 是一个开源工具包，旨在通过规范驱动开发（Spec-Driven Development）来加速高质量软件的构建。它颠覆了传统“代码为王”的模式，让规范成为可执行的核心——开发者只需描述“做什么”和“为什么”，工具便会自动生成任务列表和技术实现计划。支持30+ AI编码代理（如Claude Code、GitHub Copilot），通过slash命令实现从编写规范、生成计划、分解任务到自动实现的完整工作流。还提供扩展、预设和捆绑包机制，允许用户按角色定制开发体验。
+   亮点: 规范即代码：将需求文档转化为可自动执行的开发流程，减少“随性编码”带来的不确定性。; 与30+ AI编码代理深度集成：通过slash命令在Agent内直接调用，无需切换工具。; 高度可扩展：支持自定义扩展、预设和捆绑包，适合团队按角色（PM、开发者、安全研究员等）定制工作流。
+   详细报告: Spec Kit 由GitHub官方推出，核心理念是规范驱动开发（SDD）。传统开发中，代码是最终产物，规范只是辅助文档；而在SDD中，规范本身就是可执行的蓝图。
 
-项目使用 Python 语言开发，依赖 Poetry 管理依赖，支持通过命令行或 Web 界面操作。用户需要配置 OpenAI API 或其他 LLM API（如 Groq、Anthropic、DeepSeek）以及 Financial Datasets API 获取金融数据。通过运行 `src/main.py` 并指定股票代码，系统会输出每个智能体的决策理由和最终交易建议。此外，项目还提供了回测工具 `src/backtester.py`，可对历史时间段进行策略回测。
+**核心工作流**：
+1. 使用 `specify init` 初始化项目，选择AI代理集成。
+2. 通过 `/speckit.constitution` 设定项目原则和开发指南。
+3. 用 `/speckit.specify` 描述需求（关注“做什么”和“为什么”）。
+4. 用 `/speckit.plan` 制定技术实现计划（指定技术栈和架构）。
+5. 用 `/speckit.tasks` 分解为可执行的任务列表（包含依赖管理和并行标记）。
+6. 最终用 `/speckit.implement` 自动执行所有任务。
+7. 还有可选命令如 `/speckit.clarify`（澄清未明确点）、`/speckit.analyze`（一致性分析）、`/speckit.checklist`（生成质量清单）等。
 
-项目当前处于概念验证阶段，作者正在重建为持久化、始终在线的 AI 对冲基金，智能体将演变为可插拔、可回测的“阿尔法模型”。文档中明确声明项目仅用于教育和研究，不提供投资建议，也不承担任何财务损失责任。
-   活跃度: 未知  社区健康: 未知
+**技术构成**：
+- **CLI工具**：基于Python，通过 `uv tool install` 安装，支持自升级。
+- **集成层**：支持30+AI代理（包括Claude Code, Copilot Chat, Cody等），提供slash命令或技能模式。
+- **可扩展性**：扩展（Extension）用于添加全新命令/工作流；预设（Preset）用于定制现有模板/格式；捆绑包（Bundle）则将扩展、预设、步骤等打包成角色化配置。
+- **社区生态**：有官方文档站点，社区可贡献扩展、预设、捆绑包和演练指南。
+
+**解决的问题**：
+- 减少从需求到代码的认知鸿沟，让AI代理更准确理解意图。
+- 避免“随性编码”（Vibe coding）导致的质量不可控。
+- 标准化团队开发流程，提升协作效率。
+
+**根据文档内容，无法确定的细节**：具体技术栈除Python和uv外，未提及语言分布；项目活跃度（commits、release）未知，因API指标显示为0或null。
+   活跃度: 未知（因API指标无近期活动）  社区健康: 未知（API指标显示无fork、无issue、无近期commit，但项目由GitHub官方维护，文档丰富，有社区贡献指南）
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个“投资大师模拟器”教育平台，让用户选择不同大师的智能体组合进行虚拟投资比赛，用于教学或金融知识普及。; 灵感2：将其集成到现有的量化交易平台中，作为策略生成的辅助模块，利用多智能体共识降低单一策略风险。; 灵感3：扩展为“个性化投资顾问”系统，允许用户上传自己的持仓和风险偏好，由智能体组合给出定制化建议，并输出可解释的投资报告。
-   项目链接: https://github.com/virattt/ai-hedge-fund
-
-3. HKUDS/Vibe-Trading:
-   star: 23006  语言/技术: Python, FastAPI, MCP (Model Context Protocol), LangChain, LangGraph, Docker, Pydantic, NVIDIA NIM, Tushare, yfinance, Binance, OKX, Longbridge, Alpaca, Robinhood, DuckDB, Pillow, NumPy, bottleneck, Alpha Zoo (460+ alpha factors), QVeris
-   项目简介: Vibe-Trading是一个个人交易代理，通过单个命令即可赋予代理全面的交易能力。它集成了多种数据源（如Tushare、yfinance、Binance等）、AI模型（OpenAI、Claude、Gemini等）和券商接口（Robinhood、Longbridge等），支持回测、实时交易、策略开发、研究自动飞行等功能。项目注重安全性和模块化，已通过外部安全审计。面向量化交易爱好者和开发者，提供Web UI和CLI界面。
-   亮点: 一键部署，提供Web UI和CLI两种交互方式; 支持股票、加密货币、印度市场等多种资产回测和实时交易; 集成AI策略开发管理器，将学术论文转化为可注册的因子/策略; 全面的安全措施：多阶段Docker构建、沙箱回测、短期SSE认证等
-   详细报告: Vibe-Trading是一个开源的个人交易代理项目，旨在通过AI辅助用户进行量化交易研究和实盘操作。核心功能包括：
-- **Shadow Account**：安全隔离的模拟交易环境，用户可先在影子账户测试策略。
-- **市场数据层**：集成了18+免费数据源（Tushare、yfinance、Binance、OKX等）和可选的QVeris付费数据，支持股票、加密货币、印度NSE/BSE等。
-- **AI策略开发管理器**：新功能，允许用户将学术论文或券商研究报告转化为注册因子/策略，并自动监控IC/Sharpe衰减，形成active→monitoring→decayed→disabled的生命周期管理。
-- **基本面因子层**：PIT-safe的SEC基本面数据流入每日因子面板，提供460+ alpha因子。
-- **回测引擎**：支持多资产回测，包括T+1交割、电路断点、印度STT/印花税等费用模型，并包含阿尔法对比、组合优化等功能。
-- **实时交易**：通过券商API（Robinhood、Alpaca、Longbridge等）执行真实交易，但需用户明确授权，且默认只读。
-- **IM通道**：支持16个IM适配器运行时，可接收来自Telegram等渠道的交易信号。
-- **MCP服务器**：支持Streamable HTTP传输，提供与外部工具集成的标准接口。
-- **安全性**：已通过外部安全审计（共10项发现已全部修复），包括沙箱回测、短期SSE认证票据、CVE扫描等。
-- **贡献者活跃**：项目有大量贡献者，社区活跃，更新频繁。
-技术栈以Python为主，使用FastAPI构建后端，前端为Web UI，支持多种LLM提供商（OpenAI、Claude、Gemini、DeepSeek、GLM等），并集成了MCP协议。
-   活跃度: 非常活跃。从README可见几乎每天都有合并PR，且最近发布版本为v0.1.11。  社区健康: 良性。文档完善（中英日韩等语言），贡献指南清晰，有Discord社区，Issue和PR管理有序。
-   商业潜力: 高。项目已具备完整回测和实盘交易能力，可直接用于个人量化交易。可以商业化：提供付费高级数据源、企业级部署支持、量化策略代开发服务等。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于Vibe-Trading的AI策略开发管理器，可以构建一个量化策略市场平台，允许用户提交、分享和订阅社区开发的策略因子，并附带回测报告。; 灵感2：将其集成到企业级资管系统中，作为智能决策辅助模块，自动扫描市场信号并生成交易建议，同时通过MCP接口与现有交易执行系统对接。; 灵感3：用于金融教育，开发一个交互式交易学习模拟器，学生可以创建虚拟策略，在历史数据上回测，并通过AI分析解释策略表现。
-   项目链接: https://github.com/HKUDS/Vibe-Trading
-
-4. Graphify-Labs/graphify:
-   star: 86591  语言/技术: Python, tree-sitter, uv, pipx, CLI, Leiden社区检测
-   项目简介: graphify 是一个开源 CLI 工具，能将整个项目（代码、文档、PDF、图片、视频）映射成可查询的知识图谱，替代传统的 grep 式文件搜索。它通过 tree-sitter AST 本地解析代码，无需 LLM，不泄露数据；对文档、媒体等则利用 AI 进行语义分析。生成的图谱包含节点和边，每条边都有置信度标签（EXTRACTED/INFERRED），支持通过 `/graphify` 命令在 AI 编程助手中直接查询、追溯路径或解释概念。项目致力于让开发者告别“翻文件”，用图的方式理解代码。
-   亮点: 本地优先：代码解析完全在本地进行，不依赖 LLM，数据不离开机器; 真实知识图谱：不是向量索引，构建的图可直接遍历，支持查询、路径追踪和概念解释; 跨语言支持：通过 tree-sitter AST 支持约 40 种语言的调用/导入/继承等关系抽取; 多模态输入：除代码外，还支持文档、PDF、图片、视频/音频等映射到同一张图
-   详细报告: graphify 是一个革命性的代码理解工具，它解决了大型代码库中“ grep 式”搜索的低效问题。传统上，开发者需要反复搜索关键词、翻阅文件才能理清代码结构，而 graphify 将整个项目转化为一张可交互的知识图谱。
-
-核心功能：
-1. 图谱生成：在项目目录中运行 `/graphify .`（或在终端执行 `graphify` 命令），即可生成三个文件：`graph.html`（可交互的图谱网页）、`GRAPH_REPORT.md`（关键概念和问题建议）、`graph.json`（完整图谱数据，可反复查询）。
-2. 查询机制：支持 `graphify query <question>`、`graphify path A B`、`graphify explain <node>` 三类操作，直接从图中获取上下文，无需再次读取文件。
-3. 边置信度：每条连接都标记为 `EXTRACTED`（源代码中显式存在）或 `INFERRED`（通过依赖解析推断），帮助开发者区分直接引用和间接关联。
-4. 多模态支持：代码使用 tree-sitter AST 解析（完全本地），而文档、PDF、图片、视频等则通过 AI 模型（可配置 API key）进行语义抽取，所有节点最终汇聚到同一张图中。
-5. 社区检测：自动对图进行 Leiden 社区检测，识别出子系统，并自动命名（若配置后端）。
-6. 跨平台集成：支持 Claude Code、Cursor、Codex、GitHub Copilot、Gemini CLI 等 20+ AI 编程助手，一次安装即可在常用助手中使用。
-
-技术栈：
-- 语言：Python（CLI 工具）
-- 核心解析：tree-sitter（AST 解析，支持约 40 种语言）
-- 安装分发：uv / pipx（推荐），也支持 pip
-- 可选依赖：PDF、Office、视频、Neo4j、Ollama、OpenAI 等，按需安装
-- 图算法：Leiden 社区检测（可选）
-
-因文档不全（中间部分被截断），关于完整命令参考、Benchmarks 详细表格等无法详细点评。但总体来看，项目文档详尽、架构清晰，实用价值极高。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档提及了基于 graphify 的商业产品 Penpax（始终在线的个人知识层），但未提供具体商业模式。项目本身开源，免费使用，可能通过提供托管服务、高级支持或企业版实现商业化。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 graphify 构建一个“个人知识图谱”工具，将开发者的所有笔记、博客、代码片段、会议记录等映射成一张图，通过自然语言查询快速定位相关知识点。; 灵感2：将 graphify 集成到 CI/CD 管道中，每次代码提交后自动更新知识图谱，并在 PR 中生成“影响分析报告”，指出修改影响了哪些模块和函数，辅助代码审查。; 灵感3：基于 graphify 的图谱查询能力，开发一个“代码搜索与导航” VS Code 插件，允许开发者通过自然语言或路径提问，直接跳转到相关代码片段，提升开发效率。
-   项目链接: https://github.com/Graphify-Labs/graphify
+   衍生灵感: 灵感1：基于Spec Kit的规范驱动流程，可以开发一个“企业级API网关自动生成器”，业务人员只需用自然语言描述API接口规范，系统自动生成RESTful代码及文档。; 灵感2：将Spec Kit与内部项目管理工具（如Jira、Linear）集成，开发一个“需求到代码的端到端自动化平台”，让产品经理在Jira中编写用户故事后，自动同步为Spec Kit规范并触发AI代理实现。; 灵感3：利用其扩展机制，开发“安全合规检查扩展”，在每次实现前自动分析计划是否符合OWASP或GDPR要求，并在任务列表中插入安全审计步骤。
+   项目链接: https://github.com/github/spec-kit
