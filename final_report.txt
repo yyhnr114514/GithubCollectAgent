@@ -1,35 +1,42 @@
-1. HKUDS/Vibe-Trading:
-   star: 23806  语言/技术: Python, FastAPI, Docker, MCP, LLM (OpenAI, Anthropic, etc.), yfinance, Tushare, Alpaca, Longbridge, Binance, Alpha Zoo (因子库), Pydantic, LangChain, LangGraph
-   项目简介: Vibe-Trading 是一个开源的个人交易代理，旨在通过一条命令部署具备全面交易能力的 AI 代理。它集成了市场研究、策略开发、回测、因子分析、组合管理以及实际交易执行等功能，支持多种数据源和券商接口，并且通过 LLM（大语言模型）实现智能决策。该项目解决了量化交易门槛高、工具分散的问题，为个人投资者提供了一站式的自动交易解决方案。
-   亮点: 一键部署：通过单一命令即可启动功能完整的交易代理，降低使用门槛。; 全面的交易能力：支持市场研究、策略定义、回测、因子分析、组合优化和实际交易执行。; 丰富的因子库：内置 460+ 个因子（Alpha Zoo），覆盖基本面、动量、质量等多种类型，并支持自定义因子。; 多数据源与券商支持：集成 18+ 免费数据源（如 yfinance、Tushare）和 10+ 券商 SDK（如 Alpaca、Robinhood），覆盖股票、加密货币等。
-   详细报告: Vibe-Trading 是一个专为个人投资者设计的开源交易代理平台。它的核心是一个由 LLM 驱动的智能代理，能够理解自然语言指令，并执行一系列复杂的交易任务。项目的主要功能模块包括：
-
-1. **市场研究**：代理可以从多个数据源（如 yfinance、Tushare、Binance 等）获取实时和历史数据，并利用 web 搜索功能进行信息收集。
-2. **策略开发与回测**：用户可以用自然语言描述交易策略，代理将其转化为代码并执行回测。回测引擎支持多种优化器（如均值-方差、风险平价等），并提供了严格的正确性验证（如无前瞻偏差）。
-3. **因子分析**：内置了 460+ 个金融因子（Alpha Zoo），涵盖动量、反转、质量、价值等类别。用户可以通过因子分析功能评估因子的表现，并基于因子构建组合。
-4. **组合管理**：支持多资产组合的构建、再平衡和优化。提供了 Portfolio Studio 用于设计和管理投资组合。
-5. **实际交易**：代理可以连接到券商（如 Alpaca、Robinhood）执行交易。交易功能是实验性的，需要用户明确授权并设置限制，且所有操作均可随时暂停。
-6. **安全与合规**：项目经过外部安全审计，修复了所有发现的问题（如 Docker 容器加固、沙箱隔离、认证机制）。免责声明明确项目不构成投资建议，风险自负。
-
-技术栈方面，后端使用 Python 和 FastAPI 构建 RESTful API，前端（未提供详细内容）可能使用 React 等框架。代理通过 MCP（Machine Control Protocol）与 LLM 交互，支持 OpenAI、Anthropic、Google Gemini 等多种模型。数据层提供了统一的加载器接口，支持多种数据源的自由切换。项目使用 Docker 进行容器化部署，并且有活跃的社区贡献（包括印度股市支持、中国 A 股支持等）。
-
-根据 README，项目的版本已迭代到 v0.1.11，更新频率很高（几乎每天都有多个 PR 合并）。社区健康，有大量贡献者参与。
-   活跃度: 高，每日都有多个 PR 合并，版本迭代迅速。  社区健康: 活跃，有大量贡献者提交 PR，维护者积极响应。
-   商业潜力: 项目本身开源，但可以衍生出付费服务如高级数据源订阅、托管部署、定制化策略开发等。面向个人投资者、量化爱好者、小型投资机构。
+1. apache/ossie:
+   star: 965  语言/技术: JSON, YAML, dbt, GoodData, Polaris, Salesforce, 语义模型
+   项目简介: Apache Ossie 是一个开源的语义模型交换标准化规范，旨在解决数据分析、AI 和 BI 生态系统中工具之间的语义碎片化问题。它提供基于 JSON 和 YAML 的通用规范，确保不同工具（如 dbt、GoodData、Polaris、Salesforce）之间的数据定义和业务逻辑保持一致，消除重复定义和手动协调的痛点。项目前身为 Open Semantic Interchange (OSI)，目前处于 Apache 孵化阶段。
+   亮点: 提供单一、供应商无关的语义模型规范，实现跨工具互操作; 包含核心规范、参考转换器、示例模型和验证工具; 消除相同 KPI 在不同工具中定义不一致的痛点
+   详细报告: Apache Ossie 是一个协作的开源项目，致力于标准化语义模型的交换和利用。在数据分析、AI 和 BI 生态系统中，不同工具对相同业务指标的定义往往不一致，导致团队需要花费大量精力手动协调，并且 AI 代理基于不一致的业务逻辑产生不可靠的输出。Ossie 通过提供一个通用的、供应商无关的语义模型规范来解决这个问题。该规范基于 JSON 和 YAML，任何工具都可以读写。项目仓库包含几个部分：核心规范（core-spec/）包括规范文档、机器可读的 schema（spec.yaml 和 osi-schema.json）；转换器（converters/）提供与 dbt、GoodData、Polaris、Salesforce 等格式的相互转换；示例（examples/）包含完整的 TPC-DS 模型；验证工具（validation/）用于校验语义模型是否符合 schema；docs/ 提供项目文档。目前项目处于 Apache 孵化阶段，社区正在积极讨论和贡献。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：构建一个“个人财务管家”应用，基于 Vibe-Trading 的代理能力，增加账单分析、预算管理、财务报告生成等功能，面向普通家庭用户。; 灵感2：将其集成到 Telegram/微信等即时通讯平台，作为投资助手机器人，用户可以通过聊天发送指令执行策略回测、查看持仓、接收市场警报。; 灵感3：用于量化交易教育平台，学生可以通过自然语言描述策略并立即看到回测结果，降低学习门槛；同时可以封装成 SaaS 服务，为中小私募提供低成本交易基础设施。
-   项目链接: https://github.com/HKUDS/Vibe-Trading
+   衍生灵感: 灵感1：基于 Ossie 规范，可以开发一个企业级语义模型治理平台，自动检测并修复不同 BI 工具（如 Tableau、Power BI）中的指标定义冲突，为数据团队提供一致的数据字典。; 灵感2：可以将 Ossie 集成到数据管道中，作为元数据层，确保 AI 代理（如 Copilot 或 AutoGPT）在查询不同数据源时使用统一的业务逻辑，减少幻觉。; 灵感3：构建一个开源社区插件市场，为 Ossie 规范提供更多转换器（例如支持 Metabase、Superset、Looker），降低用户迁移成本。
+   项目链接: https://github.com/apache/ossie
 
-2. HKUDS/DeepTutor:
-   star: 26391  语言/技术: Python, TypeScript, React, Next.js, LlamaIndex, LightRAG, GraphRAG, FAISS, Docker, OpenAI API, Anthropic API, Gemini API, MCP, Obsidian
-   项目简介: DeepTutor 是一个终身个性化辅导系统，基于代理原生的学习工作空间，将聊天、测验、研究、可视化、解题和掌握路径统一在单一可扩展架构中，支持多引擎知识库、子代理伙伴和社区技能生态。
-   亮点: 统一代理循环：聊天、解题、测验、研究、可视化等所有模式共享同一智能体引擎，上下文连贯迁移; 多引擎知识库：支持 LlamaIndex、PageIndex、GraphRAG、LightRAG 及 Obsidian 仓库，可插拔文档解析; 子代理与伙伴：可实时调用 Claude Code、Codex 或自定义伙伴，持久化 IM 伴侣运行相同大脑
-   详细报告: DeepTutor 是一个由香港大学数据智能实验室（HKUDS）主导的开源项目，致力于构建终身个性化辅导系统。其核心架构采用代理原生（agent-native）设计，所有学习工作流（聊天、测验、解题、研究、可视化、掌握路径）运行在同一个智能体循环上，用户切换任务时无需更换引擎，上下文随学习者流动。项目集成了多种知识检索引擎，包括基于 LlamaIndex 的 RAG 管道、PageIndex、GraphRAG、LightRAG 以及直接链接的 Obsidian 仓库，支持版本化管理和多种文档解析器（如 PyMuPDF4LLM、Docling）。DeepTutor 还引入了「伙伴」（Partners）概念，允许用户连接本地或远程的 AI 代理（如 Claude Code、Codex）或预设的虚拟角色，在聊天中实时协作，且每个伙伴拥有独立的记忆和技能库。技能系统支持安装社区技能（来自 EduHub 或 ClawHub），通过沙盒安全门控进行审计。项目提供了 CLI 工具（deeptutor）用于启动、管理知识库和安装技能，以及完整的 Docker 部署支持。技术栈方面，后端主要使用 Python，前端基于 Next.js 和 React，RAG 组件深度依赖 LlamaIndex，向量检索使用 FAISS 等，并支持多种 LLM 提供商（OpenAI、Anthropic、Google Gemini、本地模型等）。社区活跃，截至2026年5月已获得20000+星标，更新频繁（日更版本），并有详细的贡献指南和路线图。
-   活跃度: 极高，每天发布多个版本，近一个月有超过30次发布。  社区健康: 活跃，由学术团队主导，社区贡献多，有 Discord、微信、讨论区，贡献指南完善。
-   商业潜力: 高，可商业化落地于教育科技、企业培训、知识管理等领域，但项目申明目前无付费产品。
+2. PostHog/posthog:
+   star: 35902  语言/技术: Python, JavaScript, Next.js, React, Node.js, Docker, Ruby, PHP, Go, .NET
+   项目简介: PostHog 是一个开源的产品分析平台，提供从数据采集、分析到自动修复的全套工具，帮助开发者构建“自驱型”产品。它能自动捕捉用户行为、错误、崩溃等信号，并基于这些数据生成研究报告和 Pull Request，同时整合了产品分析、Web分析、会话重放、特征开关、实验、错误跟踪、日志、调查、数据仓库、数据管道、AI可观测性等众多功能，所有工具都可从 Slack、Web、桌面或编辑器中使用。
+   亮点: 自驱模式：自动捕捉产品数据中的信号，生成研究报告和 Pull Request，实现自动化问题修复。; 一体化工具集：集成了产品分析、Web分析、会话重放、特征开关、实验、错误跟踪、日志、调查、数据仓库、数据管道、AI可观测性、工作流等12+功能。; 开源且支持自托管，同时提供免费云服务层（每月100万事件、5000次录制等）。; MCP集成：可接入Claude Code、Cursor等AI代理，在编辑器中直接操作数据。
+   详细报告: PostHog 是一个功能极其全面的开源产品分析平台，定位为“构建自驱型产品的工具”。它不仅是传统意义上的分析工具，更是一套能够主动诊断问题、发现机会并自动修复的产品系统。核心亮点是“自驱模式”：该模式能持续监控产品数据中的异常信号（如错误、Rage Click、失败查询等），并自动将它们转化为结构化的研究报告，甚至生成可以直接审核和合并的Pull Request，极大降低了开发者从发现问题到修复问题的闭环成本。
+
+除了自驱模式，PostHog 提供了丰富的功能模块：
+- 产品分析（Product Analytics）：支持自动捕获或手动埋点，通过可视化或SQL分析用户行为。
+- Web分析（Web Analytics）：类似Google Analytics的仪表盘，监控Web流量、转化率、页面体验和收入。
+- 会话重放（Session Replays）：回放真实用户的网页或移动端操作录像，用于诊断问题和理解行为。
+- 特征开关（Feature Flags）：安全地向特定用户或群组推送新功能。
+- 实验（Experiments）：通过A/B测试衡量功能对目标指标的影响，支持无代码设置。
+- 错误跟踪（Error Tracking）：捕获错误、发送告警并推动修复。
+- 日志（Logs）：采集、搜索和分析日志数据，并与产品数据关联。
+- 调查（Surveys）：提供无代码调查模板或自定义构建。
+- 数据仓库（Data Warehouse）：同步Stripe、Hubspot等外部工具数据，与产品数据一起查询。
+- 数据管道（Data Pipelines）：对进入的数据进行自定义过滤和转换，实时发送到25+工具或Webhook，或批量导出到仓库。
+- AI可观测性（AI Observability）：捕获LLM应用的追踪、生成、延迟和成本。
+- 工作流（Workflows）：创建自动化的操作或用户消息发送。
+
+技术架构上，PostHog 提供多种集成方式：JavaScript Web代码片段、多种后端SDK（Python、Node、PHP、Ruby、Go、.NET等）以及API。前端支持React、Vue、Next.js等主流框架。同时，它支持通过MCP（Model Context Protocol）与Claude Code、Cursor等AI代理工具集成，实现直接在编辑器内使用PostHog功能。部署方面，官方推荐使用PostHog Cloud（提供免费额度），也支持自托管（通过Docker一条命令部署，适合约10万事件/月的规模，超过建议迁移至云）。项目采用MIT许可证（除ee目录），同时提供完全FOSS的posthog-foss分支。
+
+由于README内容完整，可以看出PostHog已经是一个成熟、文档详尽、社区活跃的开源项目，但其GitHub API指标（如fork、star等）在输入中均为0，可能为模拟数据。实际项目中PostHog拥有极高的关注度和贡献者。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: PostHog 采用 open-core 模式，核心功能开源，企业级功能（如高级权限、SSO、自定义导出等）通过付费订阅提供。其云服务有慷慨的免费层，通过按量付费（事件、录制等）盈利，同时提供自托管选项吸引对数据隐私敏感的企业。商业化潜力大，已成为产品分析领域的有力竞争者。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 企业培训平台：基于 DeepTutor 的个性化辅导能力，开发面向企业内部员工培训的智能导师系统，支持自动生成课程、测验和掌握路径，集成企业知识库。; 科研协作助手：利用其多引擎知识库和伙伴系统，构建一个研究团队使用的文献阅读与实验设计助手，可实时调用 Claude Code 分析代码或从 ArXiv 检索论文。; 开放教育社区：搭建一个内容创作者平台，允许教师创建和共享学习技能包（Skills），学生通过社区市场安装并个性化学习，结合用户贡献的题库和可视化资源。
-   项目链接: https://github.com/HKUDS/DeepTutor
+   衍生灵感: 灵感1：基于PostHog的会话重放和错误跟踪，可以开发一个“用户体验异常自动诊断与修复助手”，当检测到用户频繁发生Rage Click或错误时，自动生成Jira工单并附上重放链接和堆栈信息，推动快速修复。; 灵感2：利用PostHog的数据管道和特征开关，构建一个“灰度发布自动化平台”，根据用户行为数据（如留存率、错误率）自动调整新功能开放比例，甚至自动回滚异常版本。; 灵感3：将PostHog的AI可观测性能力与自驱模式结合，开发一个“LLM应用行为监控与优化Agent”，自动分析模型调用延迟、错误率和用户反馈，并生成优化建议或Pull Request修改提示词。
+   项目链接: https://github.com/PostHog/posthog
 
 3. Shubhamsaboo/awesome-llm-apps:
    star: 121031  语言/技术: Python, Streamlit, OpenAI Agents SDK, Gemini API, Claude API, DeepSeek API, LangGraph, CrewAI, AG2, Qdrant, Unsloth, Firecrawl, Yahoo Finance API
@@ -58,35 +65,13 @@
    衍生灵感: 灵感1：基于“AI Travel Agent”模板，可以开发一个“企业差旅管理助手”，结合公司差旅政策数据库（如PDF或Notion），自动生成符合预算的行程方案，并集成日历和报销系统。; 灵感2：利用“Voice RAG Agent”模板，构建一个“企业知识库语音客服”，用户可以通过电话或语音助手口头提问，系统从 FAQ、产品手册中检索答案并语音回复，适用于售后支持场景。; 灵感3：将“Multi-Agent Finance Team”模板与实时市场数据（如东方财富API）结合，做一个“A股量化分析团队”，由多个智能体分别负责技术面、基本面、新闻情绪分析，最终输出投资建议。
    项目链接: https://github.com/Shubhamsaboo/awesome-llm-apps
 
-4. github/spec-kit:
-   star: 121631  语言/技术: Python, uv (Python包管理器), Markdown, GitHub API, AI编码代理集成 (Claude Code, Copilot等)
-   项目简介: Spec Kit 是一个开源工具包，旨在通过规范驱动开发（Spec-Driven Development）来加速高质量软件的构建。它颠覆了传统“代码为王”的模式，让规范成为可执行的核心——开发者只需描述“做什么”和“为什么”，工具便会自动生成任务列表和技术实现计划。支持30+ AI编码代理（如Claude Code、GitHub Copilot），通过slash命令实现从编写规范、生成计划、分解任务到自动实现的完整工作流。还提供扩展、预设和捆绑包机制，允许用户按角色定制开发体验。
-   亮点: 规范即代码：将需求文档转化为可自动执行的开发流程，减少“随性编码”带来的不确定性。; 与30+ AI编码代理深度集成：通过slash命令在Agent内直接调用，无需切换工具。; 高度可扩展：支持自定义扩展、预设和捆绑包，适合团队按角色（PM、开发者、安全研究员等）定制工作流。
-   详细报告: Spec Kit 由GitHub官方推出，核心理念是规范驱动开发（SDD）。传统开发中，代码是最终产物，规范只是辅助文档；而在SDD中，规范本身就是可执行的蓝图。
-
-**核心工作流**：
-1. 使用 `specify init` 初始化项目，选择AI代理集成。
-2. 通过 `/speckit.constitution` 设定项目原则和开发指南。
-3. 用 `/speckit.specify` 描述需求（关注“做什么”和“为什么”）。
-4. 用 `/speckit.plan` 制定技术实现计划（指定技术栈和架构）。
-5. 用 `/speckit.tasks` 分解为可执行的任务列表（包含依赖管理和并行标记）。
-6. 最终用 `/speckit.implement` 自动执行所有任务。
-7. 还有可选命令如 `/speckit.clarify`（澄清未明确点）、`/speckit.analyze`（一致性分析）、`/speckit.checklist`（生成质量清单）等。
-
-**技术构成**：
-- **CLI工具**：基于Python，通过 `uv tool install` 安装，支持自升级。
-- **集成层**：支持30+AI代理（包括Claude Code, Copilot Chat, Cody等），提供slash命令或技能模式。
-- **可扩展性**：扩展（Extension）用于添加全新命令/工作流；预设（Preset）用于定制现有模板/格式；捆绑包（Bundle）则将扩展、预设、步骤等打包成角色化配置。
-- **社区生态**：有官方文档站点，社区可贡献扩展、预设、捆绑包和演练指南。
-
-**解决的问题**：
-- 减少从需求到代码的认知鸿沟，让AI代理更准确理解意图。
-- 避免“随性编码”（Vibe coding）导致的质量不可控。
-- 标准化团队开发流程，提升协作效率。
-
-**根据文档内容，无法确定的细节**：具体技术栈除Python和uv外，未提及语言分布；项目活跃度（commits、release）未知，因API指标显示为0或null。
-   活跃度: 未知（因API指标无近期活动）  社区健康: 未知（API指标显示无fork、无issue、无近期commit，但项目由GitHub官方维护，文档丰富，有社区贡献指南）
-   商业潜力: 文档未提及
+4. HKUDS/DeepTutor:
+   star: 26391  语言/技术: Python, TypeScript, React, Next.js, LlamaIndex, LightRAG, GraphRAG, FAISS, Docker, OpenAI API, Anthropic API, Gemini API, MCP, Obsidian
+   项目简介: DeepTutor 是一个终身个性化辅导系统，基于代理原生的学习工作空间，将聊天、测验、研究、可视化、解题和掌握路径统一在单一可扩展架构中，支持多引擎知识库、子代理伙伴和社区技能生态。
+   亮点: 统一代理循环：聊天、解题、测验、研究、可视化等所有模式共享同一智能体引擎，上下文连贯迁移; 多引擎知识库：支持 LlamaIndex、PageIndex、GraphRAG、LightRAG 及 Obsidian 仓库，可插拔文档解析; 子代理与伙伴：可实时调用 Claude Code、Codex 或自定义伙伴，持久化 IM 伴侣运行相同大脑
+   详细报告: DeepTutor 是一个由香港大学数据智能实验室（HKUDS）主导的开源项目，致力于构建终身个性化辅导系统。其核心架构采用代理原生（agent-native）设计，所有学习工作流（聊天、测验、解题、研究、可视化、掌握路径）运行在同一个智能体循环上，用户切换任务时无需更换引擎，上下文随学习者流动。项目集成了多种知识检索引擎，包括基于 LlamaIndex 的 RAG 管道、PageIndex、GraphRAG、LightRAG 以及直接链接的 Obsidian 仓库，支持版本化管理和多种文档解析器（如 PyMuPDF4LLM、Docling）。DeepTutor 还引入了「伙伴」（Partners）概念，允许用户连接本地或远程的 AI 代理（如 Claude Code、Codex）或预设的虚拟角色，在聊天中实时协作，且每个伙伴拥有独立的记忆和技能库。技能系统支持安装社区技能（来自 EduHub 或 ClawHub），通过沙盒安全门控进行审计。项目提供了 CLI 工具（deeptutor）用于启动、管理知识库和安装技能，以及完整的 Docker 部署支持。技术栈方面，后端主要使用 Python，前端基于 Next.js 和 React，RAG 组件深度依赖 LlamaIndex，向量检索使用 FAISS 等，并支持多种 LLM 提供商（OpenAI、Anthropic、Google Gemini、本地模型等）。社区活跃，截至2026年5月已获得20000+星标，更新频繁（日更版本），并有详细的贡献指南和路线图。
+   活跃度: 极高，每天发布多个版本，近一个月有超过30次发布。  社区健康: 活跃，由学术团队主导，社区贡献多，有 Discord、微信、讨论区，贡献指南完善。
+   商业潜力: 高，可商业化落地于教育科技、企业培训、知识管理等领域，但项目申明目前无付费产品。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于Spec Kit的规范驱动流程，可以开发一个“企业级API网关自动生成器”，业务人员只需用自然语言描述API接口规范，系统自动生成RESTful代码及文档。; 灵感2：将Spec Kit与内部项目管理工具（如Jira、Linear）集成，开发一个“需求到代码的端到端自动化平台”，让产品经理在Jira中编写用户故事后，自动同步为Spec Kit规范并触发AI代理实现。; 灵感3：利用其扩展机制，开发“安全合规检查扩展”，在每次实现前自动分析计划是否符合OWASP或GDPR要求，并在任务列表中插入安全审计步骤。
-   项目链接: https://github.com/github/spec-kit
+   衍生灵感: 企业培训平台：基于 DeepTutor 的个性化辅导能力，开发面向企业内部员工培训的智能导师系统，支持自动生成课程、测验和掌握路径，集成企业知识库。; 科研协作助手：利用其多引擎知识库和伙伴系统，构建一个研究团队使用的文献阅读与实验设计助手，可实时调用 Claude Code 分析代码或从 ArXiv 检索论文。; 开放教育社区：搭建一个内容创作者平台，允许教师创建和共享学习技能包（Skills），学生通过社区市场安装并个性化学习，结合用户贡献的题库和可视化资源。
+   项目链接: https://github.com/HKUDS/DeepTutor
