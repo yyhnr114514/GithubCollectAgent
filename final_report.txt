@@ -1,15 +1,4 @@
-1. apache/ossie:
-   star: 965  语言/技术: JSON, YAML, dbt, GoodData, Polaris, Salesforce, 语义模型
-   项目简介: Apache Ossie 是一个开源的语义模型交换标准化规范，旨在解决数据分析、AI 和 BI 生态系统中工具之间的语义碎片化问题。它提供基于 JSON 和 YAML 的通用规范，确保不同工具（如 dbt、GoodData、Polaris、Salesforce）之间的数据定义和业务逻辑保持一致，消除重复定义和手动协调的痛点。项目前身为 Open Semantic Interchange (OSI)，目前处于 Apache 孵化阶段。
-   亮点: 提供单一、供应商无关的语义模型规范，实现跨工具互操作; 包含核心规范、参考转换器、示例模型和验证工具; 消除相同 KPI 在不同工具中定义不一致的痛点
-   详细报告: Apache Ossie 是一个协作的开源项目，致力于标准化语义模型的交换和利用。在数据分析、AI 和 BI 生态系统中，不同工具对相同业务指标的定义往往不一致，导致团队需要花费大量精力手动协调，并且 AI 代理基于不一致的业务逻辑产生不可靠的输出。Ossie 通过提供一个通用的、供应商无关的语义模型规范来解决这个问题。该规范基于 JSON 和 YAML，任何工具都可以读写。项目仓库包含几个部分：核心规范（core-spec/）包括规范文档、机器可读的 schema（spec.yaml 和 osi-schema.json）；转换器（converters/）提供与 dbt、GoodData、Polaris、Salesforce 等格式的相互转换；示例（examples/）包含完整的 TPC-DS 模型；验证工具（validation/）用于校验语义模型是否符合 schema；docs/ 提供项目文档。目前项目处于 Apache 孵化阶段，社区正在积极讨论和贡献。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 Ossie 规范，可以开发一个企业级语义模型治理平台，自动检测并修复不同 BI 工具（如 Tableau、Power BI）中的指标定义冲突，为数据团队提供一致的数据字典。; 灵感2：可以将 Ossie 集成到数据管道中，作为元数据层，确保 AI 代理（如 Copilot 或 AutoGPT）在查询不同数据源时使用统一的业务逻辑，减少幻觉。; 灵感3：构建一个开源社区插件市场，为 Ossie 规范提供更多转换器（例如支持 Metabase、Superset、Looker），降低用户迁移成本。
-   项目链接: https://github.com/apache/ossie
-
-2. PostHog/posthog:
+1. PostHog/posthog:
    star: 35902  语言/技术: Python, JavaScript, Next.js, React, Node.js, Docker, Ruby, PHP, Go, .NET
    项目简介: PostHog 是一个开源的产品分析平台，提供从数据采集、分析到自动修复的全套工具，帮助开发者构建“自驱型”产品。它能自动捕捉用户行为、错误、崩溃等信号，并基于这些数据生成研究报告和 Pull Request，同时整合了产品分析、Web分析、会话重放、特征开关、实验、错误跟踪、日志、调查、数据仓库、数据管道、AI可观测性等众多功能，所有工具都可从 Slack、Web、桌面或编辑器中使用。
    亮点: 自驱模式：自动捕捉产品数据中的信号，生成研究报告和 Pull Request，实现自动化问题修复。; 一体化工具集：集成了产品分析、Web分析、会话重放、特征开关、实验、错误跟踪、日志、调查、数据仓库、数据管道、AI可观测性、工作流等12+功能。; 开源且支持自托管，同时提供免费云服务层（每月100万事件、5000次录制等）。; MCP集成：可接入Claude Code、Cursor等AI代理，在编辑器中直接操作数据。
@@ -38,32 +27,38 @@
    衍生灵感: 灵感1：基于PostHog的会话重放和错误跟踪，可以开发一个“用户体验异常自动诊断与修复助手”，当检测到用户频繁发生Rage Click或错误时，自动生成Jira工单并附上重放链接和堆栈信息，推动快速修复。; 灵感2：利用PostHog的数据管道和特征开关，构建一个“灰度发布自动化平台”，根据用户行为数据（如留存率、错误率）自动调整新功能开放比例，甚至自动回滚异常版本。; 灵感3：将PostHog的AI可观测性能力与自驱模式结合，开发一个“LLM应用行为监控与优化Agent”，自动分析模型调用延迟、错误率和用户反馈，并生成优化建议或Pull Request修改提示词。
    项目链接: https://github.com/PostHog/posthog
 
-3. Shubhamsaboo/awesome-llm-apps:
-   star: 121031  语言/技术: Python, Streamlit, OpenAI Agents SDK, Gemini API, Claude API, DeepSeek API, LangGraph, CrewAI, AG2, Qdrant, Unsloth, Firecrawl, Yahoo Finance API
-   项目简介: 一个包含100+个开源AI智能体、智能体技能和RAG应用的模板集合，覆盖从入门级到生产级的多种场景，支持Claude、Gemini、GPT、DeepSeek、Llama、Qwen等主流模型。所有模板均可直接克隆、修改、部署，Apache-2.0协议商用友好。
-   亮点: 100+个即拿即用的AI智能体模板，覆盖智能体技能、单/多智能体、语音、RAG、生成式UI等类别; 支持Claude、Gemini、GPT、DeepSeek、Llama、Qwen等多种模型，大部分模板只需API Key即可运行; Apache-2.0开源协议，可自由克隆、分发、商用，附赠逐步教程
-   详细报告: Awesome LLM Apps 是一个由 Shubhamsaboo 维护的开源项目，旨在为开发者提供丰富、可直接运行的 AI 智能体及应用模板。项目包含超过 100 个模板，按功能分为多个类别：
+2. tirth8205/code-review-graph:
+   star: 19804  语言/技术: Python, Tree-sitter, MCP (Model Context Protocol), GitHub Actions, sentence-transformers (可选), AST解析
+   项目简介: 一个通过构建代码结构图来优化 AI 代码审查的工具，利用 Tree-sitter 解析代码生成 AST 图，并通过 MCP 协议向 AI 助手提供精准上下文，从而大幅减少 token 消耗（中位数约 82 倍），支持增量更新、爆炸半径分析和多种编程语言。
+   亮点: 通过图结构将代码审查的 token 消耗降低约 82 倍（中位数）; 支持 30+ 编程语言及 Jupyter Notebook; 增量更新 <2 秒，支持 watch 模式和 Git hooks; 提供 CI 集成（GitHub Action）和风险评分
+   详细报告: 该项目名为 code-review-graph，旨在解决 AI 代码审查工具在审查时因重新读取大量代码库而浪费 token 的问题。其核心原理是利用 Tree-sitter 解析代码库生成抽象语法树（AST），并存储为包含节点（函数、类、导入等）和边（调用、继承、测试覆盖等）的结构化图。在每次代码变更时，通过该图进行最小上下文计算，只向 AI 助手提供影响范围内的文件，避免全量扫描。
 
-- **Agent Skills**：可直接注入到编码助手（如 Claude Code、Cursor）的技能，例如“Project Graveyard”用于分析未完成项目的失败原因。
-- **Starter AI Agents**：单文件智能体，仅需 API Key 即可运行，如博客转播客、情感分析、数据问答、医疗影像诊断等。
-- **Advanced AI Agents**：生产级智能体，集成了工具调用、记忆、多步推理，例如投资分析、欺诈调查、会议准备等。
-- **Always-on Agents**：定时或事件驱动的后台智能体，例如每日 Hacker News 简报。
-- **Multi-agent Teams**：多智能体协作，如财务分析团队、游戏设计团队、法律顾问团队等。
-- **Voice AI Agents**：语音输入输出的智能体，如客服语音助手、保险理赔语音处理。
-- **Generative UI**：能够生成交互式 UI 组件的智能体，如看板、仪表盘、可编辑表格。
-- **Autonomous Game-Playing Agents**：自主玩游戏的智能体，如象棋、井字棋。
-- **MCP AI Agents**：通过 Model Context Protocol 连接外部工具的智能体。
-- **RAG**：检索增强生成教程，包括基础链、混合搜索、多模态 RAG 等。
-- **Advanced LLM Apps**：记忆管理、聊天、微调教程。
+主要功能包括：
+- **增量更新**：通过 SHA-256 哈希检测变化文件，仅重新解析变更部分，2900 文件的仓库可在 2 秒内完成索引。
+- **爆炸半径分析**：追踪变更影响的调用者、依赖项和测试文件，生成最小影响集。
+- **语义搜索**：可选集成向量嵌入（如 sentence-transformers）提升搜索准确性。
+- **多平台支持**：可配置用于 Codex、Cursor、Claude Code、GitHub Copilot 等主流 AI 编码工具。
+- **GitHub Action**：在 PR 时自动生成风险评分、影响函数和测试缺口，可设置 fail-on-risk 作为合并门禁。
+- **自定义语言支持**：用户可通过 languages.toml 添加新语言解析规则，无需修改源码。
+- **基准测试**：在 6 个真实开源仓库上测试，平均 token 减少 82 倍，平均影响精度 F1 为 0.71。
 
-技术栈方面，项目大量使用 Python，UI 层多基于 Streamlit，智能体框架涉及 LangGraph、CrewAI、AG2、OpenAI Agents SDK、Google ADK 等。后端模型支持几乎主流 LLM。每个模板都附有说明文档或教程链接，大部分可以在几行命令内运行。
-
-由于 README 内容被截断，部分模板的具体实现细节无法详细点评，建议访问项目仓库或教程站点获取完整信息。
-   活跃度: 未知  社区健康: 未知
+技术栈主要基于 Python，依赖 Tree-sitter 解析器和 MCP 协议。安装简单（pip install code-review-graph），并使用 code-review-graph install 命令自动配置。项目文档详尽，包含 FAQ、使用指南、故障排除等，社区活跃度高（Discord）。
+   活跃度: 未知（pushed_at 为 null，但文档中有近期版本 v2.3.6 和 CI 工作流）  社区健康: 未知（文档齐全，有 Discord 社区，但 GitHub 指标显示 forks 和 issues 为 0）
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于“AI Travel Agent”模板，可以开发一个“企业差旅管理助手”，结合公司差旅政策数据库（如PDF或Notion），自动生成符合预算的行程方案，并集成日历和报销系统。; 灵感2：利用“Voice RAG Agent”模板，构建一个“企业知识库语音客服”，用户可以通过电话或语音助手口头提问，系统从 FAQ、产品手册中检索答案并语音回复，适用于售后支持场景。; 灵感3：将“Multi-Agent Finance Team”模板与实时市场数据（如东方财富API）结合，做一个“A股量化分析团队”，由多个智能体分别负责技术面、基本面、新闻情绪分析，最终输出投资建议。
-   项目链接: https://github.com/Shubhamsaboo/awesome-llm-apps
+   衍生灵感: 灵感1：基于此项目，可以开发一个「内部代码审查质量看板」，将多个仓库的图分析结果汇总，展示变更影响范围、风险得分和历史趋势，帮助技术团队快速定位高风险变更。; 灵感2：可以将其集成到「CI/CD 流水线」中，在每次合并前自动生成影响分析报告，并触发特定团队的审批流程，实现精准的自动化代码门禁。; 灵感3：可以扩展其自定义语言能力，为「内部 DSL 或公司私有语言」提供图分析支持，使得 AI 助手能够理解专有代码库的结构，提升代码审查效率。
+   项目链接: https://github.com/tirth8205/code-review-graph
+
+3. RyanCodrai/turbovec:
+   star: 13368  语言/技术: Rust, Python, SIMD (NEON, AVX-512), TurboQuant算法, Lloyd-Max量化, 随机旋转, 长度归一化, maturin, FAISS (基准对比)
+   项目简介: turbovec 是一个基于 Google TurboQuant 算法的高效向量索引，用 Rust 编写并提供 Python 绑定。它能在 4GB 内存中容纳原本需要 31GB 的 1000 万文档向量（1536 维），搜索速度比 FAISS 还快 10-19%（ARM 上），并且无需训练、即插即用。支持过滤搜索、SIMD 加速、纯本地部署，非常适合隐私敏感的 RAG 场景。
+   亮点: 16x 压缩：1536 维向量从 6KB 降至 384 字节，内存占用锐减; 无训练阶段：向量直接添加即索引，无需参数调优或重建; SIMD 加速搜索：手写 NEON/AVX-512 内核，ARM 上比 FAISS 快 10-19%; 过滤搜索：在 SIMD 核内直接按 ID 允许列表过滤，不损失性能; 纯本地：不依赖外部服务，适合私有化/离线部署
+   详细报告: turbovec 是一个基于 Rust 的高性能向量索引库，实现了 Google 的 TurboQuant 算法（ICLR 2026）。其核心思想是利用随机旋转使坐标分布变得可预测，然后使用 Lloyd-Max 标量量化将每个浮点坐标压缩为 2 位或 4 位整数，最后进行位打包。具体流程：1) 归一化：去除向量长度，存储为 float；2) 随机旋转：乘以同一个随机正交矩阵，使坐标独立服从 Beta 分布；3) 坐标校准（TQ+）：拟合两个标量调整坐标分布，提高低维精度；4) Lloyd-Max 量化：根据已知分布预计算最优桶边界和质心，无需数据训练；5) 位打包：将量化后的整数紧密打包到字节中。搜索时，查询向量经过同样旋转后，直接在压缩域内用 SIMD 指令打分，无需解压缩。同时支持长度重归一化（LRN）校正量化偏差，使分数无偏。项目提供 Python 绑定（通过 maturin 构建），可 pip 安装，并内置了 LangChain、LlamaIndex、Haystack、Agno 等框架的集成，可一键替换内存向量存储。性能方面，在 100K 向量、k=64 的基准测试中，TurboQuant 在 ARM 上全面超越 FAISS FastScan 10-19%，在 x86 上 4-bit 配置胜出，2-bit 配置稍落后。压缩率方面，1536 维向量从 6KB 降至 384 字节（2-bit）或 768 字节（4-bit），内存节省高达 16 倍。此外，项目支持 O(1) 删除的 IdMapIndex 和基于 ID 允许列表的高效过滤搜索，过滤逻辑集成在 SIMD 核内，避免不必要计算。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 高。向量检索是 RAG、推荐、搜索等 AI 应用的核心，turbovec 的压缩和加速特性显著降低成本，特别适合对隐私、延迟、资源敏感的场景，如企业私有化部署、移动端、物联网。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 turbovec 开发一个「端侧隐私 RAG 助手」，将所有敏感文档向量索引存储在本地（手机/边缘设备），无需上传云端，用于医疗、法律等对数据隐私要求极高的场景。; 灵感2：利用其过滤搜索能力，构建一个「多租户向量搜索引擎」，每个租户的文档带租户 ID，搜索时通过 allowlist 限制只查自己租户的数据，无需建多个索引。; 灵感3：将 turbovec 集成到 嵌入式设备或 NPU 上，利用其低内存占用和 SIMD 加速，实现毫秒级实时相似性检索，例如智能音箱的本地音乐推荐或工业传感器的异常检测。
+   项目链接: https://github.com/RyanCodrai/turbovec
 
 4. HKUDS/DeepTutor:
    star: 26391  语言/技术: Python, TypeScript, React, Next.js, LlamaIndex, LightRAG, GraphRAG, FAISS, Docker, OpenAI API, Anthropic API, Gemini API, MCP, Obsidian
