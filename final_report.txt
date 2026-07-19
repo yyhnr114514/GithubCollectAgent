@@ -1,4 +1,26 @@
-1. PostHog/posthog:
+1. Robbyant/lingbot-map:
+   star: 13049  语言/技术: PyTorch, FlashInfer, ONNX Runtime, Kaolin, DINOv2, Viser, Open3D, ffmpeg, CUDA
+   项目简介: LingBot-Map 是一个基于几何上下文 Transformer 的流式 3D 重建基础模型，能够以约 20 FPS 的速度对超过 10,000 帧的长序列进行实时推理，并在多个基准上达到最先进的重建质量。它通过锚点上下文、位姿参考窗口和轨迹记忆，在单一流式框架中统一了坐标定位、密集几何线索和长程漂移校正。
+   亮点: 几何上下文 Transformer：统一坐标定位、密集几何和长程漂移校正的流式框架。; 高效流式推理：采用分页 KV 缓存注意力，在 518×378 分辨率下实现 ~20 FPS 的稳定推理。; 长序列支持：通过窗口推理和关键帧策略，可处理超过 10,000 帧的视频序列。; 交互式与离线渲染：提供基于 Viser 的实时可视化以及头节点点云飞越视频生成管线。
+   详细报告: LingBot-Map 是一个用于流式 3D 重建的 feed-forward 基础模型。它设计了几何上下文 Transformer 架构，通过锚点上下文（anchor context）、位姿参考窗口（pose-reference window）和轨迹记忆（trajectory memory）在单一流式框架中统一了坐标定位、密集几何线索和长程漂移校正。该模型采用分页 KV 缓存注意力（paged KV cache attention）实现高效流式推理，可在 518×378 分辨率下以约 20 FPS 的速度处理超过 10,000 帧的长序列。模型支持两种推理模式：默认的连续模式和用于超长序列的窗口模式（windowed mode）。窗口模式通过设置窗口大小、重叠关键帧和关键帧间隔来管理 KV 缓存，避免超出训练时的 RoPE 范围。此外，项目还提供天空遮罩（sky masking）功能，使用 ONNX 分割模型过滤天空点云，提升室外场景可视化效果。离线渲染管线（batch_demo.py）允许将长视频转换为头节点点云飞越 MP4 视频，支持多种相机模式（跟随、鸟瞰、静态、枢轴）和 YAML 配置文件定制镜头。模型权重托管在 Hugging Face 和 ModelScope，包括长序列版、平衡版和阶段一训练版。安装需要 PyTorch 2.8.0、CUDA 12.8，并推荐安装 FlashInfer 以获得最佳性能。硬件要求较高，建议使用 8GB 以上显存的 GPU。
+   活跃度: 未知  社区健康: 文档较完善，包含详细的安装指南、示例脚本和参数说明；但GitHub指标显示无fork和issue，可能处于早期公开阶段。
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目，可以开发一个无人机实时3D地图构建系统，用于灾后救援或地形勘探，支持在线更新和可视化。; 灵感2：可以将其集成到AR/VR头显中，实现用户移动时的实时环境3D重建，用于虚拟家具摆放或室内导航。; 灵感3：可以构建一个视频转3D模型的SaaS平台，用户上传长视频后自动生成高质量点云或网格，适用于影视制作或文化遗产数字化。
+   项目链接: https://github.com/Robbyant/lingbot-map
+
+2. apache/ossie:
+   star: 965  语言/技术: JSON, YAML, dbt, GoodData, Polaris, Salesforce, 语义模型
+   项目简介: Apache Ossie 是一个开源的语义模型交换标准化规范，旨在解决数据分析、AI 和 BI 生态系统中工具之间的语义碎片化问题。它提供基于 JSON 和 YAML 的通用规范，确保不同工具（如 dbt、GoodData、Polaris、Salesforce）之间的数据定义和业务逻辑保持一致，消除重复定义和手动协调的痛点。项目前身为 Open Semantic Interchange (OSI)，目前处于 Apache 孵化阶段。
+   亮点: 提供单一、供应商无关的语义模型规范，实现跨工具互操作; 包含核心规范、参考转换器、示例模型和验证工具; 消除相同 KPI 在不同工具中定义不一致的痛点
+   详细报告: Apache Ossie 是一个协作的开源项目，致力于标准化语义模型的交换和利用。在数据分析、AI 和 BI 生态系统中，不同工具对相同业务指标的定义往往不一致，导致团队需要花费大量精力手动协调，并且 AI 代理基于不一致的业务逻辑产生不可靠的输出。Ossie 通过提供一个通用的、供应商无关的语义模型规范来解决这个问题。该规范基于 JSON 和 YAML，任何工具都可以读写。项目仓库包含几个部分：核心规范（core-spec/）包括规范文档、机器可读的 schema（spec.yaml 和 osi-schema.json）；转换器（converters/）提供与 dbt、GoodData、Polaris、Salesforce 等格式的相互转换；示例（examples/）包含完整的 TPC-DS 模型；验证工具（validation/）用于校验语义模型是否符合 schema；docs/ 提供项目文档。目前项目处于 Apache 孵化阶段，社区正在积极讨论和贡献。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 Ossie 规范，可以开发一个企业级语义模型治理平台，自动检测并修复不同 BI 工具（如 Tableau、Power BI）中的指标定义冲突，为数据团队提供一致的数据字典。; 灵感2：可以将 Ossie 集成到数据管道中，作为元数据层，确保 AI 代理（如 Copilot 或 AutoGPT）在查询不同数据源时使用统一的业务逻辑，减少幻觉。; 灵感3：构建一个开源社区插件市场，为 Ossie 规范提供更多转换器（例如支持 Metabase、Superset、Looker），降低用户迁移成本。
+   项目链接: https://github.com/apache/ossie
+
+3. PostHog/posthog:
    star: 35902  语言/技术: Python, JavaScript, Next.js, React, Node.js, Docker, Ruby, PHP, Go, .NET
    项目简介: PostHog 是一个开源的产品分析平台，提供从数据采集、分析到自动修复的全套工具，帮助开发者构建“自驱型”产品。它能自动捕捉用户行为、错误、崩溃等信号，并基于这些数据生成研究报告和 Pull Request，同时整合了产品分析、Web分析、会话重放、特征开关、实验、错误跟踪、日志、调查、数据仓库、数据管道、AI可观测性等众多功能，所有工具都可从 Slack、Web、桌面或编辑器中使用。
    亮点: 自驱模式：自动捕捉产品数据中的信号，生成研究报告和 Pull Request，实现自动化问题修复。; 一体化工具集：集成了产品分析、Web分析、会话重放、特征开关、实验、错误跟踪、日志、调查、数据仓库、数据管道、AI可观测性、工作流等12+功能。; 开源且支持自托管，同时提供免费云服务层（每月100万事件、5000次录制等）。; MCP集成：可接入Claude Code、Cursor等AI代理，在编辑器中直接操作数据。
@@ -27,46 +49,13 @@
    衍生灵感: 灵感1：基于PostHog的会话重放和错误跟踪，可以开发一个“用户体验异常自动诊断与修复助手”，当检测到用户频繁发生Rage Click或错误时，自动生成Jira工单并附上重放链接和堆栈信息，推动快速修复。; 灵感2：利用PostHog的数据管道和特征开关，构建一个“灰度发布自动化平台”，根据用户行为数据（如留存率、错误率）自动调整新功能开放比例，甚至自动回滚异常版本。; 灵感3：将PostHog的AI可观测性能力与自驱模式结合，开发一个“LLM应用行为监控与优化Agent”，自动分析模型调用延迟、错误率和用户反馈，并生成优化建议或Pull Request修改提示词。
    项目链接: https://github.com/PostHog/posthog
 
-2. tirth8205/code-review-graph:
-   star: 19804  语言/技术: Python, Tree-sitter, MCP (Model Context Protocol), GitHub Actions, sentence-transformers (可选), AST解析
-   项目简介: 一个通过构建代码结构图来优化 AI 代码审查的工具，利用 Tree-sitter 解析代码生成 AST 图，并通过 MCP 协议向 AI 助手提供精准上下文，从而大幅减少 token 消耗（中位数约 82 倍），支持增量更新、爆炸半径分析和多种编程语言。
-   亮点: 通过图结构将代码审查的 token 消耗降低约 82 倍（中位数）; 支持 30+ 编程语言及 Jupyter Notebook; 增量更新 <2 秒，支持 watch 模式和 Git hooks; 提供 CI 集成（GitHub Action）和风险评分
-   详细报告: 该项目名为 code-review-graph，旨在解决 AI 代码审查工具在审查时因重新读取大量代码库而浪费 token 的问题。其核心原理是利用 Tree-sitter 解析代码库生成抽象语法树（AST），并存储为包含节点（函数、类、导入等）和边（调用、继承、测试覆盖等）的结构化图。在每次代码变更时，通过该图进行最小上下文计算，只向 AI 助手提供影响范围内的文件，避免全量扫描。
-
-主要功能包括：
-- **增量更新**：通过 SHA-256 哈希检测变化文件，仅重新解析变更部分，2900 文件的仓库可在 2 秒内完成索引。
-- **爆炸半径分析**：追踪变更影响的调用者、依赖项和测试文件，生成最小影响集。
-- **语义搜索**：可选集成向量嵌入（如 sentence-transformers）提升搜索准确性。
-- **多平台支持**：可配置用于 Codex、Cursor、Claude Code、GitHub Copilot 等主流 AI 编码工具。
-- **GitHub Action**：在 PR 时自动生成风险评分、影响函数和测试缺口，可设置 fail-on-risk 作为合并门禁。
-- **自定义语言支持**：用户可通过 languages.toml 添加新语言解析规则，无需修改源码。
-- **基准测试**：在 6 个真实开源仓库上测试，平均 token 减少 82 倍，平均影响精度 F1 为 0.71。
-
-技术栈主要基于 Python，依赖 Tree-sitter 解析器和 MCP 协议。安装简单（pip install code-review-graph），并使用 code-review-graph install 命令自动配置。项目文档详尽，包含 FAQ、使用指南、故障排除等，社区活跃度高（Discord）。
-   活跃度: 未知（pushed_at 为 null，但文档中有近期版本 v2.3.6 和 CI 工作流）  社区健康: 未知（文档齐全，有 Discord 社区，但 GitHub 指标显示 forks 和 issues 为 0）
-   商业潜力: 文档未提及
+4. rohitg00/ai-engineering-from-scratch:
+   star: 39171  语言/技术: Python, TypeScript, Rust, Julia, PyTorch, scikit-learn, Docker, MCP协议
+   项目简介: 一个从零开始、端到端的AI工程自学课程体系，包含503节课、20个阶段，覆盖数学基础到自主多智能体系统。每节课产出可复用的实用工具（prompts、skills、agents、MCP servers），强调理解底层原理而非仅调用API。Python、TypeScript、Rust、Julia四语言实现，MIT开源许可证。
+   亮点: 从线性代数到自主智能系统，20个阶段系统性覆盖; 每节课遵循「Build It → Use It → Ship It」模式，产出实际可用的工具; 内置/ find-your-level 和 / check-understanding 技能，帮助学习者定位和自测; 503个可复用artifact：prompts、skills、agents、MCP servers; 活跃社区，30天内15万+读者、24万+页面浏览
+   详细报告: 该项目是一个全面的AI工程自学课程，旨在弥合学生使用AI工具与专业构建AI之间的差距。课程总共503节课，分布在20个递进阶段：从Phase 0的环境搭建，到Phase 1的数学基础（线性代数、微积分、概率、优化等），再到Phase 2的经典机器学习，Phase 3的深度学习核心（感知机、反向传播、优化器等），然后进入视觉、NLP、语音、强化学习、Transformer、生成式AI、LLM从零构建、LLM工程、多模态、工具与协议（MCP）、Agent工程、自主系统、多智能体和群体智能、基础设施与生产、伦理对齐，最后以Capstone项目收尾。课程强调“先构建，后使用”——每个算法先通过原始数学和代码实现，再使用PyTorch等框架验证，确保学习者深入理解。每节课都产生一个可复用的产出物（prompt、skill、agent或MCP服务器），可直接用于日常工作流。项目还提供了Claude/Cursor等代理的集成技能，如/find-your-level进行水平测试。课程以MIT许可开源，并接受赞助支持。
+   活跃度: 活跃。文档显示持续更新，设有ROADMAP、贡献指南，且每节课的结构统一，表明项目维护积极。  社区健康: 良好。README显示30天内150,639读者，241,669页面浏览，GitHub 7.5K stars。有完善的贡献指南、审计脚本和代码规范。
+   商业潜力: 该项目有明确的赞助模式，提供从$25/月的Backer到$5000/月的Platinum层级，并承诺在README、社交媒体推广等权益。目前已有CodeRabbit和iii等赞助商。可进一步拓展为企业培训方案、认证课程等商业模式。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个「内部代码审查质量看板」，将多个仓库的图分析结果汇总，展示变更影响范围、风险得分和历史趋势，帮助技术团队快速定位高风险变更。; 灵感2：可以将其集成到「CI/CD 流水线」中，在每次合并前自动生成影响分析报告，并触发特定团队的审批流程，实现精准的自动化代码门禁。; 灵感3：可以扩展其自定义语言能力，为「内部 DSL 或公司私有语言」提供图分析支持，使得 AI 助手能够理解专有代码库的结构，提升代码审查效率。
-   项目链接: https://github.com/tirth8205/code-review-graph
-
-3. RyanCodrai/turbovec:
-   star: 13368  语言/技术: Rust, Python, SIMD (NEON, AVX-512), TurboQuant算法, Lloyd-Max量化, 随机旋转, 长度归一化, maturin, FAISS (基准对比)
-   项目简介: turbovec 是一个基于 Google TurboQuant 算法的高效向量索引，用 Rust 编写并提供 Python 绑定。它能在 4GB 内存中容纳原本需要 31GB 的 1000 万文档向量（1536 维），搜索速度比 FAISS 还快 10-19%（ARM 上），并且无需训练、即插即用。支持过滤搜索、SIMD 加速、纯本地部署，非常适合隐私敏感的 RAG 场景。
-   亮点: 16x 压缩：1536 维向量从 6KB 降至 384 字节，内存占用锐减; 无训练阶段：向量直接添加即索引，无需参数调优或重建; SIMD 加速搜索：手写 NEON/AVX-512 内核，ARM 上比 FAISS 快 10-19%; 过滤搜索：在 SIMD 核内直接按 ID 允许列表过滤，不损失性能; 纯本地：不依赖外部服务，适合私有化/离线部署
-   详细报告: turbovec 是一个基于 Rust 的高性能向量索引库，实现了 Google 的 TurboQuant 算法（ICLR 2026）。其核心思想是利用随机旋转使坐标分布变得可预测，然后使用 Lloyd-Max 标量量化将每个浮点坐标压缩为 2 位或 4 位整数，最后进行位打包。具体流程：1) 归一化：去除向量长度，存储为 float；2) 随机旋转：乘以同一个随机正交矩阵，使坐标独立服从 Beta 分布；3) 坐标校准（TQ+）：拟合两个标量调整坐标分布，提高低维精度；4) Lloyd-Max 量化：根据已知分布预计算最优桶边界和质心，无需数据训练；5) 位打包：将量化后的整数紧密打包到字节中。搜索时，查询向量经过同样旋转后，直接在压缩域内用 SIMD 指令打分，无需解压缩。同时支持长度重归一化（LRN）校正量化偏差，使分数无偏。项目提供 Python 绑定（通过 maturin 构建），可 pip 安装，并内置了 LangChain、LlamaIndex、Haystack、Agno 等框架的集成，可一键替换内存向量存储。性能方面，在 100K 向量、k=64 的基准测试中，TurboQuant 在 ARM 上全面超越 FAISS FastScan 10-19%，在 x86 上 4-bit 配置胜出，2-bit 配置稍落后。压缩率方面，1536 维向量从 6KB 降至 384 字节（2-bit）或 768 字节（4-bit），内存节省高达 16 倍。此外，项目支持 O(1) 删除的 IdMapIndex 和基于 ID 允许列表的高效过滤搜索，过滤逻辑集成在 SIMD 核内，避免不必要计算。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 高。向量检索是 RAG、推荐、搜索等 AI 应用的核心，turbovec 的压缩和加速特性显著降低成本，特别适合对隐私、延迟、资源敏感的场景，如企业私有化部署、移动端、物联网。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 turbovec 开发一个「端侧隐私 RAG 助手」，将所有敏感文档向量索引存储在本地（手机/边缘设备），无需上传云端，用于医疗、法律等对数据隐私要求极高的场景。; 灵感2：利用其过滤搜索能力，构建一个「多租户向量搜索引擎」，每个租户的文档带租户 ID，搜索时通过 allowlist 限制只查自己租户的数据，无需建多个索引。; 灵感3：将 turbovec 集成到 嵌入式设备或 NPU 上，利用其低内存占用和 SIMD 加速，实现毫秒级实时相似性检索，例如智能音箱的本地音乐推荐或工业传感器的异常检测。
-   项目链接: https://github.com/RyanCodrai/turbovec
-
-4. HKUDS/DeepTutor:
-   star: 26391  语言/技术: Python, TypeScript, React, Next.js, LlamaIndex, LightRAG, GraphRAG, FAISS, Docker, OpenAI API, Anthropic API, Gemini API, MCP, Obsidian
-   项目简介: DeepTutor 是一个终身个性化辅导系统，基于代理原生的学习工作空间，将聊天、测验、研究、可视化、解题和掌握路径统一在单一可扩展架构中，支持多引擎知识库、子代理伙伴和社区技能生态。
-   亮点: 统一代理循环：聊天、解题、测验、研究、可视化等所有模式共享同一智能体引擎，上下文连贯迁移; 多引擎知识库：支持 LlamaIndex、PageIndex、GraphRAG、LightRAG 及 Obsidian 仓库，可插拔文档解析; 子代理与伙伴：可实时调用 Claude Code、Codex 或自定义伙伴，持久化 IM 伴侣运行相同大脑
-   详细报告: DeepTutor 是一个由香港大学数据智能实验室（HKUDS）主导的开源项目，致力于构建终身个性化辅导系统。其核心架构采用代理原生（agent-native）设计，所有学习工作流（聊天、测验、解题、研究、可视化、掌握路径）运行在同一个智能体循环上，用户切换任务时无需更换引擎，上下文随学习者流动。项目集成了多种知识检索引擎，包括基于 LlamaIndex 的 RAG 管道、PageIndex、GraphRAG、LightRAG 以及直接链接的 Obsidian 仓库，支持版本化管理和多种文档解析器（如 PyMuPDF4LLM、Docling）。DeepTutor 还引入了「伙伴」（Partners）概念，允许用户连接本地或远程的 AI 代理（如 Claude Code、Codex）或预设的虚拟角色，在聊天中实时协作，且每个伙伴拥有独立的记忆和技能库。技能系统支持安装社区技能（来自 EduHub 或 ClawHub），通过沙盒安全门控进行审计。项目提供了 CLI 工具（deeptutor）用于启动、管理知识库和安装技能，以及完整的 Docker 部署支持。技术栈方面，后端主要使用 Python，前端基于 Next.js 和 React，RAG 组件深度依赖 LlamaIndex，向量检索使用 FAISS 等，并支持多种 LLM 提供商（OpenAI、Anthropic、Google Gemini、本地模型等）。社区活跃，截至2026年5月已获得20000+星标，更新频繁（日更版本），并有详细的贡献指南和路线图。
-   活跃度: 极高，每天发布多个版本，近一个月有超过30次发布。  社区健康: 活跃，由学术团队主导，社区贡献多，有 Discord、微信、讨论区，贡献指南完善。
-   商业潜力: 高，可商业化落地于教育科技、企业培训、知识管理等领域，但项目申明目前无付费产品。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 企业培训平台：基于 DeepTutor 的个性化辅导能力，开发面向企业内部员工培训的智能导师系统，支持自动生成课程、测验和掌握路径，集成企业知识库。; 科研协作助手：利用其多引擎知识库和伙伴系统，构建一个研究团队使用的文献阅读与实验设计助手，可实时调用 Claude Code 分析代码或从 ArXiv 检索论文。; 开放教育社区：搭建一个内容创作者平台，允许教师创建和共享学习技能包（Skills），学生通过社区市场安装并个性化学习，结合用户贡献的题库和可视化资源。
-   项目链接: https://github.com/HKUDS/DeepTutor
+   衍生灵感: 灵感1：基于该课程的结构化知识图谱，开发一个「AI技能诊断与个性化学习路径推荐系统」，用户通过简短测试即可获得定制化的课程路线和预估学时。; 灵感2：将该课程的 'Build It' 部分提取为交互式编码练习平台，类似LeetCode但聚焦AI算法实现，帮助面试者准备AI岗位的技术面。; 灵感3：将每节课产出的artifact（prompts、skills）集成到企业级AI平台中，作为内部AI培训的标准化模块，降低新员工上手AI开发的门槛。
+   项目链接: https://github.com/rohitg00/ai-engineering-from-scratch
