@@ -1,53 +1,52 @@
-1. Robbyant/lingbot-map:
-   star: 13049  语言/技术: PyTorch, FlashInfer, ONNX Runtime, Kaolin, DINOv2, Viser, Open3D, ffmpeg, CUDA
-   项目简介: LingBot-Map 是一个基于几何上下文 Transformer 的流式 3D 重建基础模型，能够以约 20 FPS 的速度对超过 10,000 帧的长序列进行实时推理，并在多个基准上达到最先进的重建质量。它通过锚点上下文、位姿参考窗口和轨迹记忆，在单一流式框架中统一了坐标定位、密集几何线索和长程漂移校正。
-   亮点: 几何上下文 Transformer：统一坐标定位、密集几何和长程漂移校正的流式框架。; 高效流式推理：采用分页 KV 缓存注意力，在 518×378 分辨率下实现 ~20 FPS 的稳定推理。; 长序列支持：通过窗口推理和关键帧策略，可处理超过 10,000 帧的视频序列。; 交互式与离线渲染：提供基于 Viser 的实时可视化以及头节点点云飞越视频生成管线。
-   详细报告: LingBot-Map 是一个用于流式 3D 重建的 feed-forward 基础模型。它设计了几何上下文 Transformer 架构，通过锚点上下文（anchor context）、位姿参考窗口（pose-reference window）和轨迹记忆（trajectory memory）在单一流式框架中统一了坐标定位、密集几何线索和长程漂移校正。该模型采用分页 KV 缓存注意力（paged KV cache attention）实现高效流式推理，可在 518×378 分辨率下以约 20 FPS 的速度处理超过 10,000 帧的长序列。模型支持两种推理模式：默认的连续模式和用于超长序列的窗口模式（windowed mode）。窗口模式通过设置窗口大小、重叠关键帧和关键帧间隔来管理 KV 缓存，避免超出训练时的 RoPE 范围。此外，项目还提供天空遮罩（sky masking）功能，使用 ONNX 分割模型过滤天空点云，提升室外场景可视化效果。离线渲染管线（batch_demo.py）允许将长视频转换为头节点点云飞越 MP4 视频，支持多种相机模式（跟随、鸟瞰、静态、枢轴）和 YAML 配置文件定制镜头。模型权重托管在 Hugging Face 和 ModelScope，包括长序列版、平衡版和阶段一训练版。安装需要 PyTorch 2.8.0、CUDA 12.8，并推荐安装 FlashInfer 以获得最佳性能。硬件要求较高，建议使用 8GB 以上显存的 GPU。
-   活跃度: 未知  社区健康: 文档较完善，包含详细的安装指南、示例脚本和参数说明；但GitHub指标显示无fork和issue，可能处于早期公开阶段。
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个无人机实时3D地图构建系统，用于灾后救援或地形勘探，支持在线更新和可视化。; 灵感2：可以将其集成到AR/VR头显中，实现用户移动时的实时环境3D重建，用于虚拟家具摆放或室内导航。; 灵感3：可以构建一个视频转3D模型的SaaS平台，用户上传长视频后自动生成高质量点云或网格，适用于影视制作或文化遗产数字化。
-   项目链接: https://github.com/Robbyant/lingbot-map
-
-2. apache/ossie:
-   star: 965  语言/技术: JSON, YAML, dbt, GoodData, Polaris, Salesforce, 语义模型
-   项目简介: Apache Ossie 是一个开源的语义模型交换标准化规范，旨在解决数据分析、AI 和 BI 生态系统中工具之间的语义碎片化问题。它提供基于 JSON 和 YAML 的通用规范，确保不同工具（如 dbt、GoodData、Polaris、Salesforce）之间的数据定义和业务逻辑保持一致，消除重复定义和手动协调的痛点。项目前身为 Open Semantic Interchange (OSI)，目前处于 Apache 孵化阶段。
-   亮点: 提供单一、供应商无关的语义模型规范，实现跨工具互操作; 包含核心规范、参考转换器、示例模型和验证工具; 消除相同 KPI 在不同工具中定义不一致的痛点
-   详细报告: Apache Ossie 是一个协作的开源项目，致力于标准化语义模型的交换和利用。在数据分析、AI 和 BI 生态系统中，不同工具对相同业务指标的定义往往不一致，导致团队需要花费大量精力手动协调，并且 AI 代理基于不一致的业务逻辑产生不可靠的输出。Ossie 通过提供一个通用的、供应商无关的语义模型规范来解决这个问题。该规范基于 JSON 和 YAML，任何工具都可以读写。项目仓库包含几个部分：核心规范（core-spec/）包括规范文档、机器可读的 schema（spec.yaml 和 osi-schema.json）；转换器（converters/）提供与 dbt、GoodData、Polaris、Salesforce 等格式的相互转换；示例（examples/）包含完整的 TPC-DS 模型；验证工具（validation/）用于校验语义模型是否符合 schema；docs/ 提供项目文档。目前项目处于 Apache 孵化阶段，社区正在积极讨论和贡献。
+1. bojieli/ai-agent-book:
+   star: 6742  语言/技术: Python, LLM API (OpenAI, Anthropic, SiliconFlow, 字节Doubao, 月之暗面Kimi), MCP协议, FastAPI, Docker, vLLM / Ollama, BM25 / ANNOY / HNSW, DAPO / PPO / GRPO (RL算法), RAG / Agentic RAG, CV (Vision LLM, OCR), TTS, browser-use, Claude API, GitHub Actions
+   项目简介: 一本开源书籍及配套代码仓库，系统讲解AI Agent的设计原理与工程实践，覆盖从上下文工程、工具使用、Coding Agent、评估、模型后训练到多模态与多Agent协作的完整技术栈，所有正文与示例代码均开源。
+   亮点: 全书正文与配套代码全部开源，覆盖AI Agent从入门到高级的全链路知识; 包含生产级Coding Agent、Agentic RAG、多Agent协作等前沿实践项目; 提供与各章节对应的可独立运行实验代码，支持多LLM提供商
+   详细报告: 该仓库是《深入理解AI Agent：设计原理与工程实践》一书的开源主仓库，包含全书十个章节的正文（中英文等多语言PDF）和配套示例代码。全书围绕核心公式Agent = LLM + 上下文 + 工具展开，从基础知识、上下文工程、用户记忆与知识库、工具（含MCP协议）、Coding Agent与代码生成、Agent评估、模型后训练（SFT/RL）、自我进化、多模态与实时交互，到多Agent协作。每个章节都有多个可独立运行的实验项目，例如第1章的上下文消融研究、第2章的KV Cache优化与提示工程、第3章的用户记忆系统与检索流水线、第4章的MCP工具服务器与事件驱动Agent、第5章的生产级Coding Agent及多个代码辅助推理项目、第6章的多种基准测试与成本分析、第7章的强化学习与SFT对比项目、第8章的自我进化范式、第9章的多模态与实时交互（语音、GUI、机器人）、第10章的多Agent协作（如提议者-审核者模式）。项目代码覆盖Python、FastAPI、Docker、MCP协议、多种LLM API、向量检索库（ANNOY、HNSW、BM25）、RL框架（DAPO、PPO）等。书籍排版使用pandoc+xelatex。社区贡献了英文、泰米尔语、越南语翻译。项目提供了详细的贡献指南和外部仓库克隆脚本。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 Ossie 规范，可以开发一个企业级语义模型治理平台，自动检测并修复不同 BI 工具（如 Tableau、Power BI）中的指标定义冲突，为数据团队提供一致的数据字典。; 灵感2：可以将 Ossie 集成到数据管道中，作为元数据层，确保 AI 代理（如 Copilot 或 AutoGPT）在查询不同数据源时使用统一的业务逻辑，减少幻觉。; 灵感3：构建一个开源社区插件市场，为 Ossie 规范提供更多转换器（例如支持 Metabase、Superset、Looker），降低用户迁移成本。
-   项目链接: https://github.com/apache/ossie
+   衍生灵感: 灵感1：基于第5章的生产级Coding Agent，可以开发一个针对特定领域（如金融、医疗）的代码审查与自动修复工具，集成到CI/CD流水线中，提升代码质量。; 灵感2：利用第3章的Agentic RAG和用户记忆系统，可以构建一个企业级智能客服平台，支持多会话记忆、知识库自适应检索和个性化服务，减少人工介入。; 灵感3：结合第4章的事件驱动Agent和第10章的多Agent协作模式，可以开发一个自动化运维系统，由多个Agent分工处理监控、诊断、修复和通知，实现7x24小时无人值守。
+   项目链接: https://github.com/bojieli/ai-agent-book
 
-3. PostHog/posthog:
-   star: 35902  语言/技术: Python, JavaScript, Next.js, React, Node.js, Docker, Ruby, PHP, Go, .NET
-   项目简介: PostHog 是一个开源的产品分析平台，提供从数据采集、分析到自动修复的全套工具，帮助开发者构建“自驱型”产品。它能自动捕捉用户行为、错误、崩溃等信号，并基于这些数据生成研究报告和 Pull Request，同时整合了产品分析、Web分析、会话重放、特征开关、实验、错误跟踪、日志、调查、数据仓库、数据管道、AI可观测性等众多功能，所有工具都可从 Slack、Web、桌面或编辑器中使用。
-   亮点: 自驱模式：自动捕捉产品数据中的信号，生成研究报告和 Pull Request，实现自动化问题修复。; 一体化工具集：集成了产品分析、Web分析、会话重放、特征开关、实验、错误跟踪、日志、调查、数据仓库、数据管道、AI可观测性、工作流等12+功能。; 开源且支持自托管，同时提供免费云服务层（每月100万事件、5000次录制等）。; MCP集成：可接入Claude Code、Cursor等AI代理，在编辑器中直接操作数据。
-   详细报告: PostHog 是一个功能极其全面的开源产品分析平台，定位为“构建自驱型产品的工具”。它不仅是传统意义上的分析工具，更是一套能够主动诊断问题、发现机会并自动修复的产品系统。核心亮点是“自驱模式”：该模式能持续监控产品数据中的异常信号（如错误、Rage Click、失败查询等），并自动将它们转化为结构化的研究报告，甚至生成可以直接审核和合并的Pull Request，极大降低了开发者从发现问题到修复问题的闭环成本。
+2. tirth8205/code-review-graph:
+   star: 19804  语言/技术: Python, Tree-sitter, MCP (Model Context Protocol), GitHub Actions, sentence-transformers (可选), AST解析
+   项目简介: 一个通过构建代码结构图来优化 AI 代码审查的工具，利用 Tree-sitter 解析代码生成 AST 图，并通过 MCP 协议向 AI 助手提供精准上下文，从而大幅减少 token 消耗（中位数约 82 倍），支持增量更新、爆炸半径分析和多种编程语言。
+   亮点: 通过图结构将代码审查的 token 消耗降低约 82 倍（中位数）; 支持 30+ 编程语言及 Jupyter Notebook; 增量更新 <2 秒，支持 watch 模式和 Git hooks; 提供 CI 集成（GitHub Action）和风险评分
+   详细报告: 该项目名为 code-review-graph，旨在解决 AI 代码审查工具在审查时因重新读取大量代码库而浪费 token 的问题。其核心原理是利用 Tree-sitter 解析代码库生成抽象语法树（AST），并存储为包含节点（函数、类、导入等）和边（调用、继承、测试覆盖等）的结构化图。在每次代码变更时，通过该图进行最小上下文计算，只向 AI 助手提供影响范围内的文件，避免全量扫描。
 
-除了自驱模式，PostHog 提供了丰富的功能模块：
-- 产品分析（Product Analytics）：支持自动捕获或手动埋点，通过可视化或SQL分析用户行为。
-- Web分析（Web Analytics）：类似Google Analytics的仪表盘，监控Web流量、转化率、页面体验和收入。
-- 会话重放（Session Replays）：回放真实用户的网页或移动端操作录像，用于诊断问题和理解行为。
-- 特征开关（Feature Flags）：安全地向特定用户或群组推送新功能。
-- 实验（Experiments）：通过A/B测试衡量功能对目标指标的影响，支持无代码设置。
-- 错误跟踪（Error Tracking）：捕获错误、发送告警并推动修复。
-- 日志（Logs）：采集、搜索和分析日志数据，并与产品数据关联。
-- 调查（Surveys）：提供无代码调查模板或自定义构建。
-- 数据仓库（Data Warehouse）：同步Stripe、Hubspot等外部工具数据，与产品数据一起查询。
-- 数据管道（Data Pipelines）：对进入的数据进行自定义过滤和转换，实时发送到25+工具或Webhook，或批量导出到仓库。
-- AI可观测性（AI Observability）：捕获LLM应用的追踪、生成、延迟和成本。
-- 工作流（Workflows）：创建自动化的操作或用户消息发送。
+主要功能包括：
+- **增量更新**：通过 SHA-256 哈希检测变化文件，仅重新解析变更部分，2900 文件的仓库可在 2 秒内完成索引。
+- **爆炸半径分析**：追踪变更影响的调用者、依赖项和测试文件，生成最小影响集。
+- **语义搜索**：可选集成向量嵌入（如 sentence-transformers）提升搜索准确性。
+- **多平台支持**：可配置用于 Codex、Cursor、Claude Code、GitHub Copilot 等主流 AI 编码工具。
+- **GitHub Action**：在 PR 时自动生成风险评分、影响函数和测试缺口，可设置 fail-on-risk 作为合并门禁。
+- **自定义语言支持**：用户可通过 languages.toml 添加新语言解析规则，无需修改源码。
+- **基准测试**：在 6 个真实开源仓库上测试，平均 token 减少 82 倍，平均影响精度 F1 为 0.71。
 
-技术架构上，PostHog 提供多种集成方式：JavaScript Web代码片段、多种后端SDK（Python、Node、PHP、Ruby、Go、.NET等）以及API。前端支持React、Vue、Next.js等主流框架。同时，它支持通过MCP（Model Context Protocol）与Claude Code、Cursor等AI代理工具集成，实现直接在编辑器内使用PostHog功能。部署方面，官方推荐使用PostHog Cloud（提供免费额度），也支持自托管（通过Docker一条命令部署，适合约10万事件/月的规模，超过建议迁移至云）。项目采用MIT许可证（除ee目录），同时提供完全FOSS的posthog-foss分支。
-
-由于README内容完整，可以看出PostHog已经是一个成熟、文档详尽、社区活跃的开源项目，但其GitHub API指标（如fork、star等）在输入中均为0，可能为模拟数据。实际项目中PostHog拥有极高的关注度和贡献者。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: PostHog 采用 open-core 模式，核心功能开源，企业级功能（如高级权限、SSO、自定义导出等）通过付费订阅提供。其云服务有慷慨的免费层，通过按量付费（事件、录制等）盈利，同时提供自托管选项吸引对数据隐私敏感的企业。商业化潜力大，已成为产品分析领域的有力竞争者。
+技术栈主要基于 Python，依赖 Tree-sitter 解析器和 MCP 协议。安装简单（pip install code-review-graph），并使用 code-review-graph install 命令自动配置。项目文档详尽，包含 FAQ、使用指南、故障排除等，社区活跃度高（Discord）。
+   活跃度: 未知（pushed_at 为 null，但文档中有近期版本 v2.3.6 和 CI 工作流）  社区健康: 未知（文档齐全，有 Discord 社区，但 GitHub 指标显示 forks 和 issues 为 0）
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于PostHog的会话重放和错误跟踪，可以开发一个“用户体验异常自动诊断与修复助手”，当检测到用户频繁发生Rage Click或错误时，自动生成Jira工单并附上重放链接和堆栈信息，推动快速修复。; 灵感2：利用PostHog的数据管道和特征开关，构建一个“灰度发布自动化平台”，根据用户行为数据（如留存率、错误率）自动调整新功能开放比例，甚至自动回滚异常版本。; 灵感3：将PostHog的AI可观测性能力与自驱模式结合，开发一个“LLM应用行为监控与优化Agent”，自动分析模型调用延迟、错误率和用户反馈，并生成优化建议或Pull Request修改提示词。
-   项目链接: https://github.com/PostHog/posthog
+   衍生灵感: 灵感1：基于此项目，可以开发一个「内部代码审查质量看板」，将多个仓库的图分析结果汇总，展示变更影响范围、风险得分和历史趋势，帮助技术团队快速定位高风险变更。; 灵感2：可以将其集成到「CI/CD 流水线」中，在每次合并前自动生成影响分析报告，并触发特定团队的审批流程，实现精准的自动化代码门禁。; 灵感3：可以扩展其自定义语言能力，为「内部 DSL 或公司私有语言」提供图分析支持，使得 AI 助手能够理解专有代码库的结构，提升代码审查效率。
+   项目链接: https://github.com/tirth8205/code-review-graph
+
+3. kvcache-ai/ktransformers:
+   star: 18455  语言/技术: Python, CUDA, Intel AMX/AVX, LLaMA-Factory, SGLang, ROCm, Ascend NPU, MoE, GPTQ, FP8, INT4/INT8
+   项目简介: KTransformers 是一个面向大语言模型的高效推理与微调框架，核心是基于 CPU-GPU 异构计算，让超大规模 MoE 模型（如 DeepSeek-R1/V3）在消费级显卡（如 24GB VRAM）上也能跑得飞起，微调速度比 ZeRO-Offload 快 6-12 倍，简直是“打工人神器”。项目提供推理（kt-kernel）和微调（集成 LLaMA-Factory）两大能力，支持 Intel AMX/AVX 加速、MoE 优化、多级量化等，已集成到 SGLang 生产环境。
+   亮点: CPU-GPU 异构推理，让超大 MoE 模型在低显存硬件上高效运行; 微调速度远超 ZeRO-Offload，支持 DeepSeek-V3/R1 等模型在 4×RTX 4090 上以 3.7 it/s 训练; 无缝集成 LLaMA-Factory 和 SGLang，降低生产部署门槛
+   详细报告: KTransformers 是一个专注于大语言模型高效推理与微调的开源研究项目，核心创新在于利用 CPU-GPU 异构计算，将热门专家（hot experts）放在 GPU 上，冷门专家放在 CPU 甚至磁盘上，从而突破显存瓶颈。项目分为两大模块：
+
+1. **推理 (kt-kernel)**：提供高性能异构推理服务。关键技术包括 Intel AMX/AVX 优化内核，支持 INT4/INT8 量化推理；针对 MoE 模型的 NUMA 感知内存管理；CPU-GPU 混合专家调度；支持多种精度（FP8、BF16、INT4/INT8）和量化格式（GPTQ、IQ1_S 等）。性能示例：DeepSeek-R1-0528 (FP8) 在 8×L20 GPU + Xeon Gold 6454S 上达到 227.85 tokens/s 总吞吐。集成到 SGLang 生产框架，并支持多并发、长上下文（24GB VRAM 下 139K tokens）。
+
+2. **微调 (SFT)**：与 LLaMA-Factory 深度整合，实现超大规模 MoE 模型的 CPU-GPU 混合微调。支持 INT8/INT4 量化，显存占用极低——Qwen3-30B-A3B 可在单张 RTX 4090 上以 8+ it/s 微调，DeepSeek-V3 也仅需约 80GB 显存（4×RTX 4090）。通过 FSDP2 和 KTransformers 自定义优化器，训练速度比传统 ZeRO-Offload 快 6-12 倍，CPU 内存需求减半。
+
+此外，项目持续跟进最新模型（如 MiniMax-M3、GLM-5、Kimi-K2 系列），并支持 AMD GPU（ROCm）、Intel Arc、Ascend NPU 等硬件。文档与社区活跃，有详细的教程和论文引用。因文档被截断，部分技术细节（如具体量化 kernel 实现）无法展开。
+   活跃度: 活跃。2026年仍有频繁更新，支持新模型和硬件。  社区健康: 活跃。由清华大学 MADSys Lab 等维护，更新频繁，有详细文档和社区群。
+   商业潜力: 高。可大幅降低大模型推理和微调的硬件成本，适用于企业级私有化部署、云上低预算训推等场景，商业变现空间大。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 KTransformers 的推理能力，可以开发一个“企业级私有化大模型一体机”，在普通服务器（CPU+少量 GPU）上运行千亿参数模型，用于企业内部知识库问答、智能客服等场景，大幅降低硬件成本。; 灵感2：利用其 SFT 微调能力，可以构建“MoE 模型 LoRA 微调平台”，让用户通过 Web 界面上传数据，自动在混合硬件上对 DeepSeek-V3 等模型进行领域适配（如法律、医疗），并以 API 形式发布。; 灵感3：结合 kt-kernel 的 CPU 推理优化，可以开发“边缘端 MoE 推理引擎”，在无 GPU 的 Intel 笔记本或服务器上运行 MoE 模型，用于离线文档分析、代码补全等隐私敏感场景。
+   项目链接: https://github.com/kvcache-ai/ktransformers
 
 4. rohitg00/ai-engineering-from-scratch:
    star: 39171  语言/技术: Python, TypeScript, Rust, Julia, PyTorch, scikit-learn, Docker, MCP协议
