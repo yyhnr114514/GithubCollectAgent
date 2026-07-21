@@ -1,15 +1,4 @@
-1. bojieli/ai-agent-book:
-   star: 6742  语言/技术: Python, LLM API (OpenAI, Anthropic, SiliconFlow, 字节Doubao, 月之暗面Kimi), MCP协议, FastAPI, Docker, vLLM / Ollama, BM25 / ANNOY / HNSW, DAPO / PPO / GRPO (RL算法), RAG / Agentic RAG, CV (Vision LLM, OCR), TTS, browser-use, Claude API, GitHub Actions
-   项目简介: 一本开源书籍及配套代码仓库，系统讲解AI Agent的设计原理与工程实践，覆盖从上下文工程、工具使用、Coding Agent、评估、模型后训练到多模态与多Agent协作的完整技术栈，所有正文与示例代码均开源。
-   亮点: 全书正文与配套代码全部开源，覆盖AI Agent从入门到高级的全链路知识; 包含生产级Coding Agent、Agentic RAG、多Agent协作等前沿实践项目; 提供与各章节对应的可独立运行实验代码，支持多LLM提供商
-   详细报告: 该仓库是《深入理解AI Agent：设计原理与工程实践》一书的开源主仓库，包含全书十个章节的正文（中英文等多语言PDF）和配套示例代码。全书围绕核心公式Agent = LLM + 上下文 + 工具展开，从基础知识、上下文工程、用户记忆与知识库、工具（含MCP协议）、Coding Agent与代码生成、Agent评估、模型后训练（SFT/RL）、自我进化、多模态与实时交互，到多Agent协作。每个章节都有多个可独立运行的实验项目，例如第1章的上下文消融研究、第2章的KV Cache优化与提示工程、第3章的用户记忆系统与检索流水线、第4章的MCP工具服务器与事件驱动Agent、第5章的生产级Coding Agent及多个代码辅助推理项目、第6章的多种基准测试与成本分析、第7章的强化学习与SFT对比项目、第8章的自我进化范式、第9章的多模态与实时交互（语音、GUI、机器人）、第10章的多Agent协作（如提议者-审核者模式）。项目代码覆盖Python、FastAPI、Docker、MCP协议、多种LLM API、向量检索库（ANNOY、HNSW、BM25）、RL框架（DAPO、PPO）等。书籍排版使用pandoc+xelatex。社区贡献了英文、泰米尔语、越南语翻译。项目提供了详细的贡献指南和外部仓库克隆脚本。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于第5章的生产级Coding Agent，可以开发一个针对特定领域（如金融、医疗）的代码审查与自动修复工具，集成到CI/CD流水线中，提升代码质量。; 灵感2：利用第3章的Agentic RAG和用户记忆系统，可以构建一个企业级智能客服平台，支持多会话记忆、知识库自适应检索和个性化服务，减少人工介入。; 灵感3：结合第4章的事件驱动Agent和第10章的多Agent协作模式，可以开发一个自动化运维系统，由多个Agent分工处理监控、诊断、修复和通知，实现7x24小时无人值守。
-   项目链接: https://github.com/bojieli/ai-agent-book
-
-2. tirth8205/code-review-graph:
+1. tirth8205/code-review-graph:
    star: 19804  语言/技术: Python, Tree-sitter, MCP (Model Context Protocol), GitHub Actions, sentence-transformers (可选), AST解析
    项目简介: 一个通过构建代码结构图来优化 AI 代码审查的工具，利用 Tree-sitter 解析代码生成 AST 图，并通过 MCP 协议向 AI 助手提供精准上下文，从而大幅减少 token 消耗（中位数约 82 倍），支持增量更新、爆炸半径分析和多种编程语言。
    亮点: 通过图结构将代码审查的 token 消耗降低约 82 倍（中位数）; 支持 30+ 编程语言及 Jupyter Notebook; 增量更新 <2 秒，支持 watch 模式和 Git hooks; 提供 CI 集成（GitHub Action）和风险评分
@@ -31,6 +20,17 @@
    衍生灵感: 灵感1：基于此项目，可以开发一个「内部代码审查质量看板」，将多个仓库的图分析结果汇总，展示变更影响范围、风险得分和历史趋势，帮助技术团队快速定位高风险变更。; 灵感2：可以将其集成到「CI/CD 流水线」中，在每次合并前自动生成影响分析报告，并触发特定团队的审批流程，实现精准的自动化代码门禁。; 灵感3：可以扩展其自定义语言能力，为「内部 DSL 或公司私有语言」提供图分析支持，使得 AI 助手能够理解专有代码库的结构，提升代码审查效率。
    项目链接: https://github.com/tirth8205/code-review-graph
 
+2. rohitg00/ai-engineering-from-scratch:
+   star: 39171  语言/技术: Python, TypeScript, Rust, Julia, PyTorch, scikit-learn, Docker, MCP协议
+   项目简介: 一个从零开始、端到端的AI工程自学课程体系，包含503节课、20个阶段，覆盖数学基础到自主多智能体系统。每节课产出可复用的实用工具（prompts、skills、agents、MCP servers），强调理解底层原理而非仅调用API。Python、TypeScript、Rust、Julia四语言实现，MIT开源许可证。
+   亮点: 从线性代数到自主智能系统，20个阶段系统性覆盖; 每节课遵循「Build It → Use It → Ship It」模式，产出实际可用的工具; 内置/ find-your-level 和 / check-understanding 技能，帮助学习者定位和自测; 503个可复用artifact：prompts、skills、agents、MCP servers; 活跃社区，30天内15万+读者、24万+页面浏览
+   详细报告: 该项目是一个全面的AI工程自学课程，旨在弥合学生使用AI工具与专业构建AI之间的差距。课程总共503节课，分布在20个递进阶段：从Phase 0的环境搭建，到Phase 1的数学基础（线性代数、微积分、概率、优化等），再到Phase 2的经典机器学习，Phase 3的深度学习核心（感知机、反向传播、优化器等），然后进入视觉、NLP、语音、强化学习、Transformer、生成式AI、LLM从零构建、LLM工程、多模态、工具与协议（MCP）、Agent工程、自主系统、多智能体和群体智能、基础设施与生产、伦理对齐，最后以Capstone项目收尾。课程强调“先构建，后使用”——每个算法先通过原始数学和代码实现，再使用PyTorch等框架验证，确保学习者深入理解。每节课都产生一个可复用的产出物（prompt、skill、agent或MCP服务器），可直接用于日常工作流。项目还提供了Claude/Cursor等代理的集成技能，如/find-your-level进行水平测试。课程以MIT许可开源，并接受赞助支持。
+   活跃度: 活跃。文档显示持续更新，设有ROADMAP、贡献指南，且每节课的结构统一，表明项目维护积极。  社区健康: 良好。README显示30天内150,639读者，241,669页面浏览，GitHub 7.5K stars。有完善的贡献指南、审计脚本和代码规范。
+   商业潜力: 该项目有明确的赞助模式，提供从$25/月的Backer到$5000/月的Platinum层级，并承诺在README、社交媒体推广等权益。目前已有CodeRabbit和iii等赞助商。可进一步拓展为企业培训方案、认证课程等商业模式。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于该课程的结构化知识图谱，开发一个「AI技能诊断与个性化学习路径推荐系统」，用户通过简短测试即可获得定制化的课程路线和预估学时。; 灵感2：将该课程的 'Build It' 部分提取为交互式编码练习平台，类似LeetCode但聚焦AI算法实现，帮助面试者准备AI岗位的技术面。; 灵感3：将每节课产出的artifact（prompts、skills）集成到企业级AI平台中，作为内部AI培训的标准化模块，降低新员工上手AI开发的门槛。
+   项目链接: https://github.com/rohitg00/ai-engineering-from-scratch
+
 3. kvcache-ai/ktransformers:
    star: 18455  语言/技术: Python, CUDA, Intel AMX/AVX, LLaMA-Factory, SGLang, ROCm, Ascend NPU, MoE, GPTQ, FP8, INT4/INT8
    项目简介: KTransformers 是一个面向大语言模型的高效推理与微调框架，核心是基于 CPU-GPU 异构计算，让超大规模 MoE 模型（如 DeepSeek-R1/V3）在消费级显卡（如 24GB VRAM）上也能跑得飞起，微调速度比 ZeRO-Offload 快 6-12 倍，简直是“打工人神器”。项目提供推理（kt-kernel）和微调（集成 LLaMA-Factory）两大能力，支持 Intel AMX/AVX 加速、MoE 优化、多级量化等，已集成到 SGLang 生产环境。
@@ -48,13 +48,21 @@
    衍生灵感: 灵感1：基于 KTransformers 的推理能力，可以开发一个“企业级私有化大模型一体机”，在普通服务器（CPU+少量 GPU）上运行千亿参数模型，用于企业内部知识库问答、智能客服等场景，大幅降低硬件成本。; 灵感2：利用其 SFT 微调能力，可以构建“MoE 模型 LoRA 微调平台”，让用户通过 Web 界面上传数据，自动在混合硬件上对 DeepSeek-V3 等模型进行领域适配（如法律、医疗），并以 API 形式发布。; 灵感3：结合 kt-kernel 的 CPU 推理优化，可以开发“边缘端 MoE 推理引擎”，在无 GPU 的 Intel 笔记本或服务器上运行 MoE 模型，用于离线文档分析、代码补全等隐私敏感场景。
    项目链接: https://github.com/kvcache-ai/ktransformers
 
-4. rohitg00/ai-engineering-from-scratch:
-   star: 39171  语言/技术: Python, TypeScript, Rust, Julia, PyTorch, scikit-learn, Docker, MCP协议
-   项目简介: 一个从零开始、端到端的AI工程自学课程体系，包含503节课、20个阶段，覆盖数学基础到自主多智能体系统。每节课产出可复用的实用工具（prompts、skills、agents、MCP servers），强调理解底层原理而非仅调用API。Python、TypeScript、Rust、Julia四语言实现，MIT开源许可证。
-   亮点: 从线性代数到自主智能系统，20个阶段系统性覆盖; 每节课遵循「Build It → Use It → Ship It」模式，产出实际可用的工具; 内置/ find-your-level 和 / check-understanding 技能，帮助学习者定位和自测; 503个可复用artifact：prompts、skills、agents、MCP servers; 活跃社区，30天内15万+读者、24万+页面浏览
-   详细报告: 该项目是一个全面的AI工程自学课程，旨在弥合学生使用AI工具与专业构建AI之间的差距。课程总共503节课，分布在20个递进阶段：从Phase 0的环境搭建，到Phase 1的数学基础（线性代数、微积分、概率、优化等），再到Phase 2的经典机器学习，Phase 3的深度学习核心（感知机、反向传播、优化器等），然后进入视觉、NLP、语音、强化学习、Transformer、生成式AI、LLM从零构建、LLM工程、多模态、工具与协议（MCP）、Agent工程、自主系统、多智能体和群体智能、基础设施与生产、伦理对齐，最后以Capstone项目收尾。课程强调“先构建，后使用”——每个算法先通过原始数学和代码实现，再使用PyTorch等框架验证，确保学习者深入理解。每节课都产生一个可复用的产出物（prompt、skill、agent或MCP服务器），可直接用于日常工作流。项目还提供了Claude/Cursor等代理的集成技能，如/find-your-level进行水平测试。课程以MIT许可开源，并接受赞助支持。
-   活跃度: 活跃。文档显示持续更新，设有ROADMAP、贡献指南，且每节课的结构统一，表明项目维护积极。  社区健康: 良好。README显示30天内150,639读者，241,669页面浏览，GitHub 7.5K stars。有完善的贡献指南、审计脚本和代码规范。
-   商业潜力: 该项目有明确的赞助模式，提供从$25/月的Backer到$5000/月的Platinum层级，并承诺在README、社交媒体推广等权益。目前已有CodeRabbit和iii等赞助商。可进一步拓展为企业培训方案、认证课程等商业模式。
+4. topoteretes/cognee:
+   star: 28853  语言/技术: Python, Rust, TypeScript, OpenAI API, PostgreSQL + pgvector, Neo4j, SQLite, LanceDB, Docker, MCP协议
+   项目简介: Cognee 是一个开源 AI 记忆平台，为 AI Agent 提供持久化长期记忆。它可以将任意格式的数据转化为自托管的知识图谱，让 Agent 跨会话记住、关联和行动。核心 API 包括 remember、recall、forget、improve，支持向量嵌入、图推理和本体生成。一句话：给 AI Agent 装上永不丢失的记忆。
+   亮点: 统一记忆层：将关系、嵌入、会话、元数据全部运行在单一 Postgres 实例上，无需多数据库堆栈; 跨会话持久记忆：Agent 重启后仍能回忆起之前的对话和知识，适用于长期交互场景; 多语言客户端：官方支持 Python、Rust、TypeScript，并可作为 Claude Code 插件使用
+   详细报告: Cognee 是一个开源的 AI 记忆平台，专为 AI Agent 设计，旨在解决长期记忆问题。它允许开发者将任意格式的数据（文本、文档等）注入系统，自动构建自托管的知识图谱，并结合向量嵌入和图推理，使文档既可通过语义搜索，又可通过关系连接。核心 API 非常简洁：`remember` 用于存储数据并构建知识图谱，`recall` 用于智能检索（自动选择最佳搜索策略），`forget` 用于删除记忆，`improve` 用于基于反馈优化记忆。
+
+技术实现上，Cognee 默认使用 Postgres 作为统一后端，通过 pgvector 处理向量嵌入，通过内置图引擎管理关系，并通过 SQLite 缓存会话，从而简化部署。同时也支持 Neo4j、LanceDB、Redis 等专用组件。它支持多种 LLM 提供商（如 OpenAI），并通过环境变量配置。
+
+部署方式灵活：可通过 pip 安装本地运行，也可使用 Docker 或一键部署到 Modal、Railway、Fly.io 等平台。此外，还提供 Cognee Cloud 托管服务。Cognee 还提供了针对 Claude Code 的插件，使 Claude 具备持久记忆能力。
+
+在基准测试中，Cognee 在 BEAM 长上下文基准上取得了优于此前 SOTA 的成绩（100K token 下 0.79，10M token 下 0.67）。项目还附带一篇研究论文，探讨知识图谱与 LLM 推理的优化接口。
+
+不足之处：文档中未详细说明本体生成的具体算法、数据隐私保护措施、扩展性限制等，但这些可以通过补充文档了解。由于 README 内容已经非常详尽，大部分功能都已覆盖。
+   活跃度: 未知（GitHub API 指标未提供最新推送时间，但从文档中可推断项目持续更新，例如有 2025 年研究论文和 Docker 镜像持续构建）  社区健康: 社区活跃：提供 Discord、Reddit、GitHub Discussions，并有社区插件库；但具体贡献者数量和 issue 响应速度等指标未知。
+   商业潜力: 文档未明确提及商业模式，但提供 Cognee Cloud 托管服务，暗示有潜在的企业级付费方案。开源核心+云服务的模式具有商业可行性。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于该课程的结构化知识图谱，开发一个「AI技能诊断与个性化学习路径推荐系统」，用户通过简短测试即可获得定制化的课程路线和预估学时。; 灵感2：将该课程的 'Build It' 部分提取为交互式编码练习平台，类似LeetCode但聚焦AI算法实现，帮助面试者准备AI岗位的技术面。; 灵感3：将每节课产出的artifact（prompts、skills）集成到企业级AI平台中，作为内部AI培训的标准化模块，降低新员工上手AI开发的门槛。
-   项目链接: https://github.com/rohitg00/ai-engineering-from-scratch
+   衍生灵感: 灵感1：基于 Cognee 开发一个企业知识库智能助手，统一整合内部文档、工单、代码库，让 Agent 能跨部门回忆历史决策和技术方案，提升研发和运维效率。; 灵感2：将其集成到在线教育平台，为每个学生构建个性化知识图谱，记录学习路径和易错点，实现自适应学习推荐和答疑机器人。; 灵感3：为客服系统构建增强记忆模块，当用户重复提问或出现相似问题时，Agent 能回忆起之前的处理方案，避免重复工作，同时支持跨会话上下文理解。
+   项目链接: https://github.com/topoteretes/cognee
