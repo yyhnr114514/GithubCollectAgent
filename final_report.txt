@@ -1,15 +1,43 @@
-1. bojieli/ai-agent-book:
-   star: 15365  语言/技术: LLM, 上下文工程, RAG, MCP协议, Coding Agent, 强化学习, 多模态, 多Agent协作, Python, Pandoc, LaTeX
-   项目简介: 一本开源免费的AI Agent书籍，围绕核心公式“Agent = LLM + 上下文 + 工具”，用10章详细讲解从原理到工程实战的完整知识体系，并配有88个配套实验项目（70+可独立运行），支持中、英、泰、越等多种语言。旨在帮助开发者系统学习AI Agent的设计与实现，是目前最全面的Agent开源学习资料之一。
-   亮点: 免费开源全书正文及88个配套实验，覆盖从基础到生产全流程; 支持5种语言：中文、中文繁体、英文、泰米尔语、越南语; 社区贡献翻译，持续更新
-   详细报告: 该项目是一本系统讲解AI Agent的电子书，作者将核心思想浓缩为“Agent = LLM + 上下文 + 工具”。全书共10章，第一章介绍Agent基础知识，提出新范式“模型即Agent”，并强调Harness工程是竞争力；第二章深入上下文工程，涵盖KV Cache、提示工程、Agent Skills和上下文压缩等；第三章讲解用户记忆和知识库，包括RAG、结构化索引、知识图谱等；第四章聚焦工具，介绍了MCP协议、事件驱动异步Agent等；第五章专门讲Coding Agent，认为代码是“能创造新工具的工具”；第六章讲Agent评估，包括评估环境、指标和统计显著性；第七章涉及模型后训练，比较SFT和RL的适用场景；第八章讲自我进化，不改权重也能成长；第九章扩展到多模态与实时交互，包括语音、Computer Use和机器人；第十章讲多Agent协作，探讨群体智能。书中每个章节都配有多个可运行的实验项目（共88个），并提供了详细的构建说明（支持PDF和EPUB格式）。此外，项目还列出了推荐使用的API平台（如Kimi、智谱、Siliconflow等），以及外部仓库的一键克隆脚本，方便读者复现实验。代码和文档全部开源，采用Apache 2.0许可证。
+1. shiyu-coder/Kronos:
+   star: 32674  语言/技术: Python, PyTorch, Transformer, Qlib, Hugging Face Transformers, Pandas, NumPy
+   项目简介: Kronos 是首个专为金融市场 K 线（OHLCV）序列设计的开源基础模型。它采用创新的两阶段框架：首先利用专用分词器将连续的、多维度的 K 线数据量化为层次化离散 token，然后通过自回归 Transformer 进行预训练。模型在超过 45 个全球交易所的数据上训练，能够统一处理多种量化任务，如价格预测、信号生成等。提供了多种规模（mini/small/base）的预训练权重，并附带了微调脚本和回测示例，方便开发者在自己的数据上适配使用。
+   亮点: 首个开源的金融 K 线基础模型，覆盖 45+ 交易所数据; 创新的层次化离散分词器，有效处理高噪声金融数据; 提供完整微调流程（使用 Qlib 数据）和回测示例，方便二次开发
+   详细报告: Kronos 是由 shiyu-coder 团队开发的金融基础模型，被 AAAI 2026 接收。它专门针对金融 K 线（OHLCV）序列设计，解决传统时间序列模型无法捕捉金融数据独特分布的问题。模型架构采用 decoder-only Transformer，但关键创新在于前端：一个专用分词器将连续的 K 线数据（开高低收量）先通过向量量化(VQ)编码为离散 token，再通过层次化聚类生成多层 token 序列。预训练时模型自回归地预测这些 token，从而学习金融市场的“语言”。目前开源了 Kronos-mini (4.1M), Kronos-small (24.7M), Kronos-base (102.3M) 三个版本，均可在 Hugging Face 获取。项目提供了易用的预测 API（KronosPredictor），支持单序列和批量预测，可指定采样温度、top-p 等参数生成概率性预测。微调部分基于 Qlib 构建，支持多 GPU 训练，并提供了从数据处理到回测的完整 pipeline。文档详细说明了安装、预测、微调步骤，并附有示例脚本和可视化。但部分代码注释为 AI 生成。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此书的知识体系，开发一个“AI Agent从入门到实战”的在线互动课程，结合书中的实验和自动评测，帮助学习者快速上手。; 灵感2：将书中的“Agent = LLM + 上下文 + 工具”原则抽象成一套可配置的Agent框架，集成到企业内部的智能客服或自动化运维系统中，降低Agent开发门槛。; 灵感3：针对第5章的Coding Agent内容，开发一个IDE插件，自动根据自然语言需求生成Agent代码骨架，并调用书中的实验模板进行测试。
-   项目链接: https://github.com/bojieli/ai-agent-book
+   衍生灵感: 灵感1：基于 Kronos，可以开发一个“多资产实时预警系统”，对用户关注的股票、加密货币等持仓进行 24 小时滚动预测，当预测到大幅波动时通过微信/邮件推送告警。; 灵感2：将其集成到现有的量化交易框架（如 Backtrader、vnpy）中，替代传统技术指标生成交易信号，并利用回测模块评估策略效果。; 灵感3：结合自然语言处理（如新闻情感分析），构建“事件驱动型金融预测模型”，将 Kronos 的 K 线特征与文本特征融合，提升预测准确度。
+   项目链接: https://github.com/shiyu-coder/Kronos
 
-2. tirth8205/code-review-graph:
+2. ComposioHQ/awesome-claude-skills:
+   star: 68883  语言/技术: Claude Skills, Composio, YAML, Markdown, Python, TypeScript, Playwright
+   项目简介: 一个由 Composio 维护的、超过 1000 个生产就绪的 Claude Skills 和插件的精选列表，涵盖文档处理、开发工具、数据分析、业务营销、创意媒体等多个领域。Skills 是可复用的指令包，能让 AI 代理（如 Claude、Codex、Cursor 等）执行特定任务，同时通过 Composio 集成 500+ 应用（发邮件、创建 Issue、发 Slack 等）。项目还提供了快速连接应用的插件，并支持跨平台（Claude.ai、Claude Code、API）。
+   亮点: 1000+ 生产就绪的 Claude Skills，覆盖文档、开发、数据、营销等 10+ 领域。; 通过 Composio 连接 500+ 应用，让 Claude 执行实际操作（如发邮件、创建 Issue）。; 开源且跨平台：支持 Claude.ai、Claude Code、Codex、Cursor、Gemini CLI、Antigravity 等 AI 代理。
+   详细报告: Awesome Claude Skills 是一个由 Composio 团队维护的开源项目，旨在收集和展示超过 1000 个生产就绪的 Claude Skills 和插件。Claude Skills 是 Anthropic 在 2025 年 10 月推出的开放标准（后于 12 月开源），每个 Skill 是一个文件夹，包含 SKILL.md 文件（YAML 前置元数据 + Markdown 指令），以及可选的 scripts/、templates/、resources/ 目录。Skills 是渐进式加载的：启动时 AI 代理只看到名称和描述（约 100 tokens），当代理判断相关时，才加载完整 SKILL.md（通常 < 5000 tokens），从而支持单个代理托管数百个 Skill 而不膨胀上下文。
+
+项目核心亮点是“连接应用”插件（connect-apps），它让 Claude 能够通过 Composio 平台与 500+ 应用交互（如 Gmail、Slack、GitHub、Notion 等），实现自动化操作。安装步骤简单：下载插件，运行 setup，粘贴 API 密钥，重启 Claude 即可。
+
+Skills 列表被分为文档处理（如 docx、pdf、pptx、xlsx）、开发与代码工具（如 AWS、Playwright、D3.js、FFUF、iOS Simulator、MCP Builder、Test-Driven Development 等）、数据分析（如 CSV 摘要、深度研究、PostgreSQL 只读查询、递归研究）、商业与营销（品牌构建、广告分析、域名头脑风暴）、沟通与写作、创意与媒体、生产力与组织、协作与项目管理、安全与系统、应用自动化等类别。
+
+此外，项目还包含社区贡献的多达 59 个品牌构建 Skill、法律团队 Skill、Chrome Relay 等，以及用于创建自定义 Skill 的模板和 API 指南。项目由 Composio 支持，提供免费 API 密钥和 Discord 社区。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此 Skill 标准，为企业构建私有化垂直领域 Skill 包（如医疗病历分析、金融合规审查），通过 Composio 连接内部系统（如 Salesforce、Jira），实现自动化工作流。; 灵感2：将 Skill 加载机制（渐进式加载、跨平台兼容）应用到其他 AI 助手（如自定义 GPT、本地 LLM 代理），开发一个通用的 Skill 管理器，让不同模型共享同一套指令包。; 灵感3：针对某个具体 Skill（如 Competitive Ads Extractor），集成多个广告平台 API（Google Ads、Facebook Ads、LinkedIn Ads），构建一个跨平台竞品广告监控 SaaS 工具。
+   项目链接: https://github.com/ComposioHQ/awesome-claude-skills
+
+3. rohitg00/ai-engineering-from-scratch:
+   star: 39171  语言/技术: Python, TypeScript, Rust, Julia, PyTorch, scikit-learn, Docker, MCP协议
+   项目简介: 一个从零开始、端到端的AI工程自学课程体系，包含503节课、20个阶段，覆盖数学基础到自主多智能体系统。每节课产出可复用的实用工具（prompts、skills、agents、MCP servers），强调理解底层原理而非仅调用API。Python、TypeScript、Rust、Julia四语言实现，MIT开源许可证。
+   亮点: 从线性代数到自主智能系统，20个阶段系统性覆盖; 每节课遵循「Build It → Use It → Ship It」模式，产出实际可用的工具; 内置/ find-your-level 和 / check-understanding 技能，帮助学习者定位和自测; 503个可复用artifact：prompts、skills、agents、MCP servers; 活跃社区，30天内15万+读者、24万+页面浏览
+   详细报告: 该项目是一个全面的AI工程自学课程，旨在弥合学生使用AI工具与专业构建AI之间的差距。课程总共503节课，分布在20个递进阶段：从Phase 0的环境搭建，到Phase 1的数学基础（线性代数、微积分、概率、优化等），再到Phase 2的经典机器学习，Phase 3的深度学习核心（感知机、反向传播、优化器等），然后进入视觉、NLP、语音、强化学习、Transformer、生成式AI、LLM从零构建、LLM工程、多模态、工具与协议（MCP）、Agent工程、自主系统、多智能体和群体智能、基础设施与生产、伦理对齐，最后以Capstone项目收尾。课程强调“先构建，后使用”——每个算法先通过原始数学和代码实现，再使用PyTorch等框架验证，确保学习者深入理解。每节课都产生一个可复用的产出物（prompt、skill、agent或MCP服务器），可直接用于日常工作流。项目还提供了Claude/Cursor等代理的集成技能，如/find-your-level进行水平测试。课程以MIT许可开源，并接受赞助支持。
+   活跃度: 活跃。文档显示持续更新，设有ROADMAP、贡献指南，且每节课的结构统一，表明项目维护积极。  社区健康: 良好。README显示30天内150,639读者，241,669页面浏览，GitHub 7.5K stars。有完善的贡献指南、审计脚本和代码规范。
+   商业潜力: 该项目有明确的赞助模式，提供从$25/月的Backer到$5000/月的Platinum层级，并承诺在README、社交媒体推广等权益。目前已有CodeRabbit和iii等赞助商。可进一步拓展为企业培训方案、认证课程等商业模式。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于该课程的结构化知识图谱，开发一个「AI技能诊断与个性化学习路径推荐系统」，用户通过简短测试即可获得定制化的课程路线和预估学时。; 灵感2：将该课程的 'Build It' 部分提取为交互式编码练习平台，类似LeetCode但聚焦AI算法实现，帮助面试者准备AI岗位的技术面。; 灵感3：将每节课产出的artifact（prompts、skills）集成到企业级AI平台中，作为内部AI培训的标准化模块，降低新员工上手AI开发的门槛。
+   项目链接: https://github.com/rohitg00/ai-engineering-from-scratch
+
+4. tirth8205/code-review-graph:
    star: 24740  语言/技术: Python, Tree-sitter, MCP (Model Context Protocol), Tree-sitter语言包, GitHub Actions
    项目简介: 一个面向AI代码审查的结构化图谱工具，通过Tree-sitter解析代码AST，构建函数、类、导入等节点的图，并利用MCP协议为AI助手提供精准上下文，避免大模型重复读取整个代码库。支持增量更新、爆炸半径分析、CI风险评分，兼容30+语言和主流AI编程工具（如Cursor、Claude Code等）。一句话：让AI审查只读该读的代码，节省80%以上的token消耗。
    亮点: 增量更新 <2秒：仅重新解析变更文件，依赖SHA-256哈希，2900文件项目只需2秒。; 爆炸半径分析：自动追踪变更影响的所有调用者、依赖和测试，AI只读取相关文件。; CI集成GitHub Action：PR评论中按风险评分函数，可设置失败门槛，无需上传代码到外部服务。
@@ -30,25 +58,3 @@
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于此工具开发一个「企业级代码变更影响分析平台」，集成到CI流水线中，自动生成变更影响报告，帮助开发经理和架构师快速评估改动风险，特别是大型微服务或monorepo场景。; 灵感2：将其核心图查询能力封装为REST API或gRPC服务，为其他IDE插件或聊天机器人提供代码结构查询接口，例如实现一个Slack机器人，输入"这个PR影响哪些模块？"即可返回受影响文件列表。; 灵感3：结合LLM的RAG，将图结构作为预过滤层，构建一个「智能代码搜索系统」，开发者用自然语言提问（如"auth逻辑在哪里？"），系统先通过图定位候选文件，再让LLM生成答案，提高准确率和效率。
    项目链接: https://github.com/tirth8205/code-review-graph
-
-3. AstrBotDevs/AstrBot:
-   star: 37547  语言/技术: Python, uv (Python包管理工具), Docker, LLM APIs (OpenAI, Anthropic, Gemini, DeepSeek等), 消息平台适配器 (QQ, WeChat, Telegram, 飞书, 钉钉等), Plugin 扩展机制, Agent 沙箱, WebUI / Web ChatUI, i18n 国际化支持
-   项目简介: AstrBot 是一个开源的一站式 Agent 聊天机器人平台，支持集成主流即时通讯软件（如QQ、微信、Telegram、飞书、钉钉等），提供可靠、可扩展的对话式AI基础设施。它集成了多种大语言模型（OpenAI、Anthropic、DeepSeek等）和Agent平台（Dify、Coze），拥有插件扩展系统、Agent沙箱、WebUI、Web ChatUI等功能，可用于构建个人AI助手、智能客服、自动化助手、企业知识库等场景。一句话概括：一个能让你快速在IM里搭起AI机器人的“万能底座”！
-   亮点: 免费开源，支持一键部署（uv、Docker、桌面应用等）; 多平台适应：支持QQ、微信、Telegram、飞书、钉钉、Slack、Discord、LINE等15+消息平台; 插件市场：1000+社区插件一键安装，功能无限扩展; Agent沙箱：隔离安全执行代码、Shell调用，支持会话级资源复用; 丰富的模型服务：集成30+LLM、TTS、语音识别等服务，兼容OpenAI格式; 角色扮演与主动Agent能力，支持知识库、人设、自动上下文压缩
-   详细报告: AstrBot 是一个面向个人、开发者和团队的开源聊天机器人平台，旨在解决“在IM中快速搭建AI机器人”的痛点。它提供了从底层模型调用到上层消息处理的完整框架。核心功能包括：1）AI对话与多模态：支持文本、图像、语音输入输出，集成OpenAI、Anthropic、Gemini、DeepSeek等主流LLM，以及Whisper、SenseVoice等语音识别和TTS服务。2）Agent与MCP：支持构建智能体，具备主动对话、任务规划、工具调用能力；内置Agent沙箱，可安全执行代码和Shell命令，适合自动化脚本和动态任务。3）第三方Agent平台集成：对接Dify、阿里云百炼、Coze等平台，可调用其工作流和知识库。4）插件扩展系统：拥有社区插件市场，包含1000+插件，覆盖天气、翻译、游戏、办公等场景，支持用户自定义开发。5）多消息平台适配：官方维护QQ、微信、Telegram、飞书、钉钉、Slack、Discord、LINE、KOOK、Mattermost等适配器，社区还贡献了Matrix、Rocket.Chat等。6）WebUI与Web ChatUI：提供图形化后台管理和前端聊天界面，内置Agent沙箱和联网搜索。7）部署灵活：支持uv一键命令、Docker Compose、桌面应用（基于Electron）、Replit、AUR以及宝塔面板/1Panel/CasaOS等，满足从个人体验到生产环境的多种需求。技术栈以Python为核心，使用uv作为包管理和项目工具，支持插件热加载，基于异步架构实现高并发消息处理。文档完善，有官方文档站、博客、路线图、社区QQ群和Discord。该项目不仅是一个工具，更是一个生态：贡献者活跃，插件开发者社区繁荣。由于文档中未提及具体后端框架或数据存储方案，这些细节需查看源码进一步确认。
-   活跃度: 活跃。近期有频繁提交和版本发布，文档持续更新。  社区健康: 活跃。文档显示有15+QQ群、Discord服务器，长期维护，贡献者众多，插件生态繁荣。
-   商业潜力: 高。AstrBot 可快速构建面向企业的AI客服、营销助手、内部知识库机器人，以及面向个人的陪伴/效率工具。插件市场提供变现空间（付费插件），同时可为企业提供定制化部署和运维服务。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于AstrBot开发一套“企业级智能客服系统”，利用其多平台适配（叮叮、飞书、微信等）和知识库插件，为不同企业提供统一后台、多渠道分发的AI客服解决方案，可自动接管FAQ、工单预分类等。; 灵感2：结合AstrBot的Agent沙箱和插件机制，打造“个人自动化管家”——通过Telegram或微信控制智能家居、定时执行脚本、爬取股票数据并推送提醒，甚至集成RPA操作。; 灵感3：利用AstrBot的多模型支持与角色扮演能力，构建“沉浸式游戏NPC对话引擎”——为游戏社区（Discord、QQ）提供剧情角色代理，支持动态记忆和情感响应，提升用户粘性。
-   项目链接: https://github.com/AstrBotDevs/AstrBot
-
-4. langchain-ai/open_deep_research:
-   star: 12281  语言/技术: LangChain, LangGraph, Python, Tavily Search API, OpenAI GPT-4.1 / GPT-5, Anthropic Claude, Ollama, MCP (Model Context Protocol), OpenRouter
-   项目简介: LANGCHAIN 出品的开源深度研究代理，能自动搜索、总结并生成报告。支持多种 LLM（GPT-4.1、GPT-5、Claude 等）、搜索 API（默认 Tavily）和 MCP 服务器，性能可媲美商业深度研究工具，在 Deep Research Bench 排行榜上名列前茅（#6）。配置灵活，可通过 LangGraph Studio 或 Open Agent Platform 部署使用。
-   亮点: 全开源，可定制模型、搜索工具和 MCP 配置; 支持博士级研究基准测试，并提供了详细评测结果; 集成 LangGraph Studio 和 Open Agent Platform 便于部署和交互
-   详细报告: Open Deep Research 是一个基于 LangGraph 构建的自动化深度研究代理。核心流程：用户提出问题 → 搜索代理（Research Agent）执行多轮搜索，使用 LLM 总结搜索结果 → 压缩模块精简信息 → 最终报告模型生成结构化的研究报告。它采用模块化设计，通过 configuration.py 可独立配置四个 LLM 角色（摘要、研究、压缩、最终报告），默认使用 OpenAI GPT-4.1 系列，但支持所有兼容 LangChain 的模型（包括本地 Ollama 模型）。搜索方面，默认集成 Tavily 搜索 API，也完全兼容 MCP 服务器（例如可集成自定义搜索工具或数据库）。项目提供了 LangGraph Studio UI 用于交互式测试，并支持部署到 LangGraph Platform 或 Open Agent Platform（OAP，允许非技术用户配置 agent）。此外，项目还包含 legacy 实现（工作流版本和多 agent 版本），供对比学习。评估方面，使用 Deep Research Bench 基准（100 个博士级研究任务）测评，默认配置下 RACE 得分 0.4309，GPT-5 版本提升至 0.4943，位居排行榜第 6。总之，这是一个能极大提升研究效率的开源“研究助理”。
-   活跃度: 项目活跃，近期有多个更新和博客文章  社区健康: 未知（无社区活动数据）
-   商业潜力: 可用于咨询公司、研究机构、投资分析等领域，提供自动化研究报告生成服务。也可集成到 SaaS 产品中作为增值功能。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此开发一个“企业竞品情报自动追踪系统”，定时抓取指定竞品的最新新闻、技术动态并生成周报。; 灵感2：集成到学术文献管理平台（如 Zotero）中，自动根据用户的研究兴趣生成文献综述初稿。; 灵感3：结合本地知识库（如企业内部文档），通过 MCP 连接私有数据源，打造“内部知识深度问答助手”。
-   项目链接: https://github.com/langchain-ai/open_deep_research
