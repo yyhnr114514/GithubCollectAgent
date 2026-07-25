@@ -1,4 +1,15 @@
-1. shiyu-coder/Kronos:
+1. ComposioHQ/awesome-claude-skills:
+   star: 70142  语言/技术: Markdown, YAML, JSON, Python (部分技能), TypeScript (部分技能), Node.js, MCP (Model Context Protocol), Composio API
+   项目简介: 一个精选的、超过1000个生产就绪的Claude Skills和插件列表，用于提升Claude.ai、Claude Code、Codex、Cursor、Gemini CLI等AI代理的生产力。项目还包括一个MCP网关，允许Claude通过单一端点连接1000+应用（如Gmail、Slack、GitHub），实现真实操作。旨在为开发者提供可复用的工作流指令包，使AI代理不仅生成文本，还能执行发送邮件、创建工单等实际行动。
+   亮点: 超过1000个生产就绪的Claude Skills，涵盖文档处理、开发、数据分析、营销等类别; 提供Connect插件和MCP网关，让Claude与1000+外部应用实时交互; 技能格式开放标准，可跨Claude.ai、Claude Code、API及其他支持代理（如Codex、Cursor）使用
+   详细报告: Awesome Claude Skills 是一个由Composio维护的技能集市，它集中整理了1000多个可直接投入生产的Claude Skills。每个Skill是一个包含SKILL.md文件的文件夹，用于指导AI代理如何完成特定任务。技能采用渐进式加载，会话开始时代理仅看到名称和描述（约100 tokens），只有在任务相关时才加载完整指令，因此单个代理可承载数百技能而不膨胀上下文。技能不是MCP服务器或工具，而是定义工作流程——当代理已拥有连接和工具后，技能告诉它该做什么、顺序如何、有哪些防护措施。项目本身还提供了一个名为'connect-apps'的插件，通过Composio的MCP网关，Claude可以连接Gmail、Slack、GitHub、Notion等1000+应用执行实际操作。此外，项目包含详细的目录结构，技能按领域分类：文档处理（docx、pdf、pptx、xlsx等）、开发与代码工具（Playwright自动化、测试生成、架构设计等）、数据与分析（CSV摘要、深度研究、SQL查询等）、商业与营销（品牌指南、竞品广告提取等）等。项目还提供了技能创建模板和最佳实践，鼓励社区贡献。文档还说明了技能与MCP、工具的关系：MCP负责外部连接，工具是代理调用的函数，技能定义行为流程。虽然README内容较长且被截断，但已足够展示项目的核心价值：一个丰富、实用的技能生态系统，降低开发者构建AI代理工作流的门槛。
+   活跃度: 文档未提及  社区健康: 文档未提及
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此技能库，可以开发一个“企业全能数字助手”，集成文档处理（自动生成报告）、邮件管理（自动回复常见问题）、项目管理（创建Jira工单）等技能，让AI代理成为企业员工的超级辅助。; 灵感2：针对特定行业，如法律或医疗，从技能库中筛选并定制技能包。例如，利用“Master Claude for Legal”等技能，构建一个合同审查与法律文档合规性检查的专用代理。; 灵感3：将多个技能组合成自动化流水线。例如，结合“CSV Data Summarizer”和“deep-research”技能，开发一个“市场调研自动报告生成器”：先爬取竞品数据、进行分析，再自动生成PPT或Doc文件。
+   项目链接: https://github.com/ComposioHQ/awesome-claude-skills
+
+2. shiyu-coder/Kronos:
    star: 32674  语言/技术: Python, PyTorch, Transformer, Qlib, Hugging Face Transformers, Pandas, NumPy
    项目简介: Kronos 是首个专为金融市场 K 线（OHLCV）序列设计的开源基础模型。它采用创新的两阶段框架：首先利用专用分词器将连续的、多维度的 K 线数据量化为层次化离散 token，然后通过自回归 Transformer 进行预训练。模型在超过 45 个全球交易所的数据上训练，能够统一处理多种量化任务，如价格预测、信号生成等。提供了多种规模（mini/small/base）的预训练权重，并附带了微调脚本和回测示例，方便开发者在自己的数据上适配使用。
    亮点: 首个开源的金融 K 线基础模型，覆盖 45+ 交易所数据; 创新的层次化离散分词器，有效处理高噪声金融数据; 提供完整微调流程（使用 Qlib 数据）和回测示例，方便二次开发
@@ -9,41 +20,35 @@
    衍生灵感: 灵感1：基于 Kronos，可以开发一个“多资产实时预警系统”，对用户关注的股票、加密货币等持仓进行 24 小时滚动预测，当预测到大幅波动时通过微信/邮件推送告警。; 灵感2：将其集成到现有的量化交易框架（如 Backtrader、vnpy）中，替代传统技术指标生成交易信号，并利用回测模块评估策略效果。; 灵感3：结合自然语言处理（如新闻情感分析），构建“事件驱动型金融预测模型”，将 Kronos 的 K 线特征与文本特征融合，提升预测准确度。
    项目链接: https://github.com/shiyu-coder/Kronos
 
-2. ComposioHQ/awesome-claude-skills:
-   star: 68883  语言/技术: Claude Skills, Composio, YAML, Markdown, Python, TypeScript, Playwright
-   项目简介: 一个由 Composio 维护的、超过 1000 个生产就绪的 Claude Skills 和插件的精选列表，涵盖文档处理、开发工具、数据分析、业务营销、创意媒体等多个领域。Skills 是可复用的指令包，能让 AI 代理（如 Claude、Codex、Cursor 等）执行特定任务，同时通过 Composio 集成 500+ 应用（发邮件、创建 Issue、发 Slack 等）。项目还提供了快速连接应用的插件，并支持跨平台（Claude.ai、Claude Code、API）。
-   亮点: 1000+ 生产就绪的 Claude Skills，覆盖文档、开发、数据、营销等 10+ 领域。; 通过 Composio 连接 500+ 应用，让 Claude 执行实际操作（如发邮件、创建 Issue）。; 开源且跨平台：支持 Claude.ai、Claude Code、Codex、Cursor、Gemini CLI、Antigravity 等 AI 代理。
-   详细报告: Awesome Claude Skills 是一个由 Composio 团队维护的开源项目，旨在收集和展示超过 1000 个生产就绪的 Claude Skills 和插件。Claude Skills 是 Anthropic 在 2025 年 10 月推出的开放标准（后于 12 月开源），每个 Skill 是一个文件夹，包含 SKILL.md 文件（YAML 前置元数据 + Markdown 指令），以及可选的 scripts/、templates/、resources/ 目录。Skills 是渐进式加载的：启动时 AI 代理只看到名称和描述（约 100 tokens），当代理判断相关时，才加载完整 SKILL.md（通常 < 5000 tokens），从而支持单个代理托管数百个 Skill 而不膨胀上下文。
+3. dottxt-ai/outlines:
+   star: 15322  语言/技术: Python, Pydantic, Transformers, vLLM, Ollama, OpenAI API, Jinja2, Regular Expressions
+   项目简介: Outlines 是一个为 LLM 提供结构化输出保证的 Python 库。它让开发者无需担心解析和格式问题，只需定义期望的输出类型（如 Pydantic 模型、JSON Schema、正则表达式或枚举），模型就会在生成时直接遵守该结构。解决了 LLM 输出不可预测、难以集成到生产系统的痛点。支持 OpenAI、vLLM、Ollama、HuggingFace Transformers 等多种模型后端，API 简洁统一。
+   亮点: 保证结构化输出：无需后处理解析，直接得到符合预定义类型的输出; 模型无关：同一套代码可切换不同模型后端; 支持复杂结构：Pydantic 模型、JSON Schema、正则、CFG 语法等
+   详细报告: Outlines 是由 .txt 公司开发的开源库，旨在解决 LLM 输出不可靠的问题。核心思想是“在生成时约束输出”，而不是生成后再解析。它通过使用上下文无关语法（CFG）或正则表达式等在解码过程中强制模型只生成符合指定模式的 token，从而保证输出结构严格符合预期。
 
-项目核心亮点是“连接应用”插件（connect-apps），它让 Claude 能够通过 Composio 平台与 500+ 应用交互（如 Gmail、Slack、GitHub、Notion 等），实现自动化操作。安装步骤简单：下载插件，运行 setup，粘贴 API 密钥，重启 Claude 即可。
+主要功能包括：
+- **多种输出类型**：支持 Literal（多选）、int/float 等基本类型、Pydantic 模型、JSON Schema、正则表达式、自定义语法。
+- **模型集成**：支持服务器模式（vLLM、Ollama）、本地模型（Transformers、llama.cpp）和 API（OpenAI、Gemini、自有 API）。
+- **模板系统**：基于 Jinja2 的可重用提示模板，支持少样本学习。
+- **函数调用**：根据函数签名推断输出结构，自动生成函数参数。
+- **应用封装**：将模板和输出类型封装成可复用的函数。
 
-Skills 列表被分为文档处理（如 docx、pdf、pptx、xlsx）、开发与代码工具（如 AWS、Playwright、D3.js、FFUF、iOS Simulator、MCP Builder、Test-Driven Development 等）、数据分析（如 CSV 摘要、深度研究、PostgreSQL 只读查询、递归研究）、商业与营销（品牌构建、广告分析、域名头脑风暴）、沟通与写作、创意与媒体、生产力与组织、协作与项目管理、安全与系统、应用自动化等类别。
+使用非常简单：安装后，用 `outlines.from_transformers()` 或类似方法连接模型，然后像 `model(prompt, OutputType)` 这样调用即可。输出类型可以是 Python 类型注解，如 `Literal["Yes", "No"]` 或 `int`，也可以是 Pydantic 的 BaseModel。
 
-此外，项目还包含社区贡献的多达 59 个品牌构建 Skill、法律团队 Skill、Chrome Relay 等，以及用于创建自定义 Skill 的模板和 API 指南。项目由 Composio 支持，提供免费 API 密钥和 Discord 社区。
+文档中提供了丰富的真实案例，如客户支持工单分类、电商产品归类、事件解析、文档分类、会议安排等，展示了如何将非结构化文本转化为结构化数据。该项目已被 NVIDIA、Cohere、HuggingFace、vLLM 等知名公司和项目使用，社区活跃。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此 Skill 标准，为企业构建私有化垂直领域 Skill 包（如医疗病历分析、金融合规审查），通过 Composio 连接内部系统（如 Salesforce、Jira），实现自动化工作流。; 灵感2：将 Skill 加载机制（渐进式加载、跨平台兼容）应用到其他 AI 助手（如自定义 GPT、本地 LLM 代理），开发一个通用的 Skill 管理器，让不同模型共享同一套指令包。; 灵感3：针对某个具体 Skill（如 Competitive Ads Extractor），集成多个广告平台 API（Google Ads、Facebook Ads、LinkedIn Ads），构建一个跨平台竞品广告监控 SaaS 工具。
-   项目链接: https://github.com/ComposioHQ/awesome-claude-skills
+   衍生灵感: 灵感1：构建一个“智能客服工单自动分类与路由系统”，利用 Outlines 将客户邮件或聊天记录自动解析为预定义的工单结构（优先级、类别、解决方案），并集成到现有的 CRM 或工单系统中。; 灵感2：开发一个“多平台内容审核助手”，使用 Outlines 约束模型输出为“通过/拒绝/需人工复审”等枚举，并附带结构化理由，用于社交媒体、论坛或电商评论的自动化审核。; 灵感3：创建一个“数据提取管道生成器”，允许用户通过定义 Pydantic 模型来描述从非结构化文本中提取的信息（如发票、简历、医疗记录），Outlines 自动生成相应的提取代码，并支持多种模型后端，适用于不同规模的需求。
+   项目链接: https://github.com/dottxt-ai/outlines
 
-3. microsoft/SkillOpt:
-   star: 14792  语言/技术: Python, LLM (GPT-5.5, Claude, Qwen, MiniMax等), CLI工具, Gradio (WebUI), YAML, Git
-   项目简介: SkillOpt 是一个用于自我进化智能体技能的训练框架，灵感来源于深度学习训练流程。它把技能文档当作可训练的状态，通过优化器模型对技能文档进行增、删、改的编辑操作，并采用验证门控机制确保每次编辑都能提升性能。训练后的技能是一个紧凑的 markdown 文件（约300-2000 token），部署时零额外推理开销。该项目支持多种大模型后端（OpenAI、Azure、Claude、Qwen 等）和多种执行环境（直接对话、Codex CLI、Claude Code CLI），并在多个基准测试中取得了最佳或并列最佳的结果。
-   亮点: 将技能文档视为可训练状态，像训练神经网络一样训练技能（epoch、batchsize、学习率、验证门控）; 零推理时模型调用，部署后不增加任何延迟; 在6个基准、7个模型、3种执行器上共52个评估单元中全部最佳或并列最佳
-   详细报告: SkillOpt 是微软推出的一个开源框架，核心思想是让智能体的技能（skill，即一段提示词或行为文档）能够像神经网络权重一样通过训练来自动优化。传统上，智能体技能靠手工编写或一次生成，缺乏可靠的改进机制。SkillOpt 把技能文档作为可训练的状态，使用一个独立的优化器模型（比如一个较强的LLM）对技能文档进行编辑操作（增加、删除、替换），并通过一个 held-out 验证集来评估每次编辑的效果，只有提升分数的编辑才会被采纳。训练过程引入了 epoch、mini-batchsize、学习率预算（文本形式）、拒绝编辑缓冲等机制，使技能训练稳定可靠。训练产物是一个紧凑的 best_skill.md 文件（300-2000 token），部署时直接用于原来的目标模型，不增加任何额外模型调用。该项目支持多种后端：OpenAI、Azure OpenAI、Claude、Qwen、MiniMax 等，以及多种执行环境：直接对话、Codex CLI、Claude Code CLI、Cursor 等。它还提供了 WebUI 监控仪表盘（基于 Gradio）。在论文中，SkillOpt 在 6 个基准（SearchQA 等）、7 个目标模型（包括 GPT-5.5）、3 种执行器上共 52 个评估单元全部达到最佳或并列最佳，平均提升无技能基线 23.5 分（直接对话）、24.8 分（Codex 循环）、19.1 分（Claude Code 循环）。此外，优化的技能可以在不同模型规模、不同执行器之间转移。该项目还推出了 v0.2.0 版本，包含 SkillOpt-Sleep 夜间离线自进化引擎。技术栈涉及 Python、多种 LLM API、CLI 工具、Gradio、YAML 配置等。文档详细，包括安装、数据准备、训练/评估命令、配置、新后端/新基准扩展指南等。
-   活跃度: 未知  社区健康: 未知
+4. paperless-ngx/paperless-ngx:
+   star: 43460  语言/技术: Python, Django, PostgreSQL, Redis, Docker
+   项目简介: Paperless-ngx 是一个文档管理系统，将物理文档转换为可搜索的在线存档，帮你摆脱成堆的纸张。它支持自动 OCR、标签、分类和全文搜索，让文档管理变得高效、省心。
+   亮点: 物理文档数字化：一键扫描并自动识别文字; 全文搜索：秒级检索所有文档内容; 智能分类：自动标记、归类，省去手动整理烦恼
+   详细报告: Paperless-ngx 是一个开源的文档管理系统，旨在帮助个人和组织将纸质文档数字化并组织成可搜索的在线存档。它支持扫描文档后自动进行 OCR 识别（光学字符识别），并将其内容索引，用户可以通过关键词、标签、文档类型、日期等条件快速检索。项目还集成了机器学习分类器，可以自动学习用户的分类习惯并建议标签。部署方式简单，官方推荐使用 Docker Compose 一键启动，包含前端 Web 界面和后台处理服务。技术栈主要基于 Python 和 Django 框架，使用 PostgreSQL 存储元数据，Redis 作为任务队列和缓存。由于 README 内容被截断，更多功能细节（如多用户支持、权限管理、API 文档等）请参考官方文档。
+   活跃度: 活跃（但API指标显示为0，推测为新项目或数据未同步）  社区健康: 良好（有Matrix社区、Crowdin翻译、贡献者指南）
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 SkillOpt 的训练机制，可以开发一个“客服技能自动优化系统”，让客服机器人根据历史对话自动改进回复策略，提升客户满意度。; 灵感2：将 SkillOpt 集成到代码审查助手（如 Codex CLI）中，让它根据审查反馈自动优化代码审查规则，减少误报。; 灵感3：利用 SkillOpt-Sleep 夜间自进化能力，构建一个“个人知识助理”，每晚根据当天使用记录自动优化技能，越来越懂用户。
-   项目链接: https://github.com/microsoft/SkillOpt
-
-4. slavakurilyak/awesome-ai-agents:
-   star: 2047  语言/技术: LLM, GPT, LangChain, AutoGPT, OpenAI, Python, Node.js, Rust, Docker
-   项目简介: 这是一个由 Slava Kurilyak 整理的 AI Agents 精选资源列表，收录了 200+ 个相关的开源工具、框架、平台等，并按照热度、活跃度等维度分类展示，帮助开发者快速了解并选用合适的 AI Agent 技术。
-   亮点: 包含 200+ 个 AI Agents 相关资源，覆盖开发框架、工具、平台等; 按热度排序，给出 Top 10 和 Rising 10 项目，便于快速筛选; 每个项目附带星数、更新日期、简要说明及链接
-   详细报告: 该项目本质上是一个精心策划的 GitHub 仓库，旨在追踪最新的 AI Agent 项目。它列出了从 AutoGPT、LangChain 等明星项目到新兴的 XAgent、Mem0 等多个类别的资源。每个条目包含项目名称、星数、更新日期、简要描述以及链接。项目还特别强调了 AI Agent 相比传统 LLM 的优势，引用了 Andrew Ng 的话。该列表适合任何希望了解或使用 AI Agent 技术的开发者、研究人员或企业决策者。由于是列表，不包含代码实现，但提供了丰富的入口供进一步探索。
-   活跃度: 活跃（README 显示最近更新至 2025-07-30）  社区健康: 良好，作者活跃维护，列表持续更新，但依赖社区贡献。
-   商业潜力: 中等，可作为咨询、培训或产品选型的知识库，但直接变现需结合其他服务。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此列表，可以开发一个智能推荐系统，根据用户需求自动匹配最合适的 AI Agent 框架，节省筛选时间。; 灵感2：可以构建一个自动化的 AI Agent 评测平台，集成列表中的多个 Agent，对比它们在特定任务（如代码生成、文档问答）上的表现。; 灵感3：利用列表中的资源，创建一个 AI Agent 学习路径，从基础到高级，引导开发者逐步掌握 Agent 开发技术。
-   项目链接: https://github.com/slavakurilyak/awesome-ai-agents
+   衍生灵感: 灵感1：基于此项目，可以开发一个企业级「电子发票自动归档系统」，员工拍照上传发票后自动提取金额、日期、税号，并生成财务报表。; 灵感2：与其集成到「云端网盘系统」中，让用户上传的照片或扫描件自动触发 OCR 和分类，提升个人知识管理效率。; 灵感3：可以扩展为「合同管理与到期提醒工具」，自动提取合同签署日期和到期日，提前推送提醒，避免法律风险。
+   项目链接: https://github.com/paperless-ngx/paperless-ngx
