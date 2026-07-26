@@ -20,35 +20,30 @@
    衍生灵感: 灵感1：基于 Kronos，可以开发一个“多资产实时预警系统”，对用户关注的股票、加密货币等持仓进行 24 小时滚动预测，当预测到大幅波动时通过微信/邮件推送告警。; 灵感2：将其集成到现有的量化交易框架（如 Backtrader、vnpy）中，替代传统技术指标生成交易信号，并利用回测模块评估策略效果。; 灵感3：结合自然语言处理（如新闻情感分析），构建“事件驱动型金融预测模型”，将 Kronos 的 K 线特征与文本特征融合，提升预测准确度。
    项目链接: https://github.com/shiyu-coder/Kronos
 
-3. dottxt-ai/outlines:
-   star: 15322  语言/技术: Python, Pydantic, Transformers, vLLM, Ollama, OpenAI API, Jinja2, Regular Expressions
-   项目简介: Outlines 是一个为 LLM 提供结构化输出保证的 Python 库。它让开发者无需担心解析和格式问题，只需定义期望的输出类型（如 Pydantic 模型、JSON Schema、正则表达式或枚举），模型就会在生成时直接遵守该结构。解决了 LLM 输出不可预测、难以集成到生产系统的痛点。支持 OpenAI、vLLM、Ollama、HuggingFace Transformers 等多种模型后端，API 简洁统一。
-   亮点: 保证结构化输出：无需后处理解析，直接得到符合预定义类型的输出; 模型无关：同一套代码可切换不同模型后端; 支持复杂结构：Pydantic 模型、JSON Schema、正则、CFG 语法等
-   详细报告: Outlines 是由 .txt 公司开发的开源库，旨在解决 LLM 输出不可靠的问题。核心思想是“在生成时约束输出”，而不是生成后再解析。它通过使用上下文无关语法（CFG）或正则表达式等在解码过程中强制模型只生成符合指定模式的 token，从而保证输出结构严格符合预期。
-
-主要功能包括：
-- **多种输出类型**：支持 Literal（多选）、int/float 等基本类型、Pydantic 模型、JSON Schema、正则表达式、自定义语法。
-- **模型集成**：支持服务器模式（vLLM、Ollama）、本地模型（Transformers、llama.cpp）和 API（OpenAI、Gemini、自有 API）。
-- **模板系统**：基于 Jinja2 的可重用提示模板，支持少样本学习。
-- **函数调用**：根据函数签名推断输出结构，自动生成函数参数。
-- **应用封装**：将模板和输出类型封装成可复用的函数。
-
-使用非常简单：安装后，用 `outlines.from_transformers()` 或类似方法连接模型，然后像 `model(prompt, OutputType)` 这样调用即可。输出类型可以是 Python 类型注解，如 `Literal["Yes", "No"]` 或 `int`，也可以是 Pydantic 的 BaseModel。
-
-文档中提供了丰富的真实案例，如客户支持工单分类、电商产品归类、事件解析、文档分类、会议安排等，展示了如何将非结构化文本转化为结构化数据。该项目已被 NVIDIA、Cohere、HuggingFace、vLLM 等知名公司和项目使用，社区活跃。
+3. RyanCodrai/turbovec:
+   star: 14314  语言/技术: Rust, Python, SIMD (NEON, AVX-512), TurboQuant, Lloyd-Max 量化, Maturin, LangChain, LlamaIndex, Haystack, Agno
+   项目简介: turbovec 是一个基于 Rust 的高性能向量索引库，提供 Python 绑定。它采用 Google Research 的 TurboQuant 算法，实现极致的内存压缩（如 1000 万向量从 31GB 压缩到 4GB），同时保持甚至超越 FAISS 的搜索速度。核心创新在于数据无关的量化器，无需训练阶段，支持在线增量添加、SIMD 加速搜索（ARM NEON 和 x86 AVX-512）、以及搜索时过滤。适合构建隐私敏感、内存受限或低延迟的 RAG 系统。
+   亮点: 原子级内存压缩：1000 万 1536 维向量从 31GB (float32) 降到 4GB (2-bit)，压缩比 16x。; 无需训练：数据无关的 TurboQuant 量化器，无训练阶段，支持在线增量添加，无需重建索引。; SIMD 加速搜索：手写 NEON 和 AVX-512BW 内核，速度超越 FAISS FastScan 最多 19%（ARM）或持平（x86）。; 搜索时过滤：支持白名单 ID 或位掩码过滤，过滤逻辑直接在 SIMD 内核中短路，高性能。; 完整生态集成：提供 LangChain、LlamaIndex、Haystack、Agno 等框架的即插即用替换组件。; 长度重归一化评分：校正量化产生的内积估计偏差，提升召回率。
+   详细报告: turbovec 是一个开源的向量索引库，核心算法源自 ICLR 2026 论文《TurboQuant》。它解决的是传统向量检索中内存占用大、需要预训练、搜索速度慢的问题。技术实现上，turbovec 将每个向量先归一化为单位方向，然后应用随机旋转，使得各坐标独立服从已知的 Beta 分布（高维下趋近高斯）。接着利用 Lloyd-Max 算法预计算最优量化桶（2-bit 对应 4 桶，4-bit 对应 16 桶），这个码本是基于数学分布而非数据，因此无需训练。每个坐标被量化成小整数后紧密位打包，实现 16 倍压缩（1536 维向量从 6KB 降到 384 字节）。为了弥补量化带来的内积偏差，turbovec 在编码时额外存储一个长度重归一化标量，在搜索时乘回，使评分无偏。搜索时，查询向量经同样旋转后，直接对码本进行查找表评分，SIMD 内核（NEON/AVX-512）实现高速并行。支持在线添加向量（add）、删除（remove，IdMapIndex 支持 O(1) 删除）、持久化（write/load）。此外，turbovec 提供了与 LangChain、LlamaIndex、Haystack、Agno 等主流 RAG 框架的集成，只需替换导入即可使用。性能基准显示，在 ARM M3 Max 上，turbovec 比 FAISS FastScan 快 10-19%；在 x86 Sapphire Rapids 上，4-bit 配置领先约 5%，2-bit 略逊（受限于 AVX-512 VBMI 路径）。召回率方面，在 OpenAI 1536/3072 维数据集上，turbovec 与 FAISS PQ 相当或略优，尤其在低比特率下表现更好。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：构建一个“智能客服工单自动分类与路由系统”，利用 Outlines 将客户邮件或聊天记录自动解析为预定义的工单结构（优先级、类别、解决方案），并集成到现有的 CRM 或工单系统中。; 灵感2：开发一个“多平台内容审核助手”，使用 Outlines 约束模型输出为“通过/拒绝/需人工复审”等枚举，并附带结构化理由，用于社交媒体、论坛或电商评论的自动化审核。; 灵感3：创建一个“数据提取管道生成器”，允许用户通过定义 Pydantic 模型来描述从非结构化文本中提取的信息（如发票、简历、医疗记录），Outlines 自动生成相应的提取代码，并支持多种模型后端，适用于不同规模的需求。
-   项目链接: https://github.com/dottxt-ai/outlines
+   衍生灵感: 灵感1：基于 turbovec 构建一个完全离线的企业级知识库搜索引擎。在企业内网部署，用私有 embedding 模型将文档向量化，turbovec 存储索引，员工可通过自然语言检索内部知识，无需任何外部 API，数据不出 VPC。; 灵感2：将 turbovec 集成到手机端或边缘设备上的个人助理 App 中。利用其极低内存占用（100 万向量仅需约 400MB），可以在手机上本地存储用户的笔记、照片描述、联系人等向量，实现隐私安全的本地语义搜索，无需联网。; 灵感3：基于 turbovec 的搜索时过滤功能，开发一个多租户的 SaaS 向量数据库。每个租户的文档向量共用同一个索引，但通过 allowlist 过滤只返回该租户的数据，实现零成本的租户隔离，降低云服务商的内存开销。
+   项目链接: https://github.com/RyanCodrai/turbovec
 
-4. paperless-ngx/paperless-ngx:
-   star: 43460  语言/技术: Python, Django, PostgreSQL, Redis, Docker
-   项目简介: Paperless-ngx 是一个文档管理系统，将物理文档转换为可搜索的在线存档，帮你摆脱成堆的纸张。它支持自动 OCR、标签、分类和全文搜索，让文档管理变得高效、省心。
-   亮点: 物理文档数字化：一键扫描并自动识别文字; 全文搜索：秒级检索所有文档内容; 智能分类：自动标记、归类，省去手动整理烦恼
-   详细报告: Paperless-ngx 是一个开源的文档管理系统，旨在帮助个人和组织将纸质文档数字化并组织成可搜索的在线存档。它支持扫描文档后自动进行 OCR 识别（光学字符识别），并将其内容索引，用户可以通过关键词、标签、文档类型、日期等条件快速检索。项目还集成了机器学习分类器，可以自动学习用户的分类习惯并建议标签。部署方式简单，官方推荐使用 Docker Compose 一键启动，包含前端 Web 界面和后台处理服务。技术栈主要基于 Python 和 Django 框架，使用 PostgreSQL 存储元数据，Redis 作为任务队列和缓存。由于 README 内容被截断，更多功能细节（如多用户支持、权限管理、API 文档等）请参考官方文档。
-   活跃度: 活跃（但API指标显示为0，推测为新项目或数据未同步）  社区健康: 良好（有Matrix社区、Crowdin翻译、贡献者指南）
+4. andrewyng/aisuite:
+   star: 15255  语言/技术: Python, OpenAI, Anthropic, Google, Ollama, MCP (Model Context Protocol), Streaming, Async
+   项目简介: aisuite 是一个轻量级 Python 库，提供统一的 Chat Completions API 和 Agents API，让开发者可以轻松切换多个 LLM 提供商（如 OpenAI、Anthropic、Google、Ollama 等）并构建智能体应用。它同时驱动了桌面 AI 助手 OpenWorker，能够在本地执行文件操作、连接 Slack/邮件、生成文档等任务。一句话：打工人神器，统一多模型调用，还能做桌面自动化。
+   亮点: 统一的 Chat Completions API：只需改变模型名字符串即可在多个 LLM 提供商间切换，降低集成成本。; Agents API + Toolkits：简单传个 Python 函数就能让模型调用工具，还内置文件、Git、Shell 等工具包，支持 MCP 协议。; 驱动 OpenWorker 桌面应用：一个独立的 AI 同事，能读取文件、连接 Slack/邮件、生成文档和电子表格，支持本地模型，数据不出机器。
+   详细报告: aisuite 是一个轻量级 Python 库，由 Andrew Ng 团队开发，旨在简化多 LLM 的集成和智能体构建。它分为两层：底层是统一的 Chat Completions API，上层是 Agents API 及工具系统。
+
+- **Chat Completions API**：提供与 OpenAI 兼容的接口，支持 temperature、max_tokens、tools 等标准参数。模型命名格式为 `<provider>:<model-name>`，库自动路由到对应提供商。支持流式输出（同步和异步），工具调用也支持流式。目前支持的提供商包括 OpenAI、Anthropic、Google、Mistral、Hugging Face、AWS、Cohere、Ollama、OpenRouter、Requesty 等，几乎覆盖主流。
+- **Agents API**：允许将普通 Python 函数作为工具传给模型，库自动生成 JSON schema 并处理多轮调用。通过 `max_turns` 参数可控制最大工具调用轮数。此外提供更高级的 Agent 类和 Runner：Agent 可以配置模型、指令和工具包；Runner 负责执行并返回结果。内置工具包包括 `files`（文件操作）、`git`（Git 操作）、`shell`（Shell 命令），以及通过 MCP 协议接入任意 MCP 服务器。工具策略（如审批策略）、状态存储（内存/文件/Postgres）和工件/追踪功能，让生产部署更可靠。
+- **OpenWorker**：基于 aisuite 构建的桌面应用，提供图形界面，支持聊天、深度研究、自动执行任务（如读写文件、连接 Slack/邮件、生成 PDF/文档/表格、定时自动化）。用户可自带 API Key 或使用本地 Ollama 模型，数据保留在本地。
+
+技术实现上，aisuite 使用 Python，通过适配器模式支持新提供商。安装简单，可选安装对应提供商的 SDK。整体设计清晰，文档完善，含有快速开始和多个示例。
+   活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个企业级「电子发票自动归档系统」，员工拍照上传发票后自动提取金额、日期、税号，并生成财务报表。; 灵感2：与其集成到「云端网盘系统」中，让用户上传的照片或扫描件自动触发 OCR 和分类，提升个人知识管理效率。; 灵感3：可以扩展为「合同管理与到期提醒工具」，自动提取合同签署日期和到期日，提前推送提醒，避免法律风险。
-   项目链接: https://github.com/paperless-ngx/paperless-ngx
+   衍生灵感: 灵感1：基于 aisuite 的 Agents API 和 MCP 支持，可以开发一个「企业级智能客服系统」，通过连接 CRM、工单系统和知识库（MCP 服务器），让模型自动处理常见问题并生成回复，支持审批流程。; 灵感2：利用 aisuite 统一 API 和 OpenWorker 的文件/邮件能力，构建一个「自动化报告生成助手」，定时从数据库拉取数据，调用模型分析并生成 PDF/Excel 报告，自动发送到指定邮箱。; 灵感3：结合 aisuite 的 toolkits 和状态存储，做一个「代码审查机器人」，集成到 CI/CD 流水线中，自动分析 PR 变更，调用 Git 和文件工具，给出审查意见，并持久化对话历史。
+   项目链接: https://github.com/andrewyng/aisuite
