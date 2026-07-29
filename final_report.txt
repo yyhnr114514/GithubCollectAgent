@@ -1,51 +1,63 @@
-1. NanmiCoder/MediaCrawler:
-   star: 58419  语言/技术: Python, Playwright, Node.js, FastAPI, Vite, uv, MySQL, SQLite
-   项目简介: MediaCrawler 是一个多平台自媒体数据采集工具，支持小红书、抖音、快手、B站、微博、贴吧、知乎等主流平台的公开信息抓取。它采用基于 Playwright 的浏览器自动化技术，通过 CDP 模式连接用户已有的 Chrome 浏览器来复用登录态和 Cookie，从而避免复杂的 JS 逆向工作，大幅降低技术门槛。项目提供命令行和 WebUI 两种操作方式，支持关键词搜索、指定帖子爬取、评论抓取、创作者主页数据爬取等功能，并可将数据保存为 CSV、JSON、Excel、SQLite、MySQL 等多种格式。
-   亮点: 支持小红书、抖音、快手、B站、微博、贴吧、知乎等 7 个主流平台; 基于 Playwright CDP 模式，无需逆向加密算法，降低技术门槛; 提供 WebUI 可视化界面，可实时查看爬虫状态和日志; 支持多种数据存储方式：CSV、JSON、Excel、SQLite、MySQL; 拥有 IP 代理池、登录态缓存、评论词云图等功能
-   详细报告: MediaCrawler 是一个面向学习和技术交流的多平台自媒体数据采集工具，由 NanmiCoder 开发并开源。项目核心原理是利用 Playwright 浏览器自动化框架连接已有 Chrome 浏览器的远程调试端口（CDP 模式），从而复用浏览器的登录态、Cookie 等信息，再通过 JS 表达式获取签名参数，实现无需逆向复杂加密算法的数据采集方案。这种方式既降低了技术门槛，也减少了被平台风控的风险。
+1. andrewyng/aisuite:
+   star: 15255  语言/技术: Python, OpenAI, Anthropic, Google, Ollama, MCP (Model Context Protocol), Streaming, Async
+   项目简介: aisuite 是一个轻量级 Python 库，提供统一的 Chat Completions API 和 Agents API，让开发者可以轻松切换多个 LLM 提供商（如 OpenAI、Anthropic、Google、Ollama 等）并构建智能体应用。它同时驱动了桌面 AI 助手 OpenWorker，能够在本地执行文件操作、连接 Slack/邮件、生成文档等任务。一句话：打工人神器，统一多模型调用，还能做桌面自动化。
+   亮点: 统一的 Chat Completions API：只需改变模型名字符串即可在多个 LLM 提供商间切换，降低集成成本。; Agents API + Toolkits：简单传个 Python 函数就能让模型调用工具，还内置文件、Git、Shell 等工具包，支持 MCP 协议。; 驱动 OpenWorker 桌面应用：一个独立的 AI 同事，能读取文件、连接 Slack/邮件、生成文档和电子表格，支持本地模型，数据不出机器。
+   详细报告: aisuite 是一个轻量级 Python 库，由 Andrew Ng 团队开发，旨在简化多 LLM 的集成和智能体构建。它分为两层：底层是统一的 Chat Completions API，上层是 Agents API 及工具系统。
 
-项目支持七个主流平台：小红书、抖音、快手、B站、微博、贴吧、知乎。每个平台都实现了关键词搜索、指定帖子ID爬取、二级评论、指定创作者主页爬取、登录态缓存、IP代理池和生成评论词云图等功能。用户可以通过命令行参数灵活控制爬取行为，例如 `--platform xhs --lt qrcode --type search` 表示使用二维码登录小红书并搜索关键词。
+- **Chat Completions API**：提供与 OpenAI 兼容的接口，支持 temperature、max_tokens、tools 等标准参数。模型命名格式为 `<provider>:<model-name>`，库自动路由到对应提供商。支持流式输出（同步和异步），工具调用也支持流式。目前支持的提供商包括 OpenAI、Anthropic、Google、Mistral、Hugging Face、AWS、Cohere、Ollama、OpenRouter、Requesty 等，几乎覆盖主流。
+- **Agents API**：允许将普通 Python 函数作为工具传给模型，库自动生成 JSON schema 并处理多轮调用。通过 `max_turns` 参数可控制最大工具调用轮数。此外提供更高级的 Agent 类和 Runner：Agent 可以配置模型、指令和工具包；Runner 负责执行并返回结果。内置工具包包括 `files`（文件操作）、`git`（Git 操作）、`shell`（Shell 命令），以及通过 MCP 协议接入任意 MCP 服务器。工具策略（如审批策略）、状态存储（内存/文件/Postgres）和工件/追踪功能，让生产部署更可靠。
+- **OpenWorker**：基于 aisuite 构建的桌面应用，提供图形界面，支持聊天、深度研究、自动执行任务（如读写文件、连接 Slack/邮件、生成 PDF/文档/表格、定时自动化）。用户可自带 API Key 或使用本地 Ollama 模型，数据保留在本地。
 
-除了命令行模式，项目还提供了基于 FastAPI + Vite 的 WebUI 可视化操作界面，支持可视化配置爬虫参数、实时查看运行状态和日志、数据预览和导出等功能。数据持久化方面支持 CSV、JSON、JSONL、Excel、SQLite 和 MySQL 数据库。
-
-项目推荐使用 uv 作为 Python 包管理工具，并依赖 Node.js 环境（用于部分平台的签名逻辑）。安装步骤清晰：先安装 uv 和 Node.js，然后通过 `uv sync` 安装 Python 依赖，再配置 Chrome 浏览器的远程调试端口即可运行。
-
-需要特别注意的是，项目明确声明仅供学习使用，禁止用于商业或非法用途，并提供了详细的免责声明。另外，项目开源版本功能已很强大，还有付费的 Pro 版本提供断点续爬、多账号支持、去除 Playwright 依赖等更高级特性。
-   活跃度: 未知（GitHub API 指标均为 0，但文档显示了持续更新和 Pro 版本，推测项目活跃）  社区健康: 文档显示有微信交流群、B站账号、赞助商等，社区活跃度较高，但 GitHub 指标中 forks、issues 等均为 0，可能数据未及时更新或项目处于早期阶段。
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 MediaCrawler 的多平台数据采集能力，可以构建一个「自媒体舆情监控系统」，自动抓取指定关键词下各平台的最新帖子和评论，实时分析情感倾向并生成舆情报告，助力品牌公关或市场调研。; 灵感2：可以将其集成到「电商竞品分析平台」中，通过爬取小红书、抖音等平台的测评、种草笔记和用户评论，提取产品优缺点、价格敏感度等信息，辅助产品经理做决策。; 灵感3：利用其 WebUI 和可扩展的架构，可二次开发为「自媒体内容聚合与创作者工具」，帮助创作者自动收集热点素材、跟踪同行动态、生成评论词云，提升内容生产效率。
-   项目链接: https://github.com/NanmiCoder/MediaCrawler
-
-2. shiyu-coder/Kronos:
-   star: 32674  语言/技术: Python, PyTorch, Transformer, Qlib, Hugging Face Transformers, Pandas, NumPy
-   项目简介: Kronos 是首个专为金融市场 K 线（OHLCV）序列设计的开源基础模型。它采用创新的两阶段框架：首先利用专用分词器将连续的、多维度的 K 线数据量化为层次化离散 token，然后通过自回归 Transformer 进行预训练。模型在超过 45 个全球交易所的数据上训练，能够统一处理多种量化任务，如价格预测、信号生成等。提供了多种规模（mini/small/base）的预训练权重，并附带了微调脚本和回测示例，方便开发者在自己的数据上适配使用。
-   亮点: 首个开源的金融 K 线基础模型，覆盖 45+ 交易所数据; 创新的层次化离散分词器，有效处理高噪声金融数据; 提供完整微调流程（使用 Qlib 数据）和回测示例，方便二次开发
-   详细报告: Kronos 是由 shiyu-coder 团队开发的金融基础模型，被 AAAI 2026 接收。它专门针对金融 K 线（OHLCV）序列设计，解决传统时间序列模型无法捕捉金融数据独特分布的问题。模型架构采用 decoder-only Transformer，但关键创新在于前端：一个专用分词器将连续的 K 线数据（开高低收量）先通过向量量化(VQ)编码为离散 token，再通过层次化聚类生成多层 token 序列。预训练时模型自回归地预测这些 token，从而学习金融市场的“语言”。目前开源了 Kronos-mini (4.1M), Kronos-small (24.7M), Kronos-base (102.3M) 三个版本，均可在 Hugging Face 获取。项目提供了易用的预测 API（KronosPredictor），支持单序列和批量预测，可指定采样温度、top-p 等参数生成概率性预测。微调部分基于 Qlib 构建，支持多 GPU 训练，并提供了从数据处理到回测的完整 pipeline。文档详细说明了安装、预测、微调步骤，并附有示例脚本和可视化。但部分代码注释为 AI 生成。
+技术实现上，aisuite 使用 Python，通过适配器模式支持新提供商。安装简单，可选安装对应提供商的 SDK。整体设计清晰，文档完善，含有快速开始和多个示例。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 Kronos，可以开发一个“多资产实时预警系统”，对用户关注的股票、加密货币等持仓进行 24 小时滚动预测，当预测到大幅波动时通过微信/邮件推送告警。; 灵感2：将其集成到现有的量化交易框架（如 Backtrader、vnpy）中，替代传统技术指标生成交易信号，并利用回测模块评估策略效果。; 灵感3：结合自然语言处理（如新闻情感分析），构建“事件驱动型金融预测模型”，将 Kronos 的 K 线特征与文本特征融合，提升预测准确度。
-   项目链接: https://github.com/shiyu-coder/Kronos
+   衍生灵感: 灵感1：基于 aisuite 的 Agents API 和 MCP 支持，可以开发一个「企业级智能客服系统」，通过连接 CRM、工单系统和知识库（MCP 服务器），让模型自动处理常见问题并生成回复，支持审批流程。; 灵感2：利用 aisuite 统一 API 和 OpenWorker 的文件/邮件能力，构建一个「自动化报告生成助手」，定时从数据库拉取数据，调用模型分析并生成 PDF/Excel 报告，自动发送到指定邮箱。; 灵感3：结合 aisuite 的 toolkits 和状态存储，做一个「代码审查机器人」，集成到 CI/CD 流水线中，自动分析 PR 变更，调用 Git 和文件工具，给出审查意见，并持久化对话历史。
+   项目链接: https://github.com/andrewyng/aisuite
 
-3. bradautomates/claude-video:
-   star: 4418  语言/技术: Python, yt-dlp, ffmpeg, Whisper (Groq/OpenAI), Claude Read tool, Agent Skills framework
-   项目简介: 这是一个让 Claude 能够“看”视频的开源工具。粘贴 YouTube 链接或本地视频文件，它自动下载视频、提取字幕和关键帧，让 Claude 基于视觉和听觉内容回答问题，解决了大模型无法直接理解视频的痛点。
-   亮点: 支持YouTube、Loom、TikTok等数百种视频源及本地文件; 自动优先使用免费字幕，无字幕时调用Whisper转写; 场景感知帧提取，多种细节模式（transcript/efficient/balanced/token-burner）平衡速度与质量; 帧去重机制避免重复帧浪费token
-   详细报告: 该项目的核心是赋予Claude视频理解能力。传统上，大语言模型无法直接处理视频内容。该项目通过在本地运行yt-dlp下载视频（支持YouTube、TikTok、本地文件等数百种格式），使用ffmpeg提取关键帧或场景变化帧，并优先抓取视频自带字幕（免费），若无字幕则通过Whisper（Groq或OpenAI API）转录音频。帧提取支持多种细节模式：transcript模式仅返回字幕，不下载视频；efficient模式使用关键帧（速度极快但帧数较少，上限50帧）；balanced模式检测场景变化（上限100帧，默认推荐）；token-burner模式无上限，适合对长视频进行完整分析。帧去重功能通过比较相邻帧的灰度差异，丢弃视觉上相似的帧（如静止的幻灯片），节省token。最终，帧图像和带时间戳的字幕一并交给Claude的Read工具，Claude可以“看到”画面并“听到”文字，从而回答关于视频内容的具体问题，例如“第30秒发生了什么”、“这个视频的钩子是什么”、“UI何时崩溃”等。项目安装方便，支持Claude Code、Codex、Cursor、Copilot、Gemini CLI等50+平台，并提供了详细的CLI参数（如--start/--end聚焦时间段，--resolution提高分辨率以阅读屏幕文字）。缺点是长视频在默认模式下帧数稀疏，建议对长视频使用token-burner模式或聚焦时间段。项目文档非常详尽，示例丰富。
+2. huggingface/speech-to-speech:
+   star: 7360  语言/技术: Python, Silero VAD v5, Parakeet TDT, Whisper (Transformers), Faster Whisper, Lightning Whisper MLX, MLX Audio Whisper, Paraformer (FunASR), OpenAI Responses/Chat Completions API, Transformers, mlx-lm, vLLM, llama.cpp, Qwen3-TTS (GGML/MLX), Kokoro-82M, Pocket TTS, ChatTTS, MMS TTS, WebSocket, Docker
+   项目简介: 一个低延迟、全模块化的语音代理流水线，实现 VAD → STT → LLM → TTS 级联，并通过兼容 OpenAI Realtime 的 WebSocket API 暴露。每个组件均可替换，LLM 插槽支持任何兼容 OpenAI 的接口（包括 Hugging Face、vLLM、llama.cpp 等）。默认使用 Parakeet TDT 进行本地语音识别，Qwen3-TTS 进行语音合成，并已在数千台 Reachy Mini 机器人中生产运行。
+   亮点: 低延迟模块化级联架构，VAD/STT/LLM/TTS 均可自由替换; 原生兼容 OpenAI Realtime API，任何 OpenAI 客户端可直接连接; 支持完全本地化部署（无需联网），也可使用云端/自托管 LLM; 已大规模生产验证（数千台机器人后端）
+   详细报告: Speech-to-Speech 是一个由 Hugging Face 开源的语音代理流水线，旨在构建低延迟的端到端语音对话系统。其核心架构是经典的 VAD → STT → LLM → TTS 四阶段级联，每个阶段运行在独立线程中并通过队列通信，保证了模块间的解耦与高吞吐。
+
+在语音活动检测（VAD）阶段，默认使用 Silero VAD v5，支持阈值调节、最短语音/静默时长等精细控制。语音识别（STT）支持多种后端：默认的 Parakeet TDT（通过 nano-parakeet 或 MLX 加速），以及 Whisper（Transformers）、Faster Whisper、Lightning Whisper MLX、MLX Audio Whisper、Paraformer 等。语言模型（LLM）是最灵活且计算密集的部分，支持四种后端：本地 Transformers 推理（CUDA/CPU）、Apple Silicon 上的 mlx-lm、以及通过 OpenAI 兼容 API 连接任意服务端（如 vLLM、llama.cpp、OpenAI、Hugging Face Inference Providers、OpenRouter 等）。文本转语音（TTS）默认使用 Qwen3-TTS，支持 GGML（CUDA）和 MLX（macOS）后端，此外还提供 Kokoro-82M、Pocket TTS、ChatTTS、MMS TTS 等可选实现。
+
+运行模式多样：Realtime 模式启动一个兼容 OpenAI Realtime 协议的 WebSocket 服务器，客户端可以通过标准 OpenAI Python SDK 连接；Local 模式直接使用本地麦克风和扬声器进行交互；WebSocket 和 Socket 模式则提供更底层的 PCM 音频流接口。项目还提供了 macOS 一键优化设置、Docker 容器化部署以及详尽的 CLI 参数参考。
+
+整体设计强调“完全可替换”，所有组件均可通过 CLI 标志切换。文档极其详细，包含了安装、配置、所有后端的用法示例、常见问题处理甚至引用格式。适合需要构建自定义语音助手的开发者、需要低延迟对话能力的机器人项目，以及希望完全掌控数据流的隐私敏感场景。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目开发一个「自动会议纪要生成器」，输入团队会议录像，自动提取关键讨论点、决策和待办事项，并生成结构化笔记。; 灵感2：将其集成到「视频课程学习助手」中，用户可上传教学视频，AI自动总结知识点、提取代码片段，并生成习题。; 灵感3：构建「广告创意分析平台」，自动分析竞品视频广告的钩子、节奏、视觉元素，输出可复用的创意策略报告。
-   项目链接: https://github.com/bradautomates/claude-video
+   衍生灵感: 灵感1：基于此流水线开发一个「智能家居语音管家」——结合本地 LLM（如 Gemma）和本地 TTS，在树莓派上运行，实现离线语音控制灯光、空调，无需联网，保护隐私。; 灵感2：集成到「客服语音机器人」系统中，替换原有的第三方语音 API，利用自定义 STT/LLM 提升特定领域（如金融、医疗）的识别准确率，并支持实时打断和多轮对话，降低成本。; 灵感3：作为「语音交互式游戏 NPC 引擎」，通过更换 LLM 为角色扮演模型，搭配多情绪 TTS，让游戏角色与玩家自然对话，增强沉浸感。
+   项目链接: https://github.com/huggingface/speech-to-speech
 
-4. mvanhorn/last30days-skill:
-   star: 54268  语言/技术: Python, Node.js, yt-dlp, ScrapeCreators API, Streamlit, Atom feeds, Agent Skills协议, Claude Code插件, OpenAI Codex插件, 各种平台API（Reddit, X, YouTube, TikTok, Polymarket, GitHub等）
-   项目简介: 一个由AI代理驱动的搜索引擎，通过用户投票、点赞和真金白银（如Polymarket赔率）对搜索结果进行评分，而不是由编辑筛选。它能够并行搜索Reddit、X、YouTube、TikTok、Hacker News、Polymarket、GitHub等数十个封闭平台，将各平台的信号（如Reddit的upvotes、X的点赞、YouTube的完整转录、TikTok的互动）聚合，并由AI代理判断合成出一份简洁的摘要。解决了Google等传统搜索引擎无法触及社交平台内部数据（如Reddit评论、X帖子、TikTok内容）的痛点，让你在30秒内了解一个话题在社区中真实的热度和讨论。
-   亮点: 并行搜索多个封闭社交平台，获取Google无法索引的数据; AI代理将多源内容合成一份简洁、有引用的简报; 零配置即可搜索Reddit、HN、Polymarket和GitHub；X、YouTube等需简单设置; 社区驱动，已有大量贡献者新增数据源和功能
-   详细报告: 这是一个开源的AI代理引导型搜索引擎，旨在解决传统搜索引擎（如Google）在社交平台内容上的盲区。Google只能索引公开网页，而Reddit的评论、X的帖子、YouTube的完整视频转录、TikTok的互动数据、Polymarket的预测市场赔率等都被封锁在各平台的墙内。/last30days通过AI代理（支持Claude Code、Codex、Cursor等主流AI编辑器）提供命令`/last30days <topic>`，代理会先解析出话题相关的子版块、X账号、YouTube频道等，然后并行搜索所有已启用的数据源。每个源的搜索结果会按真实互动（upvotes、点赞、播放量、真实货币押注）评分，AI代理再将相关结果合并聚类，最终生成一份包含关键事实、社区观点和引用来源的简报。例如搜索'Peter Steinberger'，你会得到他加入OpenAI、对抗Anthropic禁令、GitHub提交等最新动态，这些信息分散在X、Reddit、YouTube上，传统搜索无法一次性获取。项目完全开源（MIT），无追踪分析，支持多达20多种来源，包括arXiv、Techmeme、Digg等免费源。安装方法多样，建议通过Claude Code市场安装以自动更新。社区活跃，已有超过2700个测试，52个贡献者提交了122个PR。
-   活跃度: 活跃。根据README最新版本v3.11.1（2026年7月），说明保持着频繁更新。  社区健康: 优秀。公开GitHub仓库，有贡献者指南和社区展示线程，52个贡献者提交了122个PR，安全审计和测试覆盖度高。
-   商业潜力: 中等。可以作为付费SaaS服务提供给需要实时社交媒体研究的企业（如市场调研、公关、销售），也可作为AI编程助手的增值插件。但开源和免费部署可能限制直接盈利，可通过托管版或企业定制版收费。
+3. virgiliojr94/book-to-skill:
+   star: 11628  语言/技术: Python, Claude, GitHub Copilot CLI, Amp, Claude Code, Docling, pdftotext, ebooklib, beautifulsoup4, Markdown
+   项目简介: 将技术书籍、文档或资料库转化为结构化的 Agent Skill，支持在 GitHub Copilot CLI、Amp 或 Claude Code 中按需加载使用，避免重复阅读或上下文溢出。核心思路：一次编译，按需加载，Token 成本降低 24-51 倍。
+   亮点: 将 PDF/EPUB/DOCX 等文档一键转化为 Agent Skill，按章节按需加载; 相比直接全文注入上下文，Token 消耗降低 24-51 倍; 支持多种文档格式，自动适配技术书（Docling）或纯文本（pdftotext）; 生成 SKILL.md、每章摘要、术语表、模式表和速查表，结构清晰; 开源、MIT 许可、纯本地处理，不上传用户文件
+   详细报告: book-to-skill 是一个将技术书籍、文档文件夹或资料集合转化为统一 Agent Skill 的工具。用户只需指定一个文件、文件夹或通配符路径，工具便会进行以下处理：首先，根据书籍类型（技术书或纯文本）自动选择提取引擎——技术书使用 Docling（保留表格和代码块，约1.5秒/页），纯文本使用 pdftotext（瞬间完成）。然后，将提取的文本合并后由 Claude 分析结构，识别标题、章节、术语等，生成每章摘要（800-1200 tokens）、词汇表、设计模式表、速查表以及核心 SKILL.md（约4000 tokens）。最终 Skill 被写入代理的技能目录（如 ~/.copilot/skills/、~/.agents/skills/ 或 ~/.claude/skills/），之后用户可以通过 /<skill-name> 命令加载核心模型，通过 /<skill-name> <topic> 按需加载对应章节。项目还提供了详细的设计原则、性能基准和对比数据，证明了其在多次查询场景下的 Token 成本优势（24-51 倍）。此外，项目支持更新已有技能（fold-in），适用于内部文档、设计系统、研究聚集等多个场景。版权方面，项目本身不包含任何书籍内容，只是一个转换工具，用户需自行拥有文件的合法使用权，且不应分发生成的技能。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个'竞品监控Agent'，自动追踪行业领导者在Reddit、X、YouTube上的言论和项目动态，每周生成竞品情报简报。; 灵感2：将其集成到企业内部的CRM系统中，在与客户会面前自动搜索对方最近30天的社交媒体动态，生成'会前简报'，帮助销售或客户成功人员掌握最新话题。; 灵感3：二次开发成'趋势发现工具'，利用其自动发现模式（如`/last30days what's exploding in AI agents?`）实时监控新兴技术或事件的早期信号，用于投资或内容创作决策。
-   项目链接: https://github.com/mvanhorn/last30days-skill
+   衍生灵感: 灵感1：基于此项目，开发一个「企业内部知识库Agent技能生成器」，将公司内部的运维手册、架构设计文档、故障处理流程等转化为Agent Skill，帮助团队成员在编码时瞬间获取规范答案。; 灵感2：将其集成到「读书笔记与知识管理工具」中，例如 Obsidian 或 Notion 插件，自动将用户标记的书籍或论文生成可查询的 Skill，并在日常笔记中通过命令调用。; 灵感3：扩展为「多模态技能编译平台」，支持将视频讲座字幕、会议录音文稿等非结构化内容也转化为结构化 Skill，让 Agent 能“学习”整个培训课程。
+   项目链接: https://github.com/virgiliojr94/book-to-skill
+
+4. paperswithbacktest/awesome-systematic-trading:
+   star: 9773  语言/技术: Markdown, Python, C++, Go, Rust, TypeScript
+   项目简介: Awesome Systematic Trading 是一个精选的资源列表，收录了用于系统化（量化）交易的研究、软件、书籍、文章等。它包含 97 个库和包（回测、交易机器人、指标、优化器等）、40+ 策略、55 本书、23 个视频以及博客和课程，按语言和类别整理，适合量化交易从业者和爱好者快速查找工具和学习资料。
+   亮点: 收录 97 个量化交易相关的库和包，覆盖回测、实盘交易、加密货币、指标、风险、数据源等; 整理 40+ 机构或学术界公开的交易策略，便于参考和实现; 提供 55 本入门到高级的系统化交易书籍，以及 23 个视频和多个博客、课程
+   详细报告: Awesome Systematic Trading 是一个由社区维护的 awesome 列表，旨在帮助用户发现和研究系统化交易（量化交易）的相关资源。README 开头即点明这是“收集用于发现、开发和运行系统化交易策略的资源（论文、软件、书籍、文章）的列表”。项目按类别组织：
+
+- **Libraries and packages**（97 个）：细分为回测与实盘交易（事件驱动框架如 vnpy、zipline、backtrader，向量化框架如 vectorbt），加密货币（Freqtrade、Jesse、OctoBot 等），交易机器人，分析工具（指标如 ta-lib，指标计算，优化，定价，风险，Broker API，数据源，数据科学，数据库，图计算，机器学习，时间序列分析，可视化）。每个条目列出仓库名称、描述、星数和编程语言，并以表格呈现。
+- **Strategies**（40+ 策略）：覆盖债券、商品、货币、股票、加密货币、REITs 等多种资产类别，每一项通常有引用链接。
+- **Books**（55 本）：分为初学者、传记、编码、加密货币、一般、高频交易、机器学习等 sub 分类。
+- **Videos**（23 个）：讲师访谈、技术讲座等，附有 YouTube 链接和点赞数。
+- **Blogs** 和 **Courses**：提供进一步学习的渠道。
+
+由于 README 内容被截断，部分细节（如具体策略、书籍、视频的完整列表）无法展示，但从现有片段可见项目结构清晰、分类详尽。项目本身不包含代码，而是一个精心策划的导航页，为量化交易者节省了大量搜索时间。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 vectorbt 和 ta-lib 构建一个高性能策略回测仪表盘，支持批量优化和实时风险监控，用于个人量化团队快速验证交易想法。; 灵感2：集成 Freqtrade 和 Jesse 等加密货币框架，开发一个跨交易所的套利监控机器人，自动检测三角套利或期现价差机会。; 灵感3：利用 pysystemtrade 和 Rob Carver 的方法，构建一个面向期货的趋势跟踪系统，并接入国内期货市场数据，形成本土化的系统化交易解决方案。
+   项目链接: https://github.com/paperswithbacktest/awesome-systematic-trading
