@@ -1,21 +1,4 @@
-1. andrewyng/aisuite:
-   star: 15255  语言/技术: Python, OpenAI, Anthropic, Google, Ollama, MCP (Model Context Protocol), Streaming, Async
-   项目简介: aisuite 是一个轻量级 Python 库，提供统一的 Chat Completions API 和 Agents API，让开发者可以轻松切换多个 LLM 提供商（如 OpenAI、Anthropic、Google、Ollama 等）并构建智能体应用。它同时驱动了桌面 AI 助手 OpenWorker，能够在本地执行文件操作、连接 Slack/邮件、生成文档等任务。一句话：打工人神器，统一多模型调用，还能做桌面自动化。
-   亮点: 统一的 Chat Completions API：只需改变模型名字符串即可在多个 LLM 提供商间切换，降低集成成本。; Agents API + Toolkits：简单传个 Python 函数就能让模型调用工具，还内置文件、Git、Shell 等工具包，支持 MCP 协议。; 驱动 OpenWorker 桌面应用：一个独立的 AI 同事，能读取文件、连接 Slack/邮件、生成文档和电子表格，支持本地模型，数据不出机器。
-   详细报告: aisuite 是一个轻量级 Python 库，由 Andrew Ng 团队开发，旨在简化多 LLM 的集成和智能体构建。它分为两层：底层是统一的 Chat Completions API，上层是 Agents API 及工具系统。
-
-- **Chat Completions API**：提供与 OpenAI 兼容的接口，支持 temperature、max_tokens、tools 等标准参数。模型命名格式为 `<provider>:<model-name>`，库自动路由到对应提供商。支持流式输出（同步和异步），工具调用也支持流式。目前支持的提供商包括 OpenAI、Anthropic、Google、Mistral、Hugging Face、AWS、Cohere、Ollama、OpenRouter、Requesty 等，几乎覆盖主流。
-- **Agents API**：允许将普通 Python 函数作为工具传给模型，库自动生成 JSON schema 并处理多轮调用。通过 `max_turns` 参数可控制最大工具调用轮数。此外提供更高级的 Agent 类和 Runner：Agent 可以配置模型、指令和工具包；Runner 负责执行并返回结果。内置工具包包括 `files`（文件操作）、`git`（Git 操作）、`shell`（Shell 命令），以及通过 MCP 协议接入任意 MCP 服务器。工具策略（如审批策略）、状态存储（内存/文件/Postgres）和工件/追踪功能，让生产部署更可靠。
-- **OpenWorker**：基于 aisuite 构建的桌面应用，提供图形界面，支持聊天、深度研究、自动执行任务（如读写文件、连接 Slack/邮件、生成 PDF/文档/表格、定时自动化）。用户可自带 API Key 或使用本地 Ollama 模型，数据保留在本地。
-
-技术实现上，aisuite 使用 Python，通过适配器模式支持新提供商。安装简单，可选安装对应提供商的 SDK。整体设计清晰，文档完善，含有快速开始和多个示例。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 aisuite 的 Agents API 和 MCP 支持，可以开发一个「企业级智能客服系统」，通过连接 CRM、工单系统和知识库（MCP 服务器），让模型自动处理常见问题并生成回复，支持审批流程。; 灵感2：利用 aisuite 统一 API 和 OpenWorker 的文件/邮件能力，构建一个「自动化报告生成助手」，定时从数据库拉取数据，调用模型分析并生成 PDF/Excel 报告，自动发送到指定邮箱。; 灵感3：结合 aisuite 的 toolkits 和状态存储，做一个「代码审查机器人」，集成到 CI/CD 流水线中，自动分析 PR 变更，调用 Git 和文件工具，给出审查意见，并持久化对话历史。
-   项目链接: https://github.com/andrewyng/aisuite
-
-2. huggingface/speech-to-speech:
+1. huggingface/speech-to-speech:
    star: 7360  语言/技术: Python, Silero VAD v5, Parakeet TDT, Whisper (Transformers), Faster Whisper, Lightning Whisper MLX, MLX Audio Whisper, Paraformer (FunASR), OpenAI Responses/Chat Completions API, Transformers, mlx-lm, vLLM, llama.cpp, Qwen3-TTS (GGML/MLX), Kokoro-82M, Pocket TTS, ChatTTS, MMS TTS, WebSocket, Docker
    项目简介: 一个低延迟、全模块化的语音代理流水线，实现 VAD → STT → LLM → TTS 级联，并通过兼容 OpenAI Realtime 的 WebSocket API 暴露。每个组件均可替换，LLM 插槽支持任何兼容 OpenAI 的接口（包括 Hugging Face、vLLM、llama.cpp 等）。默认使用 Parakeet TDT 进行本地语音识别，Qwen3-TTS 进行语音合成，并已在数千台 Reachy Mini 机器人中生产运行。
    亮点: 低延迟模块化级联架构，VAD/STT/LLM/TTS 均可自由替换; 原生兼容 OpenAI Realtime API，任何 OpenAI 客户端可直接连接; 支持完全本地化部署（无需联网），也可使用云端/自托管 LLM; 已大规模生产验证（数千台机器人后端）
@@ -32,32 +15,49 @@
    衍生灵感: 灵感1：基于此流水线开发一个「智能家居语音管家」——结合本地 LLM（如 Gemma）和本地 TTS，在树莓派上运行，实现离线语音控制灯光、空调，无需联网，保护隐私。; 灵感2：集成到「客服语音机器人」系统中，替换原有的第三方语音 API，利用自定义 STT/LLM 提升特定领域（如金融、医疗）的识别准确率，并支持实时打断和多轮对话，降低成本。; 灵感3：作为「语音交互式游戏 NPC 引擎」，通过更换 LLM 为角色扮演模型，搭配多情绪 TTS，让游戏角色与玩家自然对话，增强沉浸感。
    项目链接: https://github.com/huggingface/speech-to-speech
 
-3. virgiliojr94/book-to-skill:
-   star: 11628  语言/技术: Python, Claude, GitHub Copilot CLI, Amp, Claude Code, Docling, pdftotext, ebooklib, beautifulsoup4, Markdown
-   项目简介: 将技术书籍、文档或资料库转化为结构化的 Agent Skill，支持在 GitHub Copilot CLI、Amp 或 Claude Code 中按需加载使用，避免重复阅读或上下文溢出。核心思路：一次编译，按需加载，Token 成本降低 24-51 倍。
-   亮点: 将 PDF/EPUB/DOCX 等文档一键转化为 Agent Skill，按章节按需加载; 相比直接全文注入上下文，Token 消耗降低 24-51 倍; 支持多种文档格式，自动适配技术书（Docling）或纯文本（pdftotext）; 生成 SKILL.md、每章摘要、术语表、模式表和速查表，结构清晰; 开源、MIT 许可、纯本地处理，不上传用户文件
-   详细报告: book-to-skill 是一个将技术书籍、文档文件夹或资料集合转化为统一 Agent Skill 的工具。用户只需指定一个文件、文件夹或通配符路径，工具便会进行以下处理：首先，根据书籍类型（技术书或纯文本）自动选择提取引擎——技术书使用 Docling（保留表格和代码块，约1.5秒/页），纯文本使用 pdftotext（瞬间完成）。然后，将提取的文本合并后由 Claude 分析结构，识别标题、章节、术语等，生成每章摘要（800-1200 tokens）、词汇表、设计模式表、速查表以及核心 SKILL.md（约4000 tokens）。最终 Skill 被写入代理的技能目录（如 ~/.copilot/skills/、~/.agents/skills/ 或 ~/.claude/skills/），之后用户可以通过 /<skill-name> 命令加载核心模型，通过 /<skill-name> <topic> 按需加载对应章节。项目还提供了详细的设计原则、性能基准和对比数据，证明了其在多次查询场景下的 Token 成本优势（24-51 倍）。此外，项目支持更新已有技能（fold-in），适用于内部文档、设计系统、研究聚集等多个场景。版权方面，项目本身不包含任何书籍内容，只是一个转换工具，用户需自行拥有文件的合法使用权，且不应分发生成的技能。
-   活跃度: 未知  社区健康: 未知
+2. deepfakes/faceswap:
+   star: 56404  语言/技术: Python, 深度学习, CUDA, ROCm（AMD GPU）, OpenCV（推测）
+   项目简介: FaceSwap 是一个基于深度学习的开源人脸交换工具，能够识别并替换图片和视频中的人脸。它提供了从数据提取、模型训练到最终转换的完整流程，并配有图形界面（GUI）降低使用门槛。项目强调伦理使用，旨在为AI学习、实验和合法换脸提供平台。
+   亮点: 完整的端到端工作流：提取人脸 → 训练模型 → 转换视频/图片; 支持多种模型架构（如Phaze-A、Villain）; 提供图形用户界面（GUI），降低使用门槛; 跨平台支持（Windows、Linux、MacOS）; 活跃的社区支持（Discord、论坛）
+   详细报告: FaceSwap 是一个开源的深度学习项目，用于自动识别和替换图片或视频中的人脸。其核心流程分为三步：提取（Extract）、训练（Train）和转换（Convert）。提取阶段从源素材中检测并裁剪出人脸；训练阶段使用两个数据集（例如A脸和B脸）训练一个生成模型，学习两张脸之间的映射；转换阶段将训练好的模型应用于新素材，完成换脸。项目提供了命令行和图形界面两种操作方式，支持多线程处理，并集成了FFmpeg进行视频/图片转换。技术上依赖Python，推荐使用NVIDIA GPU（CUDA）或AMD GPU（ROCm）加速计算。尽管文档未明确深度学习框架，但推测基于TensorFlow或PyTorch（因项目历史悠久，早期版本基于TensorFlow）。项目同时包含多个预训练模型（如Villain、DFL-H128等），用户可直接使用或自行训练。社区活跃，有详细的安装和使用文档（INSTALL.md、USAGE.md），并提供Discord和论坛支持。
+   活跃度: 未知（根据API指标无法判断，但文档显示持续维护）  社区健康: 活跃（有Discord、论坛、Patreon支持）
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，开发一个「企业内部知识库Agent技能生成器」，将公司内部的运维手册、架构设计文档、故障处理流程等转化为Agent Skill，帮助团队成员在编码时瞬间获取规范答案。; 灵感2：将其集成到「读书笔记与知识管理工具」中，例如 Obsidian 或 Notion 插件，自动将用户标记的书籍或论文生成可查询的 Skill，并在日常笔记中通过命令调用。; 灵感3：扩展为「多模态技能编译平台」，支持将视频讲座字幕、会议录音文稿等非结构化内容也转化为结构化 Skill，让 Agent 能“学习”整个培训课程。
-   项目链接: https://github.com/virgiliojr94/book-to-skill
+   衍生灵感: 灵感1：基于FaceSwap开发一个实时视频通话换脸插件，通过集成摄像头输入和低延迟模型推理，实现类似Snapchat滤镜但更真实的换脸效果（需注意伦理和授权）。; 灵感2：将FaceSwap的模型训练流程封装成微服务，用于影视后期制作中的批量人脸替换，例如替身演员换主演面孔，大幅降低特效成本。; 灵感3：结合Gan和超分辨率技术，开发一个高保真度的人脸修复与交换系统，用于老旧照片/视频中的人物面部替换或修复。
+   项目链接: https://github.com/deepfakes/faceswap
 
-4. paperswithbacktest/awesome-systematic-trading:
-   star: 9773  语言/技术: Markdown, Python, C++, Go, Rust, TypeScript
-   项目简介: Awesome Systematic Trading 是一个精选的资源列表，收录了用于系统化（量化）交易的研究、软件、书籍、文章等。它包含 97 个库和包（回测、交易机器人、指标、优化器等）、40+ 策略、55 本书、23 个视频以及博客和课程，按语言和类别整理，适合量化交易从业者和爱好者快速查找工具和学习资料。
-   亮点: 收录 97 个量化交易相关的库和包，覆盖回测、实盘交易、加密货币、指标、风险、数据源等; 整理 40+ 机构或学术界公开的交易策略，便于参考和实现; 提供 55 本入门到高级的系统化交易书籍，以及 23 个视频和多个博客、课程
-   详细报告: Awesome Systematic Trading 是一个由社区维护的 awesome 列表，旨在帮助用户发现和研究系统化交易（量化交易）的相关资源。README 开头即点明这是“收集用于发现、开发和运行系统化交易策略的资源（论文、软件、书籍、文章）的列表”。项目按类别组织：
+3. microsoft/VibeVoice:
+   star: 51391  语言/技术: Python, PyTorch, Hugging Face Transformers, vLLM, Qwen2.5, BitNet, Continuous Speech Tokenizer, Next-Token Diffusion, C++ (VibeASR.cpp)
+   项目简介: VibeVoice是微软开源的前沿语音AI模型家族，包含自动语音识别（ASR）和文本转语音（TTS）两大核心能力。ASR模型可单次处理长达60分钟的音频，并输出包含说话人、时间戳和内容的丰富转录；TTS模型支持多说话人、长达90分钟的合成，并具备实时流式版本。项目采用连续语音分词器（7.5Hz超低帧率）和next-token diffusion框架，结合大语言模型，兼顾效率与质量。适合长语音、会议记录、播客生成等场景，是打工人处理音频的救星。
+   亮点: 单次处理60分钟长音频的ASR，输出谁、何时、说了什么; 支持自定义热词（人名、术语）提升识别准确率; TTS支持最多4个说话人、90分钟长文本合成，语言包括英文、中文等; 实时TTS模型仅0.5B参数，首次有声延迟约300ms，支持流式输入; ASR模型通过BitNet异构量化压缩至1.58GB，可在3+CPU线程上实时推理
+   详细报告: VibeVoice是微软推出的开源语音AI模型家族，包含两大核心模型：VibeVoice-ASR（自动语音识别）和VibeVoice-TTS（文本转语音），以及一个轻量实时TTS模型VibeVoice-Realtime。项目核心技术在于使用连续语音分词器（Acoustic和Semantic），以超低帧率7.5Hz运行，大幅提升长序列处理效率。模型采用next-token diffusion框架：先由大语言模型（如Qwen2.5）理解文本上下文和对话流，再由扩散头生成高保真声学细节。
 
-- **Libraries and packages**（97 个）：细分为回测与实盘交易（事件驱动框架如 vnpy、zipline、backtrader，向量化框架如 vectorbt），加密货币（Freqtrade、Jesse、OctoBot 等），交易机器人，分析工具（指标如 ta-lib，指标计算，优化，定价，风险，Broker API，数据源，数据科学，数据库，图计算，机器学习，时间序列分析，可视化）。每个条目列出仓库名称、描述、星数和编程语言，并以表格呈现。
-- **Strategies**（40+ 策略）：覆盖债券、商品、货币、股票、加密货币、REITs 等多种资产类别，每一项通常有引用链接。
-- **Books**（55 本）：分为初学者、传记、编码、加密货币、一般、高频交易、机器学习等 sub 分类。
-- **Videos**（23 个）：讲师访谈、技术讲座等，附有 YouTube 链接和点赞数。
-- **Blogs** 和 **Courses**：提供进一步学习的渠道。
+VibeVoice-ASR可以单次接收长达60分钟的连续音频（64K token长度），无需切片，从而保持全局语义连贯性和说话人跟踪。输出结构化的转录文本，包含谁（说话人）、何时（时间戳）、什么（内容），并支持自定义热词（用户可输入特定人名、术语等）来引导识别，显著提升领域专有名词准确率。模型原生支持50+种语言。此外，ASR提供了finetuning代码，并集成了vLLM推理加速。还有针对CPU优化的BitNet版本（VibeASR.cpp），通过异构量化(I8_S+I2_S)将模型从4.62GB压缩到1.58GB，在3个以上CPU线程上即可实时推理。
 
-由于 README 内容被截断，部分细节（如具体策略、书籍、视频的完整列表）无法展示，但从现有片段可见项目结构清晰、分类详尽。项目本身不包含代码，而是一个精心策划的导航页，为量化交易者节省了大量搜索时间。
-   活跃度: 未知  社区健康: 未知
+VibeVoice-TTS模型（1.5B参数）专注于长文本多说话人合成，单次可生成最长90分钟的语音，支持最多4个不同说话人，并能表现自然对话的转停和情感。支持中文、英文及跨语言合成（如中文说英文），甚至能生成即兴演唱。而VibeVoice-Realtime（0.5B参数）则是流式TTS，支持文本流式输入，首次有声延迟约300ms，可稳健生成长达10分钟的语音。
+
+项目明确了风险与限制：可能产生不准确或偏见输出，存在被用于深度伪造或虚假信息的风险。作者强调仅供研究开发使用，商业部署需谨慎，并要求用户合法合规使用。整体而言，VibeVoice在长语音处理和多说话人合成方面突破了传统模型的限制，是语音AI社区的重要贡献。
+   活跃度: 高（最新更新2026-07-23，有多个版本发布和集成）  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 vectorbt 和 ta-lib 构建一个高性能策略回测仪表盘，支持批量优化和实时风险监控，用于个人量化团队快速验证交易想法。; 灵感2：集成 Freqtrade 和 Jesse 等加密货币框架，开发一个跨交易所的套利监控机器人，自动检测三角套利或期现价差机会。; 灵感3：利用 pysystemtrade 和 Rob Carver 的方法，构建一个面向期货的趋势跟踪系统，并接入国内期货市场数据，形成本土化的系统化交易解决方案。
-   项目链接: https://github.com/paperswithbacktest/awesome-systematic-trading
+   衍生灵感: 灵感1：基于VibeVoice-ASR，开发一个“会议纪要生成器”，自动录制并转写会议内容，实时输出谁说了什么，配合自定义热词覆盖公司内部术语，最后生成结构化会议摘要。; 灵感2：利用VibeVoice-TTS的多说话人和长文本能力，打造一个“有声书自动生成工具”，将小说文本按角色分配不同说话人，生成带有情绪和节奏的长篇有声读物，支持多种语言。; 灵感3：将VibeVoice-Realtime集成到“智能客服系统”中，实现实时语音应答，客户说话时同步返回AI语音，支持打断和流式对话，提升用户体验。
+   项目链接: https://github.com/microsoft/VibeVoice
+
+4. NanmiCoder/MediaCrawler:
+   star: 58419  语言/技术: Python, Playwright, Node.js, FastAPI, Vite, uv, MySQL, SQLite
+   项目简介: MediaCrawler 是一个多平台自媒体数据采集工具，支持小红书、抖音、快手、B站、微博、贴吧、知乎等主流平台的公开信息抓取。它采用基于 Playwright 的浏览器自动化技术，通过 CDP 模式连接用户已有的 Chrome 浏览器来复用登录态和 Cookie，从而避免复杂的 JS 逆向工作，大幅降低技术门槛。项目提供命令行和 WebUI 两种操作方式，支持关键词搜索、指定帖子爬取、评论抓取、创作者主页数据爬取等功能，并可将数据保存为 CSV、JSON、Excel、SQLite、MySQL 等多种格式。
+   亮点: 支持小红书、抖音、快手、B站、微博、贴吧、知乎等 7 个主流平台; 基于 Playwright CDP 模式，无需逆向加密算法，降低技术门槛; 提供 WebUI 可视化界面，可实时查看爬虫状态和日志; 支持多种数据存储方式：CSV、JSON、Excel、SQLite、MySQL; 拥有 IP 代理池、登录态缓存、评论词云图等功能
+   详细报告: MediaCrawler 是一个面向学习和技术交流的多平台自媒体数据采集工具，由 NanmiCoder 开发并开源。项目核心原理是利用 Playwright 浏览器自动化框架连接已有 Chrome 浏览器的远程调试端口（CDP 模式），从而复用浏览器的登录态、Cookie 等信息，再通过 JS 表达式获取签名参数，实现无需逆向复杂加密算法的数据采集方案。这种方式既降低了技术门槛，也减少了被平台风控的风险。
+
+项目支持七个主流平台：小红书、抖音、快手、B站、微博、贴吧、知乎。每个平台都实现了关键词搜索、指定帖子ID爬取、二级评论、指定创作者主页爬取、登录态缓存、IP代理池和生成评论词云图等功能。用户可以通过命令行参数灵活控制爬取行为，例如 `--platform xhs --lt qrcode --type search` 表示使用二维码登录小红书并搜索关键词。
+
+除了命令行模式，项目还提供了基于 FastAPI + Vite 的 WebUI 可视化操作界面，支持可视化配置爬虫参数、实时查看运行状态和日志、数据预览和导出等功能。数据持久化方面支持 CSV、JSON、JSONL、Excel、SQLite 和 MySQL 数据库。
+
+项目推荐使用 uv 作为 Python 包管理工具，并依赖 Node.js 环境（用于部分平台的签名逻辑）。安装步骤清晰：先安装 uv 和 Node.js，然后通过 `uv sync` 安装 Python 依赖，再配置 Chrome 浏览器的远程调试端口即可运行。
+
+需要特别注意的是，项目明确声明仅供学习使用，禁止用于商业或非法用途，并提供了详细的免责声明。另外，项目开源版本功能已很强大，还有付费的 Pro 版本提供断点续爬、多账号支持、去除 Playwright 依赖等更高级特性。
+   活跃度: 未知（GitHub API 指标均为 0，但文档显示了持续更新和 Pro 版本，推测项目活跃）  社区健康: 文档显示有微信交流群、B站账号、赞助商等，社区活跃度较高，但 GitHub 指标中 forks、issues 等均为 0，可能数据未及时更新或项目处于早期阶段。
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 MediaCrawler 的多平台数据采集能力，可以构建一个「自媒体舆情监控系统」，自动抓取指定关键词下各平台的最新帖子和评论，实时分析情感倾向并生成舆情报告，助力品牌公关或市场调研。; 灵感2：可以将其集成到「电商竞品分析平台」中，通过爬取小红书、抖音等平台的测评、种草笔记和用户评论，提取产品优缺点、价格敏感度等信息，辅助产品经理做决策。; 灵感3：利用其 WebUI 和可扩展的架构，可二次开发为「自媒体内容聚合与创作者工具」，帮助创作者自动收集热点素材、跟踪同行动态、生成评论词云，提升内容生产效率。
+   项目链接: https://github.com/NanmiCoder/MediaCrawler
