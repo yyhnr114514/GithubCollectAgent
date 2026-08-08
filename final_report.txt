@@ -9,18 +9,43 @@
    衍生灵感: 灵感1：基于 authentik 的协议兼容性，开发一个“企业应用统一认证入口”，将公司内部的 CRM、ERP、Wiki 等所有系统整合，实现员工一次登录、全网访问，并支持基于 OIDC 的现代应用和基于 SAML 的遗留系统。; 灵感2：利用 authentik 的 LDAP 和 RADIUS 支持，扩展为“网络设备身份认证服务”，为 WiFi、VPN、交换机等提供统一的认证和授权策略，实现网络接入的统一管理。; 灵感3：将 authentik 作为基础，构建一个“多租户 IdP SaaS 平台”，通过其 Helm Chart 和多实例部署能力，为不同客户提供隔离的托管身份服务，并利用其 API 实现自动化用户生命周期管理。
    项目链接: https://github.com/goauthentik/authentik
 
-2. huangruiteng/loopx:
-   star: 2971  语言/技术: Python, State Kernel, CLI, Codex, Claude Code, Cursor, Shell, Lark Kanban
-   项目简介: LoopX 是一个本地控制平面，用于管理长时间运行的 AI Agent 工作，保持目标、门禁、待办、证据、配额和交接收稳定，同时兼容 Codex、Claude Code、Cursor 等运行时，让 AI 干活变成可管理、可复盘、可持续改进的数字员工。
-   亮点: 将长周期 AI 任务分解为可验证的循环，支持目标、门禁、待办、配额、证据和交接的持久化管理; 提供 agent-agnostic 的本地控制平面，不替代任何具体 Agent 运行时，但能统一调度与治理; 支持多 Agent 协作，包含所有权、租约、能力边界和类型化交接，适合团队化任务编排; 内置配额与闸门机制，确保人类判断始终参与关键决策，避免失控的自主操作; 提供丰富的集成面：Codex App/CLI、Claude Code 适配器、自定义 Runner、Lark 看板投影
-   详细报告: LoopX 是一个面向长周期 AI Agent 工作的本地控制平面，核心思路是把会干活的 Agent 接成可管理、可复盘、可持续改进的数字员工。它解决的核心痛点是：单次会话能完成简单任务，但长期工作会面对目标漂移、决策者变动、证据过期、Agent 间交接、调度器持续消耗资源等难题。LoopX 用一个紧凑的持久状态内核（objective/gates/todos/scope/evidence/quota）来管理整个流程，把控制状态放在一个独立层。运行流程是：先检查人类判断是否介入？如果有，就提出问题并等待；否则执行一个受限于预算的 Agent 切片（比如 Codex/Claude Code/Cursor/shell），然后回写证据和交接信息，最后根据配额决定下一个 tick。这个流程有点像 Agent 原生看板，每张卡片携带身份、权限、证据和续接信息，移动卡片是受理、门控、监控、回写等操作，而看板只是投影，真正权威的是 LoopX 状态。LoopX 没有固定领导者，所有注册 Agent 都是对等节点，通过声明、租约、任务边界和能力来决定谁下一步行动。它适用于多日工程、issue/PR 循环、定期心跳监控、需要安全/发布/私密数据门禁的项目，以及需要清晰交接的 Agent 团队。但它明确不是自主生产控制器，危险操作、发布、生产写入和最终所有权都保留给人类。LoopX 的安装很简单，要求 Python 3.11+、curl、tar，macOS 或 Linux shell，Python 包除了标准库没有额外运行时依赖。对 Codex App、Codex CLI、Claude Code、OpenCode、Pi、Cursor 等都有集成说明，甚至支持自定义 Runner。其核心 tick 命令很小：quota should-run、todo claim、todo update、refresh-state、quota spend-slot。能力面分为五个问题：目标是什么？下一步做什么？何处需要人类判断？证据有什么变化？能否继续？对应的控制平面支持目标状态、配额交互契约、运行时桥、操作员界面（如 dashboard）、外部投影（Lark Kanban）、领域能力（如 issue 修复、内容运营、ML 实验建议、基准测试等），还有实验性的上下文学习（Reward Memory）和治理模式。LoopX 还提供高级路径，如预设（日常分诊、更新日志草稿）、Auto Research 协调干练人、受控回合、Explore 图挖掘、审查 Agent 工作（review-packet）等。目前的 v0.4.x 是早期但可用的版本，稳定的核心是状态和 CLI 契约，宿主集成和高级路径是可选或实验性的。它不会授予凭据、批准破坏性或生产性动作、未经授权发布内容，也不会把未经验证的运行当成成功证据。整体来看，LoopX 的技术壁垒在于它把软件工程中的状态管理、配额、门禁、审批流等思想应用到 Agent 执行领域，形成 agent-agnostic 的控制层，而且交付了完整的 CLI、文档和集成示例。对于希望让 AI 长期稳定干活、又不想失控的团队，这是一个非常值得关注的项目。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 LoopX 的配额与门禁机制，可以开发一个 'AI 安全发布管家'，将生产环境的变更操作强制经过人类审批，并把每次 Agent 的尝试、证据和决策留痕，用于审计和复盘。; 灵感2：把 LoopX 集成到现有的 CI/CD 流水线，让 AI Agent 自动处理 issue 分诊、PR 代码审查和回滚决策，同时利用其状态恢复能力处理长时间运行的迁移任务。; 灵感3：结合 Lark/飞书机器人，将 LoopX 的看板投影扩展为企业内部的 AI 任务中心，让非技术人员也能通过飞书卡片审批 Agent 的下一步行动，实现真正的 '数字员工' 管理。
-   项目链接: https://github.com/huangruiteng/loopx
+2. semantica-agi/semantica:
+   star: 2374  语言/技术: Python, RDF, SPARQL, LPG (Labeled Property Graph), W3C PROV-O, SHACL, OWL, SKOS, Rete, Datalog, Oxigraph, Blazegraph, Apache Jena, Eclipse RDF4J, Neo4j, FalkorDB, Apache AGE, AWS Neptune, Faiss, Qdrant, Pinecone, Databricks, Snowflake, MCP (Model Context Protocol)
+   项目简介: Semantica 是一个面向高合规要求场景（金融、医疗、法律等）的图原生 AI 基础设施层，通过在 LLM 和向量库之下构建可查询、可审计、可推理的知识图谱与决策记录，让 AI 的每一个决策都有据可查、因果可溯，堪称“AI 界的黑匣子记录仪”。它不依赖 LLM 也能完成图谱构建和推理，支持 W3C 标准（PROV-O、SHACL、OWL），并兼容多种图数据库和向量库，尤其适合需要严格审计和透明度的企业级 AI 系统。
+   亮点: Context Graphs：将 AI 知道的一切组织成结构化、可遍历的知识图谱，弥补传统 RAG 只回答“相似”不回答“关联”的缺陷。; Decision Intelligence：把每次决策变成一等公民对象，支持因果链追踪、相似决策检索、影响分析和合规规则检查。; 全链路审计：基于 W3C PROV-O 标准记录每个事实的来源，可导出符合监管要求的审计报告，并支持时间点快照。; 确定性的推理引擎：内置前向链、Rete、Datalog、SPARQL 等推理方式，所有推理路径可解释，不依赖 LLM。; 多源知识管道：支持文件、数据库、Databricks、Snowflake、Kafka 等接入，自动做实体识别、关系抽取、冲突检测和去重。; 多模图存储：同时支持 RDF 三元组库和属性图数据库，可随时切换后端而无需改代码。
+   详细报告: Semantica 是个野心不小的项目，它想解决的是 AI 在关键业务场景中“黑盒”和“无据可查”的痛点。在传统的向量数据库 + RAG 架构里，AI 只记住了“嵌入”而不是“意义”，决策过程无法解释，出了问题也没法回溯。Semantica 选择在 LLM、向量库和 Agent 框架下面加了一层确定性的基础设施层，用知识图谱（Knowledge Graph）把企业数据变成可查询、可推理、可审计的结构化上下文。
 
-3. Significant-Gravitas/AutoGPT:
+从架构上看，Semantica 是一条完整的数据流水线：从多源接入（文件、数据库、云存储、消息流）到解析、标准化、实体感知切分，再到 NER、关系抽取、冲突检测、去重，最终构建成知识图谱。在这张图上，还叠加了本体治理（SHACL 约束、OWL 生成、SKOS 词汇管理）、推理引擎（Rete、Datalog、SPARQL）、溯源管理（W3C PROV-O）和决策对象（Decision Intelligence）。存储方面，它支持多种 RDF 三元组库（Oxigraph、Blazegraph、Jena、RDF4J）和属性图数据库（Neo4j、FalkorDB、AGE、Neptune），外加向量库，都可以无缝切换。
+
+代码示例展示了核心用法：调用 `record_decision()` 记录一次决策，比如贷款审批或者用药检查，然后通过 `add_causal_relationship()` 建立决策之间的因果关系，最后用 `trace_decision_chain()` 回溯整个决策链，用 `find_similar_decisions()` 找相似案例，用 `check_decision_rules()` 做合规门禁。每个决策节点都有完整上下文、置信度和元数据，可以导出成 PROV-O、CSV 或 JSON 供监管审查。
+
+另外，Semantica 很强调企业集成：提供了 Databricks（Unity Catalog + Delta Lake）和 Snowflake 的原生连接器，可以直接把湖仓里的表变成带血缘的图谱节点，不用先导出数据。还提供了 MCP 服务器、REST API、CLI 和可视化工作台，方便和现有 agent 框架集成。文档里还专门讲了一个“受监管决策审计轨迹”的配方，从记录决策到导出 PROV-O 一步到位，简直是为合规部门量身定做的。
+
+需要注意的是，由于 README 内容有截断，关于性能细节、完整的集成列表以及一些模块的细节没有完全展示，这部分需要参考官方文档。总体而言，Semantica 在理念和技术选型上都相当前沿，把知识图谱、语义推理和决策审计结合起来，在 AI 治理领域很有想象空间。
+   活跃度: 未知。API 指标中 pushed_at 为 null，latest_release 为 null，无法判断开发活跃度。  社区健康: 未知。API 指标显示 forks=0、open_issues=0，且无最近提交记录，可能项目刚起步或数据未公开。文档中有 Discord、GitHub Discussions 等社区入口，但活跃度无法从现有信息判断。
+   商业潜力: 文档明确提供企业版服务，包括本地部署、私有云、行业定制和 SLA 支持，瞄准金融、医疗、法律、政府等受监管行业。这些行业对 AI 可解释性和审计有硬性需求，因此商业化潜力很大。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：开发一个“金融风控决策审计系统”，利用 Semantica 记录每一笔贷款审批的因果链和依据，自动生成符合监管要求的审计报告，让“为什么拒绝这个客户”有据可查。; 灵感2：构建“医疗用药安全知识图谱”，将药品相互作用、患者病历、医生处方等数据融合进图谱，当出现潜在危险组合时，通过推理引擎自动标记并生成干预决策链，方便医生和药师追溯来源。; 灵感3：将 Semantica 集成到企业内部 AI Agent 平台，作为统一的知识上下文和决策日志层，让不同部门的 Agent 共享一张可解释的知识网络，同时为 MCP 生态提供标准化的知识服务，打造“AI 治理中台”。
+   项目链接: https://github.com/semantica-agi/semantica
+
+3. 666ghj/MiroFish:
+   star: 70537  语言/技术: Node.js, Python, uv, Docker, OpenAI SDK (兼容 LLM API), Zep Cloud (记忆服务), GraphRAG, OASIS 模拟引擎, 多智能体系统, 自然语言处理
+   项目简介: MiroFish 是一个基于多智能体（Multi-Agent）技术的群体智能预测引擎，通过从真实世界提取种子信息（新闻、政策草案、金融信号等），自动构建高保真的并行数字世界。在这个世界里，成千上万具有独立个性、长期记忆和行为逻辑的智能体自由互动并社会演化，用户可通过上帝视角动态注入变量，精准推演未来轨迹。简单说，就是让你在数字沙盘中预演未来，从而做出更优决策。
+   亮点: 群体智能预测：通过大量智能体交互涌现出集体行为，预测宏观事件趋势。; 高保真数字世界：智能体拥有独立人格、长期记忆和行为逻辑，可进行社会演化。; 自然语言交互：用户只需上传种子材料并描述预测需求，系统自动返回详细报告。; 深度互动：模拟结束后可与任一智能体对话，与报告Agent交互。; 基于 OASIS 引擎：利用开源的社会交互模拟框架，构建复杂的社交环境。
+   详细报告: MiroFish 是一个面向未来的 AI 预测引擎，它把多智能体模拟技术带到了一个新的高度。项目的核心逻辑是：从真实世界获取少量种子信息（比如一条新闻、一份政策草案、一组金融数据），然后自动构建一个数字孪生世界。在这个世界里，每个智能体都像真人一样有自己的性格、记忆和决策逻辑，它们会相互作用、交流、形成舆情或社会演化。你可以像上帝一样操控环境变量，观察系统在不同条件下可能产生的未来走向。
+
+工作流程分五步：第一步是图构建（Graph Building），包括种子提取、个体/集体记忆注入和 GraphRAG 构建，把输入信息结构化，并建立知识图谱。第二步是环境设置（Environment Setup），进行实体关系提取、人设生成和智能体配置注入，为模拟准备角色。第三步是模拟（Simulation），采用双平台并行模拟引擎，自动解析预测需求，并动态更新时态记忆。第四步是报告生成（Report Generation），ReportAgent 带着丰富的工具与模拟后的环境深度交互，生成详细的预测报告。第五步是深度交互（Deep Interaction），你可以与模拟世界中的任意智能体聊天，或与 ReportAgent 进一步探讨。
+
+技术上，MiroFish 采用前后端分离架构。后端使用 Python（≥3.11, ≤3.12），依赖管理使用 uv，提供 LLM API 接口（兼容 OpenAI SDK 格式），推荐使用阿里云百炼平台的 qwen-plus 模型。前端基于 Node.js 18+，使用 npm 管理依赖。数据存储和记忆服务用 Zep Cloud，负责长期记忆管理。模拟引擎核心是 OASIS（Open Agent Social Interaction Simulations），这是 CAMEL-AI 团队的开源项目，MiroFish 站在巨人的肩膀上，实现了群体智能的涌现。环境变量中需要配置 LLM 和 Zep 的 API 密钥，部署方式支持源码部署和 Docker 一键启动，对开发者非常友好。
+
+这个项目最大的亮点在于它把“预测”变成了一种可交互、可探索的沉浸式体验。不再是一个黑盒输出答案，而是你可以走进未来世界，和其中的人物对话，理解它们为什么这样选择，甚至可以改变环境变量，重新跑一遍模拟，比较不同决策带来的结果。这种交互式预测能力，是传统统计模型或简单 AI 问答所不具备的。
+   活跃度: 未知（pushed_at 为 null）  社区健康: 早期阶段，根据 GitHub API 数据无 fork 和 open issue，社区参与度较低。
+   商业潜力: 高，可面向企业决策支持、市场预测、内容创作等领域，但受限于当前项目的成熟度，商业化需更多定制化开发。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：企业舆情预测与品牌危机管理工具：上传市场新闻或用户评论，MiroFish 模拟不同公关策略下的舆论走向，帮助公关团队提前预判风险、选择最佳应对方案。; 灵感2：互动式小说 / 剧本创作平台：将小说世界观和人物设定输入系统，让故事角色在模拟世界中自主演进，作者可以实时干预剧情，测试不同结局，为创作提供无限灵感。; 灵感3：政策决策沙盘：政府部门或智库在政策正式发布前，模拟不同利益群体的反应和社会效果，通过调整政策参数（如补贴力度、执行时间）观察潜在影响，辅助制定更科学的政策。
+   项目链接: https://github.com/666ghj/MiroFish
+
+4. Significant-Gravitas/AutoGPT:
    star: 186076  语言/技术: Docker
    项目简介: AutoGPT是一个开源AI代理平台，用户用自然语言描述任务，平台自动构建并运行AI代理完成完整工作流。它提供AutoPilot、Agents、Marketplace和Build四个界面，支持45+平台集成和数百种AI模型，可运行于托管平台或自托管环境，帮助用户节省时间，实现销售、营销、工程、客服等场景的自动化。
    亮点: 用自然语言即可创建并运行AI代理（AutoPilot）; 可视化工作流构建器（Build）精确控制每一步; 45+集成平台和数百种AI模型; 支持按需、按计划或从触发器运行代理
@@ -40,22 +65,3 @@ AutoGPT的自动化能力非常广泛。集成方面，已连接到Gmail、Googl
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于AutoGPT构建一个“企业工单智能分诊助理”，集成Jira和Slack，自动接收工单、分析内容、联系相关团队并给出解决方案建议，大幅降低客服响应时间。; 灵感2：开发一个“个人日程与邮件管家”，利用AutoGPT连接Gmail和Google Calendar，自动阅读邮件、提取日程事件、创建日历邀请并起草回复，成为职场人的效率神器。; 灵感3：利用AutoGPT的调度和触发器功能，构建一个“竞品情报监控系统”，定期抓取竞品官网、社交平台和新闻，生成结构化对比报告，供市场团队决策。
    项目链接: https://github.com/Significant-Gravitas/AutoGPT
-
-4. tirth8205/code-review-graph:
-   star: 29099  语言/技术: Python, Tree-sitter, MCP (Model Context Protocol), GitHub Actions, AST解析, 图结构, 增量更新, CLI工具, Jupyter Notebook支持
-   项目简介: 一句话概括：这是一个专为AI编码助手设计的代码图谱加速器，它用Tree-sitter把代码解析成结构图，再通过MCP协议给AI提供精准的上下文，让AI审查代码时只读该读的文件，从而节省约65倍的token消耗，是程序员审查代码的省token神器。
-   亮点: Token效率神器：中位每问题token减少约65倍，最高可达376倍; 支持超30种语言和Jupyter Notebook，甚至能自定义新语言; 增量更新只需几秒，适合大型项目; 一键配置主流AI工具（Codex、Cursor、Claude Code等）; CI集成：拉取请求自动风险评分，可作合并门禁
-   详细报告: 这个项目是个程序员救星，专门治疗AI编码助手在审查代码时"乱翻书"的病。它不用把整个代码库一股脑塞给AI，而是先建一张代码的"关系网"——用Tree-sitter把代码解析成AST，再提取函数、类、导入等节点，以及调用、继承、测试等边关系，存入一个图数据库。这样当某个文件改动时，它能沿着图快速算出"爆炸半径"（哪些调用者、依赖、测试会受影响），只给AI返回这最小集合的文件和边，AI就不用整个项目从头读到尾了。
-
-它的核心原理是：仓库被解析为AST，存储为图结构，包括节点（函数、类、导入）和边（调用、继承、测试覆盖），然后在审查时查询以计算AI助手需要读取的最小文件集。效果数据很直观：在记录中，fastapi仓库从94.8万token降到约2.6万token，flask从14.3万降到约2.2千，中位减少约65倍。它还支持增量更新，通过watch模式或钩子检测文件变化，只重新解析哈希变化的文件，在django这种3000文件规模的项目中，改两个文件只需2.5秒重新索引（其中1.4秒是启动开销）。
-
-对于AI助手，它作为MCP服务器提供精准上下文，安装命令自动检测已安装的AI工具（支持Codex、Cursor、Claude Code、Gemini CLI、Windsurf、Zed、Copilot等16种），写入正确的MCP配置并注入指令，重启就能用。还有一个GitHub Action，在PR时自动做风险评分，输出单个固定评论，指出高风险函数、受影响流程和测试缺口，可设置fail-on-risk作为合并门禁，全程本地运行，不泄露源码。
-
-技术上，它使用Python 3.10+，核心解析基于Tree-sitter，目前支持Python、JS/TS、Go、Rust、Java、C/C++、C#、VB.NET、Ruby、Kotlin、Swift、PHP、Scala、Solidity、Dart等30多种语言，还支持Jupyter Notebook，PHP甚至能识别Composer、Blade、Laravel路由等专属语义。如果遇到不支持的冷门语言，可以写一个languages.toml映射文件，映射到已有的tree-sitter语法，无需改代码。
-
-项目文档非常完善，有详细的Usage、FAQ、Troubleshooting和基准复现指南，还提供了自定义语言的教程。整体来说，这是一个成熟度较高、实用性极强的开源项目，特别适合使用AI编程助手开发大型项目的团队。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目可以开发一个“个人代码知识库助手”，让开发者用自然语言提问“这个项目的异常处理流程是怎样的”，AI直接给出涉及的文件、函数调用链和影响范围，而不是翻遍整个仓库。; 灵感2：可以将其集成到现有的CI/CD流程中，除了PR审查，还能在每次代码合并后自动生成“本次变更影响地图”，通知相关模块的负责人，避免意外破坏依赖关系。; 灵感3：可以扩展成“跨仓库代码图谱”，把多个微服务的代码库合并成一个图，用于分析跨服务调用链，在线上事故排查时快速定位调用链路和影响面。
-   项目链接: https://github.com/tirth8205/code-review-graph
