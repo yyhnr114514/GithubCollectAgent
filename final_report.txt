@@ -1,4 +1,21 @@
-1. goauthentik/authentik:
+1. google/skills:
+   star: 16781  语言/技术: Google Cloud, GKE, BigQuery, Gemini API, Agent Skills, npx, MCP Servers, Markdown, Claude Code, Codex
+   项目简介: 一句话概括：这是 Google 官方开源的 Agent Skills 技能库，相当于给 AI 代理装上了一套“Google 云专家大脑”，让 Claude Code、Codex 等智能体能够直接操作 GKE、BigQuery、Gemini 等谷歌服务，解决 AI 不会用云工具的痛点。
+   亮点: 提供 80+ 个官方技能，覆盖 Google Cloud 的 AI/ML、基础设施、数据库、安全等核心领域。; 安装方便，一条 `npx skills add google/skills` 命令即可将技能注入 AI 代理。; 内置插件市场，可直接集成到 Claude Code、Codex 等主流 AI 编码工具，让代理秒变 GCP 运维老司机。; Apache 2.0 开源，免费可商用，还能自己贡献技能，打造团队私有技能包。
+   详细报告: 这个项目是 Google 官方开源的 Agent Skills 技能库，专门为 AI 代理（如 Claude Code、Codex、Antigravity CLI 等）提供操作 Google 产品和技术的“操作手册”。简单说，它把 Google 云上的各种复杂操作（比如创建 GKE 集群、调优 BigQuery 查询、配置网络负载均衡）封装成了一个个 Markdown 格式的技能包，AI 代理学会这些技能后，就能像一个经验丰富的云架构师一样，自动执行任务。
+
+项目采用模块化设计，技能按领域分类：有基础入门（如认证、基础构建）、多产品解决方案（如 agentic analytics、RAG 检索）、AI/ML 平台（如 Gemini API、Model Garden、RAG Engine）、基础设施（如 GKE 的 20 多个技能，涵盖集群创建、扩缩容、备份恢复、成本优化等）、数据库和分析（AlloyDB、Bigtable、Cloud SQL、Spanner 等）、开发者工具（gcloud CLI、面向 AI 代理的 CLI）、管理工具（监控、日志查询、SLO 告警）、安全与身份（GKE 平台安全、工作负载安全）、Web 和应用托管（Cloud Run、Firebase）以及广告和数据分析（Google Ads API、Analytics）。
+
+安装方式很傻瓜化：运行 `npx skills add google/skills`，按提示勾选需要的技能即可。此外，项目还提供了插件系统，可以轻松集成到 Claude Code（`claude plugin marketplace add google/skills`）和 Codex（`codex plugin marketplace add google/skills`）。这意味着你的 AI 编程助手可以直接获得谷歌云平台的“超能力”，比如让它帮忙分析 GKE 成本、生成 Logging 查询语句，甚至迁移 AI 工作负载。
+
+虽然文档提到项目处于活跃开发阶段，但从技能列表来看已经相当丰富，而且每个技能都是独立的 Markdown 文件，方便二次修改。开源协议是 Apache 2.0，你可以随意修改和分发。不过，由于仓库目前没有提供具体的 API 指标（如 star 数、提交记录），社区热度暂时无法评估，但既然是 Google 出品，质量还是值得信赖的。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及具体商业化方案，但由于是 Apache 2.0 开源，可以基于其构建付费的云管理服务平台，或作为 AI 代理的增值插件出售。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于这个技能库，可以开发一个『Google Cloud 智能运维管家』：接入 Claude Code 后，自动巡检 GKE 集群，发现节点异常、成本超支等问题，并直接给出修复命令和 SLO 建议。; 灵感2：将 BigQuery AI/ML 技能集成到你的数据分析平台，让业务人员用自然语言提问，AI 代理自动生成 SQL 查询并可视化报表，相当于给 BI 工具装上 AI 大脑。; 灵感3：模仿这个项目模式，为 AWS 或 Azure 编写同类的 Agent Skills 技能库，帮助使用多云的企业统一管理云资源，或者为特定行业（如金融风控）定制合规性检查技能包。; 灵感4：利用项目里的 GKE 技能包，构建一个 Kubernetes 集群的自动化灾难恢复机器人，结合 Backup & DR 技能，在故障发生时自动执行恢复流程，减少人工干预。
+   项目链接: https://github.com/google/skills
+
+2. goauthentik/authentik:
    star: 23187  语言/技术: SAML, OAuth2/OIDC, LDAP, RADIUS, Docker Compose, Kubernetes, Helm, AWS CloudFormation
    项目简介: authentik 是一个开源的身份提供商（IdP），支持 SAML、OAuth2/OIDC、LDAP、RADIUS 等协议，提供现代 SSO 解决方案，可自托管，适用于从实验室到生产集群，并有企业版用于替换 Okta、Auth0 等商业 IdP。解决企业身份认证和授权管理分散的痛点。
    亮点: 支持多种身份协议：SAML、OAuth2/OIDC、LDAP、RADIUS; 提供从 Docker Compose 到 Kubernetes 的多种部署方式，适配各种规模环境; 有企业版，可替代 Okta、Auth0 等商业 IdP，降低成本和锁定风险
@@ -9,59 +26,38 @@
    衍生灵感: 灵感1：基于 authentik 的协议兼容性，开发一个“企业应用统一认证入口”，将公司内部的 CRM、ERP、Wiki 等所有系统整合，实现员工一次登录、全网访问，并支持基于 OIDC 的现代应用和基于 SAML 的遗留系统。; 灵感2：利用 authentik 的 LDAP 和 RADIUS 支持，扩展为“网络设备身份认证服务”，为 WiFi、VPN、交换机等提供统一的认证和授权策略，实现网络接入的统一管理。; 灵感3：将 authentik 作为基础，构建一个“多租户 IdP SaaS 平台”，通过其 Helm Chart 和多实例部署能力，为不同客户提供隔离的托管身份服务，并利用其 API 实现自动化用户生命周期管理。
    项目链接: https://github.com/goauthentik/authentik
 
-2. semantica-agi/semantica:
-   star: 2374  语言/技术: Python, RDF, SPARQL, LPG (Labeled Property Graph), W3C PROV-O, SHACL, OWL, SKOS, Rete, Datalog, Oxigraph, Blazegraph, Apache Jena, Eclipse RDF4J, Neo4j, FalkorDB, Apache AGE, AWS Neptune, Faiss, Qdrant, Pinecone, Databricks, Snowflake, MCP (Model Context Protocol)
-   项目简介: Semantica 是一个面向高合规要求场景（金融、医疗、法律等）的图原生 AI 基础设施层，通过在 LLM 和向量库之下构建可查询、可审计、可推理的知识图谱与决策记录，让 AI 的每一个决策都有据可查、因果可溯，堪称“AI 界的黑匣子记录仪”。它不依赖 LLM 也能完成图谱构建和推理，支持 W3C 标准（PROV-O、SHACL、OWL），并兼容多种图数据库和向量库，尤其适合需要严格审计和透明度的企业级 AI 系统。
-   亮点: Context Graphs：将 AI 知道的一切组织成结构化、可遍历的知识图谱，弥补传统 RAG 只回答“相似”不回答“关联”的缺陷。; Decision Intelligence：把每次决策变成一等公民对象，支持因果链追踪、相似决策检索、影响分析和合规规则检查。; 全链路审计：基于 W3C PROV-O 标准记录每个事实的来源，可导出符合监管要求的审计报告，并支持时间点快照。; 确定性的推理引擎：内置前向链、Rete、Datalog、SPARQL 等推理方式，所有推理路径可解释，不依赖 LLM。; 多源知识管道：支持文件、数据库、Databricks、Snowflake、Kafka 等接入，自动做实体识别、关系抽取、冲突检测和去重。; 多模图存储：同时支持 RDF 三元组库和属性图数据库，可随时切换后端而无需改代码。
-   详细报告: Semantica 是个野心不小的项目，它想解决的是 AI 在关键业务场景中“黑盒”和“无据可查”的痛点。在传统的向量数据库 + RAG 架构里，AI 只记住了“嵌入”而不是“意义”，决策过程无法解释，出了问题也没法回溯。Semantica 选择在 LLM、向量库和 Agent 框架下面加了一层确定性的基础设施层，用知识图谱（Knowledge Graph）把企业数据变成可查询、可推理、可审计的结构化上下文。
+3. TauricResearch/TradingAgents:
+   star: 96535  语言/技术: Python, LangGraph, OpenAI-compatible API, Anthropic API, Google Gemini API, Ollama, Docker, SQLite, Yahoo Finance, Alpha Vantage, FRED, Polymarket
+   项目简介: 一句话概括：TradingAgents 是一个多智能体 LLM 金融交易框架，通过模拟真实交易公司的分析师、研究员、交易员和风控团队，协作评估市场条件并生成交易决策。它解决的核心痛点是让 AI 能像真实投研团队一样从多角度（基本面、情绪、新闻、技术、风险）交叉验证和辩论，从而提供更稳健的研究型分析。框架强调研究和教育用途，而非实际投资建议。
+   亮点: 多智能体协作架构：模拟真实交易公司的分工体系，涵盖基本面、情绪、新闻、技术分析师，以及多头/空头研究辩论、交易员、风险管理和投资组合经理。; 超强模型兼容性：支持 OpenAI、Google、Anthropic、xAI、DeepSeek、Qwen、GLM、MiniMax、OpenRouter、Ollama 本地模型和 Azure、Bedrock，甚至任意 OpenAI 兼容端点。; 持久化与恢复：自动决策日志（.md 格式）和可选 LangGraph 检查点，支持断点续跑，极大提升长任务可靠性。; 全球市场覆盖：支持美股、港股、日股、伦敦、印度、加拿大、澳大利亚、A股和加密货币，用 Yahoo Finance 编码自动切换公司身份与基准。
+   详细报告: TradingAgents 是一个由 TauricResearch 开发的开源多智能体金融交易框架，核心理念是镜像真实交易公司的运作流程。它利用多个专业化 LLM 智能体来分解复杂的交易决策任务：分析师团队负责从不同维度采集和解读信息，其中基本面分析师评估财务指标和公司估值，情绪分析师聚合 StockTwits 和 Reddit 等社交媒体情绪，新闻分析师监控宏观事件，技术分析师使用 MACD、RSI 等指标预测价格趋势。研究员团队则分为看涨和看跌两组，通过结构化辩论对分析师的观点进行批判性评估，平衡收益与风险。交易员综合分析师和研究员报告，决定交易时机和规模。风险管理和投资组合经理团队持续监控波动率、流动性等风险因素，对交易提案进行批复，并在模拟交易所中执行订单。
 
-从架构上看，Semantica 是一条完整的数据流水线：从多源接入（文件、数据库、云存储、消息流）到解析、标准化、实体感知切分，再到 NER、关系抽取、冲突检测、去重，最终构建成知识图谱。在这张图上，还叠加了本体治理（SHACL 约束、OWL 生成、SKOS 词汇管理）、推理引擎（Rete、Datalog、SPARQL）、溯源管理（W3C PROV-O）和决策对象（Decision Intelligence）。存储方面，它支持多种 RDF 三元组库（Oxigraph、Blazegraph、Jena、RDF4J）和属性图数据库（Neo4j、FalkorDB、AGE、Neptune），外加向量库，都可以无缝切换。
+框架基于 LangGraph 构建，强调灵活性和模块化，提供了完整的 Python API 和 CLI。用户可通过 `tradingagents` 命令启动交互式界面，选择股票代码、分析日期和 LLM 提供商。技术上支持众多主流 LLM 提供商（OpenAI、Anthropic、Google、xAI、DeepSeek、Qwen、GLM、MiniMax 等），还包括本地 Ollama 模型和 OpenAI 兼容服务器。数据层使用 Alpha Vantage、FRED、Polymarket 等，并与 Yahoo Finance 集成。同时支持 Docker 部署，极大降低了环境配置门槛。
 
-代码示例展示了核心用法：调用 `record_decision()` 记录一次决策，比如贷款审批或者用药检查，然后通过 `add_causal_relationship()` 建立决策之间的因果关系，最后用 `trace_decision_chain()` 回溯整个决策链，用 `find_similar_decisions()` 找相似案例，用 `check_decision_rules()` 做合规门禁。每个决策节点都有完整上下文、置信度和元数据，可以导出成 PROV-O、CSV 或 JSON 供监管审查。
-
-另外，Semantica 很强调企业集成：提供了 Databricks（Unity Catalog + Delta Lake）和 Snowflake 的原生连接器，可以直接把湖仓里的表变成带血缘的图谱节点，不用先导出数据。还提供了 MCP 服务器、REST API、CLI 和可视化工作台，方便和现有 agent 框架集成。文档里还专门讲了一个“受监管决策审计轨迹”的配方，从记录决策到导出 PROV-O 一步到位，简直是为合规部门量身定做的。
-
-需要注意的是，由于 README 内容有截断，关于性能细节、完整的集成列表以及一些模块的细节没有完全展示，这部分需要参考官方文档。总体而言，Semantica 在理念和技术选型上都相当前沿，把知识图谱、语义推理和决策审计结合起来，在 AI 治理领域很有想象空间。
-   活跃度: 未知。API 指标中 pushed_at 为 null，latest_release 为 null，无法判断开发活跃度。  社区健康: 未知。API 指标显示 forks=0、open_issues=0，且无最近提交记录，可能项目刚起步或数据未公开。文档中有 Discord、GitHub Discussions 等社区入口，但活跃度无法从现有信息判断。
-   商业潜力: 文档明确提供企业版服务，包括本地部署、私有云、行业定制和 SLA 支持，瞄准金融、医疗、法律、政府等受监管行业。这些行业对 AI 可解释性和审计有硬性需求，因此商业化潜力很大。
+项目非常注重可复现性和工程健壮性。它实现了决策日志（自动迭代反思）和检查点恢复（LangGraph 保存状态），使长任务更抗中断。多市场支持（如 600519.SS 和 BTC-USD）也扩展了适用场景。然而，框架明确指出其 LLM 驱动的本质导致每次输出可能不同，不适合作为确定性投资工具，更适合研究多智能体协作分析。整体文档详细，版本迭代频繁（v0.3.1），显示了活跃的维护状态。
+   活跃度: 活跃（README 显示近期连续发布 v0.2.x 和 v0.3.x 版本）  社区健康: 未知
+   商业潜力: 文档未提及，但该框架可视为金融研究、教育或企业决策支持领域的强原型，未来可能商业化提供合规、风控等分析服务。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个“金融风控决策审计系统”，利用 Semantica 记录每一笔贷款审批的因果链和依据，自动生成符合监管要求的审计报告，让“为什么拒绝这个客户”有据可查。; 灵感2：构建“医疗用药安全知识图谱”，将药品相互作用、患者病历、医生处方等数据融合进图谱，当出现潜在危险组合时，通过推理引擎自动标记并生成干预决策链，方便医生和药师追溯来源。; 灵感3：将 Semantica 集成到企业内部 AI Agent 平台，作为统一的知识上下文和决策日志层，让不同部门的 Agent 共享一张可解释的知识网络，同时为 MCP 生态提供标准化的知识服务，打造“AI 治理中台”。
-   项目链接: https://github.com/semantica-agi/semantica
+   衍生灵感: 灵感1：基于此框架开发一个“企业风险评估智能体系统”，将交易决策逻辑转化为企业舆情监测、合规风险预警，用于公关或法务部门的多维度分析。; 灵感2：将其改造为“金融教育仿真平台”，让学生在模拟环境中体验完整投研流程，通过多智能体辩论理解市场分析的复杂性，辅助量化金融课程教学。; 灵感3：借鉴其多智能体辩论与决策机制，开发面向供应链管理、市场营销或政策分析领域的通用决策支持框架，只需替换数据源和角色定义。
+   项目链接: https://github.com/TauricResearch/TradingAgents
 
-3. 666ghj/MiroFish:
-   star: 70537  语言/技术: Node.js, Python, uv, Docker, OpenAI SDK (兼容 LLM API), Zep Cloud (记忆服务), GraphRAG, OASIS 模拟引擎, 多智能体系统, 自然语言处理
-   项目简介: MiroFish 是一个基于多智能体（Multi-Agent）技术的群体智能预测引擎，通过从真实世界提取种子信息（新闻、政策草案、金融信号等），自动构建高保真的并行数字世界。在这个世界里，成千上万具有独立个性、长期记忆和行为逻辑的智能体自由互动并社会演化，用户可通过上帝视角动态注入变量，精准推演未来轨迹。简单说，就是让你在数字沙盘中预演未来，从而做出更优决策。
-   亮点: 群体智能预测：通过大量智能体交互涌现出集体行为，预测宏观事件趋势。; 高保真数字世界：智能体拥有独立人格、长期记忆和行为逻辑，可进行社会演化。; 自然语言交互：用户只需上传种子材料并描述预测需求，系统自动返回详细报告。; 深度互动：模拟结束后可与任一智能体对话，与报告Agent交互。; 基于 OASIS 引擎：利用开源的社会交互模拟框架，构建复杂的社交环境。
-   详细报告: MiroFish 是一个面向未来的 AI 预测引擎，它把多智能体模拟技术带到了一个新的高度。项目的核心逻辑是：从真实世界获取少量种子信息（比如一条新闻、一份政策草案、一组金融数据），然后自动构建一个数字孪生世界。在这个世界里，每个智能体都像真人一样有自己的性格、记忆和决策逻辑，它们会相互作用、交流、形成舆情或社会演化。你可以像上帝一样操控环境变量，观察系统在不同条件下可能产生的未来走向。
+4. virgiliojr94/book-to-skill:
+   star: 18956  语言/技术: Python, pdftotext (poppler), pypdf, pdfminer.six, docling, ebooklib, beautifulsoup4, python-docx, striprtf, Calibre (ebook-convert), Agent Skills 标准, Markdown
+   项目简介: book-to-skill 是一个将技术书籍、文档文件夹或资料集合转化为统一 Agent Skill 的开源工具，让你可以在 GitHub Copilot CLI、Amp 或 Claude Code 中按需加载书籍章节，以极低的 token 成本获取精准答案，彻底告别“读完就忘”和“PDF 翻页找内容”的痛点。
+   亮点: 将任意技术书籍/文档转化为结构化 Agent Skill，支持按章节按需加载，token 消耗降低 24×–51×; 支持 PDF、EPUB、DOCX、HTML、RTF、MOBI/AZW/AZW3、纯文本、Markdown 等多种格式; 兼容 GitHub Copilot CLI、Amp、Claude Code 等主流 AI 编码助手，遵循开放 Agent Skills 标准; 本地处理，隐私友好，不包含、不复制书籍原文，规避版权风险
+   详细报告: book-to-skill 是一个用 Python 编写的开源命令行工具，核心解决的是“知识遗忘”和“上下文爆炸”双重痛点。开发者经常购买技术书、阅读文档，但真正使用时却难以快速定位到特定知识点；而如果直接将整本书塞给 AI Agent，不仅 token 成本高得吓人，还容易导致模型“迷失”在长文本中，产生幻觉。
 
-工作流程分五步：第一步是图构建（Graph Building），包括种子提取、个体/集体记忆注入和 GraphRAG 构建，把输入信息结构化，并建立知识图谱。第二步是环境设置（Environment Setup），进行实体关系提取、人设生成和智能体配置注入，为模拟准备角色。第三步是模拟（Simulation），采用双平台并行模拟引擎，自动解析预测需求，并动态更新时态记忆。第四步是报告生成（Report Generation），ReportAgent 带着丰富的工具与模拟后的环境深度交互，生成详细的预测报告。第五步是深度交互（Deep Interaction），你可以与模拟世界中的任意智能体聊天，或与 ReportAgent 进一步探讨。
+该工具的工作流程分为三步：第一步，用户指定一个文件、文件夹或 glob 模式（如 ./my-book.pdf）；第二步，工具会先提取并清洗原始文本，然后基于一份 SKILL.md 规范（Agent Skills 标准）将内容蒸馏为结构化的技能包——包括核心心智模型、章节索引、词汇表、模式总结和速查表；第三步，生成的技能包被安装到 AI 助手的技能目录中，当用户输入 `/your-book-slug replication` 这样的命令时，Agent 会按需加载对应的章节文件，从真实内容中回答，而不是胡编乱造。
 
-技术上，MiroFish 采用前后端分离架构。后端使用 Python（≥3.11, ≤3.12），依赖管理使用 uv，提供 LLM API 接口（兼容 OpenAI SDK 格式），推荐使用阿里云百炼平台的 qwen-plus 模型。前端基于 Node.js 18+，使用 npm 管理依赖。数据存储和记忆服务用 Zep Cloud，负责长期记忆管理。模拟引擎核心是 OASIS（Open Agent Social Interaction Simulations），这是 CAMEL-AI 团队的开源项目，MiroFish 站在巨人的肩膀上，实现了群体智能的涌现。环境变量中需要配置 LLM 和 Zep 的 API 密钥，部署方式支持源码部署和 Docker 一键启动，对开发者非常友好。
+在技术实现上，工具分为两个部分：确定性提取器（document → 纯文本 + 元数据）和规范驱动的生成器（Agent 按 SKILL.md 指导将提取内容转化为结构化技能）。提取器采用模块化设计，针对不同格式适配不同工具链：PDF 方面，对于文本密集型书籍优先使用 pdftotext（poppler），若不可用则回退到 pypdf 或 pdfminer.six；对于包含代码、表格和公式的技术类书籍，推荐使用 docling（约 1.5 秒/页），能保留 Markdown 表格和代码块。EPUB 使用 ebooklib + beautifulsoup4，或内置 zipfile 兜底；DOCX 用 python-docx；HTML 用 beautifulsoup4；RTF 用 striprtf；MOBI/AZW 系列则依赖 Calibre 的 e-book-convert 转换。纯文本、Markdown、reStructuredText 和 AsciiDoc 则无需任何额外依赖。为了简化环境配置，工具还提供了 `python3 scripts/extract.py --check` 命令，可以一键检测各格式提取器的安装状态并给出安装指令。
 
-这个项目最大的亮点在于它把“预测”变成了一种可交互、可探索的沉浸式体验。不再是一个黑盒输出答案，而是你可以走进未来世界，和其中的人物对话，理解它们为什么这样选择，甚至可以改变环境变量，重新跑一遍模拟，比较不同决策带来的结果。这种交互式预测能力，是传统统计模型或简单 AI 问答所不具备的。
-   活跃度: 未知（pushed_at 为 null）  社区健康: 早期阶段，根据 GitHub API 数据无 fork 和 open issue，社区参与度较低。
-   商业潜力: 高，可面向企业决策支持、市场预测、内容创作等领域，但受限于当前项目的成熟度，商业化需更多定制化开发。
+生成的技能包包含 5 类文件：`SKILL.md`（约 4000 tokens，核心模型 + 章节索引）、`chapters/ch01-*.md`（每章约 1000 tokens，按需加载）、`glossary.md`（约 1500 tokens，术语表）、`patterns.md`（约 2000 tokens，所有技术、算法、设计模式）、`cheatsheet.md`（约 1000 tokens，决策表和速查规则）。其中章节文件是懒加载的，只有用户询问相关主题时才会被计入上下文，因此单次查询的 token 开销极低。根据项目提供的性能数据，相比直接把整本书丢进上下文，这种方法在真实书籍上可减少 24×–51× 的 token 消耗。
+
+除了技术书籍，该工具同样适用于各类结构化知识文档，比如内部技术文档（架构决策记录、运维手册、入职指南）、品牌与设计规范、研究论文集合、RFC 和 API 合同等。凡是需要反复查询的内容，都可以转化为 Agent 技能。项目强调隐私和版权：所有处理都在本地进行，不上传用户文件；生成的技能是高度概括和结构化的衍生内容，不复制原文段落；同时要求用户使用自己拥有合法权属的文档，且不鼓励重新分发受版权保护的衍生物。
+
+项目采用 MIT 协议，代码结构清晰（scripts/extractor 下有按格式划分的解析器，tools 中还有 token 成本测量器和技能校验工具），并提供了完整的测试、性能基准、架构文档和 FAQ。需要注意的是，由于 README 内容被截断，部分细节（如具体安装步骤、所有使用模式、源码 API 等）未完全展示，需参考完整的 docs/ 目录。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 项目定位开源工具，目前通过 GitHub Sponsors 接受捐赠，没有明确商业模式。但可探索的方向包括：提供企业版托管转换服务、为大型组织定制知识库转换流水线、或作为 AI Agent 平台的核心插件以订阅制收费。文档未提及具体商业化计划。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：企业舆情预测与品牌危机管理工具：上传市场新闻或用户评论，MiroFish 模拟不同公关策略下的舆论走向，帮助公关团队提前预判风险、选择最佳应对方案。; 灵感2：互动式小说 / 剧本创作平台：将小说世界观和人物设定输入系统，让故事角色在模拟世界中自主演进，作者可以实时干预剧情，测试不同结局，为创作提供无限灵感。; 灵感3：政策决策沙盘：政府部门或智库在政策正式发布前，模拟不同利益群体的反应和社会效果，通过调整政策参数（如补贴力度、执行时间）观察潜在影响，辅助制定更科学的政策。
-   项目链接: https://github.com/666ghj/MiroFish
-
-4. Significant-Gravitas/AutoGPT:
-   star: 186076  语言/技术: Docker
-   项目简介: AutoGPT是一个开源AI代理平台，用户用自然语言描述任务，平台自动构建并运行AI代理完成完整工作流。它提供AutoPilot、Agents、Marketplace和Build四个界面，支持45+平台集成和数百种AI模型，可运行于托管平台或自托管环境，帮助用户节省时间，实现销售、营销、工程、客服等场景的自动化。
-   亮点: 用自然语言即可创建并运行AI代理（AutoPilot）; 可视化工作流构建器（Build）精确控制每一步; 45+集成平台和数百种AI模型; 支持按需、按计划或从触发器运行代理
-   详细报告: AutoGPT是目前最受欢迎的开源AI代理项目之一，拥有超过185,000个GitHub stars。它的核心价值在于让非技术人员也能通过自然语言部署复杂的自动化工作流。用户只需用一句话描述想完成的任务，AutoGPT就能自动构建一个代理，并将任务拆解成具体步骤，调用相应的工具和模型来完成，最终向用户报告结果。
-
-项目提供了四个主要使用界面：AutoPilot（智能驾驶模式），用户可以用日常语言描述任务，系统会自动将对话转化为可运行的代理；Agents（代理管理），可以查看所有代理的运行状态、成本和需要人工介入的操作；Marketplace（市场），有经过验证的现成代理模板，用户可以一键添加并进行定制；Build（构建器），通过拖拽式可视化编程，连接不同模块，实现精确控制。这四个界面满足了从零基础到高级开发者的不同需求。
-
-AutoGPT的自动化能力非常广泛。集成方面，已连接到Gmail、Google Calendar、Google Docs、Google Sheets、GitHub、Slack、Discord、Notion、HubSpot、Linear、Airtable、Jira、Salesforce、Stripe、Webflow等45+主流平台，并提供数百种AI模型接入。代理可以按需立刻运行，也可以设置定时任务或根据外部触发器自动启动。文档中列举了多个应用场景：行政运营可以自动准备每日简报；销售团队可以自动研究客户资料并准备会议；营销团队可以把产品发布简报自动生成多渠道的推广文案；工程团队可以自动处理事故并分析可能的原因；客服能自动起草回复并标记升级事项；研究领域可以持续监控信息源，变化时生成结构化报告。
-
-部署方面有两条路线：一是使用官方托管的AutoGPT Platform，无需自己管理基础设施，注册即可用，但这是付费服务，按用量计费；二是选择自托管（Self-host），完全免费（无许可费），但需要自己准备Docker环境、存储和模型API密钥，并负责后续运维。两种方式共享同一套核心代码库。
-
-技术实现上，AutoGPT平台的核心包括代理运行时、可视化构建器、模型接入层和调度触发机制。自托管方式需要Docker，配置和管理由用户承担。项目还包含经典的独立AutoGPT版本（classic/），采用MIT许可，提供Forge工具用于构建代理，以及agbenchmark用于性能基准测试。许可证方面，平台部分采用Polyform Shield（个人和内部业务免费，但不能作为竞争性托管服务销售），其余部分采用MIT。
-
-整体来看，AutoGPT是一个集低代码、AI、自动化于一体的强大平台，降低了使用AI代理的门槛，同时通过开源和托管双模式覆盖了不同用户群体。
-   活跃度: 未知（GitHub API指标未提供有效数据）  社区健康: 活跃：185k+ stars，提供Discord、GitHub Discussions、Contributing指南等社区支持，社区规模庞大。
-   商业潜力: 托管平台采用付费订阅+按量计费模式，具备清晰的商业化路径；同时开源版本吸引大量社区用户，可转化为潜在付费客户。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于AutoGPT构建一个“企业工单智能分诊助理”，集成Jira和Slack，自动接收工单、分析内容、联系相关团队并给出解决方案建议，大幅降低客服响应时间。; 灵感2：开发一个“个人日程与邮件管家”，利用AutoGPT连接Gmail和Google Calendar，自动阅读邮件、提取日程事件、创建日历邀请并起草回复，成为职场人的效率神器。; 灵感3：利用AutoGPT的调度和触发器功能，构建一个“竞品情报监控系统”，定期抓取竞品官网、社交平台和新闻，生成结构化对比报告，供市场团队决策。
-   项目链接: https://github.com/Significant-Gravitas/AutoGPT
+   衍生灵感: 灵感1：打造一个「企业知识库 Agent 化平台」——将公司的内部 Wiki、设计规范、API 文档自动转换为可查询的 Agent Skill，供开发、产品、客服等团队在 IDE 或内部聊天机器人中直接调用，大幅降低新员工培训成本。; 灵感2：基于 book-to-skill 构建一个「在线课程 AI 助教」——把教材讲义转为技能包，集成到教育类 App 或学习平台，学生可以用自然语言提问章节内容，获得带引用来源的回答，提升在线学习体验。; 灵感3：开发一个「标准合规审查引擎」——将行业法规（如 GDPR、HIPAA）或公司合规手册转换为 Agent 技能，在代码开发或文档生成时自动检查合规性，提示违规风险，辅助企业风险管控。
+   项目链接: https://github.com/virgiliojr94/book-to-skill
