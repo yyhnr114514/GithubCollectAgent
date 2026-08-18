@@ -1,67 +1,91 @@
-1. unslothai/unsloth:
-   star: 72069  语言/技术: Python, PyTorch, Tauri, Rust, llama.cpp, Hugging Face Transformers, TRL, GGUF, Vulkan, CUDA, ROCm, MLX
-   项目简介: Unsloth 是首个桌面应用，让你在本地轻松运行和训练 AI 模型，支持 LLM、扩散、嵌入、音频等多种模型，微调速度提升 2 倍、显存减少 70%，并能导出为 GGUF 等格式。
-   亮点: 首个桌面应用同时支持运行和训练模型，无需复杂配置; 微调速度提升 2 倍，显存占用减少 70%; 支持多种模型类型（LLM、图/视频扩散、音频、嵌入）和多种硬件（CPU、NVIDIA、AMD、Intel、macOS）; 提供 Unsloth Start 功能，可一键连接 Claude Code、Codex 等主流 AI 代理
-   详细报告: Unsloth 是一个开源项目，旨在让 AI 模型的运行和训练变得像普通桌面软件一样简单易用。它提供了三种使用方式：Unsloth Desktop（基于 Tauri 的桌面应用）、Unsloth Studio（Web UI）和 Unsloth Core（代码库）。核心卖点是极致的性能优化——通过自定义的 CUDA 内核和内存优化技术，微调 LLM 的速度比传统方案快 2 倍，并减少 70% 的 VRAM 占用，这使得普通消费级 GPU 也能训练大型模型。
+1. harry0703/MoneyPrinterTurbo:
+   star: 106212  语言/技术: Python, Streamlit, FastAPI, CLI, Docker, Edge TTS, Azure Speech, SiliconFlow, Google Gemini TTS, 小米 MiMo TTS, ElevenLabs, Chatterbox, faster-whisper, OpenAI, DeepSeek, Kimi/Moonshot AI, 阿里云通义千问, 火山引擎方舟, xAI Grok, MiniMax, Pexels, Pixabay, Coverr, ffmpeg
+   项目简介: 一站式AI短视频生成工具，只需提供主题或关键词，即可自动生成视频脚本、匹配素材、生成字幕和背景音乐，并合成高清短视频。支持AI Agent、WebUI、API和CLI四种使用方式，极大降低了视频制作门槛，堪称“打工人视频创作神器”。
+   亮点: AI自动生成视频脚本，也可自定义脚本; 支持竖屏9:16和横屏16:9高清视频尺寸; 批量视频生成，一次生成多个供选择; 多种语音合成方案，包括免费Edge TTS和云端TTS; 字幕生成支持TTS时间戳和Whisper两种模式; 自动从Pexels等平台匹配高清免费素材; 一键跨平台发布到TikTok、Instagram和YouTube Shorts; 支持Docker部署、Windows一键启动包、Google Colab运行
+   详细报告: MoneyPrinterTurbo 是一个基于 Python 的一站式 AI 短视频生成工具，其核心价值在于“输入主题，输出成品视频”。用户只需提供视频主题或关键词，系统会自动完成以下整个流程：首先通过大语言模型（如 Kimi、OpenAI、DeepSeek、通义千问等）生成视频脚本，并提炼出素材搜索关键词；然后从 Pexels、Pixabay、Coverr 等免费素材库中自动匹配高清视频片段；接着选择合适的语音合成引擎（如免费 Edge TTS、Azure Speech、Google Gemini TTS、ElevenLabs 等）生成配音；再根据语音自动生成字幕，最后配上背景音乐并合成最终的高清视频。整个流程高度自动化，极大地节省了视频创作者的时间。
 
-项目支持所有主流模型架构，包括 Qwen、Llama、Gemma、Mistral 等，还支持扩散模型、TTS 和嵌入模型。除了标准的监督微调，还支持强化学习（RL）、GRPO、DPO、LoRA、QLoRA、FP8 等高级训练方法。训练后的模型可以导出为 GGUF、NVFP4、FP8 等格式，方便在 llama.cpp 等推理引擎中部署。
+项目提供了四种使用方式：AI Agent（可让支持 Skill 的 Agent 自动完成安装和配置）、WebUI（基于 Streamlit，提供可视化操作界面）、API（基于 FastAPI，支持编程调用）以及 CLI（命令行直接生成），满足了不同用户群体的需求。代码按控制器、服务、模型分层，结构清晰，便于二次开发。
 
-在推理方面，Unsloth 支持 GGUF 格式的本地推理，并集成了多种后端（CPU、CUDA、ROCm、Vulkan、Metal），用户可以根据硬件选择最佳方案。它还提供了 OpenAI 兼容 API，可以轻松集成到现有应用中。Unsloth Start 功能更是让本地模型与 Claude Code、Codex 等代理无缝对接，实现私有化 AI 编程助手。
+在技术实现上，项目集成多种 AI 服务：支持主流大模型供应商及统一网关（如 Cloudflare AI Gateway、Ollama 等），支持多种 TTS 引擎，字幕生成可使用 TTS 时间戳或本地 faster-whisper 模型。视频处理依赖 ffmpeg，可通过配置指定路径。部署方面，提供 Docker Compose 方式、Windows 一键启动包以及手动安装方式，并推荐使用 uv 管理 Python 环境。
 
-项目使用双许可证：核心包采用 Apache 2.0，Studio UI 采用 AGPL-3.0。根据文档，安装方式多样，支持 Windows、macOS、Linux，并提供 Docker 镜像和在线 notebooks。整体而言，Unsloth 大幅降低了模型训练和部署的门槛，是个人开发者和小团队福音。
+此外，项目还支持背景音乐、字幕样式自定义、本地素材库等功能。生成完成后，还可以通过 Upload-Post 服务自动上传到 TikTok、Instagram 和 YouTube Shorts，实现全自动内容分发。整体而言，MoneyPrinterTurbo 不仅是一个工具，更是一个可扩展的内容生成流水线，适合个人创作者、自媒体团队和企业营销部门使用。
+   活跃度: 未知（README未提供最近更新信息，但功能列表较完整，推测活跃度较高）  社区健康: 未知（文档未提供具体社区指标）
+   商业潜力: 项目本身为开源免费工具，但可通过提供云服务、API付费、定制化开发或与MCN机构合作实现商业化。README中已有赞助商（如Kimi、火山引擎）和基于此项目的在线服务（录咖AI），说明具备商业吸引力。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目，可以开发一个“电商短视频自动生成器”，输入商品卖点关键词，自动生成带配音和字幕的产品推荐视频，批量用于抖音、快手等平台，提升电商运营效率。; 灵感2：可以将其集成到“新闻聚合平台”中，自动将热点新闻摘要生成短视频，实现新闻内容的视频化分发，扩大受众覆盖面。; 灵感3：可以扩展为“多语言教育内容生成系统”，输入知识点主题，自动生成多语言讲解视频，辅助在线教育平台快速制作高质量课程预告或知识科普短视频。
+   项目链接: https://github.com/harry0703/MoneyPrinterTurbo
+
+2. usestrix/strix:
+   star: 54256  语言/技术: Docker, LLM API (OpenAI, Anthropic, Google等), LiteLLM, Caido, Nuclei, Playwright, Bubble Tea, Python (exploit runtime), GitHub Actions, CLI
+   项目简介: Strix 是一个开源的 AI 渗透测试工具，利用自主 AI 代理模拟真实黑客行为，动态运行代码、发现漏洞并通过实际利用验证，为开发者提供快速、准确的安全测试，支持多代理协作、CI/CD 集成和自动修复，将传统渗透测试从数周缩短至数小时。
+   亮点: 自主 AI 渗透测试代理，动态发现并验证漏洞，提供实际 PoC 而非静态误报; 多代理编排，模拟红队协作，可并行扫描多个目标; 开发者优先 CLI，提供修复建议和自动化补丁生成; 支持 CI/CD 集成，在 pull request 阶段自动扫描，阻止不安全代码上线; 本地 Web 查看器，数据完全离线，无需上传云端; 支持多种 LLM 提供商，甚至可用 ChatGPT 订阅运行
+   详细报告: Strix 是一个开源的 AI 渗透测试工具，旨在将人工智能与传统的渗透测试技术相结合，提供自动化、可扩展且准确的安全评估。它的核心是一组自主 AI 代理，这些代理像真实黑客一样思考和执行操作：它们会动态运行目标代码，进行侦察、漏洞扫描、利用和验证，最终生成经过验证的、可复现的漏洞利用证据（PoC）。
+
+项目的主要组成部分包括：
+- **完整渗透测试工具包**：内置 HTTP 拦截代理（基于 Caido）、浏览器自动化（基于 Playwright）用于测试 XSS/CSRF/点击劫持等客户端漏洞、Shell 执行环境、自定义 Python 沙箱用于编写和验证 exploit、侦察与 OSINT 工具、静态和动态代码分析能力，以及包含 CVSS 评分和 OWASP 分类的知识库。
+- **多代理编排**：Strix 能够协调多个专门化的 AI 代理（如侦察代理、利用代理、后渗透代理）并行工作，它们共享信息、串联漏洞，形成类似真实红队的协作网络，从而高效覆盖复杂攻击链。
+- **全面的漏洞检测范围**：覆盖 OWASP Top 10 和更多，包括 IDOR、权限提升、认证绕过、SQL/NoSQL/命令注入、SSTI、SSRF、XXE、不安全反序列化、XSS（存储/反射/DOM）、原型污染、CSRF、竞态条件、支付逻辑漏洞、JWT 攻击、云配置错误、API 安全等。
+- **验证与报告**：每个发现都附带实际可用的 PoC 和复现步骤，而非传统扫描器的误报。Strix 还能自动生成修复补丁和合规报告（如 SOC 2、ISO 27001、PCI DSS），并提供本地 Web 仪表盘展示结果、代理图谱、实时指引和历史记录。
+- **灵活的使用方式**：支持命令行、非交互模式（headless）、GitHub Actions 集成，以及作为 Agent 技能（SKILL）提供给 Claude Code、Cursor 等编码代理。可通过 OpenAPI/Swagger/Postman 集合进行 API 测试，也支持多种认证模式（灰盒、白盒）。
+- **技术栈与依赖**：基于 Docker 沙箱运行，需要 LLM API key（OpenAI、Anthropic、Google 等），并利用了 LiteLLM 作为模型网关、Caido 作为代理、Nuclei 作为漏洞模板引擎、Playwright 用于浏览器自动化、Bubble Tea 用于构建 CLI 界面。项目本身以 Python 包形式发布在 PyPI 上。
+
+Strix 特别之处在于它结合了 AI 的自主决策能力与专业渗透测试工具，实现了真正的“解漏洞”而非简单扫描。它旨在减少安全团队的手动工作，同时提高漏洞验证的准确性，让开发人员能够在开发流程早期发现并修复安全问题。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 高。文档中明确提到了企业版服务，包括 SSO、定制合规报告、专用支持和自定义部署选项，具有清晰的商业化路径。同时，该项目切中安全测试自动化这一刚需市场，受众广泛（开发者、安全团队、企业），且开源版本可作为流量入口，吸引企业客户升级。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：可以基于 Strix 开发一个自动化的安全合规审计平台，定期对内部应用和 API 进行扫描，自动生成 SOC 2/ISO 27001 所需的合规报告，并跟踪修复进度，帮助中小企业低成本满足监管要求。; 灵感2：将 Strix 集成到 CI/CD 流水线中，作为代码合并前的强制安全门禁，不仅检测漏洞，还能自动生成修复补丁并提交 PR，实现 DevSecOps 的闭环自动化，减少安全团队的人工介入。; 灵感3：利用 Strix 的自主代理能力，构建一个安全培训系统，模拟真实的攻击场景（如靶场），学员可以观察 AI 代理如何一步步渗透并学习防御策略，同时通过对抗方式提升学员的攻防技能。; 灵感4：针对 API 安全，可以基于 Strix 开发一个微服务间 API 安全网关的旁路监测工具，持续监控生产环境的 API 流量，自动检测业务逻辑漏洞（如越权、批量抓取）并实时告警，帮助企业防范数据泄露风险。
+   项目链接: https://github.com/usestrix/strix
+
+3. mukul975/Anthropic-Cybersecurity-Skills:
+   star: 28481  语言/技术: AI Agent, Markdown, YAML, MITRE ATT&CK, NIST CSF, MITRE ATLAS, MITRE D3FEND, NIST AI RMF, MITRE Fight Fraud Framework (F3), Agentskills.io, Volatility3, Sigma, BloodHound, KAPE, Hayabusa, Falco, OpenCTI, MISP
+   项目简介: 这是一个面向AI代理的开源网络安全技能库，包含817个生产级网络安全技能，覆盖29个安全领域，并映射到MITRE ATT&CK、NIST CSF 2.0等六大行业框架。其核心目标是为AI代理提供结构化的安全分析工作流，使其具备资深安全分析师的知识和决策能力，而不仅仅是脚本或工具集合。项目遵循agentskills.io开放标准，采用YAML frontmatter和Markdown结构，支持渐进式披露，以极低的token消耗实现高效技能检索和执行。该项目为社区项目，与Anthropic官方无关，但可用于授权测试、安全研究、防御和教育等合法用途。
+   亮点: 收录817个结构化网络安全技能，覆盖29个安全领域，是目前最大的开源AI代理网络安全技能库; 映射六大行业框架（MITRE ATT&CK、NIST CSF 2.0、MITRE ATLAS、D3FEND、AI RMF、F3），每个技能都关联相关框架，便于标准化和溯源; 采用agentskills.io开放标准，支持渐进式披露，技能扫描仅需约30 tokens，全量加载也只需500-2000 tokens，对AI代理非常友好; 包含真实实践工作流，而非生成摘要，每个技能都有使用时机、前置条件、工作流和验证步骤，能指导代理逐步执行并确认结果; 兼容Claude Code、GitHub Copilot、OpenAI Codex CLI、Cursor、Gemini CLI等26+ AI平台，开箱即用
+   详细报告: 这个项目本质上是一个「AI代理的安全技能包」，目的就是让AI代理在安全分析任务中不再是个只会猜命令的门外汉，而是能像资深分析师一样按部就班地干活。它目前包含了817个技能，从云安全、威胁狩猎、数字取证、恶意软件分析，到红队、事件响应、AI安全等等，覆盖了29个安全领域，可以说是应有尽有。
+
+每个技能都遵循统一的目录结构：包含一个SKILL.md文件（YAML frontmatter + Markdown正文），以及可选的references、scripts和assets目录。YAML frontmatter里存着技能的名称、描述、标签、框架映射等元数据，方便AI代理快速扫描和匹配。Markdown正文则包含四个核心部分：何时使用（When to Use）、前置条件（Prerequisites）、工作流（Workflow）和验证（Verification）。这相当于一份标准化的操作手册，把资深分析师的决策过程给显性化了。
+
+项目还巧妙采用了渐进式披露架构：AI代理先扫描所有技能的前置元数据（每个约30 tokens），快速筛选出相关技能，然后再加载最匹配的几个技能的完整工作流（500-2000 tokens），这样就能在有限的上下文窗口中高效处理大量技能，不会爆掉context。
+
+框架映射是另一个亮点。每个技能都会根据其类型映射到多个相关框架。比如，内存取证技能会映射到MITRE ATT&CK和NIST CSF，而AI安全技能则会额外映射到MITRE ATLAS和NIST AI RMF。目前ATT&CK覆盖805个技能，NIST CSF覆盖804个，D3FEND 139个，AI RMF 97个，F3 94个，ATLAS 93个。F3框架（MITRE Fight Fraud Framework）是2026年4月刚发布的，项目已经领先性地集成了94个与欺诈相关的技能，专门覆盖ATT&CK遗漏的定位（Positioning）和变现（Monetization）战术，非常前沿。
+
+项目的快速上手也很简单：通过npx skills add命令即可自动安装，兼容主流的AI编程平台。此外，项目还提供了在线Playground，可以直接在Casky.ai上体验AI代理执行安全技能。
+
+不过，由于项目中包含攻击性技术和双用途技术（如红队C2、钓鱼模拟、漏洞利用等），作者在README中强调了仅限授权测试和合法使用，使用者需自行承担合规责任。这一点需要特别注意。
+
+社区方面，项目仍在积极维护中，已有v1.0.0版本发布（734个技能），目前main分支已有817个技能，且持续增加。贡献指南清楚，每个PR会在48小时内审查。
+   活跃度: 未知（README显示持续更新，但API指标中commits_recent为0，pushed_at为null，可能未获取到最新数据）  社区健康: 未知（根据README可见社区贡献指南、讨论区、问题跟踪，但API指标未提供具体星标和贡献者数据）
+   商业潜力: 该项目本身是开源的，商业价值在于可以为企业提供安全自动化解决方案，例如构建AI驱动的安全运营中心（SOC）辅助系统、安全培训平台或托管检测与响应（MDR）服务。由于技能库覆盖全面且持续更新，可作为商业产品的核心能力底座，但需注意合规授权。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此技能库，可以构建一个「企业安全态势感知AI助手」，集成到SOC平台中，自动对告警进行初级研判、关联MITRE ATT&CK攻击链，并给出处置建议，帮助安全分析师减负。; 灵感2：可以开发一个「AI安全培训模拟平台」，利用这些技能库中的红队和蓝队场景，生成为交互式CTF挑战或钓鱼演练，供安全团队进行实战训练，新员工也能快速上手。; 灵感3：可以将此技能库与自动化编排工具（如Siemplify、Shuffle）集成，将AI代理作为决策引擎，自动执行威胁猎杀、内存取证分析、恶意软件初步检测等重复性工作，并生成报告。; 灵感4：可以开发一个「AI驱动的漏洞管理助手」，基于技能库中的漏洞评估和加固技能，自动扫描代码库、云配置和容器镜像，给出符合NIST CSF的修复建议，帮助DevSecOps团队落地安全左移。
+   项目链接: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
+
+4. jundot/omlx:
+   star: 19016  语言/技术: Python, FastAPI, MLX, mlx-lm, mlx-vlm, Swift, SwiftUI, Metal, safetensors, MCP (Model Context Protocol), HuggingFace, SSD Cache, Continuous Batching
+   项目简介: 一句话概括：这是一个专为 Apple Silicon Mac 打造的本地 LLM 推理服务器，通过菜单栏应用即可管理多模型、连续批处理和分级 KV 缓存，支持 OpenAI/Anthropic API 兼容，让本地大模型服务起来像 OpenAI 一样方便。
+   亮点: 支持 LLM、VLM、OCR、Embedding、Reranker 多模型混合加载，统一 API; 分级 KV 缓存（热内存+冷 SSD），跨请求、跨重启复用上下文，为编码 Agent 场景优化; 原生 macOS 菜单栏应用 + 管理后台，无需终端即可监控和切换模型; 兼容 OpenAI 和 Anthropic API，支持流式输出、工具调用和视觉输入; 实验性多 Mac 联合推理，可跨设备拆分大模型
+   详细报告: oMLX 是一个面向 macOS 的本地 LLM 推理服务器，核心目标是在 Apple Silicon（M1/M2/M3/M4）上提供高效、灵活、可控制的大模型服务。它解决了现有 LLM 服务器在“便利性”和“控制力”之间二选一的痛点，让用户既能像使用 ChatGPT 一样方便，又能像 vLLM 那样精细管理缓存和模型调度。
+
+项目主要包含以下几个核心亮点：
+
+1. **分级 KV 缓存（Tiered KV Cache）**：采用 vLLM 启发的块级缓存管理，包含热层（内存）和冷层（SSD）。当上下文变化时，旧上下文仍能被缓存并复用，甚至服务器重启后也能从 SSD 恢复。这对 Claude Code 等编码工具至关重要，使得本地 LLM 在真实编码场景中变得实用。
+
+2. **连续批处理（Continuous Batching）**：基于 mlx-lm 的 BatchGenerator 实现，支持并发请求的高效处理，提升 GPU 利用率。
+
+3. **多模型 Serving**：支持同时加载 LLM、VLM、Embedding 和 Reranker 模型，并自动按类型识别。具备 LRU 自动淘汰、手动加载/卸载、模型固定（Pin）、每模型 TTL 超时和总内存限制，有效防止 OOM。
+
+4. **macOS 菜单栏 App**：原生 Swift/SwiftUI 编写（非 Electron），提供一键启动/停止、状态监控、崩溃自动重启和自动更新。菜单栏集成统计信息，无需命令操作。
+
+5. **API 兼容性**：完全兼容 OpenAI 和 Anthropic API，提供 /v1/chat/completions、/v1/completions、/v1/messages、/v1/embeddings、/v1/rerank 等接口，支持流式、视觉输入和工具调用。可作为 Drop-in replacement。
+
+6. **管理后台**：Web UI 提供模型下载（HuggingFace）、实时监控、聊天、基准测试和每模型设置，支持多语言（中、英、日、韩等），所有 CDN 依赖内嵌，可完全离线使用。
+
+7. **多 Mac 分布式推理（实验性）**：支持通过 MLX pipeline ranks 将模型拆分到不同内存大小的 Mac 上，使用 Ring 或 Thunderbolt RDMA/JACCL 通信，提供实时分片/性能地图。
+
+技术栈方面，后端使用 Python + FastAPI 作为 API 框架，模型推理基于 Apple 的 MLX 框架和 mlx-lm、mlx-vlm，自定义内核使用 Metal 编写以加速特定模型（如 GLM-5.2），缓存存储使用 safetensors。桌面端使用 Swift/SwiftUI，打包使用 venvstacks 实现可移植 Python 环境。项目还集成了 MCP（Model Context Protocol）支持。
+
+根据文档内容，oMLX 已具备较完整的功能体系和良好的设计，但部分高级功能（如多 Mac 分布式）仍处于实验阶段。由于 README 被截断，更细粒度的技术实现细节和性能基准数据请补充文档。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 Unsloth 构建一个企业内部私有化模型微调平台，让业务团队无需深入算法即可训练专属行业模型。; 灵感2：将 Unsloth 集成到教育领域，开发一个 AI 教学辅助工具，让学生通过拖拽式界面训练自己的小型模型，理解机器学习原理。; 灵感3：结合 Unsloth Start 和远程访问功能，打造一个个人 AI 助手，通过 Cloudflare 安全隧道控制本地模型，实现随时随地使用。
-   项目链接: https://github.com/unslothai/unsloth
-
-2. public-apis/public-apis:
-   star: 461880  语言/技术: Markdown, GitHub
-   项目简介: 这是一个由社区维护的公共 API 合集，收录了涵盖动物、动漫、金融、天气等几十个领域的免费 API，并提供清晰的分类、认证方式、HTTPS 支持和 CORS 状态等信息，可谓是程序员找接口的“一站式宝典”。
-   亮点: 覆盖范围极广，从动物图片到股票数据，从天气到安全情报，分类细致，方便查找。; 社区驱动，欢迎贡献，配有贡献指南、Discord 社区和 Postman 集合，协作氛围浓厚。; 每个 API 都标注了认证方式、HTTPS 与 CORS 支持情况，帮助开发者快速筛选并集成。; 与 APILayer 合作，提供商业级 API 套件，满足生产环境需求。
-   详细报告: 这个项目本质上是一个精心维护的 Markdown 文件（README.md），但它却是一座巨大的 API 金矿。它将数百个公共 API 按照领域分类，每个条目都包含 API 名称、简短描述、认证方式（No、apiKey、OAuth 等）、HTTPS 支持情况以及 CORS 配置（Yes、No、Unknown），简直就是开发者的“API 字典”。
-
-除了基础的列表，项目还支持社区贡献，任何人都可以通过 Pull Request 补充新的 API 或修正错误，并且有贡献指南和 Discord 社区供讨论交流。这种众包模式确保了列表的活力和覆盖面。
-
-值得注意的是，README 开头重点介绍了 APILayer 的统一套件，它提供了一站式的 API 集成方案，涵盖 IP 定位、股票行情、天气、航班、邮件验证等多种常用服务。不过，这属于商业推广部分，不影响核心的免费 API 列表。
-
-技术栈方面，项目本身没有代码实现，完全是文档编辑和 GitHub 协作的产物，但对于使用者来说，他们可以基于这些 API 构建各种应用。项目还提供了索引（Index）方便跳转，以及每个分类下方的“Back to Index”导航，体验贴心。
-
-由于内容被截断，我们只看到了部分分类（如 Animals、Anime、Anti-Malware 等），但可以推测还有更多如金融、天气等分类。每个 API 的链接、文档地址都直接给出，极大减少了开发者搜索的时间成本。
-
-总之，这是一个低门槛、高价值的资源库，不管你是做个人项目还是企业应用，都能从中找到可用的数据源。
-   活跃度: 未知  社区健康: 活跃
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个“API 搜索引擎”网站，将本仓库的 API 数据导入数据库，支持按关键字、分类、认证方式等条件过滤，并展示 API 的实时状态和调用示例，实现比 README 更便捷的浏览体验。; 灵感2：构建一个“API 健康监控”系统，定时调用这些公共 API 的轻量接口（如获取一个猫图片），检测其可用性和响应速度，生成状态看板，并对宕机服务发出告警，帮助开发者避免使用不稳定的接口。; 灵感3：利用其中免费的天气、股票、新闻等 API，打造一个个人仪表盘应用，聚合展示用户关心的实时信息，比如天气、自选股涨跌和头条新闻，作为日常开发者的生产力工具。
-   项目链接: https://github.com/public-apis/public-apis
-
-3. cactus-compute/needle:
-   star: 6085  语言/技术: Python, JAX, LoRA, Pydantic, Cactus Quants, Simple Attention Network, Walsh-Hadamard Transform, Sinkhorn Iteration, GQA Attention, Byte-level Grammar, Hugging Face
-   项目简介: 这是一个仅45M参数、14MB大小的极简语言模型，专为工具调用、设备控制和结构化数据提取而设计，能在超低内存（28MB）下运行，并支持LoRA微调与一键导出。
-   亮点: 极简体积：14MB二进制文件、28MB内存即可运行完整会话; 结构化输出：工具调用和提取统一为JSON，字节级语法约束保证格式; 置信度门控：每个响应带置信度分数，可设定阈值实现人机协同; 内置工具检索：从大目录中动态选择top5工具，避免上下文膨胀; 有界内存：256-token滑动窗口+KV sinks，内存占用恒定; 支持LoRA微调并导出单一.cact文件，无需重新编译
-   详细报告: Needle 2 是一个专为极端边缘场景打造的 AI 模型，参数仅 4500 万，体积压缩到 14MB，内存占用 28MB，但能力却能和 270M 甚至更大的模型一较高下。它不像传统大模型那样需要 GPU 集群，在普通 CPU 上就能跑，甚至可以塞进手机、路由器或者树莓派。它主要解决两大问题：一是让设备具备'看懂并调用工具'的能力，比如你说'今天要不要带伞？'，它能先调用天气API，再根据结果回答；二是从非结构化文本中提取结构化数据，比如自动识别发票的金额和日期。为了在这么小的体积下保持高质量输出，它内部用了很多黑科技：Hadamard MLP替代传统FFN、GQA注意力、engram记忆，以及一种叫 Cactus Quants 的量化方法，把权重压到 2-bit。同时，它使用字节级语法约束，在生成每个 token 时都强制符合你声明的 JSON schema，所以输出永远是干净的机器可读格式。最贴心的是，它每个响应都带有一个置信度分数，你可以把阈值设为 0.9，低于这个值的就转人工或走保底流程，这样就避免了 AI 瞎编乱造。另外，为了让模型在长对话中不丢记忆，它用了一个 256 token 的滑动窗口，并把工具定义钉在内存里，所以跑多久内存都固定。如果你想定制，它支持 LoRA 微调，你可以用自己业务的工具和示例数据来训练，然后导出成一个 .cact 文件，这个文件直接给同一引擎加载，连编译都不用。整体来看，如果你正发愁怎么把大模型塞进资源受限的设备，或者想让本地程序自动调用复杂 API，这个项目绝对值得研究。不过毕竟是个新项目，GitHub 上还没有什么 stars 和 issues，文档也可能还在完善中，建议实际测试后再上生产。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个'离线智能家居中枢'，用Needle 2在本地解析语音或文字指令，自动调用灯光、空调、安防等设备API，无需云服务，保护隐私。; 灵感2：构建一个'智能报表助手'，将企业各种非结构化文本（如邮件、聊天记录）自动提取为结构化字段，并调用CRM、ERP工具完成数据录入，减少人工操作。; 灵感3：为工业设备打造'边缘侧故障诊断Agent'，用Needle 2在无网络环境下读取传感器数据，按预设工具进行预警和自动上报，同时利用置信度门控在不确定时请求远程人工支持。
-   项目链接: https://github.com/cactus-compute/needle
-
-4. HKUDS/CLI-Anything:
-   star: 47636  语言/技术: Python, Node.js, YAML, JSON, Bash, CLI, MCP, REST API
-   项目简介: CLI-Anything 是一个让所有软件对 AI 智能体「原生可用」的开源项目，通过自动生成命令行接口（CLI）和技能描述（SKILL.md），使 AI 能够像人类一样操作各种软件，并提供了 CLI-Hub 包管理器来分发和安装这些 CLI。
-   亮点: 自动生成 AI 原生 CLI：通过 7 阶段流水线，为任何有代码库的软件生成结构化命令行接口，让 AI 轻松调用。; CLI-Hub 包管理器：提供统一命令 `cli-hub install <name>`，可浏览、安装、更新和卸载社区贡献的 CLI，极大降低了使用门槛。; 多智能体平台支持：与 Claude Code、OpenClaw、Codex 等主流 AI 编程代理深度集成，并支持 SKILL.md 技能发现，让 AI 自主寻找并使用合适工具。; 丰富的生态与验证：已内置 18 个专业软件 demo（如 Blender、GIMP、Zotero 等），并有超过 2280 个测试用例保障质量。
-   详细报告: CLI-Anything 是一个旨在消除 AI 智能体与现有软件之间鸿沟的前沿项目，由香港大学数据科学实验室（HKUDS）发起。其核心理念是：既然 CLI（命令行界面）是结构化、轻量、自描述的通用接口，那么将所有软件都封装成 CLI，就能让 AI 用最自然的方式操作它们。
-
-项目提供了一套完整的 7 阶段方法论（HARNESS.md），能够指导 AI 代理分析目标软件的源代码，自动生成对应的 CLI 封装。这个流水线从理解软件功能开始，到设计命令结构、实现、测试、生成文档，最终产出一个可直接安装的 Python 包和一份 SKILL.md 文件。SKILL.md 是 AI 可读的技能描述，使得支持 SKILL 协议的智能体（如 Claude Code、OpenClaw）能够自主发现并正确调用这些 CLI。
-
-除了生成工具，项目还推出了 CLI-Hub 包管理器（pip install cli-anything-hub），用户可以通过 cli-hub 命令浏览、搜索、安装、更新和卸载各种 CLI，包括社区贡献的和公共第三方 CLI。CLI-Hub 不仅支持 pip，还兼容 npm、brew 等多种安装源，并提供了 Web 前端方便用户浏览。
-
-目前，社区已为大量专业软件贡献了 CLI，涵盖 CAD（FreeCAD）、GIS（QGIS）、音视频编辑（Kdenlive、Shotcut）、知识管理（Zotero、Obsidian）、游戏引擎（Godot）等，并附带了详细的测试用例和文档。项目还发布了 arXiv 技术报告，采用 Apache 2.0 许可证。
-
-不过，生成流程严重依赖前沿级大模型（如 Claude Opus 4.6、GPT-5.4），较弱模型可能无法生成高质量 CLI；同时需要访问目标软件的源代码，对于闭源软件效果不佳。此外，生成后往往需要多轮 refine 才能达到生产级质量。
-   活跃度: 根据文档，2026 年 3 月至 5 月期间频繁更新，但 API 指标数据缺失。  社区健康: 根据文档，社区贡献活跃，大量 PR 被合并，但 GitHub API 指标显示为 0，可能数据未同步。
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：企业私域软件自动化——利用 CLI-Anything 为公司内部的 ERP/CRM 系统生成 CLI 封装，让员工通过自然语言指令即可操作数据，实现智能化办公。; 灵感2：测试工具万能适配器——将各种测试工具（如 Postman、JMeter）包装成 CLI，让 AI 测试代理根据测试计划自动执行 API 测试、性能测试并生成报告。; 灵感3：设计自动化流水线——基于已生成的图形软件 CLI（如 GIMP、Blender），构建 AI 设计代理，接受文本指令自动完成图片编辑和 3D 建模，并将结果接入 CI/CD 流程。
-   项目链接: https://github.com/HKUDS/CLI-Anything
+   衍生灵感: 灵感1：可以基于 oMLX 开发一个「Mac 本地 AI 编码工作站」——将 oMLX 与 Claude Code、OpenCode 等 Agent 工具深度捆绑，一键配置多个本地模型，利用分级 KV 缓存提升编码场景的上下文复用速度，实现零成本私有编码助手。; 灵感2：扩展为「隐私敏感型企业 RAG 服务器」——利用 oMLX 同时加载 Embedding、Reranker 和 LLM，为内部文档构建一个完全离线、API 兼容 OpenAI 的问答系统，适合金融、法律、医疗等对数据保密性要求极高的行业。; 灵感3：基于其多 Mac 分布式推理能力，开发「家庭/工作室多机 GPU 池化方案」——将多台闲置 Mac mini 组合成一台超大显存的推理集群，通过 oMLX 的 Cluster 管理界面统一调度，探索低成本的大模型部署新形态。
+   项目链接: https://github.com/jundot/omlx
