@@ -59,23 +59,33 @@
    衍生灵感: 灵感1：基于此技能库，可以构建一个「企业安全态势感知AI助手」，集成到SOC平台中，自动对告警进行初级研判、关联MITRE ATT&CK攻击链，并给出处置建议，帮助安全分析师减负。; 灵感2：可以开发一个「AI安全培训模拟平台」，利用这些技能库中的红队和蓝队场景，生成为交互式CTF挑战或钓鱼演练，供安全团队进行实战训练，新员工也能快速上手。; 灵感3：可以将此技能库与自动化编排工具（如Siemplify、Shuffle）集成，将AI代理作为决策引擎，自动执行威胁猎杀、内存取证分析、恶意软件初步检测等重复性工作，并生成报告。; 灵感4：可以开发一个「AI驱动的漏洞管理助手」，基于技能库中的漏洞评估和加固技能，自动扫描代码库、云配置和容器镜像，给出符合NIST CSF的修复建议，帮助DevSecOps团队落地安全左移。
    项目链接: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
 
-4. public-apis/public-apis:
-   star: 461880  语言/技术: Markdown, GitHub
-   项目简介: 这是一个由社区维护的公共 API 合集，收录了涵盖动物、动漫、金融、天气等几十个领域的免费 API，并提供清晰的分类、认证方式、HTTPS 支持和 CORS 状态等信息，可谓是程序员找接口的“一站式宝典”。
-   亮点: 覆盖范围极广，从动物图片到股票数据，从天气到安全情报，分类细致，方便查找。; 社区驱动，欢迎贡献，配有贡献指南、Discord 社区和 Postman 集合，协作氛围浓厚。; 每个 API 都标注了认证方式、HTTPS 与 CORS 支持情况，帮助开发者快速筛选并集成。; 与 APILayer 合作，提供商业级 API 套件，满足生产环境需求。
-   详细报告: 这个项目本质上是一个精心维护的 Markdown 文件（README.md），但它却是一座巨大的 API 金矿。它将数百个公共 API 按照领域分类，每个条目都包含 API 名称、简短描述、认证方式（No、apiKey、OAuth 等）、HTTPS 支持情况以及 CORS 配置（Yes、No、Unknown），简直就是开发者的“API 字典”。
+4. jundot/omlx:
+   star: 19016  语言/技术: Python, FastAPI, MLX, mlx-lm, mlx-vlm, Swift, SwiftUI, Metal, safetensors, MCP (Model Context Protocol), HuggingFace, SSD Cache, Continuous Batching
+   项目简介: 一句话概括：这是一个专为 Apple Silicon Mac 打造的本地 LLM 推理服务器，通过菜单栏应用即可管理多模型、连续批处理和分级 KV 缓存，支持 OpenAI/Anthropic API 兼容，让本地大模型服务起来像 OpenAI 一样方便。
+   亮点: 支持 LLM、VLM、OCR、Embedding、Reranker 多模型混合加载，统一 API; 分级 KV 缓存（热内存+冷 SSD），跨请求、跨重启复用上下文，为编码 Agent 场景优化; 原生 macOS 菜单栏应用 + 管理后台，无需终端即可监控和切换模型; 兼容 OpenAI 和 Anthropic API，支持流式输出、工具调用和视觉输入; 实验性多 Mac 联合推理，可跨设备拆分大模型
+   详细报告: oMLX 是一个面向 macOS 的本地 LLM 推理服务器，核心目标是在 Apple Silicon（M1/M2/M3/M4）上提供高效、灵活、可控制的大模型服务。它解决了现有 LLM 服务器在“便利性”和“控制力”之间二选一的痛点，让用户既能像使用 ChatGPT 一样方便，又能像 vLLM 那样精细管理缓存和模型调度。
 
-除了基础的列表，项目还支持社区贡献，任何人都可以通过 Pull Request 补充新的 API 或修正错误，并且有贡献指南和 Discord 社区供讨论交流。这种众包模式确保了列表的活力和覆盖面。
+项目主要包含以下几个核心亮点：
 
-值得注意的是，README 开头重点介绍了 APILayer 的统一套件，它提供了一站式的 API 集成方案，涵盖 IP 定位、股票行情、天气、航班、邮件验证等多种常用服务。不过，这属于商业推广部分，不影响核心的免费 API 列表。
+1. **分级 KV 缓存（Tiered KV Cache）**：采用 vLLM 启发的块级缓存管理，包含热层（内存）和冷层（SSD）。当上下文变化时，旧上下文仍能被缓存并复用，甚至服务器重启后也能从 SSD 恢复。这对 Claude Code 等编码工具至关重要，使得本地 LLM 在真实编码场景中变得实用。
 
-技术栈方面，项目本身没有代码实现，完全是文档编辑和 GitHub 协作的产物，但对于使用者来说，他们可以基于这些 API 构建各种应用。项目还提供了索引（Index）方便跳转，以及每个分类下方的“Back to Index”导航，体验贴心。
+2. **连续批处理（Continuous Batching）**：基于 mlx-lm 的 BatchGenerator 实现，支持并发请求的高效处理，提升 GPU 利用率。
 
-由于内容被截断，我们只看到了部分分类（如 Animals、Anime、Anti-Malware 等），但可以推测还有更多如金融、天气等分类。每个 API 的链接、文档地址都直接给出，极大减少了开发者搜索的时间成本。
+3. **多模型 Serving**：支持同时加载 LLM、VLM、Embedding 和 Reranker 模型，并自动按类型识别。具备 LRU 自动淘汰、手动加载/卸载、模型固定（Pin）、每模型 TTL 超时和总内存限制，有效防止 OOM。
 
-总之，这是一个低门槛、高价值的资源库，不管你是做个人项目还是企业应用，都能从中找到可用的数据源。
-   活跃度: 未知  社区健康: 活跃
+4. **macOS 菜单栏 App**：原生 Swift/SwiftUI 编写（非 Electron），提供一键启动/停止、状态监控、崩溃自动重启和自动更新。菜单栏集成统计信息，无需命令操作。
+
+5. **API 兼容性**：完全兼容 OpenAI 和 Anthropic API，提供 /v1/chat/completions、/v1/completions、/v1/messages、/v1/embeddings、/v1/rerank 等接口，支持流式、视觉输入和工具调用。可作为 Drop-in replacement。
+
+6. **管理后台**：Web UI 提供模型下载（HuggingFace）、实时监控、聊天、基准测试和每模型设置，支持多语言（中、英、日、韩等），所有 CDN 依赖内嵌，可完全离线使用。
+
+7. **多 Mac 分布式推理（实验性）**：支持通过 MLX pipeline ranks 将模型拆分到不同内存大小的 Mac 上，使用 Ring 或 Thunderbolt RDMA/JACCL 通信，提供实时分片/性能地图。
+
+技术栈方面，后端使用 Python + FastAPI 作为 API 框架，模型推理基于 Apple 的 MLX 框架和 mlx-lm、mlx-vlm，自定义内核使用 Metal 编写以加速特定模型（如 GLM-5.2），缓存存储使用 safetensors。桌面端使用 Swift/SwiftUI，打包使用 venvstacks 实现可移植 Python 环境。项目还集成了 MCP（Model Context Protocol）支持。
+
+根据文档内容，oMLX 已具备较完整的功能体系和良好的设计，但部分高级功能（如多 Mac 分布式）仍处于实验阶段。由于 README 被截断，更细粒度的技术实现细节和性能基准数据请补充文档。
+   活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个“API 搜索引擎”网站，将本仓库的 API 数据导入数据库，支持按关键字、分类、认证方式等条件过滤，并展示 API 的实时状态和调用示例，实现比 README 更便捷的浏览体验。; 灵感2：构建一个“API 健康监控”系统，定时调用这些公共 API 的轻量接口（如获取一个猫图片），检测其可用性和响应速度，生成状态看板，并对宕机服务发出告警，帮助开发者避免使用不稳定的接口。; 灵感3：利用其中免费的天气、股票、新闻等 API，打造一个个人仪表盘应用，聚合展示用户关心的实时信息，比如天气、自选股涨跌和头条新闻，作为日常开发者的生产力工具。
-   项目链接: https://github.com/public-apis/public-apis
+   衍生灵感: 灵感1：可以基于 oMLX 开发一个「Mac 本地 AI 编码工作站」——将 oMLX 与 Claude Code、OpenCode 等 Agent 工具深度捆绑，一键配置多个本地模型，利用分级 KV 缓存提升编码场景的上下文复用速度，实现零成本私有编码助手。; 灵感2：扩展为「隐私敏感型企业 RAG 服务器」——利用 oMLX 同时加载 Embedding、Reranker 和 LLM，为内部文档构建一个完全离线、API 兼容 OpenAI 的问答系统，适合金融、法律、医疗等对数据保密性要求极高的行业。; 灵感3：基于其多 Mac 分布式推理能力，开发「家庭/工作室多机 GPU 池化方案」——将多台闲置 Mac mini 组合成一台超大显存的推理集群，通过 oMLX 的 Cluster 管理界面统一调度，探索低成本的大模型部署新形态。
+   项目链接: https://github.com/jundot/omlx
