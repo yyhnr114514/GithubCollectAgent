@@ -1,21 +1,46 @@
 1. harry0703/MoneyPrinterTurbo:
-   star: 108682  语言/技术: Python, Streamlit, FastAPI, ffmpeg, Edge TTS, Azure Speech, SiliconFlow TTS, Google Gemini TTS, 小米 MiMo TTS, ElevenLabs TTS, Chatterbox TTS, faster-whisper, Pexels API, Pixabay API, Coverr API, OpenAI API, DeepSeek API, Kimi/Moonshot AI, 通义千问, Ollama, Docker, uv
-   项目简介: 一站式AI短视频生成工具，只需提供主题或关键词，即可自动完成脚本撰写、素材匹配、字幕生成、背景音乐合成和视频压制，最终输出高清竖屏或横屏短视频。支持WebUI、API、CLI和AI Agent四种使用方式，并可一键发布到TikTok、Instagram和YouTube Shorts。目前是GitHub上热门的开源项目，适合自媒体从业者、内容创作者和开发者快速批量生产短视频。
-   亮点: 一键生成完整短视频：从脚本、素材、字幕到背景音乐和最终合成，全自动流水线; 支持多种主流LLM（OpenAI、DeepSeek、Kimi、Gemini、本地Ollama等）和统一网关，灵活接入AI能力; 四种使用方式：AI Agent、WebUI、API、CLI，满足不同技术层次用户需求; 批量视频生成，可同时产出多个版本供选择; 多语言支持，可生成多语言脚本和配音; 支持本地素材和在线免费素材源（Pexels/Pixabay/Coverr）; 一键跨平台发布到TikTok、Instagram和YouTube Shorts
-   详细报告: MoneyPrinterTurbo是一个基于Python的AI短视频生成系统，核心目标是将'创意'到'成片'的整个过程完全自动化。用户只需要输入一个视频主题或关键词，系统就会调用大语言模型（LLM）自动生成视频脚本，然后根据脚本内容提取关键词，从Pexels、Pixabay、Coverr等免费素材库或本地素材中匹配相关视频片段。接着通过TTS语音合成（支持Edge TTS、Azure、ElevenLabs等）生成配音，并自动生成字幕（支持使用TTS时间戳快速生成或使用faster-whisper本地转写），最后通过ffmpeg将素材、配音、字幕和背景音乐合成最终视频。
-
-项目提供了WebUI（基于Streamlit）、API服务（基于FastAPI）、CLI和AI Agent四种使用方式，并按照控制器、服务、模型分层设计，代码结构清晰，便于二次开发。在技术选型上非常灵活：LLM接入支持OpenAI、DeepSeek、Kimi、通义千问等，还兼容Ollama本地模型和各种统一API网关；TTS方面支持多种云服务及无配音模式；视频尺寸支持9:16竖屏和16:9横屏。此外，还支持批量生成、调整片段时长、自定义字幕样式和背景音乐等细节选项。
-
-部署方面提供了Docker、一键启动包、手动部署等多种方式，支持Windows、macOS和Linux。由于多数AI能力默认依赖云端API，所以对GPU要求不高，但若使用本地whisper转写则建议配备独立显卡。项目还支持通过Upload-Post平台将生成好的视频自动上传到TikTok、Instagram和YouTube Shorts，实现了从生成到发布的完整闭环。
-
-文档清晰，包含安装步骤、功能说明、常见问题（如ffmpeg配置、Whisper模型下载失败等），并有大量实际生成的示例视频展示。整体而言，这是一个非常成熟且实用的自动化短视频生产工具，极大降低了视频创作门槛，也提供了丰富的扩展接口。
+   star: 113035  语言/技术: Python 3.11, Streamlit, Docker, Edge TTS, Azure Speech, SiliconFlow TTS, Google Gemini TTS, 小米 MiMo TTS, ElevenLabs TTS, Chatterbox TTS, faster-whisper, ffmpeg, Pexels, Pixabay, Coverr, Kimi / Moonshot AI, OpenAI, DeepSeek, 通义千问, 火山引擎方舟, xAI Grok, MiniMax, Ollama, OneAPI, LiteLLM, Groq, Pollinations AI
+   项目简介: 一站式 AI 短视频生成工具，只需提供视频主题或关键词，即可自动完成视频脚本、素材匹配、字幕和背景音乐合成，输出高清短视频。主打「零剪辑」体验，堪称内容创作者和短视频运营者的「程序救星」和「打工人神器」。
+   亮点: 提供 AI Agent、WebUI、API 和 CLI 四种使用方式，代码按控制器、服务、模型分层; 支持 AI 自动生成视频脚本或使用自定义脚本，并支持多语言脚本生成; 内置 Edge TTS、Azure、ElevenLabs 等 7 种语音合成，支持实时试听; 支持字幕生成（基于 TTS 时间戳或 faster-whisper 本地识别），可自定义字体、颜色、描边等; 素材来源支持 Pexels、Pixabay、Coverr 免费高清视频，也可使用本地素材; 支持竖屏 9:16 和横屏 16:9 两种高清尺寸，可批量生成视频; 生成后可一键自动发布到 TikTok、Instagram 和 YouTube Shorts
+   详细报告: MoneyPrinterTurbo 是一个开源的 AI 短视频自动生成工具，其核心理念是「输入主题或关键词，视频自动搞定」。它极大降低了视频制作门槛，尤其适合没有剪辑经验或需要批量产出的内容创作者。项目支持四种操作方式：AI Agent（让智能体自动完成任务）、WebUI（基于 Streamlit 的图形界面）、API（基于 FastAPI 风格，提供 /docs 文档）以及纯 CLI 命令行，用户可根据场景灵活选择。技术上，它深度融合了现代 AI 能力：通过集成 Kimi、OpenAI、Google Gemini、DeepSeek、通义千问、火山引擎等主流大模型实现高质量文案生成和素材关键词提炼；语音合成方面，默认使用完全免费的 Edge TTS（即 Azure TTS V1），同时支持 Azure TTS V2、SiliconFlow、Google Gemini、小米 MiMo、ElevenLabs 以及自托管 Chatterbox，且每种都可在 WebUI 中试听选择；字幕生成支持两种模式：一种利用 TTS 时间戳（默认，速度快），另一种使用本地 faster-whisper 模型进行更准确的字幕转写（需要额外下载模型）。视频素材方面，可调用 Pexels、Pixabay、Coverr 等免版权素材库，也支持用户上传本地素材，并可控制视频片段时长来调节切换频率。在具体视频规格上，支持竖屏 9:16（1080x1920）和横屏 16:9（1920x1080）两种常见格式，满足抖音、快手、B站、YouTube等平台需求。项目还内置了背景音乐库，可随机或指定音乐，并能调整音量。部署方式非常灵活：Windows 用户可使用一键启动包；macOS/Linux 建议用 uv 管理依赖；追求隔离环境可用 Docker Compose；对于不想进行任何部署的用户，还可以通过官方合作的在线平台（如录咖 AI）免费体验。更贴心的是，项目支持作为 AI Agent 的 Skill 使用，用户只需在支持读取 Skill 的 AI 工具中发送一句话，Agent 便会自动完成安装、配置和视频生成。此外，它还能在生成后一键跨平台发布至 TikTok、Instagram 和 YouTube Shorts。总之，MoneyPrinterTurbo 将「脚本-素材-配音-字幕-合成-分发」全链路自动化，是目前开源社区中功能较完善、易用性较高的 AI 视频生成工具。
    活跃度: 未知  社区健康: 未知
-   商业潜力: 文档提及录咖网站基于该项目提供免费在线AI视频生成服务，说明具有商业价值；但具体商业模型未详细说明。
+   商业潜力: 文档未提及，但该项目商业化潜力巨大：可直接提供 SaaS 服务，帮助自媒体工作室、电商卖家、教育培训机构快速生成视频；也可作为内部工具嵌入现有内容生产流程，大幅降本增效。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目可以开发一个『企业宣传视频自动生成器』，对接公司产品数据库，自动为每个产品生成竖屏推广短视频，用于投放抖音、快手等平台。; 灵感2：将其集成到电商系统中，根据商品标题和卖点自动生成带货短视频，批量生成后供商家选择，可直接接入淘宝、拼多多等平台。; 灵感3：构建一个『历史知识科普短视频自动生产线』，结合知识图谱和维基百科，自动生成系列科普视频，并配套字幕和配音，适合教育类自媒体。
+   衍生灵感: 灵感1：开发一个「电商商品视频自动生成器」，输入商品链接或关键词，自动生成带货短视频，适配抖音/快手/淘宝等电商平台，帮助中小商家低成本制作营销视频。; 灵感2：将其集成到企业内容营销系统中，为每篇博客文章自动生成配套的推广视频，扩大内容传播渠道，提高用户触达率。; 灵感3：构建一个「多语言视频本地化工具」，利用其多语言脚本生成和多种 TTS 能力，将现有视频自动翻译并配音成多个语言版本，用于全球化内容分发。
    项目链接: https://github.com/harry0703/MoneyPrinterTurbo
 
-2. volcengine/OpenViking:
+2. PostHog/posthog:
+   star: 38021  语言/技术: JavaScript, Python, Node, React, Next.js, Vue, PHP, Ruby, Go, C#, Flutter, React Native, Android, iOS, Django, Angular, WordPress, Webflow
+   项目简介: PostHog 是一个开源的产品分析平台，提供产品分析、会话重放、功能开关、实验、错误追踪、日志、调查、数据仓库、AI 可观测性等一体化工具，旨在帮助团队构建'自动驾驶'产品——通过 AI 自动诊断问题、发现机会并提交修复。
+   亮点: 自驾驶模式：利用 AI 将产品数据中的信号（如错误、愤怒点击、失败查询）转化为研究报告和可审查合并的 Pull Request。; 一体化平台：集产品分析、Web 分析、会话重放、功能开关、实验、错误跟踪、日志、调查、数据仓库、数据管道、AI 可观测性和工作流于一身。; 多语言 SDK 与易接入：支持 JavaScript、Python、Node、React Native、Flutter 等主流语言和框架，并提供 MCP 接入，方便集成到开发环境。
+   详细报告: PostHog 是一个开源的产品分析平台，其核心理念是提供构建产品所需的所有工具，并捕获 AI agent 主动诊断问题、发现机会和交付修复所需的全部上下文。它通过'自驾驶模式'（Self-driving mode）将产品数据中的信号（如错误、愤怒点击、失败的查询等）转化为经过研究的报告和开发人员可以审查并合并的 Pull Request，从而大幅减少手动分析数据的工作量。
+
+在功能层面，PostHog 覆盖了产品开发的全生命周期：
+- 产品分析（Product Analytics）：支持自动捕获或手动埋点的事件驱动分析，提供可视化或 SQL 查询来分析用户行为。
+- Web 分析（Web Analytics）：提供类似 GA 的仪表盘，监控网站流量、用户会话、转化率、Web 核心指标和收入。
+- 会话重放（Session Replays）：观看真实用户的会话交互，帮助诊断问题并理解用户行为，支持 Web 和移动应用。
+- 功能开关（Feature Flags）：安全地向特定用户或群组逐步发布功能。
+- 实验（Experiments）：测试变更并衡量其对目标指标的统计影响，支持无需代码的实验设置。
+- 错误追踪（Error Tracking）：跟踪错误、发送警报并解决问题，改善产品稳定性。
+- 日志（Logs）：接收、搜索和分析日志数据，并与产品数据一起分析。
+- 调查（Surveys）：通过现成的无代码模板或自定义构建器发起用户调查。
+- 数据仓库（Data Warehouse）：从 Stripe、Hubspot 等外部工具同步数据，并可与产品数据并查询。
+- 数据管道（Data Pipelines）：对传入数据运行自定义过滤和转换，支持实时发送到 25+ 工具或批量导出至数据仓库。
+- AI 可观测性（AI Observability）：捕获 LLM 应用的追踪、代际、延迟和成本。
+- 工作流（Workflows）：创建自动化操作或向用户发送消息的工作流。
+
+技术实现上，PostHog 提供了丰富的 SDK 和库，覆盖前端（JavaScript、Next.js、React、Vue）、移动端（React Native、Android、iOS、Flutter）和后端（Python、Node、PHP、Ruby、Go、.NET/C#、Django、Angular、WordPress、Webflow 等）。同时支持通过 Web 片段、REST API 或 MCP 接入，适配 Claude Code、Cursor 等 agent 环境。
+
+部署方面，PostHog 推荐使用云服务（免费额度慷慨），也支持自托管。开源 Hobby 部署可在 Linux 上单行命令启动，但规模约 10 万事件/月，超出后建议迁移到云。仓库采用 MIT 许可证（ee 目录除外），并有完全 FOSS 的 posthog-foss 变体。此外，PostHog 还开源了公司手册、发展策略和流程，体现了高度的透明性。
+
+需要注意的是，README 中并未提及具体后端技术栈框架，但根据 SDK 和部署方式推测可能涉及 Python/Django，不过为了严谨，此部分我们标记为“未知”。详细的代码结构见 monorepo 布局说明，本文因文档截断无法详细展开。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及，但项目本身具有清晰的商业模式：提供免费云服务（慷慨免费额度）和付费的云订阅，同时有完全开源的 FOSS 版本，通过增值服务和托管服务盈利。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 PostHog 的自驾驶模式，可以开发一个专门的'自动化错误修复助手'，它监控错误追踪和日志数据，自动生成修复建议或 PR，并集成到 CI/CD 流程中，让开发人员只需审核合并。; 灵感2：将 PostHog 的会话重放和调查功能集成到客户支持系统中，构建一个'用户行为洞察平台'，当用户遇到问题时自动关联其会话回放、错误日志和产品行为，提升工单处理效率和客户满意度。; 灵感3：利用 PostHog 的数据仓库和管道能力，构建一个跨平台多渠道的 AI 增长分析工具，整合来自支付、CRM、广告平台的数据，通过 AI 自动识别高转化用户特征并提供增长建议。
+   项目链接: https://github.com/PostHog/posthog
+
+3. volcengine/OpenViking:
    star: 29458  语言/技术: Python, Rust
    项目简介: OpenViking 是一个面向 AI Agent 的开源上下文数据库，将记忆、资源和技能组织为 viking:// 协议下的虚拟文件系统，通过 L0/L1/L2 三层按需加载和可观测检索，帮助 Agent 高效管理长期上下文并降低 token 消耗。
    亮点: 将零散的上下文统一为文件系统结构，Agent 通过 ls/tree/find 等命令操作上下文; 分层加载（L0/L1/L2）显著减少 token 开销，实测最高降低 91% 输入 token; 可观测检索轨迹，便于调试和追溯错误结果; 支持将会话自动沉淀为长期记忆，提升多轮任务成功率
@@ -36,56 +61,29 @@
    衍生灵感: 灵感1：基于 OpenViking 构建一个企业级知识库管理 Agent，将内部 docs、代码仓库、工单历史统一挂载到 viking://，让各团队通过自然语言查询并自动按需加载相关内容，降低 Token 费用。; 灵感2：将其集成到 RPA 或自动化测试工具中，利用目录递归检索和轨迹记录，实现复杂操作流程的可追溯回放，快速定位失败环节。; 灵感3：开发一个个人助理技能市场，用户通过 OpenViking 的 skills 目录共享和导入技能，结合会话沉淀的记忆，打造真正个性化的 AI 伙伴。
    项目链接: https://github.com/volcengine/OpenViking
 
-3. mukul975/Anthropic-Cybersecurity-Skills:
-   star: 28481  语言/技术: AI Agent, Markdown, YAML, MITRE ATT&CK, NIST CSF, MITRE ATLAS, MITRE D3FEND, NIST AI RMF, MITRE Fight Fraud Framework (F3), Agentskills.io, Volatility3, Sigma, BloodHound, KAPE, Hayabusa, Falco, OpenCTI, MISP
-   项目简介: 这是一个面向AI代理的开源网络安全技能库，包含817个生产级网络安全技能，覆盖29个安全领域，并映射到MITRE ATT&CK、NIST CSF 2.0等六大行业框架。其核心目标是为AI代理提供结构化的安全分析工作流，使其具备资深安全分析师的知识和决策能力，而不仅仅是脚本或工具集合。项目遵循agentskills.io开放标准，采用YAML frontmatter和Markdown结构，支持渐进式披露，以极低的token消耗实现高效技能检索和执行。该项目为社区项目，与Anthropic官方无关，但可用于授权测试、安全研究、防御和教育等合法用途。
-   亮点: 收录817个结构化网络安全技能，覆盖29个安全领域，是目前最大的开源AI代理网络安全技能库; 映射六大行业框架（MITRE ATT&CK、NIST CSF 2.0、MITRE ATLAS、D3FEND、AI RMF、F3），每个技能都关联相关框架，便于标准化和溯源; 采用agentskills.io开放标准，支持渐进式披露，技能扫描仅需约30 tokens，全量加载也只需500-2000 tokens，对AI代理非常友好; 包含真实实践工作流，而非生成摘要，每个技能都有使用时机、前置条件、工作流和验证步骤，能指导代理逐步执行并确认结果; 兼容Claude Code、GitHub Copilot、OpenAI Codex CLI、Cursor、Gemini CLI等26+ AI平台，开箱即用
-   详细报告: 这个项目本质上是一个「AI代理的安全技能包」，目的就是让AI代理在安全分析任务中不再是个只会猜命令的门外汉，而是能像资深分析师一样按部就班地干活。它目前包含了817个技能，从云安全、威胁狩猎、数字取证、恶意软件分析，到红队、事件响应、AI安全等等，覆盖了29个安全领域，可以说是应有尽有。
+4. Tencent/AI-Infra-Guard:
+   star: 5006  语言/技术: Go, Python, Docker, YAML, MCP, LLM, REST API, Swagger, OpenClaw, CVE
+   项目简介: 腾讯朱雀实验室开源的AI红队平台，一站式扫描AI基础设施、MCP服务器、Agent技能和提示词注入漏洞，帮企业自查AI安全风险。
+   亮点: ClawScan：一键评估OpenClaw安全风险，覆盖配置错误、技能风险、CVE漏洞和隐私泄露。; AI基础设施漏洞扫描：识别100+ AI框架组件，匹配2000+ CVE漏洞，支持Ollama、ComfyUI、vLLM等。; MCP Server & Agent Skills扫描：检测14大安全风险类别，支持源码和远程URL。; Jailbreak评估：多轮越狱攻击测试，跨模型对比。; 插件化架构：通过YAML规则和数据集贡献，社区可扩展。
+   详细报告: 你见过专门给AI当“红队”的安全工具吗？腾讯朱雀实验室的AI-Infra-Guard（简称A.I.G）就是这么个硬核平台。它不是什么花架子，而是真刀真枪地帮你检查AI系统有没有“漏风”的地方。
 
-每个技能都遵循统一的目录结构：包含一个SKILL.md文件（YAML frontmatter + Markdown正文），以及可选的references、scripts和assets目录。YAML frontmatter里存着技能的名称、描述、标签、框架映射等元数据，方便AI代理快速扫描和匹配。Markdown正文则包含四个核心部分：何时使用（When to Use）、前置条件（Prerequisites）、工作流（Workflow）和验证（Verification）。这相当于一份标准化的操作手册，把资深分析师的决策过程给显性化了。
+这货的核心功能有六大块：
+1. **AI基础设施漏洞扫描**：像给vLLM、Ollama、ComfyUI这些AI框架做体检，指纹识别版本后跟2000多个CVE漏洞库比对，直接告诉你哪里有坑。
+2. **MCP Server & Agent Skills扫描**：MCP是AI界的“USB-C接口”，但接口也可能藏毒。它能从源码或远程URL扫出14类安全风险，比如工具投毒、恶意代码、权限逃脱。
+3. **Agent Scan**：专门针对Dify、Coze这类平台的AI Agent工作流做多Agent自动化攻击测试，看你的Agent会不会被“带节奏”。
+4. **Jailbreak评估**：用精心设计的数据集对LLM发起多种攻击，比如多轮越狱、PAIR、GOAT，看看模型会不会说出不该说的话。
+5. **Model and API Relay Checker**：检查模型指纹、API中转黑盒审计，防止有人“偷梁换柱”换个模型冒充高级货。
+6. **ClawScan**：针对OpenClaw生态的一键安全评估，查配置漏洞、技能风险、CVE和隐私泄露。
 
-项目还巧妙采用了渐进式披露架构：AI代理先扫描所有技能的前置元数据（每个约30 tokens），快速筛选出相关技能，然后再加载最匹配的几个技能的完整工作流（500-2000 tokens），这样就能在有限的上下文窗口中高效处理大量技能，不会爆掉context。
+部署上，Docker一键起，4GB内存就能跑，还提供Python和Go的CLI工具，方便集成到CI/CD流水线。前端界面也不错，有实时进度，还有API文档方便二次开发。
 
-框架映射是另一个亮点。每个技能都会根据其类型映射到多个相关框架。比如，内存取证技能会映射到MITRE ATT&CK和NIST CSF，而AI安全技能则会额外映射到MITRE ATLAS和NIST AI RMF。目前ATT&CK覆盖805个技能，NIST CSF覆盖804个，D3FEND 139个，AI RMF 97个，F3 94个，ATLAS 93个。F3框架（MITRE Fight Fraud Framework）是2026年4月刚发布的，项目已经领先性地集成了94个与欺诈相关的技能，专门覆盖ATT&CK遗漏的定位（Positioning）和变现（Monetization）战术，非常前沿。
+最惊艳的是它的“插件化框架”，你可以通过添加YAML指纹规则、漏洞规则、MCP规则和越狱数据集来扩展扫描能力，社区贡献起来很方便。而且整个项目采用Apache 2.0协议，免费开源。
 
-项目的快速上手也很简单：通过npx skills add命令即可自动安装，兼容主流的AI编程平台。此外，项目还提供了在线Playground，可以直接在Casky.ai上体验AI代理执行安全技能。
+值得注意的是，开发者明确说了这工具目前没有认证机制，别直接怼到公网上，不然别人也能用你的扫描器了。另外扫描效果依赖LLM，需要配API密钥，可能产生点费用。
 
-不过，由于项目中包含攻击性技术和双用途技术（如红队C2、钓鱼模拟、漏洞利用等），作者在README中强调了仅限授权测试和合法使用，使用者需自行承担合规责任。这一点需要特别注意。
-
-社区方面，项目仍在积极维护中，已有v1.0.0版本发布（734个技能），目前main分支已有817个技能，且持续增加。贡献指南清楚，每个PR会在48小时内审查。
-   活跃度: 未知（README显示持续更新，但API指标中commits_recent为0，pushed_at为null，可能未获取到最新数据）  社区健康: 未知（根据README可见社区贡献指南、讨论区、问题跟踪，但API指标未提供具体星标和贡献者数据）
-   商业潜力: 该项目本身是开源的，商业价值在于可以为企业提供安全自动化解决方案，例如构建AI驱动的安全运营中心（SOC）辅助系统、安全培训平台或托管检测与响应（MDR）服务。由于技能库覆盖全面且持续更新，可作为商业产品的核心能力底座，但需注意合规授权。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此技能库，可以构建一个「企业安全态势感知AI助手」，集成到SOC平台中，自动对告警进行初级研判、关联MITRE ATT&CK攻击链，并给出处置建议，帮助安全分析师减负。; 灵感2：可以开发一个「AI安全培训模拟平台」，利用这些技能库中的红队和蓝队场景，生成为交互式CTF挑战或钓鱼演练，供安全团队进行实战训练，新员工也能快速上手。; 灵感3：可以将此技能库与自动化编排工具（如Siemplify、Shuffle）集成，将AI代理作为决策引擎，自动执行威胁猎杀、内存取证分析、恶意软件初步检测等重复性工作，并生成报告。; 灵感4：可以开发一个「AI驱动的漏洞管理助手」，基于技能库中的漏洞评估和加固技能，自动扫描代码库、云配置和容器镜像，给出符合NIST CSF的修复建议，帮助DevSecOps团队落地安全左移。
-   项目链接: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
-
-4. jundot/omlx:
-   star: 19016  语言/技术: Python, FastAPI, MLX, mlx-lm, mlx-vlm, Swift, SwiftUI, Metal, safetensors, MCP (Model Context Protocol), HuggingFace, SSD Cache, Continuous Batching
-   项目简介: 一句话概括：这是一个专为 Apple Silicon Mac 打造的本地 LLM 推理服务器，通过菜单栏应用即可管理多模型、连续批处理和分级 KV 缓存，支持 OpenAI/Anthropic API 兼容，让本地大模型服务起来像 OpenAI 一样方便。
-   亮点: 支持 LLM、VLM、OCR、Embedding、Reranker 多模型混合加载，统一 API; 分级 KV 缓存（热内存+冷 SSD），跨请求、跨重启复用上下文，为编码 Agent 场景优化; 原生 macOS 菜单栏应用 + 管理后台，无需终端即可监控和切换模型; 兼容 OpenAI 和 Anthropic API，支持流式输出、工具调用和视觉输入; 实验性多 Mac 联合推理，可跨设备拆分大模型
-   详细报告: oMLX 是一个面向 macOS 的本地 LLM 推理服务器，核心目标是在 Apple Silicon（M1/M2/M3/M4）上提供高效、灵活、可控制的大模型服务。它解决了现有 LLM 服务器在“便利性”和“控制力”之间二选一的痛点，让用户既能像使用 ChatGPT 一样方便，又能像 vLLM 那样精细管理缓存和模型调度。
-
-项目主要包含以下几个核心亮点：
-
-1. **分级 KV 缓存（Tiered KV Cache）**：采用 vLLM 启发的块级缓存管理，包含热层（内存）和冷层（SSD）。当上下文变化时，旧上下文仍能被缓存并复用，甚至服务器重启后也能从 SSD 恢复。这对 Claude Code 等编码工具至关重要，使得本地 LLM 在真实编码场景中变得实用。
-
-2. **连续批处理（Continuous Batching）**：基于 mlx-lm 的 BatchGenerator 实现，支持并发请求的高效处理，提升 GPU 利用率。
-
-3. **多模型 Serving**：支持同时加载 LLM、VLM、Embedding 和 Reranker 模型，并自动按类型识别。具备 LRU 自动淘汰、手动加载/卸载、模型固定（Pin）、每模型 TTL 超时和总内存限制，有效防止 OOM。
-
-4. **macOS 菜单栏 App**：原生 Swift/SwiftUI 编写（非 Electron），提供一键启动/停止、状态监控、崩溃自动重启和自动更新。菜单栏集成统计信息，无需命令操作。
-
-5. **API 兼容性**：完全兼容 OpenAI 和 Anthropic API，提供 /v1/chat/completions、/v1/completions、/v1/messages、/v1/embeddings、/v1/rerank 等接口，支持流式、视觉输入和工具调用。可作为 Drop-in replacement。
-
-6. **管理后台**：Web UI 提供模型下载（HuggingFace）、实时监控、聊天、基准测试和每模型设置，支持多语言（中、英、日、韩等），所有 CDN 依赖内嵌，可完全离线使用。
-
-7. **多 Mac 分布式推理（实验性）**：支持通过 MLX pipeline ranks 将模型拆分到不同内存大小的 Mac 上，使用 Ring 或 Thunderbolt RDMA/JACCL 通信，提供实时分片/性能地图。
-
-技术栈方面，后端使用 Python + FastAPI 作为 API 框架，模型推理基于 Apple 的 MLX 框架和 mlx-lm、mlx-vlm，自定义内核使用 Metal 编写以加速特定模型（如 GLM-5.2），缓存存储使用 safetensors。桌面端使用 Swift/SwiftUI，打包使用 venvstacks 实现可移植 Python 环境。项目还集成了 MCP（Model Context Protocol）支持。
-
-根据文档内容，oMLX 已具备较完整的功能体系和良好的设计，但部分高级功能（如多 Mac 分布式）仍处于实验阶段。由于 README 被截断，更细粒度的技术实现细节和性能基准数据请补充文档。
-   活跃度: 未知  社区健康: 未知
+总而言之，这就是个“AI安全工具箱”，适合企业安全团队、AI平台运维人员以及研究AI安全的极客们。
+   活跃度: 高（从更新日志看，2026年有多版本迭代）  社区健康: 未知（API指标显示forks和open_issues为0，可能未同步，但项目有详细的贡献指南和社区联系方式，实际活跃度未知）
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：可以基于 oMLX 开发一个「Mac 本地 AI 编码工作站」——将 oMLX 与 Claude Code、OpenCode 等 Agent 工具深度捆绑，一键配置多个本地模型，利用分级 KV 缓存提升编码场景的上下文复用速度，实现零成本私有编码助手。; 灵感2：扩展为「隐私敏感型企业 RAG 服务器」——利用 oMLX 同时加载 Embedding、Reranker 和 LLM，为内部文档构建一个完全离线、API 兼容 OpenAI 的问答系统，适合金融、法律、医疗等对数据保密性要求极高的行业。; 灵感3：基于其多 Mac 分布式推理能力，开发「家庭/工作室多机 GPU 池化方案」——将多台闲置 Mac mini 组合成一台超大显存的推理集群，通过 oMLX 的 Cluster 管理界面统一调度，探索低成本的大模型部署新形态。
-   项目链接: https://github.com/jundot/omlx
+   衍生灵感: 灵感1：开发一个AI安全合规检查平台，基于A.I.G的扫描能力，为金融、医疗等行业的AI应用提供合规审计报告，自动生成整改建议。; 灵感2：将A.I.G集成到企业DevSecOps流水线，在AI模型上线前自动执行安全扫描，防止带病上线，还能定时巡检线上服务。; 灵感3：基于MCP扫描能力，构建一个面向MCP生态的安全监控服务，实时监测公开的MCP服务器，发现恶意工具投毒或漏洞利用，做成“MCP安全哨兵”。
+   项目链接: https://github.com/Tencent/AI-Infra-Guard
