@@ -1,12 +1,18 @@
 1. harry0703/MoneyPrinterTurbo:
-   star: 113035  语言/技术: Python 3.11, Streamlit, Docker, Edge TTS, Azure Speech, SiliconFlow TTS, Google Gemini TTS, 小米 MiMo TTS, ElevenLabs TTS, Chatterbox TTS, faster-whisper, ffmpeg, Pexels, Pixabay, Coverr, Kimi / Moonshot AI, OpenAI, DeepSeek, 通义千问, 火山引擎方舟, xAI Grok, MiniMax, Ollama, OneAPI, LiteLLM, Groq, Pollinations AI
-   项目简介: 一站式 AI 短视频生成工具，只需提供视频主题或关键词，即可自动完成视频脚本、素材匹配、字幕和背景音乐合成，输出高清短视频。主打「零剪辑」体验，堪称内容创作者和短视频运营者的「程序救星」和「打工人神器」。
-   亮点: 提供 AI Agent、WebUI、API 和 CLI 四种使用方式，代码按控制器、服务、模型分层; 支持 AI 自动生成视频脚本或使用自定义脚本，并支持多语言脚本生成; 内置 Edge TTS、Azure、ElevenLabs 等 7 种语音合成，支持实时试听; 支持字幕生成（基于 TTS 时间戳或 faster-whisper 本地识别），可自定义字体、颜色、描边等; 素材来源支持 Pexels、Pixabay、Coverr 免费高清视频，也可使用本地素材; 支持竖屏 9:16 和横屏 16:9 两种高清尺寸，可批量生成视频; 生成后可一键自动发布到 TikTok、Instagram 和 YouTube Shorts
-   详细报告: MoneyPrinterTurbo 是一个开源的 AI 短视频自动生成工具，其核心理念是「输入主题或关键词，视频自动搞定」。它极大降低了视频制作门槛，尤其适合没有剪辑经验或需要批量产出的内容创作者。项目支持四种操作方式：AI Agent（让智能体自动完成任务）、WebUI（基于 Streamlit 的图形界面）、API（基于 FastAPI 风格，提供 /docs 文档）以及纯 CLI 命令行，用户可根据场景灵活选择。技术上，它深度融合了现代 AI 能力：通过集成 Kimi、OpenAI、Google Gemini、DeepSeek、通义千问、火山引擎等主流大模型实现高质量文案生成和素材关键词提炼；语音合成方面，默认使用完全免费的 Edge TTS（即 Azure TTS V1），同时支持 Azure TTS V2、SiliconFlow、Google Gemini、小米 MiMo、ElevenLabs 以及自托管 Chatterbox，且每种都可在 WebUI 中试听选择；字幕生成支持两种模式：一种利用 TTS 时间戳（默认，速度快），另一种使用本地 faster-whisper 模型进行更准确的字幕转写（需要额外下载模型）。视频素材方面，可调用 Pexels、Pixabay、Coverr 等免版权素材库，也支持用户上传本地素材，并可控制视频片段时长来调节切换频率。在具体视频规格上，支持竖屏 9:16（1080x1920）和横屏 16:9（1920x1080）两种常见格式，满足抖音、快手、B站、YouTube等平台需求。项目还内置了背景音乐库，可随机或指定音乐，并能调整音量。部署方式非常灵活：Windows 用户可使用一键启动包；macOS/Linux 建议用 uv 管理依赖；追求隔离环境可用 Docker Compose；对于不想进行任何部署的用户，还可以通过官方合作的在线平台（如录咖 AI）免费体验。更贴心的是，项目支持作为 AI Agent 的 Skill 使用，用户只需在支持读取 Skill 的 AI 工具中发送一句话，Agent 便会自动完成安装、配置和视频生成。此外，它还能在生成后一键跨平台发布至 TikTok、Instagram 和 YouTube Shorts。总之，MoneyPrinterTurbo 将「脚本-素材-配音-字幕-合成-分发」全链路自动化，是目前开源社区中功能较完善、易用性较高的 AI 视频生成工具。
+   star: 113966  语言/技术: Python, Streamlit, FastAPI, Edge TTS, Azure Speech, SiliconFlow, Google Gemini, 小米 MiMo, ElevenLabs, Chatterbox, faster-whisper, Pexels, Pixabay, Coverr, WaveSpeed AI, Kimi / Moonshot AI, OpenAI, Anthropic Claude, DeepSeek, 阿里云通义千问, Azure OpenAI, 火山引擎方舟, xAI Grok, MiniMax, Cloudflare AI Gateway, ModelScope, Ollama, OneAPI, LiteLLM, Groq, Docker, ffmpeg, uv
+   项目简介: MoneyPrinterTurbo 是一款一站式 AI 短视频生成工具，只需提供视频主题或关键词，即可自动完成视频脚本编写、素材匹配、字幕生成、背景音乐合成，最终输出高清短视频。项目支持 WebUI、API、CLI 和 AI Agent 四种使用方式，内置多种大模型接口、TTS 语音合成和素材源，可实现批量生成和跨平台一键发布，极大降低了短视频制作的门槛，堪称内容创作者的‘打工人神器’和‘程序员救星’。
+   亮点: 一键生成完整短视频：输入主题或关键词，自动生成脚本、匹配素材、生成字幕和背景音乐并合成视频; 支持多种 AI 大模型和 TTS 语音合成，用户可灵活选择或组合使用; 提供 WebUI、API、CLI 和 AI Agent 四种使用方式，满足不同场景需求; 支持批量视频生成，一次可生成多个视频供挑选; 支持跨平台发布至 TikTok、Instagram 和 YouTube Shorts
+   详细报告: MoneyPrinterTurbo 是一个功能强大且高度自动化的 AI 短视频生成工具。其核心逻辑是：用户只需输入一个主题或关键词，系统便会自动完成视频生产的全流程。首先，它利用大语言模型生成视频脚本，支持多种主流模型如 OpenAI、DeepSeek、Kimi、通义千问等，并兼容 Ollama 等本地部署环境；其次，根据脚本内容自动匹配高清素材，素材来源包括 Pexels、Pixabay、Coverr 等免版权网站，同时也支持接入 WaveSpeed AI 的文生视频模型，直接生成符合关键词的全新画面；然后，通过 TTS 引擎（如 Edge TTS、Azure Speech、ElevenLabs 等）将脚本合成为语音，并利用 TTS 时间戳或本地 faster-whisper 模型生成精准字幕；最后，自动添加背景音乐和字幕样式，渲染合成最终的高清视频。
+
+项目在架构上非常注重灵活性，提供了四种交互方式：WebUI（基于 Streamlit）适合普通用户可视化操作；API（基于 FastAPI）方便集成到其他系统；CLI 适合命令行自动化；AI Agent 则允许智能体自动读取文档并执行安装、配置和生成任务。同时，代码按控制器、服务、模型分层，便于二次开发和扩展。
+
+在技术栈方面，项目基于 Python 3.11+，使用 uv 作为依赖管理工具，支持 Docker 一键部署，内置了 ffmpeg 作为视频处理核心。语音合成方面除默认的免费 Edge TTS 外，还支持 Azure TTS、SiliconFlow、Google Gemini、小米 MiMo、ElevenLabs 等多家付费或免费服务。字幕生成支持 edge 和 whisper 两种模式，用户可根据准确度和性能需求切换。此外，项目还支持视频尺寸（竖屏 9:16、横屏 16:9）、片段时长、字幕样式、背景音乐音量等细节调节，并支持将配置导出/导入为预设文件，便于批量复用。
+
+需要注意的是，文档中部分内容（如具体的安装步骤、视频教程链接、部分赞助商信息）可能因为 README 截断而不够完整，但整体功能描述非常详尽。由于本项目高度依赖外部 API 和素材源，使用时需要自行申请相关密钥，并注意部分服务可能产生费用。
    活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及，但该项目商业化潜力巨大：可直接提供 SaaS 服务，帮助自媒体工作室、电商卖家、教育培训机构快速生成视频；也可作为内部工具嵌入现有内容生产流程，大幅降本增效。
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个「电商商品视频自动生成器」，输入商品链接或关键词，自动生成带货短视频，适配抖音/快手/淘宝等电商平台，帮助中小商家低成本制作营销视频。; 灵感2：将其集成到企业内容营销系统中，为每篇博客文章自动生成配套的推广视频，扩大内容传播渠道，提高用户触达率。; 灵感3：构建一个「多语言视频本地化工具」，利用其多语言脚本生成和多种 TTS 能力，将现有视频自动翻译并配音成多个语言版本，用于全球化内容分发。
+   衍生灵感: 灵感1：可以基于 MoneyPrinterTurbo 开发一个‘条漫短视频生成器’，将用户提供的图文故事自动转化为带配音和字幕的短视频，用于儿童教育或品牌营销。; 灵感2：可以将其集成到电商后台系统中，当商家上架新品时，自动生成商品介绍短视频并发布到抖音、TikTok 等平台，实现营销内容自动化。; 灵感3：可以扩展为一个‘新闻热点速报机器人’，定时抓取热点新闻，自动生成 20 秒左右的竖屏短视频，用于自媒体矩阵运营。
    项目链接: https://github.com/harry0703/MoneyPrinterTurbo
 
 2. PostHog/posthog:
@@ -40,50 +46,30 @@
    衍生灵感: 灵感1：基于 PostHog 的自驾驶模式，可以开发一个专门的'自动化错误修复助手'，它监控错误追踪和日志数据，自动生成修复建议或 PR，并集成到 CI/CD 流程中，让开发人员只需审核合并。; 灵感2：将 PostHog 的会话重放和调查功能集成到客户支持系统中，构建一个'用户行为洞察平台'，当用户遇到问题时自动关联其会话回放、错误日志和产品行为，提升工单处理效率和客户满意度。; 灵感3：利用 PostHog 的数据仓库和管道能力，构建一个跨平台多渠道的 AI 增长分析工具，整合来自支付、CRM、广告平台的数据，通过 AI 自动识别高转化用户特征并提供增长建议。
    项目链接: https://github.com/PostHog/posthog
 
-3. volcengine/OpenViking:
-   star: 29458  语言/技术: Python, Rust
-   项目简介: OpenViking 是一个面向 AI Agent 的开源上下文数据库，将记忆、资源和技能组织为 viking:// 协议下的虚拟文件系统，通过 L0/L1/L2 三层按需加载和可观测检索，帮助 Agent 高效管理长期上下文并降低 token 消耗。
-   亮点: 将零散的上下文统一为文件系统结构，Agent 通过 ls/tree/find 等命令操作上下文; 分层加载（L0/L1/L2）显著减少 token 开销，实测最高降低 91% 输入 token; 可观测检索轨迹，便于调试和追溯错误结果; 支持将会话自动沉淀为长期记忆，提升多轮任务成功率
-   详细报告: OpenViking 是一个开源上下文数据库，专为 AI Agent 设计。它的核心创新在于把 Agent 的记忆、资源和技能抽象成一个虚拟文件系统，通过 viking:// URI 进行统一访问。以往 Agent 的上下文通常依赖黑盒向量数据库，难以追踪和精细控制；而 OpenViking 让 Agent 像操作文件一样浏览上下文，确定性更强。
+3. elder-plinius/OBLITERATUS:
+   star: 7804  语言/技术: Python, PyTorch, Gradio, HuggingFace Transformers, SVD, PCA, 稀疏自编码器
+   项目简介: OBLITERATUS 是一个先进的开源工具包，用于理解和移除大语言模型（LLM）的拒绝行为（refusal behaviors）。它通过 abliteration 技术，在不需要重新训练的情况下，识别并精准剔除模型内部负责内容拒绝的表示，从而让模型对各类提示都能正常响应，同时保持核心语言能力。该项目还是一项分布式研究实验，每次运行都会贡献匿名基准数据，推动拒绝行为研究。它提供了从探测、提取到干预的完整流程，并带有图形界面和 Python API，支持研究人员深入分析模型对齐机制。
+   亮点: 实现多种拒绝方向提取策略（PCA、均值差异、稀疏自编码器分解、白化SVD）; 提供15个深度分析模块，可映射拒绝方向几何结构、预测自修复能力; 支持零代码操作（HuggingFace Spaces、Colab）和完整Python API，并可将分析结果自动配置消融策略
+   详细报告: OBLITERATUS 是一个专为研究人员和开发者设计的工具包，旨在深入理解和精确操控大语言模型中的“拒绝行为”——即模型对某些提示（如不安全或敏感内容）拒绝回答的机制。它基于“abliteration”这一系列技术，通过分析模型内部的激活状态，找到编码拒绝意图的特定方向（向量），然后通过数学手段将这些方向从模型中“切除”或“偏移”，使模型不再人为地拒绝特定类型的请求，同时尽量保留其原有的知识、推理和生成能力。
 
-在存储层面，每条内容被划分为三层：L0（摘要）、L1（概览）和 L2（详细信息）。写入时自动生成 L0/L1，检索时只加载任务所需的深度，从而大幅节省 token。例如在 LoCoMo 基准上，接入 OpenViking 后输入 token 可降低 34.3% 到 91%，查询延迟降低 58% 到 66%，同时记忆准确率从原生记忆的 24-57% 提升到 80-83%。
+该工具的核心流程包括：探测（PROBE）——在受限和非受限提示下收集模型的激活数据；蒸馏（DISTILL）——利用PCA、均值差异、稀疏自编码器、白化SVD等方法提取拒绝方向；切除（EXCISE）——通过归一化保留的双投影等操作，将拒绝方向从权重中去除；验证（VERIFY）——通过困惑度、连贯性检查确认模型能力未受损；重生（REBIRTH）——保存修改后的模型。此外，它还提供了多种先进的特性，如概念锥几何分析、对齐印记检测、跨模型通用性指数、防御鲁棒性评估、白化SVD提取、偏置项投影、迭代精炼等，以及15个分析模块，帮助用户理解模型拒绝机制的本质。
 
-检索方面，OpenViking 采用目录递归检索：先用向量搜索定位最相关的目录，再逐层下钻，保证结果带有上下文。每次检索的“浏览轨迹”都会被记录，一旦结果异常，可以清晰看到是哪个路径导致，方便调试。
+项目提供了六种使用方式：HuggingFace Spaces（零配置网页界面）、本地Gradio界面、Google Colab免费GPU、命令行工具、Python API以及可配置的YAML脚本，覆盖从无代码到完全可编程的多种需求。它特别强调可观测性和可复现性，每个步骤都能可视化，并能为模型部署者提供详细的决策支持。值得注意的是，OBLITERATUS 还是一项社区驱动的科学研究，用户可以选择贡献匿名数据，共同构建最大的自由消融研究数据集。
 
-此外，会话提交后，系统会异步抽取用户偏好和 Agent 经验，转化为长期记忆。例如在 tau2-bench 中，经验记忆使零售任务成功率提升 6.87 个百分点，航空任务提升 11.87 个百分点。
-
-项目提供 Python CLI（openviking-server）和 ov 客户端命令，支持 Volcengine、OpenAI、Codex、Kimi、GLM、Ollama 等多种模型提供商。同时原生集成 Claude Code、Codex、Cursor、LangChain 等主流 Agent 框架，也支持 MCP 协议。OpenViking Helper 桌面控制台（beta）提供可视化配置和会话追踪。
-
-虽然项目处于早期阶段，但文档完善，提供了快速开始、部署指南、基准报告和详细的架构说明。许可方面，主项目采用 AGPLv3，部分组件（如 ov_cli）采用 Apache 2.0，因此商业使用时需注意许可条款。
-   活跃度: 未知  社区健康: 文档提供了 Lark、微信、Discord、X 等社区渠道，有 CONTRIBUTING 指南和合作伙伴项目，但项目尚处早期，需持续观察社区活跃度。
-   商业潜力: 文档提及商业版分为 Managed SaaS 和 Self-Managed（在线/离线）两种形态，开源版无功能阉割。SaaS 托管于火山引擎，企业版支持多用户协作与权限管理；自管理版可部署到私有云或完全离线环境，适合隐私敏感行业。整体商业化路径清晰。
+由于该项目涉及移除模型的安全护栏，使用上存在极大风险。它明确声明仅用于研究、红队测试、安全评估和机制可解释性，使用者需自行承担所有责任。项目采用AGPL-3.0开源许可和商业双许可，并附带免责声明，强调禁止用于产生现实危害的用途。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 项目采用AGPL-3.0和商业双许可，存在商业化空间，如提供企业级模型安全审计服务或定制化模型解除服务。但需注意伦理和法律风险，建议专注于安全评估和透明度工具。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 OpenViking 构建一个企业级知识库管理 Agent，将内部 docs、代码仓库、工单历史统一挂载到 viking://，让各团队通过自然语言查询并自动按需加载相关内容，降低 Token 费用。; 灵感2：将其集成到 RPA 或自动化测试工具中，利用目录递归检索和轨迹记录，实现复杂操作流程的可追溯回放，快速定位失败环节。; 灵感3：开发一个个人助理技能市场，用户通过 OpenViking 的 skills 目录共享和导入技能，结合会话沉淀的记忆，打造真正个性化的 AI 伙伴。
-   项目链接: https://github.com/volcengine/OpenViking
+   衍生灵感: 灵感1：基于此工具包，可以开发一个‘模型行为审计平台’，帮助企业评估内部模型的安全边界，在部署前识别拒绝机制的薄弱环节，从而优化内容安全策略。; 灵感2：可以将其集成到现有的LLM训练流程中，作为后训练阶段的可解释性诊断工具，帮助调整对齐策略，例如自动发现哪些层或方向导致过度拒绝或能力退化。; 灵感3：可以扩展为‘可逆消融框架’，利用LoRA适配器实现动态开关模型行为，用于按需调整模型输出的审慎程度，比如在创作模式和安全模式之间无缝切换。
+   项目链接: https://github.com/elder-plinius/OBLITERATUS
 
 4. Tencent/AI-Infra-Guard:
-   star: 5006  语言/技术: Go, Python, Docker, YAML, MCP, LLM, REST API, Swagger, OpenClaw, CVE
-   项目简介: 腾讯朱雀实验室开源的AI红队平台，一站式扫描AI基础设施、MCP服务器、Agent技能和提示词注入漏洞，帮企业自查AI安全风险。
-   亮点: ClawScan：一键评估OpenClaw安全风险，覆盖配置错误、技能风险、CVE漏洞和隐私泄露。; AI基础设施漏洞扫描：识别100+ AI框架组件，匹配2000+ CVE漏洞，支持Ollama、ComfyUI、vLLM等。; MCP Server & Agent Skills扫描：检测14大安全风险类别，支持源码和远程URL。; Jailbreak评估：多轮越狱攻击测试，跨模型对比。; 插件化架构：通过YAML规则和数据集贡献，社区可扩展。
-   详细报告: 你见过专门给AI当“红队”的安全工具吗？腾讯朱雀实验室的AI-Infra-Guard（简称A.I.G）就是这么个硬核平台。它不是什么花架子，而是真刀真枪地帮你检查AI系统有没有“漏风”的地方。
-
-这货的核心功能有六大块：
-1. **AI基础设施漏洞扫描**：像给vLLM、Ollama、ComfyUI这些AI框架做体检，指纹识别版本后跟2000多个CVE漏洞库比对，直接告诉你哪里有坑。
-2. **MCP Server & Agent Skills扫描**：MCP是AI界的“USB-C接口”，但接口也可能藏毒。它能从源码或远程URL扫出14类安全风险，比如工具投毒、恶意代码、权限逃脱。
-3. **Agent Scan**：专门针对Dify、Coze这类平台的AI Agent工作流做多Agent自动化攻击测试，看你的Agent会不会被“带节奏”。
-4. **Jailbreak评估**：用精心设计的数据集对LLM发起多种攻击，比如多轮越狱、PAIR、GOAT，看看模型会不会说出不该说的话。
-5. **Model and API Relay Checker**：检查模型指纹、API中转黑盒审计，防止有人“偷梁换柱”换个模型冒充高级货。
-6. **ClawScan**：针对OpenClaw生态的一键安全评估，查配置漏洞、技能风险、CVE和隐私泄露。
-
-部署上，Docker一键起，4GB内存就能跑，还提供Python和Go的CLI工具，方便集成到CI/CD流水线。前端界面也不错，有实时进度，还有API文档方便二次开发。
-
-最惊艳的是它的“插件化框架”，你可以通过添加YAML指纹规则、漏洞规则、MCP规则和越狱数据集来扩展扫描能力，社区贡献起来很方便。而且整个项目采用Apache 2.0协议，免费开源。
-
-值得注意的是，开发者明确说了这工具目前没有认证机制，别直接怼到公网上，不然别人也能用你的扫描器了。另外扫描效果依赖LLM，需要配API密钥，可能产生点费用。
-
-总而言之，这就是个“AI安全工具箱”，适合企业安全团队、AI平台运维人员以及研究AI安全的极客们。
-   活跃度: 高（从更新日志看，2026年有多版本迭代）  社区健康: 未知（API指标显示forks和open_issues为0，可能未同步，但项目有详细的贡献指南和社区联系方式，实际活跃度未知）
-   商业潜力: 文档未提及
+   star: 5340  语言/技术: Docker, Python, Go, YAML, MCP, Agent, AI Security, OpenClaw, CVE, Jailbreak Evaluation
+   项目简介: 腾讯朱雀实验室开源的一站式 AI 红队平台，集成了 AI 基础设施漏洞扫描、MCP Server 与 Agent Skills 安全扫描、Agent 工作流评估、越狱评估和模型 API 校验等能力，帮助企业和个人全面自查 AI 应用的安全风险。
+   亮点: 集成 ClawScan、Agent Scan、MCP/Agent Skill 扫描、AI 基础设施漏洞扫描、越狱评估五大核心能力; 覆盖 2000+ CVE 漏洞规则，支持 Ollama、ComfyUI、vLLM、n8n、Triton 等主流 AI 框架; Skill 安全扫描在 SkillTrustBench 基准上 F1 分数高达 0.9848，识别 9 大类安全风险
+   详细报告: AI-Infra-Guard（简称 A.I.G）是由腾讯朱雀实验室主导开发的 AI 红队平台，目的是解决 AI 基础设施和 AI 应用中日益严峻的安全问题。平台提供多种扫描与评估能力，包括：AI 基础设施漏洞扫描（对运行中的 AI 服务进行指纹识别，匹配 2000+ CVE）、MCP Server 与 Agent Skills 扫描（从源码或远程 URL 检测 14 大类安全风险）、Agent Scan（针对 Dify、Coze 等多平台 AI Agent 工作流进行自动化安全评估）、越狱评估（用多种攻击方法测试大模型的鲁棒性）、以及模型指纹识别和 API 转发校验等高级功能。部署上支持 Docker 一键启动，也提供了独立的 CLI 工具（如 aig-skill-scan）方便集成到 CI/CD。技术方面，核心服务采用 Python 和 Go 开发，规则使用 YAML 编写，具有插件化扩展机制，用户可以贡献指纹和漏洞规则。项目还提供了完整的 Web 界面和 API 文档，并开源了前端代码。值得注意的是，当前版本缺乏认证机制，官方不建议部署在公网。该项目基于 Apache 2.0 许可开源，要求保留版权声明并注明出处。README 中展示了详细的版本更新记录和诸多学术论文引用，表明其研究深度和行业影响力，但受限于文档截断，部分技术细节（如具体的前端框架、数据库等）未提及。
+   活跃度: 活跃（README 显示近期有多个版本更新，如 v4.5.2 等）  社区健康: 未知
+   商业潜力: 文档提及有 Pro 版本（aigsec.ai）和 AI Security Skill Market，可能通过增值服务盈利，但具体商业模式未详细介绍。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个AI安全合规检查平台，基于A.I.G的扫描能力，为金融、医疗等行业的AI应用提供合规审计报告，自动生成整改建议。; 灵感2：将A.I.G集成到企业DevSecOps流水线，在AI模型上线前自动执行安全扫描，防止带病上线，还能定时巡检线上服务。; 灵感3：基于MCP扫描能力，构建一个面向MCP生态的安全监控服务，实时监测公开的MCP服务器，发现恶意工具投毒或漏洞利用，做成“MCP安全哨兵”。
+   衍生灵感: 灵感1：基于此项目可以开发一个企业 AI 资产安全巡检系统，定期自动扫描内部所有 AI 服务（vLLM、Ollama、ComfyUI）和 MCP 端点，生成合规报告并及时告警。; 灵感2：将 aig-skill-scan 集成到 Agent 开发流水线中，在每次发布 Skill 前自动执行安全扫描，防止恶意代码注入和敏感信息泄漏，提升 AI 应用供应链安全。; 灵感3：构建多租户的 AI 安全即服务平台（SaaS），基于 A.I.G 内核提供按次或订阅制的扫描服务，面向中小企业和云厂商提供安全评估能力。
    项目链接: https://github.com/Tencent/AI-Infra-Guard
