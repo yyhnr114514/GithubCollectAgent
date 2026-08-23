@@ -1,19 +1,19 @@
-1. harry0703/MoneyPrinterTurbo:
-   star: 113966  语言/技术: Python, Streamlit, FastAPI, Edge TTS, Azure Speech, SiliconFlow, Google Gemini, 小米 MiMo, ElevenLabs, Chatterbox, faster-whisper, Pexels, Pixabay, Coverr, WaveSpeed AI, Kimi / Moonshot AI, OpenAI, Anthropic Claude, DeepSeek, 阿里云通义千问, Azure OpenAI, 火山引擎方舟, xAI Grok, MiniMax, Cloudflare AI Gateway, ModelScope, Ollama, OneAPI, LiteLLM, Groq, Docker, ffmpeg, uv
-   项目简介: MoneyPrinterTurbo 是一款一站式 AI 短视频生成工具，只需提供视频主题或关键词，即可自动完成视频脚本编写、素材匹配、字幕生成、背景音乐合成，最终输出高清短视频。项目支持 WebUI、API、CLI 和 AI Agent 四种使用方式，内置多种大模型接口、TTS 语音合成和素材源，可实现批量生成和跨平台一键发布，极大降低了短视频制作的门槛，堪称内容创作者的‘打工人神器’和‘程序员救星’。
-   亮点: 一键生成完整短视频：输入主题或关键词，自动生成脚本、匹配素材、生成字幕和背景音乐并合成视频; 支持多种 AI 大模型和 TTS 语音合成，用户可灵活选择或组合使用; 提供 WebUI、API、CLI 和 AI Agent 四种使用方式，满足不同场景需求; 支持批量视频生成，一次可生成多个视频供挑选; 支持跨平台发布至 TikTok、Instagram 和 YouTube Shorts
-   详细报告: MoneyPrinterTurbo 是一个功能强大且高度自动化的 AI 短视频生成工具。其核心逻辑是：用户只需输入一个主题或关键词，系统便会自动完成视频生产的全流程。首先，它利用大语言模型生成视频脚本，支持多种主流模型如 OpenAI、DeepSeek、Kimi、通义千问等，并兼容 Ollama 等本地部署环境；其次，根据脚本内容自动匹配高清素材，素材来源包括 Pexels、Pixabay、Coverr 等免版权网站，同时也支持接入 WaveSpeed AI 的文生视频模型，直接生成符合关键词的全新画面；然后，通过 TTS 引擎（如 Edge TTS、Azure Speech、ElevenLabs 等）将脚本合成为语音，并利用 TTS 时间戳或本地 faster-whisper 模型生成精准字幕；最后，自动添加背景音乐和字幕样式，渲染合成最终的高清视频。
+1. anthropics/claude-code:
+   star: 142558  语言/技术: Node.js
+   项目简介: Claude Code 是一个跑在终端里的智能编码代理，能理解你的代码库，通过自然语言帮你执行例行任务、解释复杂代码、处理 git 工作流，让写代码像聊天一样轻松。
+   亮点: 终端原生交互：直接在命令行里用自然语言指挥它干活，不用离开终端。; 代码库理解能力：能读懂整个项目结构，帮你解释复杂代码或定位问题。; 多环境支持：既能在终端用，也能集成到 IDE，还能在 GitHub 上 @claude 召唤它。
+   详细报告: Claude Code 是 Anthropic 推出的智能编码代理，旨在成为开发者的“代码副驾驶”，但比传统插件更“agentic”——它不是一个被动的补全工具，而是能主动理解项目、执行任务的智能体。它像一个住在终端里的“编程实习生”，你说“帮我把这个函数的调用关系理一下”或“自动修复这几个 lint 错误”，它就能动手完成。
 
-项目在架构上非常注重灵活性，提供了四种交互方式：WebUI（基于 Streamlit）适合普通用户可视化操作；API（基于 FastAPI）方便集成到其他系统；CLI 适合命令行自动化；AI Agent 则允许智能体自动读取文档并执行安装、配置和生成任务。同时，代码按控制器、服务、模型分层，便于二次开发和扩展。
+从安装方式看，它支持 macOS、Linux 和 Windows，推荐使用官方脚本或包管理器安装，npm 方式已标记为弃用，说明项目在快速迭代。安装后只需在项目目录运行 `claude` 就能进入交互界面，上手门槛极低。核心能力包括：通过自然语言指令执行诸如代码重构、测试运行、依赖升级等例行任务；能解释复杂的代码逻辑，适合学习或 code review；还能处理 git 工作流，比如生成 commit message、解决 merge 冲突等。
 
-在技术栈方面，项目基于 Python 3.11+，使用 uv 作为依赖管理工具，支持 Docker 一键部署，内置了 ffmpeg 作为视频处理核心。语音合成方面除默认的免费 Edge TTS 外，还支持 Azure TTS、SiliconFlow、Google Gemini、小米 MiMo、ElevenLabs 等多家付费或免费服务。字幕生成支持 edge 和 whisper 两种模式，用户可根据准确度和性能需求切换。此外，项目还支持视频尺寸（竖屏 9:16、横屏 16:9）、片段时长、字幕样式、背景音乐音量等细节调节，并支持将配置导出/导入为预设文件，便于批量复用。
+它还支持插件系统，可以扩展自定义命令和 agents，这为二次开发提供了很大的想象空间。此外，项目有明确的数据收集和隐私保护说明，表明它不只是本地工具，也会将使用数据回传（用于改进产品），但承诺不会用反馈数据训练模型，这在一定程度上缓解了隐私担忧。
 
-需要注意的是，文档中部分内容（如具体的安装步骤、视频教程链接、部分赞助商信息）可能因为 README 截断而不够完整，但整体功能描述非常详尽。由于本项目高度依赖外部 API 和素材源，使用时需要自行申请相关密钥，并注意部分服务可能产生费用。
+不过，由于 README 内容被截断，关于插件的具体细节、API 接口、高级配置、以及与其他工具的集成方式（如 IDE 插件具体名单）都没有展示，需要补充详细文档才能展开。从现有信息看，这是一个面向专业开发者的“效率神器”，尤其适合那些日常要处理大量重复性编码任务、又懒得写脚本的程序员。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：可以基于 MoneyPrinterTurbo 开发一个‘条漫短视频生成器’，将用户提供的图文故事自动转化为带配音和字幕的短视频，用于儿童教育或品牌营销。; 灵感2：可以将其集成到电商后台系统中，当商家上架新品时，自动生成商品介绍短视频并发布到抖音、TikTok 等平台，实现营销内容自动化。; 灵感3：可以扩展为一个‘新闻热点速报机器人’，定时抓取热点新闻，自动生成 20 秒左右的竖屏短视频，用于自媒体矩阵运营。
-   项目链接: https://github.com/harry0703/MoneyPrinterTurbo
+   衍生灵感: 灵感1：开发一个“团队代码知识库管家”——基于 Claude Code 的代码理解能力，自动扫描团队私有仓库，生成可检索的代码问答机器人，新员工入职后直接问它“支付流程怎么实现？”就能快速上手。; 灵感2：打造一个“自动化 Code Review 助手”——将 Claude Code 集成到 CI/CD 流水线中，让它自动审查每次提交的代码，给出风格建议和潜在 bug 提示，并把结果推送至企业微信或钉钉，减轻维护者的负担。; 灵感3：构建一个“语义化 Git 提交生成器”——利用 Claude Code 对 diff 的理解，自动生成符合 Conventional Commits 规范的 commit message，并附带中文解释，让团队提交历史更清晰。
+   项目链接: https://github.com/anthropics/claude-code
 
 2. PostHog/posthog:
    star: 38021  语言/技术: JavaScript, Python, Node, React, Next.js, Vue, PHP, Ruby, Go, C#, Flutter, React Native, Android, iOS, Django, Angular, WordPress, Webflow
@@ -46,24 +46,7 @@
    衍生灵感: 灵感1：基于 PostHog 的自驾驶模式，可以开发一个专门的'自动化错误修复助手'，它监控错误追踪和日志数据，自动生成修复建议或 PR，并集成到 CI/CD 流程中，让开发人员只需审核合并。; 灵感2：将 PostHog 的会话重放和调查功能集成到客户支持系统中，构建一个'用户行为洞察平台'，当用户遇到问题时自动关联其会话回放、错误日志和产品行为，提升工单处理效率和客户满意度。; 灵感3：利用 PostHog 的数据仓库和管道能力，构建一个跨平台多渠道的 AI 增长分析工具，整合来自支付、CRM、广告平台的数据，通过 AI 自动识别高转化用户特征并提供增长建议。
    项目链接: https://github.com/PostHog/posthog
 
-3. elder-plinius/OBLITERATUS:
-   star: 7804  语言/技术: Python, PyTorch, Gradio, HuggingFace Transformers, SVD, PCA, 稀疏自编码器
-   项目简介: OBLITERATUS 是一个先进的开源工具包，用于理解和移除大语言模型（LLM）的拒绝行为（refusal behaviors）。它通过 abliteration 技术，在不需要重新训练的情况下，识别并精准剔除模型内部负责内容拒绝的表示，从而让模型对各类提示都能正常响应，同时保持核心语言能力。该项目还是一项分布式研究实验，每次运行都会贡献匿名基准数据，推动拒绝行为研究。它提供了从探测、提取到干预的完整流程，并带有图形界面和 Python API，支持研究人员深入分析模型对齐机制。
-   亮点: 实现多种拒绝方向提取策略（PCA、均值差异、稀疏自编码器分解、白化SVD）; 提供15个深度分析模块，可映射拒绝方向几何结构、预测自修复能力; 支持零代码操作（HuggingFace Spaces、Colab）和完整Python API，并可将分析结果自动配置消融策略
-   详细报告: OBLITERATUS 是一个专为研究人员和开发者设计的工具包，旨在深入理解和精确操控大语言模型中的“拒绝行为”——即模型对某些提示（如不安全或敏感内容）拒绝回答的机制。它基于“abliteration”这一系列技术，通过分析模型内部的激活状态，找到编码拒绝意图的特定方向（向量），然后通过数学手段将这些方向从模型中“切除”或“偏移”，使模型不再人为地拒绝特定类型的请求，同时尽量保留其原有的知识、推理和生成能力。
-
-该工具的核心流程包括：探测（PROBE）——在受限和非受限提示下收集模型的激活数据；蒸馏（DISTILL）——利用PCA、均值差异、稀疏自编码器、白化SVD等方法提取拒绝方向；切除（EXCISE）——通过归一化保留的双投影等操作，将拒绝方向从权重中去除；验证（VERIFY）——通过困惑度、连贯性检查确认模型能力未受损；重生（REBIRTH）——保存修改后的模型。此外，它还提供了多种先进的特性，如概念锥几何分析、对齐印记检测、跨模型通用性指数、防御鲁棒性评估、白化SVD提取、偏置项投影、迭代精炼等，以及15个分析模块，帮助用户理解模型拒绝机制的本质。
-
-项目提供了六种使用方式：HuggingFace Spaces（零配置网页界面）、本地Gradio界面、Google Colab免费GPU、命令行工具、Python API以及可配置的YAML脚本，覆盖从无代码到完全可编程的多种需求。它特别强调可观测性和可复现性，每个步骤都能可视化，并能为模型部署者提供详细的决策支持。值得注意的是，OBLITERATUS 还是一项社区驱动的科学研究，用户可以选择贡献匿名数据，共同构建最大的自由消融研究数据集。
-
-由于该项目涉及移除模型的安全护栏，使用上存在极大风险。它明确声明仅用于研究、红队测试、安全评估和机制可解释性，使用者需自行承担所有责任。项目采用AGPL-3.0开源许可和商业双许可，并附带免责声明，强调禁止用于产生现实危害的用途。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 项目采用AGPL-3.0和商业双许可，存在商业化空间，如提供企业级模型安全审计服务或定制化模型解除服务。但需注意伦理和法律风险，建议专注于安全评估和透明度工具。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此工具包，可以开发一个‘模型行为审计平台’，帮助企业评估内部模型的安全边界，在部署前识别拒绝机制的薄弱环节，从而优化内容安全策略。; 灵感2：可以将其集成到现有的LLM训练流程中，作为后训练阶段的可解释性诊断工具，帮助调整对齐策略，例如自动发现哪些层或方向导致过度拒绝或能力退化。; 灵感3：可以扩展为‘可逆消融框架’，利用LoRA适配器实现动态开关模型行为，用于按需调整模型输出的审慎程度，比如在创作模式和安全模式之间无缝切换。
-   项目链接: https://github.com/elder-plinius/OBLITERATUS
-
-4. Tencent/AI-Infra-Guard:
+3. Tencent/AI-Infra-Guard:
    star: 5340  语言/技术: Docker, Python, Go, YAML, MCP, Agent, AI Security, OpenClaw, CVE, Jailbreak Evaluation
    项目简介: 腾讯朱雀实验室开源的一站式 AI 红队平台，集成了 AI 基础设施漏洞扫描、MCP Server 与 Agent Skills 安全扫描、Agent 工作流评估、越狱评估和模型 API 校验等能力，帮助企业和个人全面自查 AI 应用的安全风险。
    亮点: 集成 ClawScan、Agent Scan、MCP/Agent Skill 扫描、AI 基础设施漏洞扫描、越狱评估五大核心能力; 覆盖 2000+ CVE 漏洞规则，支持 Ollama、ComfyUI、vLLM、n8n、Triton 等主流 AI 框架; Skill 安全扫描在 SkillTrustBench 基准上 F1 分数高达 0.9848，识别 9 大类安全风险
@@ -73,3 +56,14 @@
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于此项目可以开发一个企业 AI 资产安全巡检系统，定期自动扫描内部所有 AI 服务（vLLM、Ollama、ComfyUI）和 MCP 端点，生成合规报告并及时告警。; 灵感2：将 aig-skill-scan 集成到 Agent 开发流水线中，在每次发布 Skill 前自动执行安全扫描，防止恶意代码注入和敏感信息泄漏，提升 AI 应用供应链安全。; 灵感3：构建多租户的 AI 安全即服务平台（SaaS），基于 A.I.G 内核提供按次或订阅制的扫描服务，面向中小企业和云厂商提供安全评估能力。
    项目链接: https://github.com/Tencent/AI-Infra-Guard
+
+4. shy3130/tickflow-stock-panel:
+   star: 3463  语言/技术: FastAPI, Pydantic v2, APScheduler, sse-starlette, Polars, DuckDB, Parquet, vectorbt, TickFlow, OpenAI 兼容接口, React 18, Vite, TypeScript, Tailwind, Tanstack Query, Lightweight Charts, ECharts, dnd-kit, Docker
+   项目简介: 这是一个面向个人散户和量化爱好者的自托管 A 股量化工作台，整合了选股、监控、回测、个股分析等功能，基于 TickFlow 数据源，采用 Polars 毫秒级扫描全 A 股，支持 18 个内置策略与自定义信号，并提供 Docker 一键部署。
+   亮点: Polars 毫秒级扫全 A 股, 内置 18 个选股策略; 三种回测模式(个股/策略组合/自由信号), 支持 T+1/手续费/滑点/止损; 四类监控规则(策略/个股信号/价格/异动), 支持语音播报和飞书推送; AI 四维分析(技术/基本面/财务/消息面)与盘后自动复盘; 自托管零运维, 支持 Docker 单容器部署
+   详细报告: 本项目的核心定位是为个人投资者提供一个自托管、零运维的 A 股量化工作台, 解决从数据获取、选股、回测到监控的全流程需求。它基于 TickFlow 数据源, 但并非官方项目, 仅供学习研究使用。功能上, 选股引擎内置 18 个策略, 使用 Polars 进行毫秒级全市场扫描, 并可自定义信号或通过 AI 生成策略。指标流水线支持 MA/EMA/MACD/RSI/KDJ/布林/量比等常用指标, 并落盘为 Parquet 格式。回测引擎支持三种模式, 考虑 T+1、手续费、滑点和止损, 通过 SSE 流式推送进度。监控中心支持四类监控规则, 支持 AND/OR 条件组合, 语音播报和飞书推送。个股分析提供 9 类关键价位和 AI 四维分析。连板梯队功能展示连板层级、概念轮动和盘后 AI 复盘。数据扩展支持第三方数据源接入(接口/推送/CSV/JSON)。技术栈方面, 后端使用 FastAPI、Pydantic v2、APScheduler、sse-starlette, 数据处理采用 Polars、DuckDB、Parquet, 回测使用 vectorbt (唯一的 pandas 依赖), AI 部分支持 OpenAI 兼容接口(如 DeepSeek、通义、Ollama), 前端使用 React 18、Vite、TypeScript、Tailwind、Tanstack Query、Lightweight Charts、ECharts、dnd-kit。部署支持 Docker 两阶段构建, 单容器运行。项目还提供了详细的文档, 涵盖部署、配置、功能、自定义数据源和策略开发规范。整体来看, 这是一个功能全面、技术栈现代的量化工作台, 适合有一定编程基础的量化爱好者进行二次开发和学习。但需注意, 项目明确不对标同花顺/通达信, 不提供 AI 荐股或涨停预测, 且小白需要绕路, 适合有经验的用户。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目的选股引擎和监控中心, 可以开发一个『基金/可转债智能监控助手』, 将策略扩展至其他金融品种, 实时监控异动并推送提醒。; 灵感2：可以将其集成到现有的量化交易系统中, 通过 Webhook 或 API 对接券商接口, 实现自动化交易执行, 形成从信号产生到下单的闭环。; 灵感3：利用其数据扩展能力, 接入加密货币或其他市场数据, 构建一个跨市场的多资产量化分析平台, 同时支持 A 股和海外市场。
+   项目链接: https://github.com/shy3130/tickflow-stock-panel
