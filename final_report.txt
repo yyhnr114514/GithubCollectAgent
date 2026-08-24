@@ -1,69 +1,81 @@
-1. anthropics/claude-code:
-   star: 142558  语言/技术: Node.js
-   项目简介: Claude Code 是一个跑在终端里的智能编码代理，能理解你的代码库，通过自然语言帮你执行例行任务、解释复杂代码、处理 git 工作流，让写代码像聊天一样轻松。
-   亮点: 终端原生交互：直接在命令行里用自然语言指挥它干活，不用离开终端。; 代码库理解能力：能读懂整个项目结构，帮你解释复杂代码或定位问题。; 多环境支持：既能在终端用，也能集成到 IDE，还能在 GitHub 上 @claude 召唤它。
-   详细报告: Claude Code 是 Anthropic 推出的智能编码代理，旨在成为开发者的“代码副驾驶”，但比传统插件更“agentic”——它不是一个被动的补全工具，而是能主动理解项目、执行任务的智能体。它像一个住在终端里的“编程实习生”，你说“帮我把这个函数的调用关系理一下”或“自动修复这几个 lint 错误”，它就能动手完成。
+1. Alishahryar1/free-claude-code:
+   star: 48023  语言/技术: Python, Bash, PowerShell, RTK, Whisper (OpenAI), NVIDIA NIM, OpenAI-compatible API
+   项目简介: 一个开源的多提供商 AI 编码代理网关，让你通过一个统一的本地代理在 9 种编码代理和 49 家 AI 模型提供商之间自由切换，用上免费 token，自动容灾，还能省 token 钱。
+   亮点: 49 个 ToS-friendly 模型提供商，每月超 13 亿免费 token，涵盖免费、付费、订阅和本地模型。; 支持 9 种主流编码代理（Claude Code、Codex、Pi、OpenCode 等）统一接入。; 自动故障转移：一个模型挂了自动切下一个，无需重启对话。; 最多减少 90% 的终端输出 token 消耗（通过 RTK + 5 项 FCC 优化）。; 多端触达：终端、桌面、IDE、Discord、Telegram，语音输入也能用。
+   详细报告: Free Claude Code (FCC) 是一个开源的本地代理工具，它把自己伪装成 AI 提供商的 API 端点，让各种编码代理（Claude Code、Codex 等）以为在跟 Anthropic 或 OpenAI 对话，实际上它把请求转发到任意你配置的模型提供商。这么做的好处是，你不需要为每个代理单独搞一套 API key，而且可以用上很多提供商的免费配额。
 
-从安装方式看，它支持 macOS、Linux 和 Windows，推荐使用官方脚本或包管理器安装，npm 方式已标记为弃用，说明项目在快速迭代。安装后只需在项目目录运行 `claude` 就能进入交互界面，上手门槛极低。核心能力包括：通过自然语言指令执行诸如代码重构、测试运行、依赖升级等例行任务；能解释复杂的代码逻辑，适合学习或 code review；还能处理 git 工作流，比如生成 commit message、解决 merge 冲突等。
+核心功能包括：
 
-它还支持插件系统，可以扩展自定义命令和 agents，这为二次开发提供了很大的想象空间。此外，项目有明确的数据收集和隐私保护说明，表明它不只是本地工具，也会将使用数据回传（用于改进产品），但承诺不会用反馈数据训练模型，这在一定程度上缓解了隐私担忧。
+1. **统一模型路由**：FCC 内置 49 家提供商的接入配置，从 NVIDIA NIM、OpenRouter、Groq 到 OpenAI、xAI、Google Gemini，甚至本地 Ollama、LM Studio。你在一个 Admin UI 里填入各家的 API key，然后统一选择模型。Admin UI 支持搜索和校验模型，还能为不同的 Claude 模型层级（Opus、Sonnet 等）单独指定不同的底层模型。
 
-不过，由于 README 内容被截断，关于插件的具体细节、API 接口、高级配置、以及与其他工具的集成方式（如 IDE 插件具体名单）都没有展示，需要补充详细文档才能展开。从现有信息看，这是一个面向专业开发者的“效率神器”，尤其适合那些日常要处理大量重复性编码任务、又懒得写脚本的程序员。
+2. **故障转移**：这是最贴心的功能。当你当前使用的模型因为配额、网络等原因请求失败时，FCC 会自动按你配置的备用模型顺序重试，整个过程对用户透明，不用手动重启会话。对于重度用户来说，这就是'打工人神器'，不用因为一个提供商挂了就卡死。
+
+3. **Token 省钱优化**：它集成了 RTK，可以把那些常见的终端输出（比如编译日志、测试输出）压缩掉，最高减少 90% 的 token 消耗。同时还有 5 项内置优化，避免在配额探测、命令前缀、标题、建议和文件路径这些场景浪费 token，直接省下真金白银。
+
+4. **多客户端兼容**：支持 Claude Code、Codex、Pi、OpenCode、Cline、Hermes、DeepSeek Harness、Grok Build、Muse Code 这 9 种代理。你可以用同一个模型库跑不同的代理，而且在 VS Code、JetBrains 里也能接上。
+
+5. **多端交互**：除了本地命令行，还提供 Discord 和 Telegram 机器人，能在手机上远程启动任务。另外还支持语音消息，用本地 Whisper 或 NVIDIA NIM 把语音转成文字，然后喂给 agent。
+
+6. **安全与控制**：Admin UI 里可以开启代理认证，防止别人偷用你的模型配额。针对不同的模型 tier（Fable/Opus/Sonnet/Haiku）可以做路由覆盖，还能控制推理深度（Reasoning），从 Off 到 Max 自由选择。
+
+技术上，它主要通过 Python 实现，安装脚本支持 macOS/Linux (bash) 和 Windows (PowerShell)。本地代理默认监听 8082 端口（示例中 Claude Code 通过 ANTHROPIC_BASE_URL 指向它），并支持 OpenAI 兼容格式。语音功能依赖 PyTorch 和 Whisper 或 NVIDIA NIM 的 API。
+
+由于文档被截断，具体的 REST API 定义、配置文件格式、高级扩展方式（ARCHITECTURE.md）没有展示，但整体架构思路很清晰：一个本地代理，多后端路由，多前端适配。对于开发者来说，它的价值不仅是拿来即用，更是一个'模型路由网关'的参考实现。
    活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及，但可以看出在降低 AI 使用成本、统一模型管理方面有商业化潜力，比如做成 SaaS 服务或企业私有化部署。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此项目，可以开发一个企业级的'多模型 API 网关'，为团队提供统一的 LLM 接入层，支持成本监控、配额管理和访问控制，还能自动选择性价比最高的模型来完成任务。; 灵感2：可以将其故障转移和模型路由机制集成到现有的 CI/CD 流水线中，比如在自动化代码审查或文档生成任务里，当主模型超时或失败时自动切换到备用模型，保证流水线不中断。; 灵感3：扩展为智能客服路由中心，把用户的语音/文本请求通过 Whisper 转写，然后根据意图自动路由到最适合的模型（小模型处理简单问题，大模型处理复杂推理），并存档所有对话用于质检。
+   项目链接: https://github.com/Alishahryar1/free-claude-code
+
+2. virgiliojr94/book-to-skill:
+   star: 24709  语言/技术: Python, PDF解析（pdftotext、pypdf、pdfminer.six、docling）, EPUB解析（ebooklib、beautifulsoup4）, DOCX、HTML、RTF、MOBI等格式支持, Agent Skills（SKILL.md 规范）, Markdown, CLI
+   项目简介: 一个将技术书籍、文档或资源集合转化为结构化 Agent Skill 的工具，让 AI 编程助手（如 GitHub Copilot CLI、Amp、Claude Code）按需加载章节，节省 24-51 倍 token，避免二次翻阅和幻觉。
+   亮点: 将整本书变成结构化的技能，按需加载章节，节省 24x-51x token; 支持多种文档格式（PDF、EPUB、DOCX、HTML、RTF、MOBI 等），并兼容 GitHub Copilot CLI、Amp、Claude Code; 本地处理保护隐私，不包含书籍内容，遵守合理使用原则
+   详细报告: book-to-skill 是一个极具创意的开源项目，它解决了开发者“买了技术书却记不住内容”的痛点。传统阅读方式下，你读完一本书，几个月后可能连章节标题都忘了，而翻 PDF 搜索又只能得到页码列表，问 AI 助手它要么胡说八道要么说没有内容。这个项目的核心思路是：把整本书（或任何结构化文本）转化为一个符合 Agent Skills 标准的技能目录，让 AI 助手在需要时按需加载对应章节，从而用最少的 token 获得精确答案。
+
+工作流程分三步：首先你通过命令 `/book-to-skill your-book.pdf` 指向一个文件、文件夹或 glob 模式；接着工具会用一个确定性的 Python 提取器将文档转换为干净的文本和元数据，再通过一个由 SKILL.md 驱动的生成器将文本结构化为框架、决策规则、反例、每章独立文件等；最后，你的 AI 助手（如 Copilot CLI、Amp、Claude Code）可以通过 `/your-book-slug 主题` 这样的命令，在需要时加载对应章节文件，直接基于真实内容回答，避免幻觉。
+
+生成的结构包含 `SKILL.md`（核心心智模型 + 章节索引）、`chapters/`（每章一个文件，按需加载）、`glossary.md`（术语表）、`patterns.md`（技术/算法/设计模式）、`cheatsheet.md`（快速参考表）。这种设计的亮点在于全部采用 Markdown 格式，且每个文件都很小（章节约 1000 tokens），极大降低了上下文占用。据项目文档，相比直接把整本书扔进上下文，它可节省 24 到 51 倍的 token，因为 AI 不需要反复导航目录、回溯重读。
+
+项目还支持多种文档格式：PDF 会根据书籍类型自动选择不同引擎（技术类用 docling 保留代码表格，文本类用 pdftotext）；EPUB 用 ebooklib 和 BeautifulSoup；还有其他格式如 DOCX、HTML、RTF、MOBI 等。所有处理都在本地完成，保护隐私，且不附带任何书籍内容，仅作为转换工具，符合合理使用原则。
+
+除了书籍，它还能处理内部文档、品牌规范、研究论文、规范和标准等，凡是需要反复查阅的资料都能变成可查询的技能。安装非常便捷，可通过 `npx skills add` 一键添加到各种宿主环境，或者手动克隆到对应 skills 目录。整体来说，这个项目是 AI 时代的“知识蒸馏器”，让文档的价值真正融入工作流。
+   活跃度: 未知（pushed_at 为 null，暂无近期提交记录）  社区健康: 未知（GitHub 数据显示 forks=0、open_issues=0，可能处于早期阶段或未公开活动）
+   商业潜力: 文档未提及（但项目有 Sponsor 机制，且未来可考虑面向企业的知识管理服务）
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：企业知识库 Agent：将公司内部的架构决策记录（ADR）、运维手册、新员工指南等文档批量转换为 skill，团队成员通过对话式查询即可获取准确答案，大幅减少搜索和阅读时间。; 灵感2：在线教育平台智能助教：将课程教材、讲义转换为 skill，集成到学习平台或 Copilot 中，学员随时提问，AI 基于教材内容精确解答，并可自动生成章节测试题。; 灵感3：合规与标准查询系统：将大量法规、API 契约、安全标准等文档转化为可检索的 skill，审计人员或开发人员用自然语言即可快速定位条款要求，避免遗漏和误读。
+   项目链接: https://github.com/virgiliojr94/book-to-skill
+
+3. anthropics/claude-plugins-community:
+   star: 993  语言/技术: Claude Code, Claude Cowork, JSON, GitHub Actions, 插件系统
+   项目简介: 这个是 Claude 官方维护的社区插件市场镜像仓库，用来收集和管理由社区开发者提交、经过安全扫描和审核的 Claude 插件。相当于一个插件的‘应用商店’，用户可以通过它一键安装各类插件来扩展 Claude Code 和 Claude Cowork 的能力。解决的问题是让 Claude 能像手机装 App 一样方便地扩展功能，而且所有插件都经过官方安全检查，省心又放心。
+   亮点: 官方审核机制：所有插件经过自动安全扫描和人工审批，质量有保障; 一键安装体验：通过命令行或网页即可完成插件安装，对普通用户友好; 社区驱动：由全球开发者贡献插件，让 Claude 的生态越来越丰富
+   详细报告: 这个项目是 Anthropic 官方推出的社区插件市场镜像仓库，其核心作用类似于手机上的应用商店，用来集中分发和管理由社区开发者编写的 Claude 插件。仓库本身是一个只读镜像，里面的 marketplace.json 文件记录了所有可安装的插件列表，每天会从 Anthropic 内部的审核流程中同步更新。开发者如果开发了插件，需要去官方指定的提交入口（clau.de/plugin-directory-submission）提交，经过自动化安全扫描和批准后才会出现在这个市场里。直接往这个仓库提交 PR 是没用的，系统会自动关闭，这保证了所有插件都经过了官方审查，降低了恶意代码的风险。
+
+用户使用这个市场有两种方式：一种是图形化操作，在 Claude Cowork 的插件商店里直接安装；另一种是命令行方式，通过 `claude plugin marketplace add` 和 `claude plugin install` 命令来添加市场并安装指定插件。这种设计既照顾了小白用户，也给开发者和高级用户提供了高效的管理手段。
+
+技术上讲，该仓库主要依赖 JSON 格式的清单文件来维护插件元数据，结合 Claude 本身的插件机制实现安装、版本管理和权限控制。虽然文档没有细说底层实现，但结合 Anthropic 的其他项目推测，整个流程可能利用了 GitHub Actions 或类似的 CI/CD 管道来进行夜间的同步和更新。
+
+对于开发者来说，这个项目最大的价值在于它提供了一个标准的插件分发和发现渠道，你只需要把你的插件写好并提交审核，就能让全世界的用户使用到你的作品。同时，因为这是个官方项目，它在安全和规范上做了严格把控，这对整个 AI Agent 生态的健康发展起到了很好的示范作用，让插件开发者和使用者都能放心参与。
+   活跃度: 由于是夜间定期更新的镜像仓库，本身提交频率不高，但涉及的插件提交审核应该比较频繁。  社区健康: 文档未详细描述社区活动情况，但提到了社区驱动的插件贡献和夜间同步，推测有活跃的贡献者群体。
+   商业潜力: 文档未提及具体的商业模式，但作为官方生态的一部分，有可能成为未来插件收费、广告或推荐位分发的入口，不过目前仅作为免费社区资源存在。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：可以做一个「Claude 插件搜索引擎」，基于这个社区的 marketplace.json 数据，把插件分类、关键字、评分、下载量等做成可视化平台，方便用户快速找到心仪的功能。; 灵感2：开发一个「企业级 Claude 插件私有市场」，利用这个项目的审核和分发机制，在企业内部搭建自己的插件仓库，让内部团队共享封装的行业插件，同时保留安全门禁。; 灵感3：可以集成到 CI/CD 流程，在自动化测试环境里预装社区常用插件，用来做 Agent 行为测试和功能对比，比如评估不同插件在特定任务上的表现。
+   项目链接: https://github.com/anthropics/claude-plugins-community
+
+4. Comfy-Org/ComfyUI:
+   star: 129425  语言/技术: Python, PyTorch, Vue.js, TypeScript, CUDA, ROCm, TAESD
+   项目简介: ComfyUI 是一个功能强大且高度模块化的 AI 创作引擎，采用可视化节点图界面，让用户无需编写代码即可构建复杂的图像、视频、3D、音频等生成工作流。它原生支持最新开源 SOTA 模型，并提供本地 API 接口，可无缝集成到生产管线，被广泛认为是生成式 AI 领域的“工作流神器”。
+   亮点: 可视化节点图工作流，通过拖拽连线即可搭建复杂的 AI 生成流程，无需任何编程基础。; 原生支持多种最新开源模型（Stable Diffusion、Flux、Wan、Hunyuan 等），覆盖图像、视频、音频、3D 等模态，并可通过 Partner Nodes 访问闭源模型。; 提供本地 API 端点，支持异步队列、部分图重执行、智能 VRAM 管理，并可通过 App Mode 将复杂工作流封装为简单 UI，便于生产环境集成。; 完全离线运行，注重隐私和可控性，支持自定义节点扩展，社区生态丰富。
+   详细报告: ComfyUI 是面向视觉创作者和开发者的 AI 内容生成引擎，其核心是模块化的节点图（Node Graph）界面。用户通过将不同功能的节点（如加载模型、文本编码、采样、解码等）连接成一个流程图，即可完成从文本到图像、视频、3D 模型甚至音频的生成。这种高度可视化、可复用的工作流设计，使得即使没有深度学习背景的用户也能轻松上手，而专业用户则能精细控制每个参数。
+
+在技术层面，ComfyUI 使用 Python 编写，基于 PyTorch 深度学习框架，支持多种硬件加速（NVIDIA CUDA、AMD ROCm、Intel XPU、Apple Silicon 等）。前端则采用 TypeScript + Vue.js，提供了流畅的交互体验。项目内置了高效的资源管理机制，包括异步队列、部分图重执行、模型卸载和量化支持，使得在消费级显卡上也能运行大型模型。此外，ComfyUI 还提供 REST API，开发者可以将其作为后端引擎，把工作流嵌入到自有应用中，实现自动化生产。
+
+在模型兼容性方面，ComfyUI 支持完整的 checkpoint 加载，也可拆分加载扩散模型、VAE、文本编码器、LoRA、ControlNet 等组件，并内置了修补、外绘、参考条件、模型合并、放大、帧插值、分割、深度估计等图像处理工具。工作流可以保存为 JSON 文件，甚至能从生成的媒体中恢复完整的工作流和种子，方便复现与分享。
+
+ComfyUI 的发布节奏非常活跃，大约每两周发布一个稳定版本，同时前端每两周更新一次。官方提供了桌面应用、Windows 便携版、手动安装等多种部署方式，也支持通过 comfy-cli 命令行工具一键安装。由于文档被截断，部分高级功能（如动态提示词、TAESD 预览、TLS 配置等）虽已展示，但更深入的使用细节建议查阅完整文档。整体而言，ComfyUI 不仅是一个工具，更是一个充满生态活力的创作平台。
+   活跃度: 高  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个“团队代码知识库管家”——基于 Claude Code 的代码理解能力，自动扫描团队私有仓库，生成可检索的代码问答机器人，新员工入职后直接问它“支付流程怎么实现？”就能快速上手。; 灵感2：打造一个“自动化 Code Review 助手”——将 Claude Code 集成到 CI/CD 流水线中，让它自动审查每次提交的代码，给出风格建议和潜在 bug 提示，并把结果推送至企业微信或钉钉，减轻维护者的负担。; 灵感3：构建一个“语义化 Git 提交生成器”——利用 Claude Code 对 diff 的理解，自动生成符合 Conventional Commits 规范的 commit message，并附带中文解释，让团队提交历史更清晰。
-   项目链接: https://github.com/anthropics/claude-code
-
-2. PostHog/posthog:
-   star: 38021  语言/技术: JavaScript, Python, Node, React, Next.js, Vue, PHP, Ruby, Go, C#, Flutter, React Native, Android, iOS, Django, Angular, WordPress, Webflow
-   项目简介: PostHog 是一个开源的产品分析平台，提供产品分析、会话重放、功能开关、实验、错误追踪、日志、调查、数据仓库、AI 可观测性等一体化工具，旨在帮助团队构建'自动驾驶'产品——通过 AI 自动诊断问题、发现机会并提交修复。
-   亮点: 自驾驶模式：利用 AI 将产品数据中的信号（如错误、愤怒点击、失败查询）转化为研究报告和可审查合并的 Pull Request。; 一体化平台：集产品分析、Web 分析、会话重放、功能开关、实验、错误跟踪、日志、调查、数据仓库、数据管道、AI 可观测性和工作流于一身。; 多语言 SDK 与易接入：支持 JavaScript、Python、Node、React Native、Flutter 等主流语言和框架，并提供 MCP 接入，方便集成到开发环境。
-   详细报告: PostHog 是一个开源的产品分析平台，其核心理念是提供构建产品所需的所有工具，并捕获 AI agent 主动诊断问题、发现机会和交付修复所需的全部上下文。它通过'自驾驶模式'（Self-driving mode）将产品数据中的信号（如错误、愤怒点击、失败的查询等）转化为经过研究的报告和开发人员可以审查并合并的 Pull Request，从而大幅减少手动分析数据的工作量。
-
-在功能层面，PostHog 覆盖了产品开发的全生命周期：
-- 产品分析（Product Analytics）：支持自动捕获或手动埋点的事件驱动分析，提供可视化或 SQL 查询来分析用户行为。
-- Web 分析（Web Analytics）：提供类似 GA 的仪表盘，监控网站流量、用户会话、转化率、Web 核心指标和收入。
-- 会话重放（Session Replays）：观看真实用户的会话交互，帮助诊断问题并理解用户行为，支持 Web 和移动应用。
-- 功能开关（Feature Flags）：安全地向特定用户或群组逐步发布功能。
-- 实验（Experiments）：测试变更并衡量其对目标指标的统计影响，支持无需代码的实验设置。
-- 错误追踪（Error Tracking）：跟踪错误、发送警报并解决问题，改善产品稳定性。
-- 日志（Logs）：接收、搜索和分析日志数据，并与产品数据一起分析。
-- 调查（Surveys）：通过现成的无代码模板或自定义构建器发起用户调查。
-- 数据仓库（Data Warehouse）：从 Stripe、Hubspot 等外部工具同步数据，并可与产品数据并查询。
-- 数据管道（Data Pipelines）：对传入数据运行自定义过滤和转换，支持实时发送到 25+ 工具或批量导出至数据仓库。
-- AI 可观测性（AI Observability）：捕获 LLM 应用的追踪、代际、延迟和成本。
-- 工作流（Workflows）：创建自动化操作或向用户发送消息的工作流。
-
-技术实现上，PostHog 提供了丰富的 SDK 和库，覆盖前端（JavaScript、Next.js、React、Vue）、移动端（React Native、Android、iOS、Flutter）和后端（Python、Node、PHP、Ruby、Go、.NET/C#、Django、Angular、WordPress、Webflow 等）。同时支持通过 Web 片段、REST API 或 MCP 接入，适配 Claude Code、Cursor 等 agent 环境。
-
-部署方面，PostHog 推荐使用云服务（免费额度慷慨），也支持自托管。开源 Hobby 部署可在 Linux 上单行命令启动，但规模约 10 万事件/月，超出后建议迁移到云。仓库采用 MIT 许可证（ee 目录除外），并有完全 FOSS 的 posthog-foss 变体。此外，PostHog 还开源了公司手册、发展策略和流程，体现了高度的透明性。
-
-需要注意的是，README 中并未提及具体后端技术栈框架，但根据 SDK 和部署方式推测可能涉及 Python/Django，不过为了严谨，此部分我们标记为“未知”。详细的代码结构见 monorepo 布局说明，本文因文档截断无法详细展开。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及，但项目本身具有清晰的商业模式：提供免费云服务（慷慨免费额度）和付费的云订阅，同时有完全开源的 FOSS 版本，通过增值服务和托管服务盈利。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 PostHog 的自驾驶模式，可以开发一个专门的'自动化错误修复助手'，它监控错误追踪和日志数据，自动生成修复建议或 PR，并集成到 CI/CD 流程中，让开发人员只需审核合并。; 灵感2：将 PostHog 的会话重放和调查功能集成到客户支持系统中，构建一个'用户行为洞察平台'，当用户遇到问题时自动关联其会话回放、错误日志和产品行为，提升工单处理效率和客户满意度。; 灵感3：利用 PostHog 的数据仓库和管道能力，构建一个跨平台多渠道的 AI 增长分析工具，整合来自支付、CRM、广告平台的数据，通过 AI 自动识别高转化用户特征并提供增长建议。
-   项目链接: https://github.com/PostHog/posthog
-
-3. Tencent/AI-Infra-Guard:
-   star: 5340  语言/技术: Docker, Python, Go, YAML, MCP, Agent, AI Security, OpenClaw, CVE, Jailbreak Evaluation
-   项目简介: 腾讯朱雀实验室开源的一站式 AI 红队平台，集成了 AI 基础设施漏洞扫描、MCP Server 与 Agent Skills 安全扫描、Agent 工作流评估、越狱评估和模型 API 校验等能力，帮助企业和个人全面自查 AI 应用的安全风险。
-   亮点: 集成 ClawScan、Agent Scan、MCP/Agent Skill 扫描、AI 基础设施漏洞扫描、越狱评估五大核心能力; 覆盖 2000+ CVE 漏洞规则，支持 Ollama、ComfyUI、vLLM、n8n、Triton 等主流 AI 框架; Skill 安全扫描在 SkillTrustBench 基准上 F1 分数高达 0.9848，识别 9 大类安全风险
-   详细报告: AI-Infra-Guard（简称 A.I.G）是由腾讯朱雀实验室主导开发的 AI 红队平台，目的是解决 AI 基础设施和 AI 应用中日益严峻的安全问题。平台提供多种扫描与评估能力，包括：AI 基础设施漏洞扫描（对运行中的 AI 服务进行指纹识别，匹配 2000+ CVE）、MCP Server 与 Agent Skills 扫描（从源码或远程 URL 检测 14 大类安全风险）、Agent Scan（针对 Dify、Coze 等多平台 AI Agent 工作流进行自动化安全评估）、越狱评估（用多种攻击方法测试大模型的鲁棒性）、以及模型指纹识别和 API 转发校验等高级功能。部署上支持 Docker 一键启动，也提供了独立的 CLI 工具（如 aig-skill-scan）方便集成到 CI/CD。技术方面，核心服务采用 Python 和 Go 开发，规则使用 YAML 编写，具有插件化扩展机制，用户可以贡献指纹和漏洞规则。项目还提供了完整的 Web 界面和 API 文档，并开源了前端代码。值得注意的是，当前版本缺乏认证机制，官方不建议部署在公网。该项目基于 Apache 2.0 许可开源，要求保留版权声明并注明出处。README 中展示了详细的版本更新记录和诸多学术论文引用，表明其研究深度和行业影响力，但受限于文档截断，部分技术细节（如具体的前端框架、数据库等）未提及。
-   活跃度: 活跃（README 显示近期有多个版本更新，如 v4.5.2 等）  社区健康: 未知
-   商业潜力: 文档提及有 Pro 版本（aigsec.ai）和 AI Security Skill Market，可能通过增值服务盈利，但具体商业模式未详细介绍。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目可以开发一个企业 AI 资产安全巡检系统，定期自动扫描内部所有 AI 服务（vLLM、Ollama、ComfyUI）和 MCP 端点，生成合规报告并及时告警。; 灵感2：将 aig-skill-scan 集成到 Agent 开发流水线中，在每次发布 Skill 前自动执行安全扫描，防止恶意代码注入和敏感信息泄漏，提升 AI 应用供应链安全。; 灵感3：构建多租户的 AI 安全即服务平台（SaaS），基于 A.I.G 内核提供按次或订阅制的扫描服务，面向中小企业和云厂商提供安全评估能力。
-   项目链接: https://github.com/Tencent/AI-Infra-Guard
-
-4. shy3130/tickflow-stock-panel:
-   star: 3463  语言/技术: FastAPI, Pydantic v2, APScheduler, sse-starlette, Polars, DuckDB, Parquet, vectorbt, TickFlow, OpenAI 兼容接口, React 18, Vite, TypeScript, Tailwind, Tanstack Query, Lightweight Charts, ECharts, dnd-kit, Docker
-   项目简介: 这是一个面向个人散户和量化爱好者的自托管 A 股量化工作台，整合了选股、监控、回测、个股分析等功能，基于 TickFlow 数据源，采用 Polars 毫秒级扫描全 A 股，支持 18 个内置策略与自定义信号，并提供 Docker 一键部署。
-   亮点: Polars 毫秒级扫全 A 股, 内置 18 个选股策略; 三种回测模式(个股/策略组合/自由信号), 支持 T+1/手续费/滑点/止损; 四类监控规则(策略/个股信号/价格/异动), 支持语音播报和飞书推送; AI 四维分析(技术/基本面/财务/消息面)与盘后自动复盘; 自托管零运维, 支持 Docker 单容器部署
-   详细报告: 本项目的核心定位是为个人投资者提供一个自托管、零运维的 A 股量化工作台, 解决从数据获取、选股、回测到监控的全流程需求。它基于 TickFlow 数据源, 但并非官方项目, 仅供学习研究使用。功能上, 选股引擎内置 18 个策略, 使用 Polars 进行毫秒级全市场扫描, 并可自定义信号或通过 AI 生成策略。指标流水线支持 MA/EMA/MACD/RSI/KDJ/布林/量比等常用指标, 并落盘为 Parquet 格式。回测引擎支持三种模式, 考虑 T+1、手续费、滑点和止损, 通过 SSE 流式推送进度。监控中心支持四类监控规则, 支持 AND/OR 条件组合, 语音播报和飞书推送。个股分析提供 9 类关键价位和 AI 四维分析。连板梯队功能展示连板层级、概念轮动和盘后 AI 复盘。数据扩展支持第三方数据源接入(接口/推送/CSV/JSON)。技术栈方面, 后端使用 FastAPI、Pydantic v2、APScheduler、sse-starlette, 数据处理采用 Polars、DuckDB、Parquet, 回测使用 vectorbt (唯一的 pandas 依赖), AI 部分支持 OpenAI 兼容接口(如 DeepSeek、通义、Ollama), 前端使用 React 18、Vite、TypeScript、Tailwind、Tanstack Query、Lightweight Charts、ECharts、dnd-kit。部署支持 Docker 两阶段构建, 单容器运行。项目还提供了详细的文档, 涵盖部署、配置、功能、自定义数据源和策略开发规范。整体来看, 这是一个功能全面、技术栈现代的量化工作台, 适合有一定编程基础的量化爱好者进行二次开发和学习。但需注意, 项目明确不对标同花顺/通达信, 不提供 AI 荐股或涨停预测, 且小白需要绕路, 适合有经验的用户。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目的选股引擎和监控中心, 可以开发一个『基金/可转债智能监控助手』, 将策略扩展至其他金融品种, 实时监控异动并推送提醒。; 灵感2：可以将其集成到现有的量化交易系统中, 通过 Webhook 或 API 对接券商接口, 实现自动化交易执行, 形成从信号产生到下单的闭环。; 灵感3：利用其数据扩展能力, 接入加密货币或其他市场数据, 构建一个跨市场的多资产量化分析平台, 同时支持 A 股和海外市场。
-   项目链接: https://github.com/shy3130/tickflow-stock-panel
+   衍生灵感: 灵感1：基于 ComfyUI 构建一个「电商产品图自动化生成平台」——利用其节点图把商品图、背景替换、光影调整、模特换装等工作流封装成 API，商家只需上传原图即可批量生成多风格宣传图，极大提升运营效率。; 灵感2：将其集成到短视频生产管线中，开发「AI 视频工作流编排器」——通过 ComfyUI API 串联视频生成、放大、帧插值和字幕节点，实现从脚本到成片的自动化处理，适合媒体、广告和自媒体团队。; 灵感3：针对设计师群体，打造一个「本地优先的创意助手」——基于 ComfyUI 自定义节点，开发一套人性化的 UI 界面，提供模板化工作流和实时预览，并通过 App Mode 降低使用门槛，让非技术用户也能享受 AI 创作红利。
+   项目链接: https://github.com/Comfy-Org/ComfyUI
