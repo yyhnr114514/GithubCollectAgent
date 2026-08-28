@@ -1,4 +1,23 @@
-1. anthropics/claude-plugins-official:
+1. K-Dense-AI/scientific-agent-skills:
+   star: 35742  语言/技术: Python, Agent Skills (agentskills.io), Agent Plugins (agent-plugins.org), Markdown, GitHub Actions (CI), npx, gh CLI
+   项目简介: 这是一个为AI代理提供163个现成科学技能的开源集合，涵盖基因组学、药物发现、临床研究、材料科学等20多个领域。它让AI变成你的科研助手，能直接调用专业数据库和Python库执行复杂流程。你不需要自己查阅API文档，只要把技能装进支持的AI代理（如Claude Code、Cursor），就能一句话触发科研工作流。项目由K-Dense团队维护，遵循开放的Agent Skills标准，还兼容Agent Plugins，安装超简单。
+   亮点: 163个开箱即用的科学技能，覆盖生物、化学、医学、物理等20+领域; 统一访问78+公共科学数据库，包括PubChem、UniProt、ClinicalTrials.gov等; 每个技能都包含完整文档、代码示例和测试套件，CI保证质量; 兼容Claude Code、Cursor、Codex、Gemini CLI等主流AI代理，支持多种安装方式; 活跃维护，有视频教程和社区支持
+   详细报告: 这个项目本质上是一个『技能包商店』，里面装满了为AI代理精心编写的『使用说明书』。每个技能都以文件夹形式存在，包含一个SKILL.md（指导AI如何调用）、代码示例、使用场景和测试脚本。当AI代理（比如Claude Code）配置好这个技能库后，你只需要用自然语言描述需求，它就能自动找到对应的技能，按照预定义的步骤调用合适的Python包（如RDKit、Scanpy、PyTorch Lightning）或数据库API（如PubChem、UniProt）来完成任务。
+
+项目的核心价值在于『让AI更懂科研』。虽然AI本身能写代码调API，但面对上百个科学库和数据库，它常常不知道选哪个、参数怎么设、流程怎么跑。科学Agent技能把这些知识固化下来，让AI直接站在专家的肩膀上。例如，做单细胞RNA-seq分析，技能会引导AI正确使用Scanpy的流程；做药物虚拟筛选，技能会告诉它怎么用RDKit计算分子性质、怎么用PyTDC获取基准数据。
+
+项目覆盖了从基础数据分析到专业领域应用的完整链条：包括生物信息学（序列分析、单细胞、变异注释）、化学信息学（分子属性预测、ADMET分析）、临床研究（PK/PD建模、试验设计）、医学影像（DICOM处理、病理切片分析）、材料科学（晶体结构、相图）、物理学（天文数据分析、量子计算模拟）等。同时提供了30多个分析与交流工具，比如文献检索、论文写作、同行评审支持，甚至能生成PPT海报。
+
+技术实现上，项目遵循两个开放标准：Agent Skills（定义技能格式）和Agent Plugins（定义插件打包）。因此，任何支持这些标准的AI代理都能直接加载使用。安装方式灵活：可以在命令行用npx或gh skill一键安装，也可以手动复制或符号链接到插件目录。项目对质量要求很高，每个带脚本的技能都有配套测试，CI会在合并PR前运行结构检查和测试，确保文档链接有效、脚本能跑通。
+
+此外，项目还提供了一个免费的开源桌面应用K-Dense BYOK，相当于把整个技能库包装成一个本地科研工作站，支持自带API密钥、40多种模型，数据不出本机，适合需要隐私保护的研究团队。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此技能库，可以开发一个『药物研发AI助手』，整合虚拟筛选、ADMET预测、分子对接等技能，帮助制药企业快速评估化合物，减少早期筛选成本。; 灵感2：将技能库集成到实验室信息管理系统(LIMS)中，作为自动化数据处理层，让实验人员通过聊天就能完成数据分析（比如直接从质谱仪输出文件生成鉴定报告），用Opentrons技能还能联动自动化液体工作站。; 灵感3：参照其结构，为企业的私有数据库或内部工具编写专属AI技能，并通过Agent Plugins标准分发，让整个研发团队共享，打造一个可复用的『组织技能集市』。
+   项目链接: https://github.com/K-Dense-AI/scientific-agent-skills
+
+2. anthropics/claude-plugins-official:
    star: 34489  语言/技术: Claude Code, MCP, JSON, Slash Commands, Agents, Skills, Git, Plugin Marketplace
    项目简介: 这是一个官方的 Claude Code 插件目录，相当于 AI 编程助手界的『App Store』。它集中管理和分发高质量插件，让开发者能一键安装各种增强 Claude Code 能力的扩展，比如 MCP 服务器、斜杠命令、自定义 Agents 和 Skills。解决了插件来源混乱、安装繁琐、安全性难保障的痛点，还提供了标准化的插件结构和严格的审核机制。
    亮点: 官方维护+社区参与的双轨制插件目录：既有 Anthropic 内部团队开发的高质量插件，也有经过严格审核的第三方插件，兼顾可靠性与多样性。; 标准化的插件结构：统一了 .claude-plugin/plugin.json、MCP 配置、commands、agents、skills 等组织方式，让开发者能快速上手和迁移。; 插件名不可变与重命名映射机制：确保已安装插件的用户不会因为插件改名而遭遇无注册错误，自动迁移让升级过程无感。; skill-bundle 插件支持：允许直接打包 SKILL.md 文件而无需完整插件清单，降低了纯技能包发布门槛。
@@ -19,59 +38,50 @@
    衍生灵感: 灵感1：基于此插件目录的模式，开发一个『企业内部 AI 助手插件市场』，供公司内部团队共享和安装定制化的 Claude Code 技能，比如专属的代码规范审查 Agent、内部 API 调用 MCP 等，让整个研发团队的 AI 工具链统一且安全。; 灵感2：构建一个『插件质量监控与安全审计平台』，自动扫描该目录中所有插件的更新，检测 MCP 服务器的权限变化、SKILL.md 内容风险，并生成兼容性报告，帮助企业级用户放心使用第三方插件。; 灵感3：将此插件市场的概念迁移到其他 AI 助手（如 OpenAI Codex、本地开源模型编程助手），设计一种通用的插件打包格式，让一套技能、Agent 定义能跨平台复用，成为 AI Agent 领域的『OpenAPI』。
    项目链接: https://github.com/anthropics/claude-plugins-official
 
-2. Alishahryar1/free-claude-code:
-   star: 50696  语言/技术: Python, Shell, PowerShell, OpenAI-compatible API, Whisper, NVIDIA NIM, RTK, Claude Code, Codex, Ollama, llama.cpp, LM Studio
-   项目简介: 这是一个开源的AI编码代理网关，让你通过统一的模型目录和本地代理服务器，免费或低成本地使用50多家提供商的模型来运行Claude Code、Codex等10种编码代理。它解决了开发者被单一模型供应商锁定、付费API昂贵、提供商宕机导致工作流中断等痛点，还通过自动故障转移、token压缩和语音输入等特性极大提升了编码效率。
-   亮点: 50+ ToS-friendly providers，每月1.3B+免费token，可自由选择免费/付费/订阅/本地模型; 支持Claude Code、Codex、Pi、OpenCode、Cline、Hermes等10种主流编码代理，统一模型目录; 自动故障转移，提供商宕机时自动切换下一个配置的模型，无需重启会话; 通过RTK及5项优化，最多减少90%的终端输出token，降低成本和延迟; 支持语音笔记转代码（本地Whisper或NVIDIA NIM），可用麦克风直接下指令; 支持VS Code、JetBrains、Discord、Telegram等多种客户端，跨Windows/macOS/Linux平台
-   详细报告: free-claude-code（简称FCC）是一个本地代理服务器，相当于一个“AI模型路由器”+“编码代理管理工具”。它的核心逻辑是：在本地起一个fcc-server，对外提供OpenAI兼容的API接口，同时连接50多家模型提供商（如NVIDIA NIM、OpenRouter、Groq、OpenAI/ChatGPT、xAI、DeepSeek、Mistral、本地Ollama等）。用户通过它启动Claude Code等编码代理时，代理请求先发给FCC，FCC再根据配置转发给选定的上游模型，并将响应返回给代理。由于接口兼容，现有的编码代理无需修改即可使用FCC的模型。
+3. calesthio/OpenMontage:
+   star: 52904  语言/技术: Python, Node.js, FFmpeg, FFprobe, Remotion (React), HyperFrames (HTML/GSAP), Piper TTS, React, GSAP, GitHub Actions (推断, 文档未明确)
+   项目简介: 一句话概括：开源、智能体驱动的视频制作系统，让 AI 编程助手变成视频工作室，用自然语言描述即可自动完成研究、脚本、素材生成、剪辑和渲染。
+   亮点: 首个开源、agentic（智能体驱动）的视频制作系统，将 AI 编码助手（如 Claude Code、Cursor）转变为完整的视频制作工作室; 不仅支持基于图片生成视频，还支持真实素材视频：从免费素材库（Archive.org、NASA、Wikimedia Commons）构建可搜索语料库，检索动态剪辑并合成成片; 内置 Backlot 实时看板，展示生产流程中的每个阶段、脚本、场景卡片、资源生成状态、预算支出，并支持人工审批关卡（contact sheet），在渲染前批准视觉素材; 强大的预算控制：预估成本、锁定预算、超过阈值暂停确认（默认 $0.50），总预算上限默认 $10，防止意外账单; 多维度自检：通过 ffprobe 验证、帧采样、音频电平分析、交付承诺校验、字幕检查，确保输出质量; 支持多种视频生成供应商（Fal、Atlas Cloud、Kling、HeyGen、Runway、ARK 等），以及本地 GPU 生成（Wan2.2、Hunyuan 等模型）; 零 API Key 也能制作真实视频：Piper TTS 免费离线配音 + 开放素材库 + Remotion/HyperFrames 渲染
+   详细报告: OpenMontage 是一个革命性的开源项目，它重新定义了视频制作的方式。核心思想是：让你喜欢的 AI 编程助手（如 Claude Code、Cursor、Copilot、Windsurf、Codex）变成一个全自动的视频制作工作室。你只需要用自然语言描述你想要什么，例如“做一个 60 秒的动画解释器，讲神经网络如何学习”，代理就会自动完成以下工作：网络搜索研究主题、生成 AI 图像、撰写脚本、进行有情感表达的配音、寻找免版税背景音乐、生成单词级字幕，并最终渲染成完成的视频。
 
-主要功能包括：1）统一管理多个提供商的API密钥，无需在多个编码代理中分别配置；2）提供模型选择界面（Admin UI），可搜索和切换模型，并支持按Claude Code的模型层级（Fable/Opus/Sonnet/Haiku）分别路由到不同上游；3）自动故障转移，当上游请求失败时自动尝试下一个配置的模型（可设置回退列表），避免工作中断；4）token压缩优化，通过RTK过滤常见命令输出，并针对配额探测、命令前缀、标题、建议、文件路径等场景进行本地优化，大幅减少发往提供商的token，降低费用；5）语音输入，使用本地Whisper或NVIDIA NIM将语音转成文本，然后交给编码代理执行；6）消息平台集成，支持Discord和Telegram，可通过手机远程操控编码代理；7）本地模型支持，可接入LM Studio、llama.cpp、Ollama等本地推理服务，实现完全离线使用。
+最令人印象深刻的是它不仅仅局限于将静态图片变成幻灯片式视频。它支持真正的“视频视频”——代理从免费素材库（例如 Archive.org、NASA、Wikimedia Commons）构建一个可搜索的语料库，通过 CLIP 检索真实的运动剪辑，将它们编辑到时间轴上，并合成最终作品。这意味着你可以制作基于真实素材的纪录片、新闻蒙太奇等，而不需要昂贵的付费素材。
 
-安装方面，项目提供了macOS/Linux和Windows的一键脚本，支持安装和更新，卸载时保留用户已有的工具链。配置通过Admin UI进行，支持验证模型连通性。文档还详细列出了各提供商的配置方法，以及针对特定提供商的注意事项（如OpenAI需连接ChatGPT账号、Vertex AI使用应用默认凭据等）。整体来看，这是一个功能强大且文档比较完整的开发者工具，适合希望突破单一模型限制、降低AI编码成本、提升稳定性的开发者。由于README被截断，关于架构和扩展指南（ARCHITECTURE.md）的具体内容未展示，但可以推测项目提供了模块化设计，便于二次开发。
+项目架构是高度模块化和代理驱动的。所有工作流都通过 YAML 清单（pipeline_defs/）定义，舞台导演技能位于 skills/pipelines/，工具通过注册表自动发现。代理首先选择正确的流水线，然后读取清单和技能，再使用工具执行。工具注册表允许动态扩展，新增工具只需继承 BaseTool 并实现接口，即可被自动发现。
+
+Backlot 是一个独特的可视化看板系统，它将生产过程的“幕后”实时展示出来：阶段灯亮起、脚本变成剧本页面、场景卡片在生成时闪烁，每个提供商决策和花费都一览无余。更重要的是，它成为了真实的审批关卡：资源生成会暂停在逐场景的联系表上，显示镜头、提示词、单个资产成本和质量评分，让你在渲染之前批准视觉素材。这一功能对于需要创意控制的专业人士来说极其有价值。
+
+在代码层面，OpenMontage 结合了 Python（核心工具和多代理协调）、Node.js/React（Remotion 合成引擎）、以及 HTML/GSAP（HyperFrames 渲染器）。它内置了多种渲染后端：Remotion 适合数据驱动的解说视频和现有 React 场景堆栈；HyperFrames 则适合书法排版、产品宣传、动态图形密集型的项目，甚至支持 SVG 角色动画。
+
+预算控制是另一个亮点：代理在执行前估算成本，支持预留资金、记录实际花费，并提供 observe/warn/cap 三种模式，可配置单次操作审批阈值和总预算上限。所有提供商选择都会通过 7 个维度的评分，并保留可审计的决策日志，让你完全理解为什么最终输出看起来是这个样子。
+
+此外，项目可以在零 API Key 的情况下运行：Piper TTS 提供免费离线文本转语音，Archive.org、NASA、Pexels 等提供免费素材，Remotion / HyperFrames 负责渲染。对于有 GPU 的用户，还可以通过 make install-gpu 启用本地视频生成模型（如 Wan2.2、Hunyuan），彻底摆脱云服务依赖。
+
+该项目还充分考虑了代理兼容性，为 Claude Code、Cursor、Copilot、Codex、Windsurf 提供了相应的配置文件（CLAUDE.md、CURSOR.md 等），所有文件指向共享的 AGENT_GUIDE.md 和 PROJECT_CONTEXT.md。未来还计划支持 Ollama 和 LM Studio 本地 LLM，实现完全离线运行。
+
+总而言之，OpenMontage 是一个功能极其强大、设计精良的开源项目，它将 AI 编程助手的潜力扩展到了视频创作领域，大大降低了专业视频制作的门槛，无论是创意人员、营销团队还是教育工作者都能从中受益。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以为企业内部开发一个统一的AI编码网关，集中管理多家模型供应商的API密钥和配额，为所有开发团队提供一致的模型接入体验，同时利用故障转移和成本控制机制优化预算。; 灵感2：可以将其扩展为通用AI模型路由器，不仅支持编码代理，还能为其他AI应用（如对话机器人、自动化脚本、数据分析工具）提供统一的OpenAI兼容接口，实现模型动态切换、负载均衡和按业务场景自动选择最优模型。; 灵感3：可以结合语音输入功能，打造一个车载或移动端的语音编程助手，用户通过手机语音描述需求，后端经FCC路由到最强模型，生成代码并执行，实现“边走边敲代码”。
-   项目链接: https://github.com/Alishahryar1/free-claude-code
+   衍生灵感: 灵感1：基于此项目，可以开发一个“个性化品牌营销视频自动生成器”，企业只需输入产品描述和目标受众，OpenMontage 自动从品牌资产库和免费素材中提取镜头，生成符合品牌调性的宣传片，并自动适配不同平台的尺寸和字幕风格。; 灵感2：可以将其集成到“在线教育平台”中，教师用自然语言输入课程要点，系统自动生成带讲解、图表和字幕的微课视频，并利用 Backlot 的审批流让教师预览和修改每一帧，提高课程制作效率。; 灵感3：可以拓展为一个“电影预告片快速原型工具”，编剧或导演输入故事大纲，系统自动生成包含概念视觉、动态分镜、配乐和旁白的预告片，用于内部评审或众筹展示，大幅降低前期可视化成本。
+   项目链接: https://github.com/calesthio/OpenMontage
 
-3. MadsLorentzen/ai-job-search:
-   star: 36979  语言/技术: Claude Code, Python 3.10+, Bun, LaTeX (lualatex/xelatex), pdftotext, pypdf, Notion MCP, Gmail API
-   项目简介: 一个基于 Claude Code 的 AI 驱动的求职应用框架，能自动评估职位适配度、定制简历、撰写求职信并准备面试，帮助开发者高效完成整个求职流程。
-   亮点: 多命令工作流：/setup 设置个人资料、/scrape 搜索职位、/apply 自动生成定制简历和求职信、/interview 面试准备等，覆盖求职全链路。; PDF 验证循环：自动编译并视觉检查 PDF，确保简历恰好 2 页、求职信 1 页，修复排版问题，避免布局错误。; ATS 文本层验证：提取 PDF 文本层，模拟 ATS 解析器检查联系信息和关键词覆盖，且不虚报技能，确保投递有效。
-   详细报告: AI Job Search 是一个基于 Claude Code 的开源求职框架，作者 Mads Lorentzen 是一名地球物理学家，在失业后构建了这套工具并成功用其找到 AI 工程师工作。核心思想是将求职流程标准化、自动化：通过 Claude Code 智能体，结合自定义的提示词和工作流，实现从职位搜索到最终投递的完整自动化。
+4. abi/screenshot-to-code:
+   star: 75264  语言/技术: React/Vite（前端）, FastAPI（后端）, Python, TypeScript/JavaScript, Tailwind CSS, OpenAI GPT-5.5/5.4 Mini, Anthropic Claude Opus 4.6/4.8, Gemini 3 Flash/3.1 Pro, Replicate（图像生成/编辑）, Playwright（无头浏览器预览）, Poetry（Python依赖管理）, Docker
+   项目简介: 一句话概括：这个项目是一个AI驱动的设计转代码工具，能将截图、Figma设计稿、屏幕录制等视觉输入直接转换成干净、可用的前端代码（如HTML+Tailwind、React+Vue等），堪称“设计师的甩锅神器”和“前端程序员的救星”。它解决了从设计到代码手动翻译的痛点，让原型落地速度起飞。
+   亮点: 支持多种前端栈：HTML+Tailwind、React+Tailwind、Vue+Tailwind、Bootstrap、Ionic等; 除了静态截图，还能处理屏幕录制，把动态交互转换成可运行的原型; 利用Gemini提取截图中的真实素材（logo/图片），配合Replicate实现图像编辑和背景移除，生成质量更高; 内置无头浏览器截图预览，AI可以自己检查生成的页面效果并迭代修正
+   详细报告: 这是一个将设计图“魔法般”变成前端代码的开源项目。用户只需要上传一张截图、一个Figma设计稿，甚至是一段屏幕录制视频，AI就能自动分析视觉布局、颜色、字体、间距等设计细节，生成对应的HTML/CSS/React/Vue代码。
 
-项目的主要功能包括：
-1. **个人资料构建**：`/setup` 命令支持三种方式，包括上传文档文件夹（CV、证书等）、粘贴单份 CV、或通过聊天式访谈，自动生成结构化个人画像，存储于 CLAUDE.md 和技能文件中。
-2. **职位搜索**：`/scrape` 命令搜索多个求职门户（目前主要针对丹麦市场，如 Jobindex、Jobnet 等），去重并按匹配度排序；`/rank` 可批量评分，生成候选列表。
-3. **自动申请**：`/apply` 命令接收职位 URL 或粘贴的描述，执行多步流程：解析职位、评估匹配度、起草 LaTeX 简历和求职信、启动评审代理（另一个 Claude 实例）研究公司并批评草稿、修改、编译并检查 PDF 排版、执行 ATS 检查，最终输出完整申请包。
-4. **面试准备**：`/interview` 根据申请记录生成定制面试准备包，包括公司研究、常见问题映射、模拟面试等，强调诚实回答，不编造经验。
-5. **结果追踪与同步**：`/outcome` 记录申请结果，`/notion-sync` 将管道同步到 Notion，`/gmail-sync` 集成邮箱读取状态，`/html-report` 生成离线 HTML 报表。
-6. **技能扩展**：`/expand` 从公开资料中提取额外技能，`/upskill` 分析技能差距并生成学习计划，`/add-template` 允许添加自定义简历/求职信模板，`/add-portal` 可生成新求职门户的搜索技能。
+核心逻辑是：前端（React/Vite）负责交互界面和展示，后端（FastAPI）负责调用AI模型的API。用户至少需要一个模型提供商的API Key（OpenAI、Anthropic或Gemini三选一），但官方强烈建议同时配置Gemini和Replicate的Key，因为Gemini负责从原始截图中提取真正的资源图片（比如产品的Logo、真实照片），而Replicate负责图像生成、背景移除和图像编辑，这样生成出来的页面会高度还原原图，而不是用占位符或虚假图片。
 
-技术架构上，项目依赖 Claude Code 作为 AI 代理核心，使用 Python 编写辅助工具，Bun 作为 CLI 工具运行环境，LaTeX 编译生成 PDF，同时可选 pypdf/pdftotext 进行 ATS 文本提取。整个工作流强调安全：职位描述被视为不可信输入，严格限制指令注入；同时明确隐私风险，建议使用私有仓库。
+项目支持多套技术栈的输出：HTML+Tailwind是默认标配，也能生成纯CSS、React+Tailwind、Vue+Tailwind、Bootstrap和Ionic+Tailwind。另外，它还能处理屏幕录制，比如录制一个网站的动态交互过程，AI能把它变成一个可点击的原型，这给产品经理和UI/UX设计师带来了极大的便利——直接录屏就能得到交互原型。
 
-虽然门户搜索目前仅针对丹麦，但设计模式可扩展，开发者可以轻松替换为本地求职板。项目文档详尽，包含详细的设置指南、贡献指南和安全说明，适合作为学习和二次开发的基础。
+后端可以通过Poetry安装依赖，并用Uvicorn启动，前端用pnpm管理包，跑在5173端口。为了让AI能自我检查生成的页面，还需要安装Chromium浏览器（通过Playwright），这样AI可以在无头浏览器中渲染出它生成的页面，并截图对比原图，从而自动迭代修正，类似于“AI自我审稿”。
+
+Docker用户也可以通过docker-compose快速启动，不过这种模式下文件变动不会自动重建，适合体验而不适合开发。README还提供了详细的FAQ，比如如何配置OpenAI代理（OPENAI_BASE_URL）、如何解决UTF-8编码问题等。
+
+由于提供的README被截断，关于项目更详细的模型选择逻辑、具体生成流程、以及是否支持更多自定义配置等信息，请补充完整的文档内容。但是目前已有的信息足以看出这是一个非常成熟且实用的开源项目，在GitHub上很受欢迎（虽然API显示的指标为空，但根据行业的认知，这是一个高星项目）。
    活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
+   商业潜力: 高。该工具可直接作为商业SaaS服务（已有官方hosted版本screenshottocode.com），也可嵌入到设计协作平台（如Figma）或低代码平台中，作为增值功能。企业还可基于此定制私有化部署，用于内部设计转代码流程，节省大量前端开发人力。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：构建一个面向国内的‘AI 求职助手’，适配 BOSS直聘、拉勾等平台，利用相同框架自动化投递流程，甚至增加智能排序和反馈分析功能。; 灵感2：将此框架的核心逻辑提炼为通用‘文档智能生成引擎’，用于自动生成产品需求文档、投标书或学术论文，通过自定义模板和评审机制保证输出质量。; 灵感3：将其集成到企业 HR 系统中，作为内部人才推荐工具，自动匹配内部员工技能与岗位要求，生成个性化发展建议。
-   项目链接: https://github.com/MadsLorentzen/ai-job-search
-
-4. AgriciDaniel/claude-obsidian:
-   star: 12776  语言/技术: Python, Claude Code, Obsidian, Markdown, JSON, Canvas, BM25, Bash, Git
-   项目简介: 一句话概括：这是一个本地优先的AI知识系统，将Claude Code等Agent的能力与Obsidian无缝集成，把捕获的源资料转化为带引用链接的永久知识卡片，并通过15个可组合技能实现从采集、入库、检索到维护的完整闭环，让知识库每次使用都更有价值。
-   亮点: 本地优先：vault是普通文件目录，不锁定在插件缓存或云数据库，用户完全拥有数据。; 可信溯源：每条重要声明都携带来源、支持/矛盾证据、置信度和审查状态，虚假引用无处遁形。; 事务安全：并行worker只返回草稿，由单一协调者合并为原子操作，避免竞态冲突，失败可恢复。; 15个技能一体：从wiki-ingest、wiki-query到canvas、autoresearch，统一证据模型，开箱即用。; 多方法论支持：Generic、LYT、PARA、Zettelkasten四种笔记组织模式自由切换。
-   详细报告: claude-obsidian是一个面向Claude Code及兼容Agent Skills宿主的本地优先知识系统。它解决的痛点是：传统AI笔记工具只记录文本，无法形成可积累、可追溯、可复用的知识网络。该项目设计了一套可重复的循环：捕获来源（通过inbox和内容寻址副本）、沉淀证据（通过来源账本和声明账本）、连接知识（生成链接页面、索引、MOC和Canvas图）、再次利用（查询、检索、lint、回填）。
-
-核心架构强调信任边界：产品代码和用户vault严格分离，vault选择必须显式配置（环境变量、配置文件或唯一初始化祖先），不确定就拒绝写入。所有写操作都采用事务模型：先计算目标SHA-256，并行worker只返回草稿和证据，协调者合并成单一操作包，审查后原子应用，失败自动回滚。这种设计让多个AI agent可以安全协作而不互相踩踏。
-
-技术实现上，项目使用Python 3.11+编写核心CLI（scripts/claude-obsidian.py），提供init、adopt、migrate、transaction、lint、contracts、capture、checkpoint等命令。技能（skills）采用Agent Skills规范，每个技能有独立的SKILL.md定义触发词和契约，支持Claude Code的命名空间调用（如/claude-obsidian:wiki）。检索方面集成了BM25确定性算法，可选远程向量模型（需显式用户同意）。Obsidian集成包括Markdown格式、Bases原生表格、Canvas可视知识图谱。
-
-项目还提供了完整的安全机制：内容寻址存储、原子文件替换、进程锁、备份与恢复、冲突检测。支持四种笔记组织模式（Generic、LYT、PARA、Zettelkasten），切换模式只影响新笔记路由，不会批量移动旧笔记。能力边界诚实公开：PDF/EPUB仅提取元数据，OCR和URL抓取需要配置外部执行器，Windows原生写入需要WSL且失败会明确报错。
-
-开发质量较高：有完整的测试套件（make test），CI覆盖Linux/macOS/Windows smoke，发布包可字节级复现审计。文档详实，包括安装指南、Windows/WSL指南、事务契约、溯源契约和Compound Vault架构文档。整体上这是一个设计理念先进、实现严谨的知识管理工具，尤其适合追求数据自主权和可追溯性的技术用户。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于claude-obsidian的溯源机制，开发一个'科研文献知识库系统'——自动从arXiv/PubMed抓取论文，提取核心观点、实验数据、引用关系，并通过Canvas可视化研究脉络，确保每个结论都有可靠的文献支撑。; 灵感2：将其改造为'团队项目知识中枢'——集成Git、Jira、Confluence等工具，自动生成项目决策记录、会议纪要关联、需求追溯矩阵，利用事务性写入避免多人协作时的冲突，形成可持续复用的组织记忆。; 灵感3：借鉴其'事务化AI写入'模式，构建一个面向AI Agent的'文件系统安全层'——为任意目录提供原子写入、冲突检测、回滚能力，让多个AI agent可以安全地协同操作本地文件，避免相互覆盖或数据损坏。
-   项目链接: https://github.com/AgriciDaniel/claude-obsidian
+   衍生灵感: 灵感1：构建一个“设计系统合规检测器”——基于此项目，可以开发一个工具，让用户上传产品页面的截图，自动生成代码并对比设计规范（如颜色、间距、字体），从而确保所有前端页面符合公司设计系统。; 灵感2：打造一个“网页自动改版工具”——集成screenshot-to-code到CI/CD流程中，当设计师更新Figma设计稿时，自动生成对应代码并创建Pull Request，实现设计到代码的全自动化交付。; 灵感3：开发一个“教学辅助工具”——用于编程教育场景，学生上传手绘草图或截图，系统生成代码并对比标准答案，帮助初学者理解布局和CSS原理。
+   项目链接: https://github.com/abi/screenshot-to-code
