@@ -1,20 +1,22 @@
 1. K-Dense-AI/scientific-agent-skills:
-   star: 35742  语言/技术: Python, Agent Skills (agentskills.io), Agent Plugins (agent-plugins.org), Markdown, GitHub Actions (CI), npx, gh CLI
-   项目简介: 这是一个为AI代理提供163个现成科学技能的开源集合，涵盖基因组学、药物发现、临床研究、材料科学等20多个领域。它让AI变成你的科研助手，能直接调用专业数据库和Python库执行复杂流程。你不需要自己查阅API文档，只要把技能装进支持的AI代理（如Claude Code、Cursor），就能一句话触发科研工作流。项目由K-Dense团队维护，遵循开放的Agent Skills标准，还兼容Agent Plugins，安装超简单。
-   亮点: 163个开箱即用的科学技能，覆盖生物、化学、医学、物理等20+领域; 统一访问78+公共科学数据库，包括PubChem、UniProt、ClinicalTrials.gov等; 每个技能都包含完整文档、代码示例和测试套件，CI保证质量; 兼容Claude Code、Cursor、Codex、Gemini CLI等主流AI代理，支持多种安装方式; 活跃维护，有视频教程和社区支持
-   详细报告: 这个项目本质上是一个『技能包商店』，里面装满了为AI代理精心编写的『使用说明书』。每个技能都以文件夹形式存在，包含一个SKILL.md（指导AI如何调用）、代码示例、使用场景和测试脚本。当AI代理（比如Claude Code）配置好这个技能库后，你只需要用自然语言描述需求，它就能自动找到对应的技能，按照预定义的步骤调用合适的Python包（如RDKit、Scanpy、PyTorch Lightning）或数据库API（如PubChem、UniProt）来完成任务。
+   star: 37001  语言/技术: Agent Skills 标准, Python, JavaScript (npx), GitHub CLI, Markdown, RDKit, Scanpy, PyTorch Lightning, scikit-learn, pydicom, GeoPandas, pymatgen, BioPython, Qiskit, OpenMM, MDAnalysis, PubChem, ChEMBL, UniProt, ClinicalTrials.gov
+   项目简介: 这是一个为 AI 代理（如 Claude Code、Cursor、Codex 等）提供 160+ 个科学研究和学术工作流技能的集合，覆盖生物信息学、药物发现、临床研究、数据科学等多个领域，让 AI 助手瞬间变身“科研助理”。它解决了科学家在使用 AI 时重复查阅文档、编写集成代码的痛点，开箱即用，支持开放标准。
+   亮点: 提供 163 个开箱即用的科学技能，覆盖 19 个科研领域（README 另一处提到 161 个，具体数量以仓库为准）; 兼容 Cursor、Claude Code、Codex、Google Antigravity 等主流 AI 代理，一次安装全局可用; 内置统一数据库查询技能，可访问 78+ 公共科学数据库（PubChem、ChEMBL、UniProt、ClinicalTrials.gov 等）; 每个技能都包含完整文档、代码示例、测试套件，并遵循 Agent Skills 开放标准; 既是 Agent Skills 包也是 Agent Plugins 包，支持 npx 和 gh skill 安装，版本可锁定
+   详细报告: 这个项目简直就是科研工作者的“外挂大脑”！Scientific Agent Skills 本质上不是一个新的编程框架，而是一套精心编写的“技能包”，专门给 AI 代理（比如 Claude Code、Cursor、Codex 那些写代码的智能助手）加持科学计算能力。想象一下，平时你让 AI 帮你写个 Python 脚本处理脑电图数据，它可能得现场查文档、猜参数、瞎试一通；但现在，你把技能包往里一装，AI 就像拿到了武功秘籍，直接调用预定义的赛先生流程，稳准狠地完成任务。
 
-项目的核心价值在于『让AI更懂科研』。虽然AI本身能写代码调API，但面对上百个科学库和数据库，它常常不知道选哪个、参数怎么设、流程怎么跑。科学Agent技能把这些知识固化下来，让AI直接站在专家的肩膀上。例如，做单细胞RNA-seq分析，技能会引导AI正确使用Scanpy的流程；做药物虚拟筛选，技能会告诉它怎么用RDKit计算分子性质、怎么用PyTDC获取基准数据。
+它内置了 163 个技能（README 另一处写了 161 个），覆盖生物信息学、化学信息学、蛋白质组学、临床研究、医学影像、机器学习、材料科学、物理天文、地理空间、实验室自动化等近 20 个领域。每个技能都以文件夹形式组织，内含 SKILL.md 文档（相当于说明书）、可运行的代码示例、使用场景和最佳实践，甚至还有测试脚本——确保 AI 调用时不翻车。整个仓库遵循开放的 Agent Skills 标准（agentskills.io），意味着任何支持该标准的 AI 代理都能直接读取并执行这些技能，不绑定某一家厂商。
 
-项目覆盖了从基础数据分析到专业领域应用的完整链条：包括生物信息学（序列分析、单细胞、变异注释）、化学信息学（分子属性预测、ADMET分析）、临床研究（PK/PD建模、试验设计）、医学影像（DICOM处理、病理切片分析）、材料科学（晶体结构、相图）、物理学（天文数据分析、量子计算模拟）等。同时提供了30多个分析与交流工具，比如文献检索、论文写作、同行评审支持，甚至能生成PPT海报。
+项目最大的亮点是“拿来即用”的集成体验。你可以用一行命令 npx skills add K-Dense-AI/scientific-agent-skills 把它安装到支持 Agent Skills 的编辑器或 CLI 中；也可以用 GitHub CLI（gh skill install）安装，并支持锁定到特定版本或 commit。另外，它本身就是合法的 Agent Plugins 包（plugin.json + skills/），在 Cursor 里可以像装插件一样 symlink 一下，重启就能看到并调用。这种多路径安装方式极大地降低了入门门槛，让非技术背景的科研人员也能享受到 AI 的威力。
 
-技术实现上，项目遵循两个开放标准：Agent Skills（定义技能格式）和Agent Plugins（定义插件打包）。因此，任何支持这些标准的AI代理都能直接加载使用。安装方式灵活：可以在命令行用npx或gh skill一键安装，也可以手动复制或符号链接到插件目录。项目对质量要求很高，每个带脚本的技能都有配套测试，CI会在合并PR前运行结构检查和测试，确保文档链接有效、脚本能跑通。
+除此之外，项目还配套了一个叫 K-Dense BYOK 的开源工具，作为“AI 联合科学家”在桌面上运行，自带 Web 搜索、文件处理、100+ 科学数据库访问，还能调用这里的全部 161 个技能。用户自己带 API key，选择 40+ 模型，数据留在本机，可选 Modal 云算力扩展。不过这个工具是独立仓库，本仓库重点是技能集本身。
 
-此外，项目还提供了一个免费的开源桌面应用K-Dense BYOK，相当于把整个技能库包装成一个本地科研工作站，支持自带API密钥、40多种模型，数据不出本机，适合需要隐私保护的研究团队。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
+技术层面，技能集大量使用了 Python 生态的科学计算库，比如 RDKit（分子性质预测）、Scanpy（单细胞分析）、PyTorch Lightning（深度学习）、scikit-learn（机器学习）、pydicom（医学影像）、GeoPandas（地理空间）、pymatgen（材料）、Qiskit（量子计算）、OpenMM/MDAnalysis（分子动力学）等。数据库方面既有统一的 database-lookup 技能（覆盖 78 个公共库），也有 BioServices（约 40 个生物信息学服务）、BioPython Entrez（39 个 NCBI 子库）、gget（20+ 基因组数据库）这样的整合包。此外还提供了与 Benchling、DNAnexus、LatchBio、Opentrons 等平台的集成技能，确保从数据采集到实验自动化全链路覆盖。
+
+文档质量非常高，每个技能都有详细说明，并且 CI 强制要求每个带脚本的技能配套测试套件，保证了质量。对开发者来说，这意味着二次开发成本低——你可以直接复制一个技能模板，修改成自己的专属工作流。整体而言，这是一个让 AI 从“通用助手”进化成“专业科研伙伴”的宝藏工具库，值得所有科研团队关注。
+   活跃度: 未知  社区健康: 文档声称社区驱动、有活跃维护和贡献指南，并鼓励 star 支持。但 GitHub API 指标显示 forks=0、open_issues=0、无近期提交和发布，可能项目较新或数据未更新，需自行观察社区活跃度。
+   商业潜力: 文档提及提供企业级支持（Enterprise Support），可针对高级需求提供商业服务。项目本身 MIT 许可，但每个技能有独立许可，可通过定制化技能开发、培训、技术支持等方式商业化。潜在客户包括药企、CRO 公司、科研院所、高校实验室等。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此技能库，可以开发一个『药物研发AI助手』，整合虚拟筛选、ADMET预测、分子对接等技能，帮助制药企业快速评估化合物，减少早期筛选成本。; 灵感2：将技能库集成到实验室信息管理系统(LIMS)中，作为自动化数据处理层，让实验人员通过聊天就能完成数据分析（比如直接从质谱仪输出文件生成鉴定报告），用Opentrons技能还能联动自动化液体工作站。; 灵感3：参照其结构，为企业的私有数据库或内部工具编写专属AI技能，并通过Agent Plugins标准分发，让整个研发团队共享，打造一个可复用的『组织技能集市』。
+   衍生灵感: 灵感1：基于 Scientific Agent Skills，可以开发一个“生物医药研发智能体”，专门对接药企内部的靶点筛选、虚拟筛选、ADMET 预测流程。把技能包集成到企业微信/钉钉机器人中，研究人员发一句“帮我分析这个化合物的 ADMET 性质”，机器人自动调用 RDKit 和 ADMET 数据库技能，返回可视化报告。; 灵感2：结合 K-Dense BYOK 的思路，打造一个“科研文献自动综述系统”。利用技能集中的文献检索和证据可追溯写作技能，输入一个研究主题，系统自动从 PubMed、ClinicalTrials.gov 等数据库拉取相关文献，生成带引用标注的综述初稿，并附上证据等级评分，适合科研团队做开题调研。; 灵感3：将技能包嵌入到高校或科研机构的 JupyterHub 环境中，作为 AI 助手的“知识插件”。学生写毕业论文时，AI 助手能根据上下文调用统计分析或绘图技能，手把手教他们做数据分析，同时通过技能内置的测试确保结果正确性，降低导师的指导负担。
    项目链接: https://github.com/K-Dense-AI/scientific-agent-skills
 
 2. anthropics/claude-plugins-official:
