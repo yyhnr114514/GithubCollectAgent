@@ -1,46 +1,46 @@
 1. K-Dense-AI/scientific-agent-skills:
-   star: 37001  语言/技术: Agent Skills 标准, Python, JavaScript (npx), GitHub CLI, Markdown, RDKit, Scanpy, PyTorch Lightning, scikit-learn, pydicom, GeoPandas, pymatgen, BioPython, Qiskit, OpenMM, MDAnalysis, PubChem, ChEMBL, UniProt, ClinicalTrials.gov
-   项目简介: 这是一个为 AI 代理（如 Claude Code、Cursor、Codex 等）提供 160+ 个科学研究和学术工作流技能的集合，覆盖生物信息学、药物发现、临床研究、数据科学等多个领域，让 AI 助手瞬间变身“科研助理”。它解决了科学家在使用 AI 时重复查阅文档、编写集成代码的痛点，开箱即用，支持开放标准。
-   亮点: 提供 163 个开箱即用的科学技能，覆盖 19 个科研领域（README 另一处提到 161 个，具体数量以仓库为准）; 兼容 Cursor、Claude Code、Codex、Google Antigravity 等主流 AI 代理，一次安装全局可用; 内置统一数据库查询技能，可访问 78+ 公共科学数据库（PubChem、ChEMBL、UniProt、ClinicalTrials.gov 等）; 每个技能都包含完整文档、代码示例、测试套件，并遵循 Agent Skills 开放标准; 既是 Agent Skills 包也是 Agent Plugins 包，支持 npx 和 gh skill 安装，版本可锁定
-   详细报告: 这个项目简直就是科研工作者的“外挂大脑”！Scientific Agent Skills 本质上不是一个新的编程框架，而是一套精心编写的“技能包”，专门给 AI 代理（比如 Claude Code、Cursor、Codex 那些写代码的智能助手）加持科学计算能力。想象一下，平时你让 AI 帮你写个 Python 脚本处理脑电图数据，它可能得现场查文档、猜参数、瞎试一通；但现在，你把技能包往里一装，AI 就像拿到了武功秘籍，直接调用预定义的赛先生流程，稳准狠地完成任务。
+   star: 38101  语言/技术: Python, Agent Skills (open standard), Agent Plugins, npx, GitHub CLI, RDKit, Scanpy, PyTorch Lightning, scikit-learn, PyTDC, PathML, pydicom, NeuroKit2, PufferLib, QuTiP, GeoPandas, pymatgen, BioPython, Qiskit, OpenMM, MDAnalysis, scVelo, TimesFM, Docker, CI/CD
+   项目简介: 一句话概括：这是一个为 AI 智能体（如 Claude Code、Cursor、Codex 等）提供 163 个即用型科学和研究技能的集合，覆盖生物信息学、药物发现、临床研究、材料科学、物理学等众多领域，让普通 AI 助手瞬间变身能执行复杂多步科研流程的“AI 科学家”，解决科研人员重复查文档、写代码、调 API 的痛点。
+   亮点: 163 个即用型科学和研究技能，涵盖 20+ 个学科领域; 统一数据库查询技能，可访问 78+ 个公共科学数据库（如 PubChem、ChEMBL、UniProt、COSMIC 等）; 支持多智能体宿主：Cursor、Claude Code、Codex、Google Antigravity、Gemini CLI 等; 每个技能包含完整文档（SKILL.md）、代码示例、集成指南和测试套件; 作为 Agent Plugins 包发布，一键插件化加载，简化安装; 持续维护，CI 测试保障质量，最终用户可快速上手; MIT 许可证，同时每个技能有自己的许可说明，灵活可商用
+   详细报告: Scientific Agent Skills 是由 K-Dense 团队精心打造的一个开源项目，核心理念是将科研工作中常用的数据库、Python 库和平台封装成标准的“Agent Skills”，让任何支持 Agent Skills 标准的 AI 智能体都能直接调用这些技能，从而无需每次从头编写繁琐的 API 调用逻辑。项目包含 163 个技能，分为四大类：
 
-它内置了 163 个技能（README 另一处写了 161 个），覆盖生物信息学、化学信息学、蛋白质组学、临床研究、医学影像、机器学习、材料科学、物理天文、地理空间、实验室自动化等近 20 个领域。每个技能都以文件夹形式组织，内含 SKILL.md 文档（相当于说明书）、可运行的代码示例、使用场景和最佳实践，甚至还有测试脚本——确保 AI 调用时不翻车。整个仓库遵循开放的 Agent Skills 标准（agentskills.io），意味着任何支持该标准的 AI 代理都能直接读取并执行这些技能，不绑定某一家厂商。
+- **100+ 科学/金融数据库技能**：通过统一的 database-lookup 技能，提供了对 78+ 个公共数据库（如 PubChem、ChEMBL、UniProt、COSMIC、ClinicalTrials.gov、FRED、USPTO 等）的确定性访问，并管理了 DepMap、Imaging Data Commons、PrimeKG、NCATS ARAX、U.S. Treasury Fiscal Data、Hugging Science、OneKGPd、Genomic Intelligence 等专用技能。此外还集成了 BioServices（约 40 个生物信息学服务）、BioPython（Entrez 访问 39 个 NCBI 子数据库）、gget（20+ 个基因组学数据库）。
+- **70+ 优化 Python 包技能**：为 RDKit、Scanpy、PyTorch Lightning、scikit-learn、PyTDC、PathML、pydicom、NeuroKit2、PufferLib、QuTiP、GeoPandas、pymatgen、Qiskit、OpenMM/MDAnalysis、scVelo 等常用科学计算库提供了版本感知的“最佳实践”工作流指南。智能体本身可以用任何 Python 包，但这些技能是预先验证的、更安全更可靠的路径。
+- **9 个科学集成技能**：专门为 Benchling、DNAnexus、LatchBio、OMERO、Protocols.io、Open Notebook、Ginkgo Cloud Lab、LabArchives 和 Opentrons 等平台提供即拿即用的流程，简化了与外部系统的交互。
+- **30+ 分析与沟通工具**：包括文献综述、证据溯源写作、保密同行评审、文档处理、Paperclip（全文论文/监管文件检索）、Paperzilla、Exa Search、PPTX 海报生成、幻灯片/示意图/信息图制作、Mermaid 图表等。另外还有 10+ 研究与临床工具，如证据受限的假设生成、基金撰写、PK/PD 建模与模拟、BIDS 支持、ISO 标准证据准备、分析方法验证（ICH/USP/CLSI）等。
 
-项目最大的亮点是“拿来即用”的集成体验。你可以用一行命令 npx skills add K-Dense-AI/scientific-agent-skills 把它安装到支持 Agent Skills 的编辑器或 CLI 中；也可以用 GitHub CLI（gh skill install）安装，并支持锁定到特定版本或 commit。另外，它本身就是合法的 Agent Plugins 包（plugin.json + skills/），在 Cursor 里可以像装插件一样 symlink 一下，重启就能看到并调用。这种多路径安装方式极大地降低了入门门槛，让非技术背景的科研人员也能享受到 AI 的威力。
+每个技能都遵循标准结构，包含详尽的 SKILL.md 文档、可运行的代码示例、使用场景和最佳实践、集成指南、参考资料，并且所有包含 scripts/ 的技能都配有测试套件，CI 会在每次 pull request 时执行测试，保证质量。项目支持多种安装方式：通过 `npx skills add` 一键安装，使用 `gh skill install` 按需安装特定技能或版本锁定，或以 Agent Plugins 方式通过 Cursor 等客户端直接加载。该项目最大的价值在于“确定性”：AI 智能体不再依赖模糊的“猜测”来调用科研数据库，而是基于经过验证的技能集，大幅提升了科研工作流的效率和可复现性。
 
-除此之外，项目还配套了一个叫 K-Dense BYOK 的开源工具，作为“AI 联合科学家”在桌面上运行，自带 Web 搜索、文件处理、100+ 科学数据库访问，还能调用这里的全部 161 个技能。用户自己带 API key，选择 40+ 模型，数据留在本机，可选 Modal 云算力扩展。不过这个工具是独立仓库，本仓库重点是技能集本身。
-
-技术层面，技能集大量使用了 Python 生态的科学计算库，比如 RDKit（分子性质预测）、Scanpy（单细胞分析）、PyTorch Lightning（深度学习）、scikit-learn（机器学习）、pydicom（医学影像）、GeoPandas（地理空间）、pymatgen（材料）、Qiskit（量子计算）、OpenMM/MDAnalysis（分子动力学）等。数据库方面既有统一的 database-lookup 技能（覆盖 78 个公共库），也有 BioServices（约 40 个生物信息学服务）、BioPython Entrez（39 个 NCBI 子库）、gget（20+ 基因组数据库）这样的整合包。此外还提供了与 Benchling、DNAnexus、LatchBio、Opentrons 等平台的集成技能，确保从数据采集到实验自动化全链路覆盖。
-
-文档质量非常高，每个技能都有详细说明，并且 CI 强制要求每个带脚本的技能配套测试套件，保证了质量。对开发者来说，这意味着二次开发成本低——你可以直接复制一个技能模板，修改成自己的专属工作流。整体而言，这是一个让 AI 从“通用助手”进化成“专业科研伙伴”的宝藏工具库，值得所有科研团队关注。
-   活跃度: 未知  社区健康: 文档声称社区驱动、有活跃维护和贡献指南，并鼓励 star 支持。但 GitHub API 指标显示 forks=0、open_issues=0、无近期提交和发布，可能项目较新或数据未更新，需自行观察社区活跃度。
-   商业潜力: 文档提及提供企业级支持（Enterprise Support），可针对高级需求提供商业服务。项目本身 MIT 许可，但每个技能有独立许可，可通过定制化技能开发、培训、技术支持等方式商业化。潜在客户包括药企、CRO 公司、科研院所、高校实验室等。
+（注：README 中未全部展示所有技能细节，部分领域如医疗影像、临床决策等仅概述，未提及具体技术实现，如需深入请补充文档。）
+   活跃度: 未知  社区健康: 文档称项目为社区驱动，并鼓励 star 和贡献，但 API 指标显示 forks 和 issues 均为 0，可能处于早期或刚开源，真实社区活跃度未知。
+   商业潜力: 文档提及 K-Dense 提供商业支持，可为企业定制高级需求，适用于制药、生物技术、学术机构等，商业模式可包括订阅制技能库、定制化技能开发、企业级部署和培训服务。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 Scientific Agent Skills，可以开发一个“生物医药研发智能体”，专门对接药企内部的靶点筛选、虚拟筛选、ADMET 预测流程。把技能包集成到企业微信/钉钉机器人中，研究人员发一句“帮我分析这个化合物的 ADMET 性质”，机器人自动调用 RDKit 和 ADMET 数据库技能，返回可视化报告。; 灵感2：结合 K-Dense BYOK 的思路，打造一个“科研文献自动综述系统”。利用技能集中的文献检索和证据可追溯写作技能，输入一个研究主题，系统自动从 PubMed、ClinicalTrials.gov 等数据库拉取相关文献，生成带引用标注的综述初稿，并附上证据等级评分，适合科研团队做开题调研。; 灵感3：将技能包嵌入到高校或科研机构的 JupyterHub 环境中，作为 AI 助手的“知识插件”。学生写毕业论文时，AI 助手能根据上下文调用统计分析或绘图技能，手把手教他们做数据分析，同时通过技能内置的测试确保结果正确性，降低导师的指导负担。
+   衍生灵感: 灵感1：基于此项目，可以开发一个“实验室专属 AI 科研助手”产品，为特定研究团队精选并配置所需的技能包，连接内部数据库和 LIMS，自动完成数据清洗、分析和报告生成，加速科研流程。; 灵感2：可以将其集成到在线教育平台，打造“智能科学实验教学系统”，学生在 AI 辅助下完成生物信息学、化学信息学等课程设计，系统自动提供步骤指导、代码修正和结果解读，降低学习门槛。; 灵感3：可以扩展构建“跨学科文献挖掘与知识图谱平台”，利用其中的文献检索和数据库技能，自动从海量论文和数据库中提取关系，构建领域知识图谱，用于科研选题和趋势预测。; 灵感4：可以将其作为“制药行业合规审查助手”的内核，专门针对 ICH/ISO 标准，自动生成分析方法验证报告和监管提交文档的草稿，辅助 QA/RA 团队提高效率。
    项目链接: https://github.com/K-Dense-AI/scientific-agent-skills
 
-2. anthropics/claude-plugins-official:
-   star: 34489  语言/技术: Claude Code, MCP, JSON, Slash Commands, Agents, Skills, Git, Plugin Marketplace
-   项目简介: 这是一个官方的 Claude Code 插件目录，相当于 AI 编程助手界的『App Store』。它集中管理和分发高质量插件，让开发者能一键安装各种增强 Claude Code 能力的扩展，比如 MCP 服务器、斜杠命令、自定义 Agents 和 Skills。解决了插件来源混乱、安装繁琐、安全性难保障的痛点，还提供了标准化的插件结构和严格的审核机制。
-   亮点: 官方维护+社区参与的双轨制插件目录：既有 Anthropic 内部团队开发的高质量插件，也有经过严格审核的第三方插件，兼顾可靠性与多样性。; 标准化的插件结构：统一了 .claude-plugin/plugin.json、MCP 配置、commands、agents、skills 等组织方式，让开发者能快速上手和迁移。; 插件名不可变与重命名映射机制：确保已安装插件的用户不会因为插件改名而遭遇无注册错误，自动迁移让升级过程无感。; skill-bundle 插件支持：允许直接打包 SKILL.md 文件而无需完整插件清单，降低了纯技能包发布门槛。
-   详细报告: 这个项目本质是一个『插件市场』，专为 Claude Code 打造。Claude Code 是 Anthropic 推出的 AI 编程助手，而插件系统则允许开发者扩展它的能力。此目录就是官方认可+社区贡献的插件集中地，分为 /plugins（Anthropic 内部维护）和 /external_plugins（第三方合作伙伴及社区提交）两大部分。
-
-安装方式极其简单：直接在 Claude Code 中执行 `/plugin install {plugin-name}@claude-plugins-official`，或者通过 `/plugin > Discover` 交互式浏览安装。这种设计非常『打工人神器』，省去了到处找资源、手动配置环境的痛苦。
-
-在插件结构上，它定义了一套统一的规范：每个插件包含必须的 `.claude-plugin/plugin.json` 元数据文件，以及可选的 `.mcp.json`（配置 MCP 服务器，让 AI 能调用外部工具或数据源）、`commands/`（自定义斜杠命令，比如 `/review` 快速代码审查）、`agents/`（自定义智能体角色，比如专门写测试的 Agent）、`skills/`（技能定义，教 AI 完成特定任务）和 `README.md` 文档。这种标准化让插件开发变得非常工程化，也方便自动化工具扫描和加载。
-
-特别值得注意的是插件名的『不可变』设计。一旦发布，`name` 字段就成了永久 slug，不能改动。如果非要改名，必须提供 `renames` 映射，否则老用户升级时会报 plugin-not-found 错误。这体现了对现有用户生态的保护，值得其他插件市场借鉴。
-
-对于只包含技能（SKILL.md）但不想维护完整插件清单的仓库，它还支持一种『skill-bundle』模式——在 marketplace 条目中直接声明 `strict: false` 和 `skills` 数组，就能将一个仓库内的多个技能打包为插件，注册格式为 `<plugin-name>:<skill-name>`。这种灵活设计降低了技能发布门槛，让更多开发者能参与贡献。
-
-除此之外，项目还提供了贡献指南和安全警告：明确提醒用户安装第三方插件前务必信任来源，Anthropic 不对 MCP 服务器内容负责，这种透明声明在 AI 安全敏感时代非常必要。由于 README 被截断，插件目录的具体插件列表、社区规模等无法进一步展开。整体来看，这是一个基础设施级项目，虽然代码量不大，但生态价值极高，未来很可能成为 AI Agent 领域的标配插件源。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及，但目录本身作为生态入口，可衍生商业服务，如插件认证费用、高级技术支持、企业安全订阅等。
+2. p-e-w/heretic:
+   star: 28785  语言/技术: Python, PyTorch, Optuna, bitsandbytes, uv, PaCMAP
+   项目简介: Heretic 是一个全自动去除大语言模型审查（安全对齐）的命令行工具，通过高级方向消融和自动参数优化，让模型在保持智能的同时大幅减少拒绝回答，无需人工干预。
+   亮点: 全自动去审查：只需一行命令，无需理解模型内部结构; 超低 KL 散度：在抑制拒绝的同时，最大限度保留模型原始能力; 广泛兼容：支持密集、MoE、多模态及混合架构模型; 内置评估与可视化：提供基准测试和残差几何分析工具; 社区验证：已生成超过 5000 个模型，用户反馈与独立基准表现优秀
+   详细报告: Heretic 是一个用于移除大语言模型（LLM）中审查机制（即“安全对齐”）的全自动工具。在传统的模型对齐过程中，开发者会通过微调让模型拒绝回答涉及暴力、色情等敏感话题，这虽然提升了安全性，但也限制了模型的自由表达能力。Heretic 基于“方向消融”（Abliteration）这一高级技术，通过修改模型内部的残差流向，抑制特定“审查方向”的激活，从而在不需要重新训练的情况下让模型恢复“畅所欲言”的能力。与人工操作不同的是，Heretic 引入了基于 Optuna 的 TPE（Tree-structured Parzen Estimator）参数优化器，能够自动寻找最佳消融参数，使得整个去审查过程完全无需人工干预，甚至不需要理解 Transformer 的内部结构。用户只需一条命令行指令，即可完成对一个模型的“去审查”工作。Heretic 的核心亮点在于它同时优化两个目标：一是最小化模型对“有害”提示词的拒绝次数，二是最小化与原模型的 KL 散度，从而在去除审查的同时，最大限度保留原模型的智能水平和语言能力。从 README 中的对比表格可以看到，使用 Heretic 自动生成的结果在拒绝抑制上与人工精调的模型持平（如 3/100），但 KL 散度显著更低（0.16 vs 0.45 或 1.04），表明对模型行为的影响更小。Heretic 支持绝大多数密集模型，包括多模态模型、多种 MoE 架构，甚至部分混合模型（如 Qwen3-4B-Instruct-2507），但不支持纯状态空间模型。技术上，Heretic 使用 Python 编写，基于 PyTorch 2.2+，利用 bitsandbytes 进行量化以降低显存需求。它还提供了一系列研究功能，比如残差向量 PaCMAP 投影可视化，以及残差几何的量化指标输出，方便研究者深入理解模型内部语义。此外，Heretic 内置了评估模块，可以自动运行基准测试，与原始模型或其他消融版本对比。该项目使用 AGPL-3.0 许可证，代码开源，社区已经利用它发布了超过 5000 个去审查模型，用户反馈普遍良好，认为其生成的模型在保留智能的同时，提供了更自然、更少回避的回答。
+   活跃度: 未知（API数据未提供时间戳等有效信息）  社区健康: 根据GitHub API指标（forks=0, open_issues=0等）无法有效判断，但README显示社区活跃（5000+模型）。
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此插件目录的模式，开发一个『企业内部 AI 助手插件市场』，供公司内部团队共享和安装定制化的 Claude Code 技能，比如专属的代码规范审查 Agent、内部 API 调用 MCP 等，让整个研发团队的 AI 工具链统一且安全。; 灵感2：构建一个『插件质量监控与安全审计平台』，自动扫描该目录中所有插件的更新，检测 MCP 服务器的权限变化、SKILL.md 内容风险，并生成兼容性报告，帮助企业级用户放心使用第三方插件。; 灵感3：将此插件市场的概念迁移到其他 AI 助手（如 OpenAI Codex、本地开源模型编程助手），设计一种通用的插件打包格式，让一套技能、Agent 定义能跨平台复用，成为 AI Agent 领域的『OpenAPI』。
-   项目链接: https://github.com/anthropics/claude-plugins-official
+   衍生灵感: 灵感1：开发一个“个性化价值观对齐助手”，基于 Heretic 的可调参数框架，允许用户自定义模型应遵循的价值观（如“更开放”或“更保守”），而不仅仅是移除审查。可以做成一个 GUI 工具，让非技术人员也能调整自家 LLM 的行为。; 灵感2：将 Heretic 的自动优化技术移植到其他模型编辑任务，例如“去偏见”或“知识更新”。通过类似的方向消融和 TPE 优化，自动识别并削弱模型中的偏见方向，或注入新知识，为模型修复提供通用框架。; 灵感3：利用 Heretic 的残差可视化研究功能，构建一个“模型可解释性分析平台”，将不同层的残差投影动态展示出来，帮助 AI 安全研究员和模型开发者更直观地理解模型如何拒绝有害请求，从而设计更安全的对齐策略。
+   项目链接: https://github.com/p-e-w/heretic
 
-3. calesthio/OpenMontage:
+3. ComposioHQ/awesome-claude-skills:
+   star: 70142  语言/技术: Markdown, YAML, JSON, Python (部分技能), TypeScript (部分技能), Node.js, MCP (Model Context Protocol), Composio API
+   项目简介: 一个精选的、超过1000个生产就绪的Claude Skills和插件列表，用于提升Claude.ai、Claude Code、Codex、Cursor、Gemini CLI等AI代理的生产力。项目还包括一个MCP网关，允许Claude通过单一端点连接1000+应用（如Gmail、Slack、GitHub），实现真实操作。旨在为开发者提供可复用的工作流指令包，使AI代理不仅生成文本，还能执行发送邮件、创建工单等实际行动。
+   亮点: 超过1000个生产就绪的Claude Skills，涵盖文档处理、开发、数据分析、营销等类别; 提供Connect插件和MCP网关，让Claude与1000+外部应用实时交互; 技能格式开放标准，可跨Claude.ai、Claude Code、API及其他支持代理（如Codex、Cursor）使用
+   详细报告: Awesome Claude Skills 是一个由Composio维护的技能集市，它集中整理了1000多个可直接投入生产的Claude Skills。每个Skill是一个包含SKILL.md文件的文件夹，用于指导AI代理如何完成特定任务。技能采用渐进式加载，会话开始时代理仅看到名称和描述（约100 tokens），只有在任务相关时才加载完整指令，因此单个代理可承载数百技能而不膨胀上下文。技能不是MCP服务器或工具，而是定义工作流程——当代理已拥有连接和工具后，技能告诉它该做什么、顺序如何、有哪些防护措施。项目本身还提供了一个名为'connect-apps'的插件，通过Composio的MCP网关，Claude可以连接Gmail、Slack、GitHub、Notion等1000+应用执行实际操作。此外，项目包含详细的目录结构，技能按领域分类：文档处理（docx、pdf、pptx、xlsx等）、开发与代码工具（Playwright自动化、测试生成、架构设计等）、数据与分析（CSV摘要、深度研究、SQL查询等）、商业与营销（品牌指南、竞品广告提取等）等。项目还提供了技能创建模板和最佳实践，鼓励社区贡献。文档还说明了技能与MCP、工具的关系：MCP负责外部连接，工具是代理调用的函数，技能定义行为流程。虽然README内容较长且被截断，但已足够展示项目的核心价值：一个丰富、实用的技能生态系统，降低开发者构建AI代理工作流的门槛。
+   活跃度: 文档未提及  社区健康: 文档未提及
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于此技能库，可以开发一个“企业全能数字助手”，集成文档处理（自动生成报告）、邮件管理（自动回复常见问题）、项目管理（创建Jira工单）等技能，让AI代理成为企业员工的超级辅助。; 灵感2：针对特定行业，如法律或医疗，从技能库中筛选并定制技能包。例如，利用“Master Claude for Legal”等技能，构建一个合同审查与法律文档合规性检查的专用代理。; 灵感3：将多个技能组合成自动化流水线。例如，结合“CSV Data Summarizer”和“deep-research”技能，开发一个“市场调研自动报告生成器”：先爬取竞品数据、进行分析，再自动生成PPT或Doc文件。
+   项目链接: https://github.com/ComposioHQ/awesome-claude-skills
+
+4. calesthio/OpenMontage:
    star: 52904  语言/技术: Python, Node.js, FFmpeg, FFprobe, Remotion (React), HyperFrames (HTML/GSAP), Piper TTS, React, GSAP, GitHub Actions (推断, 文档未明确)
    项目简介: 一句话概括：开源、智能体驱动的视频制作系统，让 AI 编程助手变成视频工作室，用自然语言描述即可自动完成研究、脚本、素材生成、剪辑和渲染。
    亮点: 首个开源、agentic（智能体驱动）的视频制作系统，将 AI 编码助手（如 Claude Code、Cursor）转变为完整的视频制作工作室; 不仅支持基于图片生成视频，还支持真实素材视频：从免费素材库（Archive.org、NASA、Wikimedia Commons）构建可搜索语料库，检索动态剪辑并合成成片; 内置 Backlot 实时看板，展示生产流程中的每个阶段、脚本、场景卡片、资源生成状态、预算支出，并支持人工审批关卡（contact sheet），在渲染前批准视觉素材; 强大的预算控制：预估成本、锁定预算、超过阈值暂停确认（默认 $0.50），总预算上限默认 $10，防止意外账单; 多维度自检：通过 ffprobe 验证、帧采样、音频电平分析、交付承诺校验、字幕检查，确保输出质量; 支持多种视频生成供应商（Fal、Atlas Cloud、Kling、HeyGen、Runway、ARK 等），以及本地 GPU 生成（Wan2.2、Hunyuan 等模型）; 零 API Key 也能制作真实视频：Piper TTS 免费离线配音 + 开放素材库 + Remotion/HyperFrames 渲染
@@ -66,24 +66,3 @@ Backlot 是一个独特的可视化看板系统，它将生产过程的“幕后
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于此项目，可以开发一个“个性化品牌营销视频自动生成器”，企业只需输入产品描述和目标受众，OpenMontage 自动从品牌资产库和免费素材中提取镜头，生成符合品牌调性的宣传片，并自动适配不同平台的尺寸和字幕风格。; 灵感2：可以将其集成到“在线教育平台”中，教师用自然语言输入课程要点，系统自动生成带讲解、图表和字幕的微课视频，并利用 Backlot 的审批流让教师预览和修改每一帧，提高课程制作效率。; 灵感3：可以拓展为一个“电影预告片快速原型工具”，编剧或导演输入故事大纲，系统自动生成包含概念视觉、动态分镜、配乐和旁白的预告片，用于内部评审或众筹展示，大幅降低前期可视化成本。
    项目链接: https://github.com/calesthio/OpenMontage
-
-4. abi/screenshot-to-code:
-   star: 75264  语言/技术: React/Vite（前端）, FastAPI（后端）, Python, TypeScript/JavaScript, Tailwind CSS, OpenAI GPT-5.5/5.4 Mini, Anthropic Claude Opus 4.6/4.8, Gemini 3 Flash/3.1 Pro, Replicate（图像生成/编辑）, Playwright（无头浏览器预览）, Poetry（Python依赖管理）, Docker
-   项目简介: 一句话概括：这个项目是一个AI驱动的设计转代码工具，能将截图、Figma设计稿、屏幕录制等视觉输入直接转换成干净、可用的前端代码（如HTML+Tailwind、React+Vue等），堪称“设计师的甩锅神器”和“前端程序员的救星”。它解决了从设计到代码手动翻译的痛点，让原型落地速度起飞。
-   亮点: 支持多种前端栈：HTML+Tailwind、React+Tailwind、Vue+Tailwind、Bootstrap、Ionic等; 除了静态截图，还能处理屏幕录制，把动态交互转换成可运行的原型; 利用Gemini提取截图中的真实素材（logo/图片），配合Replicate实现图像编辑和背景移除，生成质量更高; 内置无头浏览器截图预览，AI可以自己检查生成的页面效果并迭代修正
-   详细报告: 这是一个将设计图“魔法般”变成前端代码的开源项目。用户只需要上传一张截图、一个Figma设计稿，甚至是一段屏幕录制视频，AI就能自动分析视觉布局、颜色、字体、间距等设计细节，生成对应的HTML/CSS/React/Vue代码。
-
-核心逻辑是：前端（React/Vite）负责交互界面和展示，后端（FastAPI）负责调用AI模型的API。用户至少需要一个模型提供商的API Key（OpenAI、Anthropic或Gemini三选一），但官方强烈建议同时配置Gemini和Replicate的Key，因为Gemini负责从原始截图中提取真正的资源图片（比如产品的Logo、真实照片），而Replicate负责图像生成、背景移除和图像编辑，这样生成出来的页面会高度还原原图，而不是用占位符或虚假图片。
-
-项目支持多套技术栈的输出：HTML+Tailwind是默认标配，也能生成纯CSS、React+Tailwind、Vue+Tailwind、Bootstrap和Ionic+Tailwind。另外，它还能处理屏幕录制，比如录制一个网站的动态交互过程，AI能把它变成一个可点击的原型，这给产品经理和UI/UX设计师带来了极大的便利——直接录屏就能得到交互原型。
-
-后端可以通过Poetry安装依赖，并用Uvicorn启动，前端用pnpm管理包，跑在5173端口。为了让AI能自我检查生成的页面，还需要安装Chromium浏览器（通过Playwright），这样AI可以在无头浏览器中渲染出它生成的页面，并截图对比原图，从而自动迭代修正，类似于“AI自我审稿”。
-
-Docker用户也可以通过docker-compose快速启动，不过这种模式下文件变动不会自动重建，适合体验而不适合开发。README还提供了详细的FAQ，比如如何配置OpenAI代理（OPENAI_BASE_URL）、如何解决UTF-8编码问题等。
-
-由于提供的README被截断，关于项目更详细的模型选择逻辑、具体生成流程、以及是否支持更多自定义配置等信息，请补充完整的文档内容。但是目前已有的信息足以看出这是一个非常成熟且实用的开源项目，在GitHub上很受欢迎（虽然API显示的指标为空，但根据行业的认知，这是一个高星项目）。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 高。该工具可直接作为商业SaaS服务（已有官方hosted版本screenshottocode.com），也可嵌入到设计协作平台（如Figma）或低代码平台中，作为增值功能。企业还可基于此定制私有化部署，用于内部设计转代码流程，节省大量前端开发人力。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：构建一个“设计系统合规检测器”——基于此项目，可以开发一个工具，让用户上传产品页面的截图，自动生成代码并对比设计规范（如颜色、间距、字体），从而确保所有前端页面符合公司设计系统。; 灵感2：打造一个“网页自动改版工具”——集成screenshot-to-code到CI/CD流程中，当设计师更新Figma设计稿时，自动生成对应代码并创建Pull Request，实现设计到代码的全自动化交付。; 灵感3：开发一个“教学辅助工具”——用于编程教育场景，学生上传手绘草图或截图，系统生成代码并对比标准答案，帮助初学者理解布局和CSS原理。
-   项目链接: https://github.com/abi/screenshot-to-code
