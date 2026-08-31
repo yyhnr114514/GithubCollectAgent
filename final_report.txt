@@ -29,40 +29,46 @@
    衍生灵感: 灵感1：开发一个“个性化价值观对齐助手”，基于 Heretic 的可调参数框架，允许用户自定义模型应遵循的价值观（如“更开放”或“更保守”），而不仅仅是移除审查。可以做成一个 GUI 工具，让非技术人员也能调整自家 LLM 的行为。; 灵感2：将 Heretic 的自动优化技术移植到其他模型编辑任务，例如“去偏见”或“知识更新”。通过类似的方向消融和 TPE 优化，自动识别并削弱模型中的偏见方向，或注入新知识，为模型修复提供通用框架。; 灵感3：利用 Heretic 的残差可视化研究功能，构建一个“模型可解释性分析平台”，将不同层的残差投影动态展示出来，帮助 AI 安全研究员和模型开发者更直观地理解模型如何拒绝有害请求，从而设计更安全的对齐策略。
    项目链接: https://github.com/p-e-w/heretic
 
-3. ComposioHQ/awesome-claude-skills:
-   star: 70142  语言/技术: Markdown, YAML, JSON, Python (部分技能), TypeScript (部分技能), Node.js, MCP (Model Context Protocol), Composio API
-   项目简介: 一个精选的、超过1000个生产就绪的Claude Skills和插件列表，用于提升Claude.ai、Claude Code、Codex、Cursor、Gemini CLI等AI代理的生产力。项目还包括一个MCP网关，允许Claude通过单一端点连接1000+应用（如Gmail、Slack、GitHub），实现真实操作。旨在为开发者提供可复用的工作流指令包，使AI代理不仅生成文本，还能执行发送邮件、创建工单等实际行动。
-   亮点: 超过1000个生产就绪的Claude Skills，涵盖文档处理、开发、数据分析、营销等类别; 提供Connect插件和MCP网关，让Claude与1000+外部应用实时交互; 技能格式开放标准，可跨Claude.ai、Claude Code、API及其他支持代理（如Codex、Cursor）使用
-   详细报告: Awesome Claude Skills 是一个由Composio维护的技能集市，它集中整理了1000多个可直接投入生产的Claude Skills。每个Skill是一个包含SKILL.md文件的文件夹，用于指导AI代理如何完成特定任务。技能采用渐进式加载，会话开始时代理仅看到名称和描述（约100 tokens），只有在任务相关时才加载完整指令，因此单个代理可承载数百技能而不膨胀上下文。技能不是MCP服务器或工具，而是定义工作流程——当代理已拥有连接和工具后，技能告诉它该做什么、顺序如何、有哪些防护措施。项目本身还提供了一个名为'connect-apps'的插件，通过Composio的MCP网关，Claude可以连接Gmail、Slack、GitHub、Notion等1000+应用执行实际操作。此外，项目包含详细的目录结构，技能按领域分类：文档处理（docx、pdf、pptx、xlsx等）、开发与代码工具（Playwright自动化、测试生成、架构设计等）、数据与分析（CSV摘要、深度研究、SQL查询等）、商业与营销（品牌指南、竞品广告提取等）等。项目还提供了技能创建模板和最佳实践，鼓励社区贡献。文档还说明了技能与MCP、工具的关系：MCP负责外部连接，工具是代理调用的函数，技能定义行为流程。虽然README内容较长且被截断，但已足够展示项目的核心价值：一个丰富、实用的技能生态系统，降低开发者构建AI代理工作流的门槛。
-   活跃度: 文档未提及  社区健康: 文档未提及
+3. unclecode/crawl4ai:
+   star: 80389  语言/技术: Python, Playwright, Docker, FastAPI, JWT, Selenium, PyTorch, Transformer, LLM, CSS/XPath, BM25, Async
+   项目简介: Crawl4AI 是一款开源的、LLM 友好的网络爬虫与抓取工具，能够将网页内容转换为干净的、适用于 RAG、AI 代理和数据管道的 Markdown 格式。它由 50k+ 星标社区支持，提供从简单爬取到深度爬取、结构化数据提取、浏览器自动化等一系列功能，并支持 Docker 一键部署。核心要点是解决传统爬虫数据杂乱、难以直接用于大语言模型的问题，让开发者无需折腾即可获取高质量的、结构化的网页数据。
+   亮点: LLM 友好的 Markdown 生成：干净、结构化的 Markdown 输出，支持引用、表格、代码块，并内置 Fit Markdown 和 BM25 过滤机制，可大幅提升 AI 任务的数据质量。; 结构化数据提取：支持 LLM 驱动的任意抽取，也支持无 LLM 的 CSS/XPath 快速抽取，以及基于主题/正则/句子的分块策略，适应不同场景。; 强大的浏览器集成：支持用户自有浏览器、远程 CDP 控制、持久化浏览器配置、会话管理、代理认证、动态视图调整等，可有效避免反爬并处理 JavaScript 渲染内容。; 深度爬取与智能调度：支持 BFS 深度爬取、断点恢复、预取模式（提速 5-10 倍）、全页面扫描（无限滚动）、iframe 内容提取等，可大规模采集动态网页。; 轻量部署与安全增强：Docker 镜像内置监控仪表盘和 API，提供 JWT 认证、浏览器池、沙箱防护，并支持多架构（AMD64/ARM64），方便生产环境部署。
+   详细报告: Crawl4AI 是一个功能非常全面的开源网络爬虫和抓取框架，其设计初衷就是为了解决一个很实在的痛点：互联网上的网页数据（HTML）杂乱无章，直接丢给大语言模型（LLM）会导致上下文污染、token 浪费、结果不准确。作者 unclecode 在 2023 年因为找不到一个好用的“网页转 Markdown”工具，而且市面上的替代品要么需要付费、要么限制多，一怒之下几天内写出了这个库，并开源火遍全网。
+
+从技术实现来看，Crawl4AI 以 Python 为基础，默认基于 Playwright 驱动浏览器进行异步抓取（同时也保留了基于 Selenium 的同步版本，但已标记为弃用）。它的核心架构围绕几个关键模块：
+
+1. **Markdown 生成策略**：默认使用 `DefaultMarkdownGenerator`，它内部可以插入不同的内容过滤器，比如 `PruningContentFilter`（启发式修剪噪声内容）或 `BM25ContentFilter`（基于用户查询的 BM25 相关性过滤）。这样输出的 `raw_markdown` 和 `fit_markdown` 可以为不同场景提供不同粒度。
+
+2. **结构化数据提取**：既支持通过 LLM 进行智能抽取（用户给一个自然语言问题，模型返回结构化 JSON），也支持无 LLM 的快速 CSS/XPath 抽取。此外，还提供了分块策略（topic-based、regex、sentence-level）和余弦相似度匹配，用于从长文档中抽取相关信息。
+
+3. **浏览器控制与反检测**：支持使用用户自己的浏览器（通过 CDP 连接），这样可以继承浏览器的真实指纹和登录状态，从而更不容易被反爬识别。同时支持动态 viewport 调整、懒加载处理、iframe 内容提取、模拟滚动等，非常适合处理现代单页应用（SPA）和无限滚动页面。
+
+4. **深度爬取与调度**：新增了 `MemoryAdaptiveDispatcher`（内存自适应调度器）和一些高级策略（如 BFS 深度爬取）。通过 `prefetch=True` 可以预取 URL 来加速发现，并支持断点恢复（`resume_state`）和状态回调，适合长时间运行的采集任务。
+
+5. **部署与 API**：Docker 集成非常完善，官方镜像带有监控仪表板、Playground、WebSocket 鉴权、浏览器池、MCP 集成（可直接连接 Claude Code 等 AI 工具），并支持 FastAPI 服务器和 JWT 认证，多架构自动检测。用户也可以直接通过 pip 安装，使用 CLI 工具 `crwl` 快速抓取。
+
+此外，项目非常重视安全，v0.8.7 和 v0.9.x 的更新中修复了 Docker API 的多个关键漏洞（如 RCE、SSRF、认证绕过、文件写入、XSS 和硬编码 JWT 密钥），并默认启用认证、将服务器绑定到 loopback。这使得它更适合在生产环境中使用。
+
+由于 README 内容被截断，一些更精细的 API 和扩展机制（如 hooks 的具体实现）未能展开，但整体来看，Crawl4AI 是一个集爬虫、抓取、数据清洗、AI 提取于一体的综合工具，非常适合作为构建 RAG 系统、数据管道和 AI Agent 的基础设施。
+   活跃度: 高。README 中列出了 v0.9.2 (latest)、v0.9.0、v0.8.7、v0.8.0 等多个近期发布版本，更新频率较高，且承诺了持续的功能与安全修复，说明项目处于活跃开发阶段。  社区健康: README 提到项目拥有 50k+ 的 star 社区，是 GitHub 上最受欢迎的爬虫项目，作者积极维护，近期还发布了 v0.9.2 等版本。文档中展示了大量赞助商（包括战略伙伴和金牌企业），并且有多种社区参与渠道（Discord、Twitter等），生态活跃度较高。
+   商业潜力: 文档中明确提到了商业化的规划：推出了 Crawl4AI Cloud API（Closed Beta），强调低成本、大规模，并提供了多种赞助级别（从 $5/月到 $2000/月），目标客户包括初创企业和数据基础设施团队。项目的使命是打造公平的数据交易市场，将数字足迹转化为结构化资产，具有明确的 B 端付费潜力和数据变现空间。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 Crawl4AI 构建一个『法律/金融新闻智能监测系统』，定时抓取指定网站（如法院公告、SEC 文件、央行新闻），自动转换为干净的 Markdown，使用 LLM 抽取关键实体和事件，生成结构化摘要并推送给订阅者，替代传统的人工监控和简报工作。; 灵感2：将 Crawl4AI 集成到现有的 RAG 知识库系统中，作为文档采集层。利用其 LLM 友好的 Markdown 输出和深度爬取能力，自动抓取企业内部 Wiki、文档站、API Docs 等，并同步到向量数据库，让 AI 助手能基于最新内部知识回答问题。; 灵感3：开发一个面向电商卖家的小程序『价格与竞品雷达』，使用 Crawl4AI 定期深度抓取竞争对手的商品页、评价页，通过 CSS/LLM 提取价格、库存、促销信息，结合历史数据生成调价建议，帮助商家快速响应市场变化。
+   项目链接: https://github.com/unclecode/crawl4ai
+
+4. mvanhorn/last30days-skill:
+   star: 60639  语言/技术: Python 3.12+, Node.js, yt-dlp, ScrapeCreators API, Claude Code / Codex / Cursor / Copilot / Gemini CLI / OpenClaw 等 Agent 宿主, Agent Skills 规范, MCP (Model Context Protocol), Reddit JSON API / RSS / shreddit 爬虫, GitHub API, Polymarket API, arctic-shift, uv (Python 包管理器), Chromium cookie 提取 (Brave, Edge, Vivaldi, Opera, Arc), macOS Keychain / Linux pass, OpenSSF Scorecard / Semgrep / OSV-Scanner
+   项目简介: 这是一个由 AI 代理驱动的 '搜索过去 30 天' 的引擎，它跨 Reddit、X、YouTube、TikTok、Hacker News、Polymarket 等多个社交平台并行搜索，按照真实用户的点赞、投票和金钱投注来评分，而不是编辑推荐。它旨在打破每个平台的围墙花园，通过一个 Agent 技能（Skill）将所有平台连接起来，快速生成一份关于任意话题 (人物、公司、产品、事件) 的近期热点简报。核心价值是让你在几分钟内了解社区真正在讨论什么，替代低效的人工搜索。
+   亮点: 多平台并行搜索：覆盖 Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub 等主流社区，以及 arXiv、Techmeme、Digg 等免费数据源。; 真实用户参与度评分：用 upvotes、likes、真实金钱投注作为信号，自动聚类并合成一份精炼简报，而不是一串链接。; 零配置快速接入：安装到 Claude Code 只需一条命令，也支持 npx skills add 全球安装，或作为 .skill 文件上传到 claude.ai 网页版。; 深度报告模式：支持入职信号分析、发现模式（探索新兴话题）、工具对比、历史回看、ELI5 简化说明、HTML 导出等。; 社区驱动与安全加固：175 个合并 PR，52 位社区贡献者；有 2700+ 测试，覆盖 XSS 修复、供应链安全、凭据安全等。
+   详细报告: 这个项目的本质是一个由 AI 代理驱动的搜索与情报聚合技能，专门解决'搜索引擎无法检索社交平台内部讨论'的问题。传统 Google 搜索只能索引公开网页，而 Reddit 评论区、X 帖子、YouTube 字幕、TikTok 描述、Polymarket 预测市场数据等大量真实用户的声音都被隔离在围墙花园里，或者没有 API 权限，或者需要复杂的认证。
+
+last30days-skill 的做法是：用户输入一个话题，Agent 首先通过预研究解析出关键实体（X 账号、GitHub 仓库、subreddit、YouTube channel、TikTok hashtag 等），然后并行调用各个平台的搜索 API 或爬虫（如 Reddit 的 JSON 接口、X 的 Bird 客户端、yt-dlp 下载 YouTube 字幕），并利用用户自己的浏览器 Cookie 来解锁 X 等平台。搜索结果会被聚合成'事件簇'，然后按真实参与度（upvotes、likes、浏览量、Polymarket 赔率）进行排序和计分，最后由一个 AI 评判者综合成一份有引用来源的简报。
+
+项目支持深度定制，包括 '--hiring-signals' 分析公司招聘页推断战略方向，'what's exploding' 发现模式帮你捕捉上升期话题，还支持自动比较多个工具（如 OpenClaw vs Hermes vs Paperclip）并生成带真实 GitHub star 数的对比表。它还能生成自包含的 HTML 报告，并可保存到本地库用于后续搜索。
+
+技术架构上，核心引擎是用 Python 3.12+ 编写的，X 搜索部分使用了 Node.js 生态（Bird 客户端），媒体下载依赖 yt-dlp，部分商业数据通过 ScrapeCreators API 获取。项目发布为一种 Agent Skill，可被 50+ 多种 AI 编程助手（Claude Code、Codex、Cursor、Copilot、Gemini CLI 等）识别。安装方式多样：Claude Code 用户可通过插件市场自动更新，也可以直接 npx skills add 全局安装。目前已经具备 175+ 合并 PR，社区贡献者超过 50 人，测试 2700+，并且通过 OpenSSF Scorecard、Semgrep 等安全扫描。此项目不是给程序员提供的一个函数库，而是给任何 AI 使用者提供的一项独特的信息检索能力——让 AI 直接搜索真实的人群讨论，而不是被 SEO 和编辑推荐所左右。
+   活跃度: 高，最近更新至 v3.11.1（2026 年 7 月），且有持续版本迭代记录。  社区健康: 社区活跃，拥有 52+ 位贡献者，175+ 合并 PR，2700+ 测试，并已形成贡献指南和完整的行为准则。
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此技能库，可以开发一个“企业全能数字助手”，集成文档处理（自动生成报告）、邮件管理（自动回复常见问题）、项目管理（创建Jira工单）等技能，让AI代理成为企业员工的超级辅助。; 灵感2：针对特定行业，如法律或医疗，从技能库中筛选并定制技能包。例如，利用“Master Claude for Legal”等技能，构建一个合同审查与法律文档合规性检查的专用代理。; 灵感3：将多个技能组合成自动化流水线。例如，结合“CSV Data Summarizer”和“deep-research”技能，开发一个“市场调研自动报告生成器”：先爬取竞品数据、进行分析，再自动生成PPT或Doc文件。
-   项目链接: https://github.com/ComposioHQ/awesome-claude-skills
-
-4. calesthio/OpenMontage:
-   star: 52904  语言/技术: Python, Node.js, FFmpeg, FFprobe, Remotion (React), HyperFrames (HTML/GSAP), Piper TTS, React, GSAP, GitHub Actions (推断, 文档未明确)
-   项目简介: 一句话概括：开源、智能体驱动的视频制作系统，让 AI 编程助手变成视频工作室，用自然语言描述即可自动完成研究、脚本、素材生成、剪辑和渲染。
-   亮点: 首个开源、agentic（智能体驱动）的视频制作系统，将 AI 编码助手（如 Claude Code、Cursor）转变为完整的视频制作工作室; 不仅支持基于图片生成视频，还支持真实素材视频：从免费素材库（Archive.org、NASA、Wikimedia Commons）构建可搜索语料库，检索动态剪辑并合成成片; 内置 Backlot 实时看板，展示生产流程中的每个阶段、脚本、场景卡片、资源生成状态、预算支出，并支持人工审批关卡（contact sheet），在渲染前批准视觉素材; 强大的预算控制：预估成本、锁定预算、超过阈值暂停确认（默认 $0.50），总预算上限默认 $10，防止意外账单; 多维度自检：通过 ffprobe 验证、帧采样、音频电平分析、交付承诺校验、字幕检查，确保输出质量; 支持多种视频生成供应商（Fal、Atlas Cloud、Kling、HeyGen、Runway、ARK 等），以及本地 GPU 生成（Wan2.2、Hunyuan 等模型）; 零 API Key 也能制作真实视频：Piper TTS 免费离线配音 + 开放素材库 + Remotion/HyperFrames 渲染
-   详细报告: OpenMontage 是一个革命性的开源项目，它重新定义了视频制作的方式。核心思想是：让你喜欢的 AI 编程助手（如 Claude Code、Cursor、Copilot、Windsurf、Codex）变成一个全自动的视频制作工作室。你只需要用自然语言描述你想要什么，例如“做一个 60 秒的动画解释器，讲神经网络如何学习”，代理就会自动完成以下工作：网络搜索研究主题、生成 AI 图像、撰写脚本、进行有情感表达的配音、寻找免版税背景音乐、生成单词级字幕，并最终渲染成完成的视频。
-
-最令人印象深刻的是它不仅仅局限于将静态图片变成幻灯片式视频。它支持真正的“视频视频”——代理从免费素材库（例如 Archive.org、NASA、Wikimedia Commons）构建一个可搜索的语料库，通过 CLIP 检索真实的运动剪辑，将它们编辑到时间轴上，并合成最终作品。这意味着你可以制作基于真实素材的纪录片、新闻蒙太奇等，而不需要昂贵的付费素材。
-
-项目架构是高度模块化和代理驱动的。所有工作流都通过 YAML 清单（pipeline_defs/）定义，舞台导演技能位于 skills/pipelines/，工具通过注册表自动发现。代理首先选择正确的流水线，然后读取清单和技能，再使用工具执行。工具注册表允许动态扩展，新增工具只需继承 BaseTool 并实现接口，即可被自动发现。
-
-Backlot 是一个独特的可视化看板系统，它将生产过程的“幕后”实时展示出来：阶段灯亮起、脚本变成剧本页面、场景卡片在生成时闪烁，每个提供商决策和花费都一览无余。更重要的是，它成为了真实的审批关卡：资源生成会暂停在逐场景的联系表上，显示镜头、提示词、单个资产成本和质量评分，让你在渲染之前批准视觉素材。这一功能对于需要创意控制的专业人士来说极其有价值。
-
-在代码层面，OpenMontage 结合了 Python（核心工具和多代理协调）、Node.js/React（Remotion 合成引擎）、以及 HTML/GSAP（HyperFrames 渲染器）。它内置了多种渲染后端：Remotion 适合数据驱动的解说视频和现有 React 场景堆栈；HyperFrames 则适合书法排版、产品宣传、动态图形密集型的项目，甚至支持 SVG 角色动画。
-
-预算控制是另一个亮点：代理在执行前估算成本，支持预留资金、记录实际花费，并提供 observe/warn/cap 三种模式，可配置单次操作审批阈值和总预算上限。所有提供商选择都会通过 7 个维度的评分，并保留可审计的决策日志，让你完全理解为什么最终输出看起来是这个样子。
-
-此外，项目可以在零 API Key 的情况下运行：Piper TTS 提供免费离线文本转语音，Archive.org、NASA、Pexels 等提供免费素材，Remotion / HyperFrames 负责渲染。对于有 GPU 的用户，还可以通过 make install-gpu 启用本地视频生成模型（如 Wan2.2、Hunyuan），彻底摆脱云服务依赖。
-
-该项目还充分考虑了代理兼容性，为 Claude Code、Cursor、Copilot、Codex、Windsurf 提供了相应的配置文件（CLAUDE.md、CURSOR.md 等），所有文件指向共享的 AGENT_GUIDE.md 和 PROJECT_CONTEXT.md。未来还计划支持 Ollama 和 LM Studio 本地 LLM，实现完全离线运行。
-
-总而言之，OpenMontage 是一个功能极其强大、设计精良的开源项目，它将 AI 编程助手的潜力扩展到了视频创作领域，大大降低了专业视频制作的门槛，无论是创意人员、营销团队还是教育工作者都能从中受益。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个“个性化品牌营销视频自动生成器”，企业只需输入产品描述和目标受众，OpenMontage 自动从品牌资产库和免费素材中提取镜头，生成符合品牌调性的宣传片，并自动适配不同平台的尺寸和字幕风格。; 灵感2：可以将其集成到“在线教育平台”中，教师用自然语言输入课程要点，系统自动生成带讲解、图表和字幕的微课视频，并利用 Backlot 的审批流让教师预览和修改每一帧，提高课程制作效率。; 灵感3：可以拓展为一个“电影预告片快速原型工具”，编剧或导演输入故事大纲，系统自动生成包含概念视觉、动态分镜、配乐和旁白的预告片，用于内部评审或众筹展示，大幅降低前期可视化成本。
-   项目链接: https://github.com/calesthio/OpenMontage
+   衍生灵感: 灵感 1：构建一个 '竞品情报监控中心'。你可以把 /last30days 嵌入到定时任务中，每周自动生成一份关于主要竞品的综合简报，包括用户反馈、新版本发布、招聘方向、预测市场对公司前景的看法，从而让产品经理和决策者始终掌握最新动向。; 灵感 2：为销售和 CRM 集成一个 '会见前快速背景' 插件。在销售代表与 CEO 会面前，自动运行 /last30days <对方名字>，抓取对方最近 30 天的推文、Reddit 讨论、GitHub 活跃度、YouTube 采访等，一键生成可分享的 briefing 卡片，有效提升销售准备度。; 灵感 3：打造一个 '红队舆情分析工具'。针对某个品牌或大 V，用 /last30days 定期抓取各社交平台上的负面/正面情绪，结合 Polymarket 预测和市场反应，产出情绪预警，帮助公关团队及时应对危机。
+   项目链接: https://github.com/mvanhorn/last30days-skill
