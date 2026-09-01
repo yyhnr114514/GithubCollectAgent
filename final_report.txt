@@ -1,74 +1,76 @@
 1. K-Dense-AI/scientific-agent-skills:
-   star: 38101  语言/技术: Python, Agent Skills (open standard), Agent Plugins, npx, GitHub CLI, RDKit, Scanpy, PyTorch Lightning, scikit-learn, PyTDC, PathML, pydicom, NeuroKit2, PufferLib, QuTiP, GeoPandas, pymatgen, BioPython, Qiskit, OpenMM, MDAnalysis, scVelo, TimesFM, Docker, CI/CD
-   项目简介: 一句话概括：这是一个为 AI 智能体（如 Claude Code、Cursor、Codex 等）提供 163 个即用型科学和研究技能的集合，覆盖生物信息学、药物发现、临床研究、材料科学、物理学等众多领域，让普通 AI 助手瞬间变身能执行复杂多步科研流程的“AI 科学家”，解决科研人员重复查文档、写代码、调 API 的痛点。
-   亮点: 163 个即用型科学和研究技能，涵盖 20+ 个学科领域; 统一数据库查询技能，可访问 78+ 个公共科学数据库（如 PubChem、ChEMBL、UniProt、COSMIC 等）; 支持多智能体宿主：Cursor、Claude Code、Codex、Google Antigravity、Gemini CLI 等; 每个技能包含完整文档（SKILL.md）、代码示例、集成指南和测试套件; 作为 Agent Plugins 包发布，一键插件化加载，简化安装; 持续维护，CI 测试保障质量，最终用户可快速上手; MIT 许可证，同时每个技能有自己的许可说明，灵活可商用
-   详细报告: Scientific Agent Skills 是由 K-Dense 团队精心打造的一个开源项目，核心理念是将科研工作中常用的数据库、Python 库和平台封装成标准的“Agent Skills”，让任何支持 Agent Skills 标准的 AI 智能体都能直接调用这些技能，从而无需每次从头编写繁琐的 API 调用逻辑。项目包含 163 个技能，分为四大类：
-
-- **100+ 科学/金融数据库技能**：通过统一的 database-lookup 技能，提供了对 78+ 个公共数据库（如 PubChem、ChEMBL、UniProt、COSMIC、ClinicalTrials.gov、FRED、USPTO 等）的确定性访问，并管理了 DepMap、Imaging Data Commons、PrimeKG、NCATS ARAX、U.S. Treasury Fiscal Data、Hugging Science、OneKGPd、Genomic Intelligence 等专用技能。此外还集成了 BioServices（约 40 个生物信息学服务）、BioPython（Entrez 访问 39 个 NCBI 子数据库）、gget（20+ 个基因组学数据库）。
-- **70+ 优化 Python 包技能**：为 RDKit、Scanpy、PyTorch Lightning、scikit-learn、PyTDC、PathML、pydicom、NeuroKit2、PufferLib、QuTiP、GeoPandas、pymatgen、Qiskit、OpenMM/MDAnalysis、scVelo 等常用科学计算库提供了版本感知的“最佳实践”工作流指南。智能体本身可以用任何 Python 包，但这些技能是预先验证的、更安全更可靠的路径。
-- **9 个科学集成技能**：专门为 Benchling、DNAnexus、LatchBio、OMERO、Protocols.io、Open Notebook、Ginkgo Cloud Lab、LabArchives 和 Opentrons 等平台提供即拿即用的流程，简化了与外部系统的交互。
-- **30+ 分析与沟通工具**：包括文献综述、证据溯源写作、保密同行评审、文档处理、Paperclip（全文论文/监管文件检索）、Paperzilla、Exa Search、PPTX 海报生成、幻灯片/示意图/信息图制作、Mermaid 图表等。另外还有 10+ 研究与临床工具，如证据受限的假设生成、基金撰写、PK/PD 建模与模拟、BIDS 支持、ISO 标准证据准备、分析方法验证（ICH/USP/CLSI）等。
-
-每个技能都遵循标准结构，包含详尽的 SKILL.md 文档、可运行的代码示例、使用场景和最佳实践、集成指南、参考资料，并且所有包含 scripts/ 的技能都配有测试套件，CI 会在每次 pull request 时执行测试，保证质量。项目支持多种安装方式：通过 `npx skills add` 一键安装，使用 `gh skill install` 按需安装特定技能或版本锁定，或以 Agent Plugins 方式通过 Cursor 等客户端直接加载。该项目最大的价值在于“确定性”：AI 智能体不再依赖模糊的“猜测”来调用科研数据库，而是基于经过验证的技能集，大幅提升了科研工作流的效率和可复现性。
-
-（注：README 中未全部展示所有技能细节，部分领域如医疗影像、临床决策等仅概述，未提及具体技术实现，如需深入请补充文档。）
-   活跃度: 未知  社区健康: 文档称项目为社区驱动，并鼓励 star 和贡献，但 API 指标显示 forks 和 issues 均为 0，可能处于早期或刚开源，真实社区活跃度未知。
-   商业潜力: 文档提及 K-Dense 提供商业支持，可为企业定制高级需求，适用于制药、生物技术、学术机构等，商业模式可包括订阅制技能库、定制化技能开发、企业级部署和培训服务。
+   star: 40956  语言/技术: Python, Agent Skills, Agent Plugins, npx, GitHub CLI
+   项目简介: 一个为 AI 代理提供 163 个科学和研究技能的综合集合，基于开放的 Agent Skills 标准，将 AI 代理变成能执行复杂多步骤科学工作流的研究助手，解决科研人员在数据分析和文献查阅上的重复性劳动痛点。
+   亮点: 提供 163 个现成的科学和研究技能，覆盖 20+ 科学领域; 统一访问 78+ 公共数据库和 70+ 优化的 Python 包，节省 API 文档研究时间; 基于开放的 Agent Skills 标准，兼容 Cursor、Claude Code、Codex 等主流 AI 代理
+   详细报告: Scientific Agent Skills 是由 K-Dense Inc. 维护的开源项目，旨在为 AI 代理提供即插即用的科学技能，使其能够执行复杂的科研工作流。项目遵循开放的 Agent Skills 标准，任何支持该标准的 AI 代理（如 Cursor、Claude Code、Codex、Google Antigravity 等）都可以通过简单的命令安装和调用这些技能。核心优势在于其覆盖面极广：163 个技能按领域划分，包括生物信息学、化学信息学、蛋白质组学、临床研究、医学成像、药物发现、材料科学、物理天文、地理空间分析、实验室自动化等。每个技能都是一个包含 SKILL.md 文档、代码示例、测试脚本和最佳实践的文件夹，代理可以从中学习如何使用特定的库或 API。例如，对于单细胞 RNA-seq 分析，有专门针对 Scanpy 的技能；对于分子对接，有基于 RDKit 的技能；对于临床文献检索，有 Paperclip 技能可以引用 FDA/PMDA/EMA 文件。此外，项目还提供了对 78 个公共数据库的统一访问接口，以及 70 多个版本感知的 Python 包技能，确保代理使用正确的方法和参数。项目支持多种安装方式：通过 npx 命令、GitHub CLI 或者作为 Agent Plugins 包。每个技能都经过严格的测试，在 CI 中运行，确保质量。项目还附带了一个免费的桌面应用 K-Dense BYOK，让没有编程背景的研究人员也能通过图形界面使用这些技能进行文献综述、假设生成、实验方案设计等工作。项目的技术架构非常轻量，不依赖特定的运行环境，只需将技能目录复制到代理的技能路径即可。技能内部使用 Python 作为主要语言，但也可以调用任何命令行工具或 Web API。每个技能都有清晰的元数据，包括名称、版本、许可证和依赖项，便于管理和追溯。此外，项目还提供了 Autoskill 工具，可以从现有工作流中自动生成新技能，实现技能的自我扩展。为了确保科研的严谨性，许多技能都强调了证据可追溯性，例如在文献综述技能中，引用会精确到行；在临床决策支持技能中，输出会明确指出是研究用途而非临床决策。这些设计使得 AI 代理在科学研究中的应用更加可靠和合规。项目采用 MIT 许可证，但每个技能也单独声明了自己的许可证，用户需要遵守各自的条款。当前项目处于积极开发阶段，K-Dense 团队持续添加新技能并修复问题。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目，可以开发一个“实验室专属 AI 科研助手”产品，为特定研究团队精选并配置所需的技能包，连接内部数据库和 LIMS，自动完成数据清洗、分析和报告生成，加速科研流程。; 灵感2：可以将其集成到在线教育平台，打造“智能科学实验教学系统”，学生在 AI 辅助下完成生物信息学、化学信息学等课程设计，系统自动提供步骤指导、代码修正和结果解读，降低学习门槛。; 灵感3：可以扩展构建“跨学科文献挖掘与知识图谱平台”，利用其中的文献检索和数据库技能，自动从海量论文和数据库中提取关系，构建领域知识图谱，用于科研选题和趋势预测。; 灵感4：可以将其作为“制药行业合规审查助手”的内核，专门针对 ICH/ISO 标准，自动生成分析方法验证报告和监管提交文档的草稿，辅助 QA/RA 团队提高效率。
+   衍生灵感: 灵感1：构建一个面向环境科学的专用技能包，与全球环境监测数据库和气候模型对接，自动生成环境影响评估报告，适合环保咨询公司和政府机构使用。; 灵感2：将该技能集合集成到药物研发公司的内部知识管理系统中，为新药立项提供一站式文献检索、靶点验证和 PK/PD 建模支持，加速 Drug Discovery 流程。; 灵感3：开发一个面向科研教育的虚拟实验室平台，利用这些技能自动批改学生实验报告、生成个性化学习建议，降低实验课的教学成本。
    项目链接: https://github.com/K-Dense-AI/scientific-agent-skills
 
-2. p-e-w/heretic:
-   star: 28785  语言/技术: Python, PyTorch, Optuna, bitsandbytes, uv, PaCMAP
-   项目简介: Heretic 是一个全自动去除大语言模型审查（安全对齐）的命令行工具，通过高级方向消融和自动参数优化，让模型在保持智能的同时大幅减少拒绝回答，无需人工干预。
-   亮点: 全自动去审查：只需一行命令，无需理解模型内部结构; 超低 KL 散度：在抑制拒绝的同时，最大限度保留模型原始能力; 广泛兼容：支持密集、MoE、多模态及混合架构模型; 内置评估与可视化：提供基准测试和残差几何分析工具; 社区验证：已生成超过 5000 个模型，用户反馈与独立基准表现优秀
-   详细报告: Heretic 是一个用于移除大语言模型（LLM）中审查机制（即“安全对齐”）的全自动工具。在传统的模型对齐过程中，开发者会通过微调让模型拒绝回答涉及暴力、色情等敏感话题，这虽然提升了安全性，但也限制了模型的自由表达能力。Heretic 基于“方向消融”（Abliteration）这一高级技术，通过修改模型内部的残差流向，抑制特定“审查方向”的激活，从而在不需要重新训练的情况下让模型恢复“畅所欲言”的能力。与人工操作不同的是，Heretic 引入了基于 Optuna 的 TPE（Tree-structured Parzen Estimator）参数优化器，能够自动寻找最佳消融参数，使得整个去审查过程完全无需人工干预，甚至不需要理解 Transformer 的内部结构。用户只需一条命令行指令，即可完成对一个模型的“去审查”工作。Heretic 的核心亮点在于它同时优化两个目标：一是最小化模型对“有害”提示词的拒绝次数，二是最小化与原模型的 KL 散度，从而在去除审查的同时，最大限度保留原模型的智能水平和语言能力。从 README 中的对比表格可以看到，使用 Heretic 自动生成的结果在拒绝抑制上与人工精调的模型持平（如 3/100），但 KL 散度显著更低（0.16 vs 0.45 或 1.04），表明对模型行为的影响更小。Heretic 支持绝大多数密集模型，包括多模态模型、多种 MoE 架构，甚至部分混合模型（如 Qwen3-4B-Instruct-2507），但不支持纯状态空间模型。技术上，Heretic 使用 Python 编写，基于 PyTorch 2.2+，利用 bitsandbytes 进行量化以降低显存需求。它还提供了一系列研究功能，比如残差向量 PaCMAP 投影可视化，以及残差几何的量化指标输出，方便研究者深入理解模型内部语义。此外，Heretic 内置了评估模块，可以自动运行基准测试，与原始模型或其他消融版本对比。该项目使用 AGPL-3.0 许可证，代码开源，社区已经利用它发布了超过 5000 个去审查模型，用户反馈普遍良好，认为其生成的模型在保留智能的同时，提供了更自然、更少回避的回答。
-   活跃度: 未知（API数据未提供时间戳等有效信息）  社区健康: 根据GitHub API指标（forks=0, open_issues=0等）无法有效判断，但README显示社区活跃（5000+模型）。
+2. jingyaogong/minimind:
+   star: 56403  语言/技术: PyTorch, Python, MoE, Qwen3/Qwen3-MoE 结构, Tokenizer (BPE+ByteLevel), LoRA, DPO, PPO, GRPO, CISPO, DDP, DeepSpeed, YaRN (RoPE 长文本外推), transformers, trl, peft, Streamlit, vLLM, Ollama, llama.cpp, SwanLab
+   项目简介: MiniMind 是一个从零开始训练超小规模语言模型的开源项目，旨在以极低的成本（约3块钱、2小时）和极小的参数量（64M）复现大语言模型的核心训练流程。项目不仅提供了完整的模型结构（Dense+MoE），还覆盖了从数据清洗、预训练、SFT、LoRA、RLHF（DPO）、RLAIF（PPO/GRPO/CISPO）到工具调用、Agentic RL、自适应思考与模型蒸馏等全链路代码。所有核心算法均基于 PyTorch 从0实现，不依赖第三方高层接口，同时兼容 transformers、vllm、ollama 等主流生态。项目旨在降低 LLM 学习门槛，为个人开发者提供一个可复现、可理解、可扩展的起点。
+   亮点: 从零开始训练 LLM，最低仅需3块钱成本和2小时训练时间（单卡3090跑完1 epoch SFT）; 参数量极小（主线64M），约为 GPT-3 的 1/2700，普通个人 GPU 即可轻松复现; 完整覆盖预训练、SFT、LoRA、DPO、PPO/GRPO/CISPO、Tool Use、Agentic RL、蒸馏等全流程，所有算法从0原生实现; 兼容 transformers、vllm、ollama、llama.cpp 等主流推理框架，提供 OpenAI 兼容 API 和 WebUI; 支持 MoE 模型（198M-A64M），并扩展了视觉（MiniMind-V）、多模态 Omni（MiniMind-O）、扩散语言模型和线性注意力模型
+   详细报告: MiniMind 是一个“大道至简”的开源项目，核心目标是让每个人都能从零开始亲手训练一个极小的语言模型，而不是仅仅停留在调用现有大模型的 API 或做简单的微调。项目开发者认为，现在很多教程只教如何使用 transformers 等工具库的抽象接口，十几行代码就能跑通训练，但底层实现被完全封装，学习者无法真正理解 LLM 的内部机制。因此，MiniMind 用 PyTorch 从0实现了包括模型结构、损失函数、训练循环、RLHF 等关键代码，不依赖任何第三方高层封装，让学习者可以逐行理解。
+
+项目主线 MiniMind-3 对齐 Qwen3/Qwen3-MoE 生态，Dense 约64M参数量，MoE 约198M-A64M。它自研了一个仅6400词表的 tokenizer（基于 BPE+ByteLevel），显著压缩 embedding 和输出层参数占比，更适合小模型。同时，tokenizer 支持 `<think>`、`<tool_call>` 等特殊标记，为推理和工具调用做准备。
+
+MiniMind 提供了完整的训练链路：预训练（Pretrain）使用 `pretrain_t2t_mini.jsonl` 或 `pretrain_t2t.jsonl`，目标是在小算力下兼顾文本质量、长度分布、中英混合能力；SFT 使用 `sft_t2t_mini.jsonl` 或 `sft_t2t.jsonl`，数据中已混入工具调用样本，默认即具备 Tool Call 能力；RL 阶段支持 DPO（基于偏好数据）、RLAIF（PPO/GRPO/CISPO，从0实现），并新增了 Agentic RL 训练脚本 `train_agent.py`，支持多轮 Tool-Use 场景下的强化学习。所有训练脚本支持断点续训、DDP/DeepSpeed 多卡加速、SwanLab/WandB 可视化。
+
+在推理方面，MiniMind 兼容 transformers 格式和原生 PyTorch 权重，提供 CLI 推理、Streamlit WebUI（支持思考展示、工具选择）、以及兼容 OpenAI API 的服务端（支持 `reasoning_content`、`tool_calls`、`open_thinking`）。同时支持 llama.cpp、vllm、ollama 等第三方框架，并且通过 YaRN 实现了 RoPE 长文本外推。
+
+项目还包含多个实验性拓展，比如从 MiniMind 微调扩散语言模型（dLM）和线性注意力模型，展示了向非自回归架构扩展的可能性。MiniMind 有活跃的社区贡献，已有多个基于它的论文和出版物（如 ECG-Expert-QA、LegalEval-Q 等），也催生了《从零开始写大模型》一书。整体来说，这是一个优秀的学习资源和轻量级 LLM 实验基座，适合教育、研究、快速原型验证和个人开发者探索。
+   活跃度: 高  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：开发一个“个性化价值观对齐助手”，基于 Heretic 的可调参数框架，允许用户自定义模型应遵循的价值观（如“更开放”或“更保守”），而不仅仅是移除审查。可以做成一个 GUI 工具，让非技术人员也能调整自家 LLM 的行为。; 灵感2：将 Heretic 的自动优化技术移植到其他模型编辑任务，例如“去偏见”或“知识更新”。通过类似的方向消融和 TPE 优化，自动识别并削弱模型中的偏见方向，或注入新知识，为模型修复提供通用框架。; 灵感3：利用 Heretic 的残差可视化研究功能，构建一个“模型可解释性分析平台”，将不同层的残差投影动态展示出来，帮助 AI 安全研究员和模型开发者更直观地理解模型如何拒绝有害请求，从而设计更安全的对齐策略。
-   项目链接: https://github.com/p-e-w/heretic
+   衍生灵感: 灵感1：基于 MiniMind 的极低训练成本和完整链路，可以开发一个“个人专属大模型学习实验室”，让零基础开发者通过图形化界面选择数据、模型大小、训练阶段，一键生成自己的对话模型，用于教学或实验。; 灵感2：将 MiniMind 作为嵌入式或边缘设备的轻量级语言模型内核，集成到离线语音助手、智能家居控制中枢或工业设备日志异常检测系统，在无网络环境下提供低延迟的文本理解和工具调用能力。; 灵感3：利用 MiniMind 的 Agentic RL 和 Tool Call 能力，构建一个“自动化测试智能体”，让模型学习使用各种交互工具（如浏览器、API、数据库）来执行软件测试、数据抓取或 API 验证任务，通过强化学习不断优化工具调用策略。
+   项目链接: https://github.com/jingyaogong/minimind
 
-3. unclecode/crawl4ai:
-   star: 80389  语言/技术: Python, Playwright, Docker, FastAPI, JWT, Selenium, PyTorch, Transformer, LLM, CSS/XPath, BM25, Async
-   项目简介: Crawl4AI 是一款开源的、LLM 友好的网络爬虫与抓取工具，能够将网页内容转换为干净的、适用于 RAG、AI 代理和数据管道的 Markdown 格式。它由 50k+ 星标社区支持，提供从简单爬取到深度爬取、结构化数据提取、浏览器自动化等一系列功能，并支持 Docker 一键部署。核心要点是解决传统爬虫数据杂乱、难以直接用于大语言模型的问题，让开发者无需折腾即可获取高质量的、结构化的网页数据。
-   亮点: LLM 友好的 Markdown 生成：干净、结构化的 Markdown 输出，支持引用、表格、代码块，并内置 Fit Markdown 和 BM25 过滤机制，可大幅提升 AI 任务的数据质量。; 结构化数据提取：支持 LLM 驱动的任意抽取，也支持无 LLM 的 CSS/XPath 快速抽取，以及基于主题/正则/句子的分块策略，适应不同场景。; 强大的浏览器集成：支持用户自有浏览器、远程 CDP 控制、持久化浏览器配置、会话管理、代理认证、动态视图调整等，可有效避免反爬并处理 JavaScript 渲染内容。; 深度爬取与智能调度：支持 BFS 深度爬取、断点恢复、预取模式（提速 5-10 倍）、全页面扫描（无限滚动）、iframe 内容提取等，可大规模采集动态网页。; 轻量部署与安全增强：Docker 镜像内置监控仪表盘和 API，提供 JWT 认证、浏览器池、沙箱防护，并支持多架构（AMD64/ARM64），方便生产环境部署。
-   详细报告: Crawl4AI 是一个功能非常全面的开源网络爬虫和抓取框架，其设计初衷就是为了解决一个很实在的痛点：互联网上的网页数据（HTML）杂乱无章，直接丢给大语言模型（LLM）会导致上下文污染、token 浪费、结果不准确。作者 unclecode 在 2023 年因为找不到一个好用的“网页转 Markdown”工具，而且市面上的替代品要么需要付费、要么限制多，一怒之下几天内写出了这个库，并开源火遍全网。
+3. Osmantic/ODS:
+   star: 5623  语言/技术: Docker, llama.cpp / llama-server, Open WebUI, LiteLLM, TEI Embeddings, Whisper, Kokoro, Hermes Agent, OpenClaw, n8n, APE, OpenCode, Memory Shepherd, Qdrant, SearXNG, Perplexica, Brave Search, ComfyUI, Privacy Shield, Langfuse, Python, Shell, PowerShell, JavaScript
+   项目简介: ODS 是一个一键部署私有 AI 服务器的开源项目，将大模型推理、聊天界面、智能体、语音、RAG、图像生成等十余个开源组件打包成完整栈，支持 Linux/Windows/macOS，让普通用户无需手动拼接即可拥有本地 AI 能力。
+   亮点: 一键安装：自动检测 GPU 并选择合适模型，2 分钟内即可开始聊天; 集成完整 AI 服务栈：聊天、智能体、语音、RAG、图像生成、隐私保护等; 跨平台支持：Linux、Windows（WSL2）、macOS（Apple Silicon），并提供扩展系统
+   详细报告: ODS（Osmantic Deployment System）是一个旨在将个人电脑、Mac 或 Linux 机器转变为私有 AI 服务器的部署系统。它解决了本地 AI 搭建过程中需要手动拼接多个工具（如 Ollama、Open WebUI、n8n、ComfyUI 等）并处理繁琐配置的痛点，让用户通过一条命令即可获得完整的本地 AI 体验。
 
-从技术实现来看，Crawl4AI 以 Python 为基础，默认基于 Playwright 驱动浏览器进行异步抓取（同时也保留了基于 Selenium 的同步版本，但已标记为弃用）。它的核心架构围绕几个关键模块：
+核心功能包括：
+- 本地模型推理：基于 llama-server（llama.cpp）运行开放模型，自动选择适合硬件的模型，支持 NVIDIA、AMD、Intel Arc 等 GPU，并有硬件自动检测机制。
+- ChatGPT 风格 Web UI：集成 Open WebUI，支持多语言聊天、文档上传、联网搜索等。
+- 控制仪表盘：提供 Web 界面管理模型、服务、GPU 状态，并支持扩展。
+- 语音、智能体与工作流：集成 Whisper（语音识别）、Kokoro（语音合成）、Hermes Agent（自主智能体）、n8n（工作流自动化）等，可实现自动化任务。
+- RAG 与搜索：使用 Qdrant 向量数据库和 TEI Embeddings 实现本地文档检索，集成 SearXNG 和 Perplexica 进行私密搜索。
+- 图像生成：集成 ComfyUI，支持本地图片生成。
+- 隐私与运维：包含 Privacy Shield（PII 脱敏代理）、Token Spy（令牌使用监控）、Langfuse（LLM 可观测性）等，确保数据留在本地。
 
-1. **Markdown 生成策略**：默认使用 `DefaultMarkdownGenerator`，它内部可以插入不同的内容过滤器，比如 `PruningContentFilter`（启发式修剪噪声内容）或 `BM25ContentFilter`（基于用户查询的 BM25 相关性过滤）。这样输出的 `raw_markdown` 和 `fit_markdown` 可以为不同场景提供不同粒度。
+ODS 支持 Linux（多种发行版）、Windows（Docker Desktop + WSL2）和 macOS（Apple Silicon）。默认本地模式，也支持可选的云模式（通过 OpenAI/Anthropic/Together 等 API）。安装后可通过 `localhost:3000` 访问 Web UI。项目采用 Apache 2.0 许可，提供丰富的文档（如快速开始、硬件指南、扩展开发等）。
 
-2. **结构化数据提取**：既支持通过 LLM 进行智能抽取（用户给一个自然语言问题，模型返回结构化 JSON），也支持无 LLM 的快速 CSS/XPath 抽取。此外，还提供了分块策略（topic-based、regex、sentence-level）和余弦相似度匹配，用于从长文档中抽取相关信息。
+技术栈方面，ODS 基于 Docker 容器编排，使用 Shell/PowerShell 脚本实现安装器，并通过 Python 脚本进行硬件检测和模型选择。所有服务通过 Docker Compose 定义，支持环境变量配置端口等。项目还提供了扩展系统，用户可添加自定义服务。
 
-3. **浏览器控制与反检测**：支持使用用户自己的浏览器（通过 CDP 连接），这样可以继承浏览器的真实指纹和登录状态，从而更不容易被反爬识别。同时支持动态 viewport 调整、懒加载处理、iframe 内容提取、模拟滚动等，非常适合处理现代单页应用（SPA）和无限滚动页面。
-
-4. **深度爬取与调度**：新增了 `MemoryAdaptiveDispatcher`（内存自适应调度器）和一些高级策略（如 BFS 深度爬取）。通过 `prefetch=True` 可以预取 URL 来加速发现，并支持断点恢复（`resume_state`）和状态回调，适合长时间运行的采集任务。
-
-5. **部署与 API**：Docker 集成非常完善，官方镜像带有监控仪表板、Playground、WebSocket 鉴权、浏览器池、MCP 集成（可直接连接 Claude Code 等 AI 工具），并支持 FastAPI 服务器和 JWT 认证，多架构自动检测。用户也可以直接通过 pip 安装，使用 CLI 工具 `crwl` 快速抓取。
-
-此外，项目非常重视安全，v0.8.7 和 v0.9.x 的更新中修复了 Docker API 的多个关键漏洞（如 RCE、SSRF、认证绕过、文件写入、XSS 和硬编码 JWT 密钥），并默认启用认证、将服务器绑定到 loopback。这使得它更适合在生产环境中使用。
-
-由于 README 内容被截断，一些更精细的 API 和扩展机制（如 hooks 的具体实现）未能展开，但整体来看，Crawl4AI 是一个集爬虫、抓取、数据清洗、AI 提取于一体的综合工具，非常适合作为构建 RAG 系统、数据管道和 AI Agent 的基础设施。
-   活跃度: 高。README 中列出了 v0.9.2 (latest)、v0.9.0、v0.8.7、v0.8.0 等多个近期发布版本，更新频率较高，且承诺了持续的功能与安全修复，说明项目处于活跃开发阶段。  社区健康: README 提到项目拥有 50k+ 的 star 社区，是 GitHub 上最受欢迎的爬虫项目，作者积极维护，近期还发布了 v0.9.2 等版本。文档中展示了大量赞助商（包括战略伙伴和金牌企业），并且有多种社区参与渠道（Discord、Twitter等），生态活跃度较高。
-   商业潜力: 文档中明确提到了商业化的规划：推出了 Crawl4AI Cloud API（Closed Beta），强调低成本、大规模，并提供了多种赞助级别（从 $5/月到 $2000/月），目标客户包括初创企业和数据基础设施团队。项目的使命是打造公平的数据交易市场，将数字足迹转化为结构化资产，具有明确的 B 端付费潜力和数据变现空间。
+需要注意的是，由于 README 内容被截断，部分细节（如某些具体模型名称、安装流程的完整说明）可能不完整，但整体架构和功能已清晰呈现。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 本地 AI 私有化部署市场需求巨大，尤其适用于对数据敏感的企业、研究机构和政府部门。ODS 可降低私有 AI 门槛，但商业模式尚不明确，文档未详细提及。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 Crawl4AI 构建一个『法律/金融新闻智能监测系统』，定时抓取指定网站（如法院公告、SEC 文件、央行新闻），自动转换为干净的 Markdown，使用 LLM 抽取关键实体和事件，生成结构化摘要并推送给订阅者，替代传统的人工监控和简报工作。; 灵感2：将 Crawl4AI 集成到现有的 RAG 知识库系统中，作为文档采集层。利用其 LLM 友好的 Markdown 输出和深度爬取能力，自动抓取企业内部 Wiki、文档站、API Docs 等，并同步到向量数据库，让 AI 助手能基于最新内部知识回答问题。; 灵感3：开发一个面向电商卖家的小程序『价格与竞品雷达』，使用 Crawl4AI 定期深度抓取竞争对手的商品页、评价页，通过 CSS/LLM 提取价格、库存、促销信息，结合历史数据生成调价建议，帮助商家快速响应市场变化。
-   项目链接: https://github.com/unclecode/crawl4ai
+   衍生灵感: 灵感1：基于 ODS 构建企业内部私有 AI 知识库平台——利用其 RAG 和搜索能力，结合企业文档库，为员工提供安全、私密的智能问答助手，解决数据外泄风险。; 灵感2：将 ODS 集成到边缘计算设备（如 NVIDIA Jetson）中，打造面向智能制造或智慧医疗的本地 AI 网关，实现低延迟、高隐私的现场数据处理。; 灵感3：基于 ODS 的扩展系统，开发一个针对特定行业（如法律、金融）的 AI 工具包，预置领域模型、专用工作流和合规检查功能，形成垂直解决方案。
+   项目链接: https://github.com/Osmantic/ODS
 
-4. mvanhorn/last30days-skill:
-   star: 60639  语言/技术: Python 3.12+, Node.js, yt-dlp, ScrapeCreators API, Claude Code / Codex / Cursor / Copilot / Gemini CLI / OpenClaw 等 Agent 宿主, Agent Skills 规范, MCP (Model Context Protocol), Reddit JSON API / RSS / shreddit 爬虫, GitHub API, Polymarket API, arctic-shift, uv (Python 包管理器), Chromium cookie 提取 (Brave, Edge, Vivaldi, Opera, Arc), macOS Keychain / Linux pass, OpenSSF Scorecard / Semgrep / OSV-Scanner
-   项目简介: 这是一个由 AI 代理驱动的 '搜索过去 30 天' 的引擎，它跨 Reddit、X、YouTube、TikTok、Hacker News、Polymarket 等多个社交平台并行搜索，按照真实用户的点赞、投票和金钱投注来评分，而不是编辑推荐。它旨在打破每个平台的围墙花园，通过一个 Agent 技能（Skill）将所有平台连接起来，快速生成一份关于任意话题 (人物、公司、产品、事件) 的近期热点简报。核心价值是让你在几分钟内了解社区真正在讨论什么，替代低效的人工搜索。
-   亮点: 多平台并行搜索：覆盖 Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub 等主流社区，以及 arXiv、Techmeme、Digg 等免费数据源。; 真实用户参与度评分：用 upvotes、likes、真实金钱投注作为信号，自动聚类并合成一份精炼简报，而不是一串链接。; 零配置快速接入：安装到 Claude Code 只需一条命令，也支持 npx skills add 全球安装，或作为 .skill 文件上传到 claude.ai 网页版。; 深度报告模式：支持入职信号分析、发现模式（探索新兴话题）、工具对比、历史回看、ELI5 简化说明、HTML 导出等。; 社区驱动与安全加固：175 个合并 PR，52 位社区贡献者；有 2700+ 测试，覆盖 XSS 修复、供应链安全、凭据安全等。
-   详细报告: 这个项目的本质是一个由 AI 代理驱动的搜索与情报聚合技能，专门解决'搜索引擎无法检索社交平台内部讨论'的问题。传统 Google 搜索只能索引公开网页，而 Reddit 评论区、X 帖子、YouTube 字幕、TikTok 描述、Polymarket 预测市场数据等大量真实用户的声音都被隔离在围墙花园里，或者没有 API 权限，或者需要复杂的认证。
+4. kaifcodec/user-scanner:
+   star: 4381  语言/技术: Python, httpx, curl_cffi, asyncio, MCP (Model Context Protocol), Nix
+   项目简介: 这是一款强大的二合一 OSINT（开源情报）套件，专为邮箱和用户名深度调查而生。它能在 465+ 个平台和网站中扫描数字足迹、验证账号注册、提取用户元数据，甚至通过交叉扫描在邮箱和用户名之间自动切换侦察，还内置了供 AI 智能体使用的 MCP 服务器，堪称'网络情报放大镜'和'打工人人肉搜索神器'。
+   亮点: 465+ 扫描向量：覆盖 175+ 邮箱关联网站和 290+ 用户名平台; 交叉扫描与枢轴引擎：自动从邮箱挖用户名、从用户名挖邮箱，多轮递归侦察; 原生 MCP 服务器：让 Claude、Cursor 等 AI 助手能自主执行 OSINT 调查并递归枢轴; Hudson Rock 恶意软件泄露查询：检查目标是否出现在信息窃取者日志中; 高并发抓取与 TLS 指纹模拟：基于 httpx 和 curl_cffi 提升扫描效率，降低被封风险
+   详细报告: User Scanner 是一个专为安全研究人员、渗透测试人员和网络调查员设计的 OSINT 工具，它解决的核心痛点是：在多个平台分散地查找一个人的数字足迹既耗时又低效。这个项目把 465+ 个网站的检测逻辑统一封装，用户只需一条命令，就能同时探测目标邮箱或用户名在哪些平台注册过，并提取公开的附加信息（如头像、简介、关注者数、用户 ID、卖家状态等）。
 
-last30days-skill 的做法是：用户输入一个话题，Agent 首先通过预研究解析出关键实体（X 账号、GitHub 仓库、subreddit、YouTube channel、TikTok hashtag 等），然后并行调用各个平台的搜索 API 或爬虫（如 Reddit 的 JSON 接口、X 的 Bird 客户端、yt-dlp 下载 YouTube 字幕），并利用用户自己的浏览器 Cookie 来解锁 X 等平台。搜索结果会被聚合成'事件簇'，然后按真实参与度（upvotes、likes、浏览量、Polymarket 赔率）进行排序和计分，最后由一个 AI 评判者综合成一份有引用来源的简报。
+它的核心逻辑基于 Python 的异步并发模型，利用 httpx 提供高性能 HTTP 请求，再通过 curl_cffi 模拟真实的 TLS 指纹，让请求看起来像是来自普通浏览器，从而绕过一些简单的反爬机制。这种并发扫描和指纹伪装技术，使得它能在几秒钟内完成对数百个平台的探测，而不是像传统脚本那样逐个等待。
 
-项目支持深度定制，包括 '--hiring-signals' 分析公司招聘页推断战略方向，'what's exploding' 发现模式帮你捕捉上升期话题，还支持自动比较多个工具（如 OpenClaw vs Hermes vs Paperclip）并生成带真实 GitHub star 数的对比表。它还能生成自包含的 HTML 报告，并可保存到本地库用于后续搜索。
+交叉扫描与枢轴引擎是它最亮眼的创新点之一。传统 OSINT 工具通常只能单向查询，而这个工具可以从一次扫描的返回结果中自动提取新线索。比如你先扫描一个邮箱，发现它在某个论坛注册了，然后从那个论坛的公开页面里挖出用户名和更多链接，再自动去扫描这些新线索，形成一张不断扩大的情报网。这种递归式的信息挖掘，极大地提升了调查的深度和广度。
 
-技术架构上，核心引擎是用 Python 3.12+ 编写的，X 搜索部分使用了 Node.js 生态（Bird 客户端），媒体下载依赖 yt-dlp，部分商业数据通过 ScrapeCreators API 获取。项目发布为一种 Agent Skill，可被 50+ 多种 AI 编程助手（Claude Code、Codex、Cursor、Copilot、Gemini CLI 等）识别。安装方式多样：Claude Code 用户可通过插件市场自动更新，也可以直接 npx skills add 全局安装。目前已经具备 175+ 合并 PR，社区贡献者超过 50 人，测试 2700+，并且通过 OpenSSF Scorecard、Semgrep 等安全扫描。此项目不是给程序员提供的一个函数库，而是给任何 AI 使用者提供的一项独特的信息检索能力——让 AI 直接搜索真实的人群讨论，而不是被 SEO 和编辑推荐所左右。
-   活跃度: 高，最近更新至 v3.11.1（2026 年 7 月），且有持续版本迭代记录。  社区健康: 社区活跃，拥有 52+ 位贡献者，175+ 合并 PR，2700+ 测试，并已形成贡献指南和完整的行为准则。
-   商业潜力: 文档未提及
+它还集成了 MCP (Model Context Protocol) 服务器，这意味着 AI 编程助手或聊天机器人可以直接通过标准协议调用它的功能。比如你可以让 Claude 或 Cursor 自动分析某个人的社交账号，并生成一份调查报告。这为 AI 智能体的自动化调查能力打开了大门，也是其迎合 AI 时代潮流的一大亮点。
+
+此外，项目还支持 Hudson Rock 的恶意软件日志查询，可以检查目标邮箱或用户名是否出现在信息窃取者的泄露数据库中，这对于追踪攻击者或评估个人资产泄露风险很有价值。报告导出功能支持 PDF、JSON、CSV，方便与其他分析工具链集成。代理轮换功能也做得足够细，支持 HTTP 和 SOCKS5 代理，并能在扫描前校验代理的可用性。
+
+总的来说，这是一个功能丰富、扩展性强、文档齐全的 OSINT 框架，适合作为安全团队的基础设施组件，也适合希望深入探索网络情报的开发者学习。
+   活跃度: 未知  社区健康: 未知（README 显示有赞助商，但 GitHub 指标未提供社区活跃度数据）
+   商业潜力: 商业潜力巨大：可转化为企业级数字风险防护平台、招聘背景调查工具、以及面向安全分析师提供的 SaaS 情报订阅服务。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感 1：构建一个 '竞品情报监控中心'。你可以把 /last30days 嵌入到定时任务中，每周自动生成一份关于主要竞品的综合简报，包括用户反馈、新版本发布、招聘方向、预测市场对公司前景的看法，从而让产品经理和决策者始终掌握最新动向。; 灵感 2：为销售和 CRM 集成一个 '会见前快速背景' 插件。在销售代表与 CEO 会面前，自动运行 /last30days <对方名字>，抓取对方最近 30 天的推文、Reddit 讨论、GitHub 活跃度、YouTube 采访等，一键生成可分享的 briefing 卡片，有效提升销售准备度。; 灵感 3：打造一个 '红队舆情分析工具'。针对某个品牌或大 V，用 /last30days 定期抓取各社交平台上的负面/正面情绪，结合 Polymarket 预测和市场反应，产出情绪预警，帮助公关团队及时应对危机。
-   项目链接: https://github.com/mvanhorn/last30days-skill
+   衍生灵感: 灵感1：基于此项目开发一个企业内部'数字足迹风险评估平台'。员工可自助提交邮箱/用户名，扫描结果用于检测账号是否在异常平台注册、是否暴露敏感信息，帮助企业提前发现钓鱼或账号滥用风险。; 灵感2：将其集成到招聘 HR 系统中，作为候选人背景调查的自动化补充工具。输入候选人邮箱，自动生成其公开社交活动概览（需合法授权），帮助识别社保伪造或夸大职业经历。; 灵感3：结合大语言模型，构建一个'AI 调查分析师'。利用其 MCP 服务器接口，让 AI 代理自动执行交叉扫描、分析关联图谱，最后输出报告摘要，用于威胁情报分析或社工防御演练。
+   项目链接: https://github.com/kaifcodec/user-scanner
