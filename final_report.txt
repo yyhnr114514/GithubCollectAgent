@@ -1,4 +1,23 @@
-1. anthropics/skills:
+1. NousResearch/hermes-agent:
+   star: 224414  语言/技术: Python, Node.js, MCP (Model Context Protocol), Docker, SSH, Singularity, Modal, Daytona, Vercel Sandbox, FTS5 (SQLite全文搜索), LLM (多模型兼容), Honcho (用户建模), Cron 任务调度, TUI (终端UI), Telegram/Discord/Slack/WhatsApp/Signal API
+   项目简介: 一句话概括：这是一个由 Nous Research 打造的“自我进化型”AI 代理，核心卖点是内置学习闭环——它能把使用过程中的经验固化为技能，下次遇到类似任务直接调用；还能跨会话记住你的偏好和历史对话，像个越来越懂你的私人管家。更重要的是，它不绑定某个特定模型，可以自由切换任意大模型（OpenAI、OpenRouter等），而且支持在 Telegram、Discord、微信等渠道上跟它聊天，也能跑在从5美元VPS到GPU集群的各种环境里。用一句人话说：它不仅是AI助手，更是一个能一边干活一边变强的“打工人神器”。
+   亮点: 内置学习闭环：能从复杂任务中自动创建技能、并在使用中自我改进，还能搜索过去对话来增强记忆。; 多平台接入：通过一个网关进程同时连接 Telegram、Discord、Slack、WhatsApp、Signal 和 CLI，还支持语音备忘转录。; 弹性部署：支持本地、Docker、SSH、Modal、Daytona 等七种终端后端，其中 Modal/Daytona 可实现无服务器持久化，空闲时几乎零成本。; 模型自由切换：可用 Nous Portal、OpenRouter、OpenAI 或自建端点，一条命令更换模型，无厂商锁定。
+   详细报告: Hermes Agent 是 Nous Research 推出的自我改进型 AI 代理，定位是“跑在任意基础设施上的私人 AI 员工”。它最核心的创新是一个闭环学习机制：当代理完成一个复杂任务后，会自动把过程固化为“技能”（skill）；在后续使用中，这些技能还会根据反馈自我优化。此外，它内置了“记忆”模块，会主动保存关键信息，具备 FTS5 全文搜索能力，可以检索过去的对话并利用大模型生成摘要，从而实现跨会话的上下文记忆。它还会通过 Honcho 建立对话式的用户模型，使交互越来越个性化。
+
+在交互层面，Hermes 提供了两种入口：一个是功能完整的 TUI（终端界面），支持多行编辑、命令补全、对话历史、中断重定向和流式工具输出；另一个是消息网关，可以统一连接 Telegram、Discord、Slack、WhatsApp、Signal 等平台，且对话在平台间可以连续切换。它还内置了 cron 调度器，可以用自然语言定义定时任务（如每日报告、夜间备份），并把结果推送到任意支持的平台。
+
+在工具使用方面，Hermes 拥有 40+ 工具和工具集系统，支持 MCP（Model Context Protocol）集成，可扩展能力强。它还能委派子代理并行执行任务，并支持通过 RPC 调用工具来编写 Python 脚本，将多步骤流水线压成零上下文消耗的步骤。
+
+在部署方面，它特别强调“不局限在你的笔记本上”：提供本地、Docker、SSH、Singularity、Modal、Daytona、Vercel Sandbox 共七种终端后端。特别是 Modal 和 Daytona 支持无服务器持久化，环境空闲时可休眠，唤醒时几乎零成本，因此你可以用 5 美元的 VPS 或 GPU 集群来运行它。
+
+安装也颇为贴心：Linux/macOS 一行命令，Windows 原生支持 PowerShell 脚本（并自动附带便携 Git Bash），还支持 Termux。迁移方面，从 OpenClaw 可以一键导入设置、记忆、技能和 API 密钥。由于 README 被截断，更多架构细节和接口文档请参考官方文档，但上述功能已经体现出它的核心价值：一个可成长、可远程控制、跨平台且高度灵活的 AI 代理。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：可以基于 Hermes 开发一个“企业知识库管家”——把它接入钉钉/飞书，自动学习公司内部 FAQ、会议纪要，生成技能并定时推送每日摘要，让团队信息同步零障碍。; 灵感2：利用它的多平台网关和 cron 调度，构建一个“跨渠道舆情监控员”：让它每半小时检索一次特定话题，把结果汇总到 Slack 或微信群，并自动生成报告。; 灵感3：结合其子代理并行能力和模型自由切换，做一个“AI 外包团队”：在云上部署多个 Hermes 实例，分别承担客服、代码审查、市场调研等角色，通过 RPC 互相协作，形成一个小型自动化公司。
+   项目链接: https://github.com/NousResearch/hermes-agent
+
+2. anthropics/skills:
    star: 168210  语言/技术: Markdown, YAML, Claude Skills, Claude Code, Claude Agent Skills, JavaScript (推测，部分技能可能用到), Python (推测，数据处理类技能可能涉及)
    项目简介: 这个项目是 Anthropic 官方发布的 Claude 技能（Skills）集合仓库，旨在通过可复用的指令、脚本和资源来增强 Claude 在特定任务上的表现。它既包含了创意设计、技术开发、企业办公等各类示例技能，也提供了文档创建与编辑技能（如 docx、pdf、pptx、xlsx）的生产级参考实现，同时还包含技能规范（spec）和模板（template），帮助开发者快速创建自定义技能。简单来说，它是 Claude 的“技能商店”和“开发手册”，让 AI 更懂你的工作流。
    亮点: 官方出品：由 Anthropic 团队维护，提供高质量的技能示例和最佳实践，权威性强。; 文档技能全家桶：包含 docx、pdf、pptx、xlsx 等生产级文档处理技能，可直接用于生成、编辑和提取常用办公文件。; 一键集成 Claude Code：支持通过插件市场安装，让 Claude Code 直接获得这些技能，快速提升自动化能力。; 开源与参考结合：大部分技能采用 Apache 2.0 开源，而文档技能以源码可用形式提供，为复杂技能开发提供了珍贵参考。; 技能模板与规范：包含 SKILL.md 的标准格式和完整规范，降低了自定义技能的开发门槛。
@@ -29,7 +48,7 @@
    衍生灵感: 灵感1：基于文档技能，开发一个「合同智能审核助手」技能包，自动从合同 PDF 中提取关键条款、比对模板差异、高亮风险点，并生成修订建议，帮助法务人员将审核效率提升数倍。; 灵感2：利用技能模板和规范，为企业内部开发「品牌营销内容生成器」技能，将公司 VI 规范、文案风格、图片使用指南打包为技能，让 Claude 在生成任何对外物料时自动遵循品牌规则，确保一致性。; 灵感3：结合 MCP 服务器生成技能，开发一个「数据库查询可视化」技能，让 Claude 根据自然语言生成 SQL，并自动将查询结果渲染成图表和报告，非技术人员也能轻松进行数据探索。; 灵感4：将技能系统集成到现有的项目管理工具中，开发「会议纪要自动化」技能：录制的会议音频转文字后，技能自动按公司模板整理出决策项、行动人和截止日期，并同步到 Jira/Trello。
    项目链接: https://github.com/anthropics/skills
 
-2. blader/humanizer:
+3. blader/humanizer:
    star: 41709  语言/技术: Markdown, Agent Skills (SKILL.md), Claude Code, Claude Desktop, CI, Skills CLI
    项目简介: Humanizer是一个将AI生成文本改写为自然人类写作风格的开源技能包，基于Wikipedia的35种AI写作痕迹模式进行检测与重写。它不改变原文含义，不编造事实，保留代码、数据等非散文内容，并支持个人写作风格匹配。该技能可让Claude、Claude Code等AI代理直接将输出人性化，解决AI内容僵硬、模板化、容易被识破的痛点。
    亮点: 基于Wikipedia 35种AI写作模式，覆盖内容、语法、风格、聊天机器人、填充词等类别; 两阶段处理：先按普通散文重写，再对照模式和原文事实进行审查修正; 支持写作样本风格匹配，让改写更贴近个人语气; 可安全处理文件：仅修改散文，保留代码、数据、frontmatter和链接目标; 开源且MIT许可证，生态继承Agent Skills标准，易于集成
@@ -43,25 +62,6 @@
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：开发一个“自媒体/博客AI伪原创清洗箱”应用。集成到内容发布后台（如WordPress插件或Notion自动工作流），用Humanizer将ChatGPT或Claude初稿批量转化为“人味文章”，再结合SEO插件，输出天生逃过AI检测的博客或知乎文章。; 灵感2：将Humanizer作为企业知识库检索增强生成（RAG）系统或客服聊天机器人的后处理环节。由大模型抽取出事实性答案，先按标准话术生成，再让Humanizer对答案进行“去AI化”改写，保留可核实的专有名词、数字和引用，让最终回复语气自然、不生硬，避免被用户一眼识破为机器人对话。; 灵感3：构建一个“多语言写作风格转换助手”或插件。Humanizer当前模型主要针对英文AI模式，可以对其进行二次开发：收集中文或其他语言的AI典型表达特征（如“首先、其次、最后”、“总而言之”的机械结构），制成本地化模式列表，结合语言特有语法（如中文的“了”、“的”重复率）实现多语种再创作，集成到各类AI写作IDE中。
    项目链接: https://github.com/blader/humanizer
-
-3. NousResearch/hermes-agent:
-   star: 224414  语言/技术: Python, Node.js, MCP (Model Context Protocol), Docker, SSH, Singularity, Modal, Daytona, Vercel Sandbox, FTS5 (SQLite全文搜索), LLM (多模型兼容), Honcho (用户建模), Cron 任务调度, TUI (终端UI), Telegram/Discord/Slack/WhatsApp/Signal API
-   项目简介: 一句话概括：这是一个由 Nous Research 打造的“自我进化型”AI 代理，核心卖点是内置学习闭环——它能把使用过程中的经验固化为技能，下次遇到类似任务直接调用；还能跨会话记住你的偏好和历史对话，像个越来越懂你的私人管家。更重要的是，它不绑定某个特定模型，可以自由切换任意大模型（OpenAI、OpenRouter等），而且支持在 Telegram、Discord、微信等渠道上跟它聊天，也能跑在从5美元VPS到GPU集群的各种环境里。用一句人话说：它不仅是AI助手，更是一个能一边干活一边变强的“打工人神器”。
-   亮点: 内置学习闭环：能从复杂任务中自动创建技能、并在使用中自我改进，还能搜索过去对话来增强记忆。; 多平台接入：通过一个网关进程同时连接 Telegram、Discord、Slack、WhatsApp、Signal 和 CLI，还支持语音备忘转录。; 弹性部署：支持本地、Docker、SSH、Modal、Daytona 等七种终端后端，其中 Modal/Daytona 可实现无服务器持久化，空闲时几乎零成本。; 模型自由切换：可用 Nous Portal、OpenRouter、OpenAI 或自建端点，一条命令更换模型，无厂商锁定。
-   详细报告: Hermes Agent 是 Nous Research 推出的自我改进型 AI 代理，定位是“跑在任意基础设施上的私人 AI 员工”。它最核心的创新是一个闭环学习机制：当代理完成一个复杂任务后，会自动把过程固化为“技能”（skill）；在后续使用中，这些技能还会根据反馈自我优化。此外，它内置了“记忆”模块，会主动保存关键信息，具备 FTS5 全文搜索能力，可以检索过去的对话并利用大模型生成摘要，从而实现跨会话的上下文记忆。它还会通过 Honcho 建立对话式的用户模型，使交互越来越个性化。
-
-在交互层面，Hermes 提供了两种入口：一个是功能完整的 TUI（终端界面），支持多行编辑、命令补全、对话历史、中断重定向和流式工具输出；另一个是消息网关，可以统一连接 Telegram、Discord、Slack、WhatsApp、Signal 等平台，且对话在平台间可以连续切换。它还内置了 cron 调度器，可以用自然语言定义定时任务（如每日报告、夜间备份），并把结果推送到任意支持的平台。
-
-在工具使用方面，Hermes 拥有 40+ 工具和工具集系统，支持 MCP（Model Context Protocol）集成，可扩展能力强。它还能委派子代理并行执行任务，并支持通过 RPC 调用工具来编写 Python 脚本，将多步骤流水线压成零上下文消耗的步骤。
-
-在部署方面，它特别强调“不局限在你的笔记本上”：提供本地、Docker、SSH、Singularity、Modal、Daytona、Vercel Sandbox 共七种终端后端。特别是 Modal 和 Daytona 支持无服务器持久化，环境空闲时可休眠，唤醒时几乎零成本，因此你可以用 5 美元的 VPS 或 GPU 集群来运行它。
-
-安装也颇为贴心：Linux/macOS 一行命令，Windows 原生支持 PowerShell 脚本（并自动附带便携 Git Bash），还支持 Termux。迁移方面，从 OpenClaw 可以一键导入设置、记忆、技能和 API 密钥。由于 README 被截断，更多架构细节和接口文档请参考官方文档，但上述功能已经体现出它的核心价值：一个可成长、可远程控制、跨平台且高度灵活的 AI 代理。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：可以基于 Hermes 开发一个“企业知识库管家”——把它接入钉钉/飞书，自动学习公司内部 FAQ、会议纪要，生成技能并定时推送每日摘要，让团队信息同步零障碍。; 灵感2：利用它的多平台网关和 cron 调度，构建一个“跨渠道舆情监控员”：让它每半小时检索一次特定话题，把结果汇总到 Slack 或微信群，并自动生成报告。; 灵感3：结合其子代理并行能力和模型自由切换，做一个“AI 外包团队”：在云上部署多个 Hermes 实例，分别承担客服、代码审查、市场调研等角色，通过 RPC 互相协作，形成一个小型自动化公司。
-   项目链接: https://github.com/NousResearch/hermes-agent
 
 4. bikini/exploitarium:
    star: 4552  语言/技术: 未知
