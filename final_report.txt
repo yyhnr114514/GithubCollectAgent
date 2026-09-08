@@ -1,71 +1,21 @@
-1. NousResearch/hermes-agent:
-   star: 224414  语言/技术: Python, Node.js, MCP (Model Context Protocol), Docker, SSH, Singularity, Modal, Daytona, Vercel Sandbox, FTS5 (SQLite全文搜索), LLM (多模型兼容), Honcho (用户建模), Cron 任务调度, TUI (终端UI), Telegram/Discord/Slack/WhatsApp/Signal API
-   项目简介: 一句话概括：这是一个由 Nous Research 打造的“自我进化型”AI 代理，核心卖点是内置学习闭环——它能把使用过程中的经验固化为技能，下次遇到类似任务直接调用；还能跨会话记住你的偏好和历史对话，像个越来越懂你的私人管家。更重要的是，它不绑定某个特定模型，可以自由切换任意大模型（OpenAI、OpenRouter等），而且支持在 Telegram、Discord、微信等渠道上跟它聊天，也能跑在从5美元VPS到GPU集群的各种环境里。用一句人话说：它不仅是AI助手，更是一个能一边干活一边变强的“打工人神器”。
-   亮点: 内置学习闭环：能从复杂任务中自动创建技能、并在使用中自我改进，还能搜索过去对话来增强记忆。; 多平台接入：通过一个网关进程同时连接 Telegram、Discord、Slack、WhatsApp、Signal 和 CLI，还支持语音备忘转录。; 弹性部署：支持本地、Docker、SSH、Modal、Daytona 等七种终端后端，其中 Modal/Daytona 可实现无服务器持久化，空闲时几乎零成本。; 模型自由切换：可用 Nous Portal、OpenRouter、OpenAI 或自建端点，一条命令更换模型，无厂商锁定。
-   详细报告: Hermes Agent 是 Nous Research 推出的自我改进型 AI 代理，定位是“跑在任意基础设施上的私人 AI 员工”。它最核心的创新是一个闭环学习机制：当代理完成一个复杂任务后，会自动把过程固化为“技能”（skill）；在后续使用中，这些技能还会根据反馈自我优化。此外，它内置了“记忆”模块，会主动保存关键信息，具备 FTS5 全文搜索能力，可以检索过去的对话并利用大模型生成摘要，从而实现跨会话的上下文记忆。它还会通过 Honcho 建立对话式的用户模型，使交互越来越个性化。
+1. microsoft/markitdown:
+   star: 180692  语言/技术: Python 3.10+, Markdown, LLM / OpenAI API, Azure Document Intelligence, Azure Content Understanding, OCR (LLM Vision), Docker, 插件系统 (Plugin)
+   项目简介: MarkItDown 是微软开源的轻量级 Python 工具，能把 PDF、Word、Excel、PPT、图片、音频、HTML、EPUB、ZIP 甚至 YouTube 链接等几十种格式统统转成 Markdown，专为 LLM（大语言模型）和文本分析管线设计。它不像传统转换工具那样追求像素级还原，而是保留标题、列表、表格、链接等关键结构，让 AI 更“懂”文档。已集成 Azure Document Intelligence 和 Azure Content Understanding，支持 OCR 和插件扩展，是“打工人”喂数据给 AI 的神器。
+   亮点: 多格式统一转 Markdown：内置 PDF、Office 文档、图片、音频、HTML、EPUB、YouTube 等转换器，输出对 LLM 友好的结构化文本。; 天然补全 LLM 生态缺口：Markdown 与 GPT-4o 等主流模型的训练数据高度匹配，token 效率高，让 AI 更精准地理解文档。; 可扩展且安全：支持第三方插件（#markitdown-plugin），并提供了窄化 API（convert_local/convert_stream）以降低安全风险。
+   详细报告: MarkItDown 是一个命令行和 Python 双栖的工具，核心使命是“万物皆可 Markdown”。它把各种繁杂的办公文档、网页、媒体文件统一“翻译”成结构化的文本，然后就能直接投喂给大语言模型做摘要、问答、知识库构建等。它解决了大模型落地时最头疼的非结构化数据预处理问题——以前大家要用一堆临时脚本分别处理 PDF、Word、Excel，现在一条命令搞定。
 
-在交互层面，Hermes 提供了两种入口：一个是功能完整的 TUI（终端界面），支持多行编辑、命令补全、对话历史、中断重定向和流式工具输出；另一个是消息网关，可以统一连接 Telegram、Discord、Slack、WhatsApp、Signal 等平台，且对话在平台间可以连续切换。它还内置了 cron 调度器，可以用自然语言定义定时任务（如每日报告、夜间备份），并把结果推送到任意支持的平台。
+技术上，它用 Python 编写，底层通过不同的 converter 对接不同格式的解析库：PDF 有内置解析和 Azure 云解析两套方案；PPTX、DOCX、XLSX 都有对应的处理逻辑；图片会提取 EXIF 元数据，还能调用 LLM 做 OCR 识别或图像理解；音频能转录音频并抽取元数据；HTML、CSV/JSON/XML 基本是纯文本处理；ZIP 会递归遍历内部文件；YouTube 链接还能直接拉取字幕。所有这些转换结果都统一输出为 Markdown，保留标题层级、表头、超链接等，减少信息丢失。
 
-在工具使用方面，Hermes 拥有 40+ 工具和工具集系统，支持 MCP（Model Context Protocol）集成，可扩展能力强。它还能委派子代理并行执行任务，并支持通过 RPC 调用工具来编写 Python 脚本，将多步骤流水线压成零上下文消耗的步骤。
+为了更强大的场景，它还支持接入微软的 Azure Document Intelligence 和 Azure Content Understanding。前者提供云端版式的精准布局分析，特别适合扫描版 PDF 和复杂表格；后者更是多模态全能选手，能处理文档、图片、音频甚至视频，还可以通过自定义分析器输出结构化的 YAML 字段（比如发票上的“金额”、“日期”），这是内置转换器做不到的。同时，MarkItDown 设计了插件机制，第三方开发者可以发布新格式的转换器，比如文中提到的 markitdown-ocr 插件，利用 LLM Vision 从图片中提取文字，不依赖任何传统 OCR 库。
 
-在部署方面，它特别强调“不局限在你的笔记本上”：提供本地、Docker、SSH、Singularity、Modal、Daytona、Vercel Sandbox 共七种终端后端。特别是 Modal 和 Daytona 支持无服务器持久化，环境空闲时可休眠，唤醒时几乎零成本，因此你可以用 5 美元的 VPS 或 GPU 集群来运行它。
-
-安装也颇为贴心：Linux/macOS 一行命令，Windows 原生支持 PowerShell 脚本（并自动附带便携 Git Bash），还支持 Termux。迁移方面，从 OpenClaw 可以一键导入设置、记忆、技能和 API 密钥。由于 README 被截断，更多架构细节和接口文档请参考官方文档，但上述功能已经体现出它的核心价值：一个可成长、可远程控制、跨平台且高度灵活的 AI 代理。
+安装和用法也非常体贴：支持 pip 一键安装，也有 Docker 镜像；命令行可以管道输入，Python API 可以自由定制 LLM 客户端。文档里还强调了安全实践，因为转换器跟 open() 一样能访问系统资源，所以官方建议在不可信环境中用 convert_local() 这类窄化接口，防止 SSRF 或路径穿越。遗憾的是，由于 README 被截断，关于音频转录的具体模型和性能指标没有展开，但这不影响整体判断——它就是目前把“文件转文本供 AI 使用”这件事做到最系统化的开源项目之一。
    活跃度: 未知  社区健康: 未知
    商业潜力: 文档未提及
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：可以基于 Hermes 开发一个“企业知识库管家”——把它接入钉钉/飞书，自动学习公司内部 FAQ、会议纪要，生成技能并定时推送每日摘要，让团队信息同步零障碍。; 灵感2：利用它的多平台网关和 cron 调度，构建一个“跨渠道舆情监控员”：让它每半小时检索一次特定话题，把结果汇总到 Slack 或微信群，并自动生成报告。; 灵感3：结合其子代理并行能力和模型自由切换，做一个“AI 外包团队”：在云上部署多个 Hermes 实例，分别承担客服、代码审查、市场调研等角色，通过 RPC 互相协作，形成一个小型自动化公司。
-   项目链接: https://github.com/NousResearch/hermes-agent
+   衍生灵感: 灵感1：企业知识库自动清洗管道——基于 MarkItDown 写一个后端服务，定时扫描共享盘里的 PDF/Word/PPT，自动转成干净的 Markdown 并写入向量数据库，让 HR 或法务部门用 RAG 聊天机器人快速查询政策文件。; 灵感2：个人“全格式笔记中心”集成——把 MarkItDown 嵌入笔记应用（如 Obsidian 插件或自建 Web 服务），用户上传任意附件就能生成结构化笔记草稿，再配合本地 LLM 生成摘要和标签，省去手动整理。; 灵感3：音视频内容运营工具——利用它对 YouTube/Audio 的转录能力，构建一个自媒体助手，自动把访谈视频转成带时间戳的 Markdown 纪要，并提取金句和待办事项，投喂给内容团队二次创作。
+   项目链接: https://github.com/microsoft/markitdown
 
-2. openai/skills:
-   star: 25691  语言/技术: Codex, AI Agent, Markdown, Shell 脚本, GitHub
-   项目简介: 一句话概括：这是一个已弃用的官方技能库，用于打包和分发 Codex 等 AI 代理可以复用的人工指令、脚本和资源，即 Agent Skills，旨在实现'一次编写，处处可用'，但现已迁移到 OpenAI Plugins 和 agentskills.io 标准。
-   亮点: 提供结构化的 Agent Skills 目录（.system、.curated、.experimental），方便技能分类和查找; 内置 $skill-installer 工具，可通过名字或 GitHub URL 自动安装技能，简化使用流程; 明确标识技能许可协议，便于合规使用和再分发
-   详细报告: 这个项目是 OpenAI 在 GitHub 上开源的 Agent Skills 演示与分发仓库，核心概念是“技能（Skills）”——即一组文件夹，里面装有指令、脚本和其他资源，AI 代理（如 Codex）可以自动发现并按需加载，从而完成特定领域或流程的任务。简单说，就像给 AI 配一套可插拔的“外挂能力包”，从写代码到处理 issue 都能针对性地增强。
-
-仓库根据内容划分为多个目录：`.system` 目录内的技能默认随 Codex 最新版自动安装；`.curated` 目录放置经过挑选的稳定技能，可通过 `$skill-installer` 按名称一键安装；`.experimental` 则存放实验性技能，需要指定具体目录或提供 GitHub URL 来安装。这种分层设计让技能从实验到成熟有清晰的路径，同时也方便开发者复用。
-
-技术上，虽然 README 没有详细罗列支持的语言或具体脚本写法，但可以推断技能内部通常包含 Markdown 格式的指令文件（如 SKILL.md）、可执行的 Python/Shell 脚本以及示例资源，且每个技能配有 LICENSE.txt 管理版权。项目本身不是运行时代码，而是一个“技能目录 + 安装器”的组合，因此技术栈主要围绕 Codex 的插件/技能机制展开。
-
-不过，这个仓库已经明确标记为“deprecated”（弃用）。原因是 OpenAI 将技能和插件体系整合到了新的 OpenAI Plugins 仓库中，并推出了更正式的 Agent Skills 开放标准（agentskills.io）。所以对于新用户，文档建议直接前往新仓库或遵循官方构建指南，不要再以本仓库为基础做二次开发。对于想要了解 Agent Skills 早期设计和演进历史的开发者，这个仓库仍有一定参考价值，但不适合生产环境。
-
-由于文档本身比较简短，关于技能内部的具体实现细节、可用技能清单、如何在企业内大规模部署等，均未展开说明；若需进一步分析或展示实际例子，请补充完整的仓库代码或技能文件。
-   活跃度: 已弃用，不再有新开发，迁移至其他仓库  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于 Agent Skills 的构建思想，可以开发一个“企业内部 AI 技能商城”，让不同团队将常用的数据分析、报表生成、客服应答等能力打包成技能，通过统一门户发布和订阅，实现全员 AI 能力复用。; 灵感2：借鉴该仓库的目录分层和自动安装机制，可以构建一个“个人 AI 助手插件管理器”，支持从远程 Git 地址增量安装/更新技能，并自动处理版本冲突，让 AI 在本地自动扩展新技能。; 灵感3：将此技能框架与 CI/CD 流水线集成，打造“自动化代码审查技能集”——当开发提 PR 时，AI 自动加载代码规范、漏洞检查和测试生成技能，提升研发效能。
-   项目链接: https://github.com/openai/skills
-
-3. blader/humanizer:
-   star: 44481  语言/技术: Claude Agent Skills, Claude Code Plugin, Markdown, Skills CLI, 自然语言处理(NLG), LLM提示工程
-   项目简介: Humanizer 是一个专治“AI味”的文本润色技能。它通过识别 25 种典型的 AI 写作模式（从“不是 X 而是 Y”的舞台式铺垫到空泛的“专家指出”），把机械、刻板、爱说教的人工智能文本，重写成自然、具体、有作者个人风格的真实人类表达，同时严格保证不虚构任何事实。它既可以直接处理粘贴的文本，也能对指定文件里的散文部分进行修改，适用于 Claude Code、Claude Desktop 等支持 Agent Skills 的环境。
-   亮点: 识别 25 种 AI 典型写作模式，按强度和频率编号，强力模式单次出现即可触发修改，弱模式则需多处呼应。; 不编造事实：原文缺少的关键细节（如姓名、日期、引文）会向用户提问，而不是脑补。; 支持“声音匹配”：提供你个人的写作片段，Humanizer 会模仿你的用词、节奏、标点甚至破折号习惯。; 三种输出形态：展示第一版重写、对残留人工智能味的点卯、以及最终精修版，全程可监督。; 支持文本、文件语句级修改；只动散文，不碰代码、数据、frontmatter 和链接目标。
-   详细报告: Humanizer 是一个“人味修复师”，确切地说，它是一个打包成 Agent Skill 的精细提示词工程。它的目标不是简单地把 AI 文本“换个说法”，而是把 AI 语言模型那种“默认选择最安全、最普适表达”的生成特性，纠正为“针对一个读者、一个主题”的人类选择。
-
-项目本身几乎不包含传统编程代码，核心是一个高度结构化的 SKILL.md 文件，用 Markdown 写成。它完美兼容 Anthropic 的 Agent Skills 体系，你可以用 `npx skills add blader/humanizer --global` 全局安装，也可以通过 Claude Code 的 `/plugin marketplace add blader/humanizer` 来安装插件，甚至手动下载 ZIP 塞进 Claude Desktop 的技能文件夹。这种“只要是 Markdown 就能跑”的极简设计，保证了它能在多个 Agent 平台间无缝迁移。
-
-最核心的武器是 25 种“AI tell”模式，它们来源于维基百科《Signs of AI writing》条目，并被作者重新分类成五大类：
-
-- A 类：**用舞台架势代替正面陈述**。比如“不是 X，而是 Y”这种欲扬先抑的套路、“这就是真正的胜利”这种一言蔽之的收尾、“让我们深入探讨”这种跑酷式过渡，以及“真正重要的是...”这类装深沉的格言。
-- B 类：**按既定节奏硬排**。比如硬凑三个排比 (“创新、灵感、洞见”)、一连串相同开头的句子、滥用破折号作为万能连接符、叠加的限定词（“可能也许大概”），以及不必要的连字符短语。
-- C 类：**假装权威与拔高意义**。典型词有 delve、testament、landscape；“标志着决定性时刻”、“尽管困难但依然蓬勃发展”这类空转的评语；还有“专家认为”、“曾刊登于纽约时报”这种未经证实的背书。
-- D 类：**依模板格式化**。为装饰而加粗关键词、标题加 emoji/箭头、把直引号改成弯引号，这些“合规操作”反而暴露了机器味。
-- E 类：**对话残留与草稿指纹**。比如“好问题！希望这对你有帮助”、“根据现有资料无法确认”，甚至“这一函数原先是为了替代...”，这些明显是 AI 聊天时留下的安全毯。
-
-工作流程也很有章法：Humanizer 先对文本中所有可疑模式进行扫描，并按强度排序；然后它不把原文章结构视为金科玉律，大刀阔斧地起一份全新改写稿；再反向校验草稿是否还有残留模式、原意是否被篡改；最后才给出终稿。如果句子缺失一个具体细节（例如“去年十月去的”），它会直接向你提问，绝不会编造一个日期。
-
-这套设计方案带来了很实用的体验：粘贴文本时，你会看到它的“思考过程”——首版改写、对仍显生硬的细节的犀利吐槽、最终润色。而当你给出文件路径时，它只修改正文中的散文部分，完全避开代码块、YAML frontmatter 和超链接。它还能通过你附上的写作样本学习个人语调，因此你看到的终稿不像“AI 装人”，更像“另一个你在写”。
-
-从 1.0.0 到 3.0.0，项目经历过几次大重构。3.0.0 版本把过去 35 个模式归纳为 25 个，统一了“为什么 AI 会写出这种话”的解释框架，加入了更为精细的误判防护（例如“故意使用破折号”也能被尊重）。这种对细节的钻牛角程度，在同类型项目里相当罕见。
-
-当然，它也有明显的边界：目前主要针对英文文本，模式清单基于英文写作习惯，中文的“八百标兵奔北坡”之类的 AI 腔调尚未被覆盖；它没有自带的模型推理能力，必须依附于 Claude 等支持 Agent Skills 的 LLM；由于不是传统代码库，目前也缺少可编程 API。不过，就“如何让 AI 文字像人话”这一课题而言，这个项目提供了教科书级的分解方法，值得每一位做文本生成、Agent 开发的工程师认真研读。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：构建一个“中文版 Humanizer”——基于其 25 个模式的方法论，扩展出针对中文 AI 文本的套路库（例如“赋能”、“闭环”、“生态化反”、“对标一下”），制作一个 Web 端或 VSCode 插件，帮助国内新媒体运营一键去除“微信体”AI痕迹。; 灵感2：将 Humanizer 的核心检测逻辑封装成一个“AI味指数 API”，集成到 CI/CD 流程中。比如当 ChatGPT 生成的代码注释或文档提交到仓库时，自动触发检查，若 AI 味超标则阻塞合并，确保输出的人类可读性。; 灵感3：借助它的“声音匹配”能力开发一个“风格迁移写作助手”，为同一套产品文档生成多种人格化版本：比如“极客博客版本”、“面向投资者的商务版本”、“活力满满的社交媒体版本”，并支持用户上传个人范文进行定制。; 灵感4：将其与知识库/笔记工具结合，做成一个“笔记二手润色”功能——当你在 Obsidian 或 Notion 中粘贴来自 AI 助手的速记时，自动检测并重写为符合你 persönlicher 措辞习惯的永久笔记。; 灵感5：基于“不对原文结构让步”的流程，开发一个“AI长文重构引擎”用于学术论文或报告，不仅能改头换面，还能主动定位缺失的证据链，并回溯向用户索要数据源——这在事实核查严苛的金融或医疗文本领域很有价值。
-   项目链接: https://github.com/blader/humanizer
-
-4. The-Swarm-Corporation/AutoHedge:
+2. The-Swarm-Corporation/AutoHedge:
    star: 4843  语言/技术: Python, Solana, Jupiter API, OpenAI API, Anthropic API, Swarms, 多Agent系统, JSON
    项目简介: AutoHedge 是一个企业级的多智能体自动化对冲基金，通过多个专业AI代理协同完成市场分析、风险评估与交易执行，目前支持Solana链上全自动交易，并计划扩展到Coinbase等交易所。它就像一群不知疲倦的AI交易员，7x24小时帮你盯盘、研究、下注，而你只需要偶尔瞥一眼日志。
    亮点: 多Agent架构（导演、量化、风控、执行）; 实时市场数据分析和自动执行; 风险优先设计，内置仓位管理与风险评估; 结构化JSON输出，便于集成; 企业级可配置日志; 模块化设计，可扩展至新交易所
@@ -94,3 +44,45 @@
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于AutoHedge的框架，开发一个**多交易所自动套利机器人**——不仅支持Solana，还支持以太坊、BSC等链上的DEX，利用跨链价差和闪电贷做无风险套利。你只需扩展Execution Agent并接入更多聚合器。; 灵感2：将AutoHedge的**多Agent框架**改造为**金融舆情分析系统**：让Director生成热点话题，Quant抓取社交媒体和新闻数据验证情绪，Risk衡量舆论对市场的影响大小，最后生成投资建议报告——这个思路能直接用于传统股票市场。; 灵感3：把AutoHedge的**风险管理Agent**单独抽取成一个**通用仓位管理库**，支持对接任何交易API（如股票、期货、外汇），内置凯利公式、波动率调整、回撤熔断等风控算法，为个人量化交易者提供专业级“安全护栏”。; 灵感4：为AutoHedge开发一个**可视化监控层**，将各Agent的决策过程流转为实时图表，让用户像看自动驾驶一样理解“AI为什么这么操作”，增加透明度和信任感，这有助于产品商业化。
    项目链接: https://github.com/The-Swarm-Corporation/AutoHedge
+
+3. bytedance/deer-flow:
+   star: 81924  语言/技术: Python, LangChain, LangGraph, Docker, MCP (Model Context Protocol), vLLM, SQLite/PostgreSQL, React/Next.js（前端，文档未明确但路径存在）, uv (Python包管理), pnpm
+   项目简介: DeerFlow（Deep Exploration and Efficient Research Flow）是字节跳动开源的一款超级智能体（Agent）编排框架，它通过编排子代理、记忆系统和沙盒环境，结合可扩展技能，让开发者能用一行提示让Claude Code等编码代理完成从环境部署到复杂任务自动化的一系列操作。项目2.0版完全重写，不仅支持多模型提供商（OpenAI、DeepSeek、Kimi、本地vLLM等），还集成了字节的InfoQuest搜索爬虫、MCP服务器、IM渠道、长期记忆、上下文压缩、沙盒文件系统等，适合构建从深度研究、代码生成到自主工作流的一站式AI助手。
+   亮点: 一键式代理引导：只需一句提示，Claude Code、Codex等编码代理即可自动克隆、配置并启动项目，大幅降低上手门槛。; 自动化配置向导：make setup交互式选择LLM提供商、Web搜索、沙盒模式，2分钟生成config.yaml和.env，还提供make doctor健康检查和support-bundle排障工具。; 支持丰富LLM后端：除标准OpenAI兼容接口外，还支持Codex CLI、Claude Code OAuth、vLLM本地模型以及OpenRouter等网关，甚至可配置Z.AI GLM-5.3-Flash等特殊模型。; 企业级沙盒安全机制：提供多种沙盒模式（Docker、AIO sandbox、provisioner），支持文件读写和bash权限控制，确保不可信任务隔离执行。; 深度集成与扩展性：内置MCP服务器、IM渠道支持、LangSmith/Langfuse/Monocle追踪，还提供嵌入式Python客户端，方便二次开发。
+   详细报告: DeerFlow 2.0是一个从零重写的开源超级智能体（Agent）框架，由字节跳动开发并开源。与1.x版本的非流式深度研究工具不同，2.0定位为「超级Agent Harness」，核心思想是将复杂的AI任务拆解为多个子代理的协作流程，同时管理长期记忆和沙盒执行环境，让开发者可以轻松构建能“做几乎任何事”的自主Agent。
+
+**核心逻辑与技术架构**：项目基于LangChain和LangGraph构建，LangChain负责封装和对接各种LLM，LangGraph则用于编排多代理的工作流和状态管理。这使得DeerFlow能支持多模型混合、动态工具调用和复杂的上下文传递。同时，项目深度集成了字节跳动自家的火山引擎模型生态，推荐使用豆包（Doubao-Seed-2.0-Code）、DeepSeek v3.2和Kimi 2.5，也兼容OpenAI、Claude等主流模型，甚至支持通过vLLM部署本地开源模型（如Qwen3），满足数据私密性需求。
+
+**配置与部署**：用户通过make setup启动交互式向导，选择LLM提供商、可选的Web搜索、沙箱模式、bash接入和文件写入权限等，自动生成最小的config.yaml并写入.env密钥，大约耗时2分钟。还提供make config复制全量模板，支持手动编辑高级配置（如多模型负载均衡、vLLM推理参数、Codex CLI / Claude Code OAuth等）。部署方式分为Docker（推荐开发环境）和生产模式（make up），生产模式下统一nginx入口并等待Gateway健康检查，数据库后端可选用SQLite或PostgreSQL，用于LangGraph检查点、存储与应用数据。
+
+**功能特性亮点**：项目强调“One-Line Agent Setup”——将部署说明提供给Claude Code、Codex、Cursor等编码代理，它们可自行完成克隆、安装、配置等操作，让开发者的自然语言成为驱动一切的工具。配置过程中可启用或禁用沙盒（Docker容器）和文件写入权限，确保任务在隔离环境中执行。多代理协作方面，支持子代理（Sub-Agents）动态运行、会话目标（Session Goals）、手动上下文压缩、长期记忆（Long-Term Memory）等功能，防止长对话上下文爆炸，提高连续任务的效率。此外，DeerFlow 2.0集成了BytePlus的InfoQuest智能搜索爬虫工具，用户可直接内置搜索能力，无需额外配置Tavily等第三方。
+
+**可观测性与扩展**：内置了LangSmith、Langfuse、Monocle三种追踪/可观测性工具对接，方便开发者调试和监控Agent行为。同时支持MCP（模型上下文协议）服务器、IM渠道（如钉钉、飞书等，文档未列详细名单）、个人访问令牌（可按用户隔离权限），以及计划任务（Scheduled Tasks）和终端工作台（TUI），让Agent可以定时触发或通过命令行交互。
+
+**安全与社区**：项目强调安全部署，强调不要在未授权环境下暴露服务，给出了IP白名单、反向代理认证、网络VLAN隔离等建议。开箱即用的MIT许可证，并鸣谢LangChain、LangGraph等开源社区。项目在GitHub Trending上曾登顶，拥有活跃贡献者，持续维护中。
+
+**注意**：因README被截断，部分功能细节（如IM渠道具体列表、嵌入式Python客户端的具体接口）文档未完整展示，无法展开说明。仅基于已有内容，该框架在易用性、模型兼容性和企业安全设计上表现出彩，是构建复杂Agent应用的优秀底座。
+   活跃度: 未知（API指标中pushed_at和commits均为空，需实时确认）  社区健康: 据README描述，项目曾在GitHub Trending日榜排第一，有核心贡献者维护，但当前API指标为空，无法直接验证。建议查看实时仓库动态。
+   商业潜力: 文档显示该项目由字节跳动开源，与火山引擎有深度合作（推荐火山引擎模型和编码计划），同时集成了BytePlus的InfoQuest商业搜索工具，具备明显云生态引流潜力。企业可用其构建内部AI代理中台，但商业授权和合规需进一步关注。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于DeerFlow开发企业级「竞品情报自动侦察系统」——部署后接入子代理和InfoQuest，每天自动抓取竞品官网、新闻、招聘信息，利用长期记忆生成周报，并发送到企业IM群组，让打工人告别手动刷竞品动态的噩梦。; 灵感2：可以将其集成到代码仓库（如GitHub/GitLab）的Issue管理流程中，利用DeerFlow的子代理自动复现Bug、搜索历史提交、建议修复方案，并生成Pull Request草稿，成为开源维护者的「智能救火队员」。; 灵感3：构建「个人知识库自主研究员」——DeerFlow + MCP + 本地向量数据库，让用户以自然语言下达论文综述或技术调研任务，Agent自动在Sandbox中运行代码验证想法，并将研究结果沉淀为结构化文档，成为科研工作者的第二大脑。
+   项目链接: https://github.com/bytedance/deer-flow
+
+4. openai/skills:
+   star: 25691  语言/技术: Codex, AI Agent, Markdown, Shell 脚本, GitHub
+   项目简介: 一句话概括：这是一个已弃用的官方技能库，用于打包和分发 Codex 等 AI 代理可以复用的人工指令、脚本和资源，即 Agent Skills，旨在实现'一次编写，处处可用'，但现已迁移到 OpenAI Plugins 和 agentskills.io 标准。
+   亮点: 提供结构化的 Agent Skills 目录（.system、.curated、.experimental），方便技能分类和查找; 内置 $skill-installer 工具，可通过名字或 GitHub URL 自动安装技能，简化使用流程; 明确标识技能许可协议，便于合规使用和再分发
+   详细报告: 这个项目是 OpenAI 在 GitHub 上开源的 Agent Skills 演示与分发仓库，核心概念是“技能（Skills）”——即一组文件夹，里面装有指令、脚本和其他资源，AI 代理（如 Codex）可以自动发现并按需加载，从而完成特定领域或流程的任务。简单说，就像给 AI 配一套可插拔的“外挂能力包”，从写代码到处理 issue 都能针对性地增强。
+
+仓库根据内容划分为多个目录：`.system` 目录内的技能默认随 Codex 最新版自动安装；`.curated` 目录放置经过挑选的稳定技能，可通过 `$skill-installer` 按名称一键安装；`.experimental` 则存放实验性技能，需要指定具体目录或提供 GitHub URL 来安装。这种分层设计让技能从实验到成熟有清晰的路径，同时也方便开发者复用。
+
+技术上，虽然 README 没有详细罗列支持的语言或具体脚本写法，但可以推断技能内部通常包含 Markdown 格式的指令文件（如 SKILL.md）、可执行的 Python/Shell 脚本以及示例资源，且每个技能配有 LICENSE.txt 管理版权。项目本身不是运行时代码，而是一个“技能目录 + 安装器”的组合，因此技术栈主要围绕 Codex 的插件/技能机制展开。
+
+不过，这个仓库已经明确标记为“deprecated”（弃用）。原因是 OpenAI 将技能和插件体系整合到了新的 OpenAI Plugins 仓库中，并推出了更正式的 Agent Skills 开放标准（agentskills.io）。所以对于新用户，文档建议直接前往新仓库或遵循官方构建指南，不要再以本仓库为基础做二次开发。对于想要了解 Agent Skills 早期设计和演进历史的开发者，这个仓库仍有一定参考价值，但不适合生产环境。
+
+由于文档本身比较简短，关于技能内部的具体实现细节、可用技能清单、如何在企业内大规模部署等，均未展开说明；若需进一步分析或展示实际例子，请补充完整的仓库代码或技能文件。
+   活跃度: 已弃用，不再有新开发，迁移至其他仓库  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：基于 Agent Skills 的构建思想，可以开发一个“企业内部 AI 技能商城”，让不同团队将常用的数据分析、报表生成、客服应答等能力打包成技能，通过统一门户发布和订阅，实现全员 AI 能力复用。; 灵感2：借鉴该仓库的目录分层和自动安装机制，可以构建一个“个人 AI 助手插件管理器”，支持从远程 Git 地址增量安装/更新技能，并自动处理版本冲突，让 AI 在本地自动扩展新技能。; 灵感3：将此技能框架与 CI/CD 流水线集成，打造“自动化代码审查技能集”——当开发提 PR 时，AI 自动加载代码规范、漏洞检查和测试生成技能，提升研发效能。
+   项目链接: https://github.com/openai/skills
