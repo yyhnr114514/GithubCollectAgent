@@ -1,74 +1,15 @@
-1. microsoft/markitdown:
-   star: 180692  语言/技术: Python 3.10+, Markdown, LLM / OpenAI API, Azure Document Intelligence, Azure Content Understanding, OCR (LLM Vision), Docker, 插件系统 (Plugin)
-   项目简介: MarkItDown 是微软开源的轻量级 Python 工具，能把 PDF、Word、Excel、PPT、图片、音频、HTML、EPUB、ZIP 甚至 YouTube 链接等几十种格式统统转成 Markdown，专为 LLM（大语言模型）和文本分析管线设计。它不像传统转换工具那样追求像素级还原，而是保留标题、列表、表格、链接等关键结构，让 AI 更“懂”文档。已集成 Azure Document Intelligence 和 Azure Content Understanding，支持 OCR 和插件扩展，是“打工人”喂数据给 AI 的神器。
-   亮点: 多格式统一转 Markdown：内置 PDF、Office 文档、图片、音频、HTML、EPUB、YouTube 等转换器，输出对 LLM 友好的结构化文本。; 天然补全 LLM 生态缺口：Markdown 与 GPT-4o 等主流模型的训练数据高度匹配，token 效率高，让 AI 更精准地理解文档。; 可扩展且安全：支持第三方插件（#markitdown-plugin），并提供了窄化 API（convert_local/convert_stream）以降低安全风险。
-   详细报告: MarkItDown 是一个命令行和 Python 双栖的工具，核心使命是“万物皆可 Markdown”。它把各种繁杂的办公文档、网页、媒体文件统一“翻译”成结构化的文本，然后就能直接投喂给大语言模型做摘要、问答、知识库构建等。它解决了大模型落地时最头疼的非结构化数据预处理问题——以前大家要用一堆临时脚本分别处理 PDF、Word、Excel，现在一条命令搞定。
-
-技术上，它用 Python 编写，底层通过不同的 converter 对接不同格式的解析库：PDF 有内置解析和 Azure 云解析两套方案；PPTX、DOCX、XLSX 都有对应的处理逻辑；图片会提取 EXIF 元数据，还能调用 LLM 做 OCR 识别或图像理解；音频能转录音频并抽取元数据；HTML、CSV/JSON/XML 基本是纯文本处理；ZIP 会递归遍历内部文件；YouTube 链接还能直接拉取字幕。所有这些转换结果都统一输出为 Markdown，保留标题层级、表头、超链接等，减少信息丢失。
-
-为了更强大的场景，它还支持接入微软的 Azure Document Intelligence 和 Azure Content Understanding。前者提供云端版式的精准布局分析，特别适合扫描版 PDF 和复杂表格；后者更是多模态全能选手，能处理文档、图片、音频甚至视频，还可以通过自定义分析器输出结构化的 YAML 字段（比如发票上的“金额”、“日期”），这是内置转换器做不到的。同时，MarkItDown 设计了插件机制，第三方开发者可以发布新格式的转换器，比如文中提到的 markitdown-ocr 插件，利用 LLM Vision 从图片中提取文字，不依赖任何传统 OCR 库。
-
-安装和用法也非常体贴：支持 pip 一键安装，也有 Docker 镜像；命令行可以管道输入，Python API 可以自由定制 LLM 客户端。文档里还强调了安全实践，因为转换器跟 open() 一样能访问系统资源，所以官方建议在不可信环境中用 convert_local() 这类窄化接口，防止 SSRF 或路径穿越。遗憾的是，由于 README 被截断，关于音频转录的具体模型和性能指标没有展开，但这不影响整体判断——它就是目前把“文件转文本供 AI 使用”这件事做到最系统化的开源项目之一。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
+1. ayghri/i-have-adhd:
+   star: 31311  语言/技术: Claude Code, SKILL.md, Plugin系统, Markdown, Bash
+   项目简介: 一句话概括：这是一个专为ADHD（注意力缺陷多动障碍）人群优化的AI编程助手技能（Skill/Plugin），让AI不再给出冗长、绕弯子的回答，而是直接给出下一步行动、编号步骤、不废话，堪称“程序员救星”。它通过定义一套规则，改变AI助手的回复风格，让你扫一眼就知道该干啥。
+   亮点: 核心功能：一句话点明，强制AI助手以行动开头、编号多步任务、结尾给唯一具体下一步，杜绝“Great question!”、“Hope this helps!”等废话。; 解决痛点：AI回答喜欢铺垫、跑题、一次给太多信息，对ADHD人群特别不友好；此技能让输出变得直接、可执行、有完成感。; 易定制：规则全写在SKILL.md里，fork随便改，还能通过命令行轻松装换，适配个人喜好。
+   详细报告: 这个项目叫 i-have-adhd，是给AI编程助手（特别是Claude Code）用的一个“技能”或“插件”。它不是个独立应用，而是一套指令模板，教AI怎么说话。作者显然受够了AI那种“好的！让我们逐步分析”的调调——对于ADHD大脑来说，看长回复就像被扔进迷宫，找不到出口。于是他就写了这份SKILL.md，定义10条铁律：比如第1条“先用行动开头”，第3条“结尾必须给一个具体下一步”，第9条“列表最多5项”，第10条“不要开场白、不要总结、不要收尾语”。装上这个技能后，AI的回答就从“老太太的裹脚布”变成了“战斗手册”——直接告诉你“改哪个文件、第几行、用什么代码替换、然后跑什么测试”。README里用对比表格展示了前后差异，反差极其强烈。技术上，它主要是利用Claude Code的plugin机制，通过一个`claude plugin`命令行完成安装/卸载，SKILL.md是核心规则文件。安装方式也很赛博：直接把安装指令复制粘贴给AI，AI就会自己搞定，相当于让AI给自己装“行为矫正器”。项目还提供了多语言README（中文、日文等），说明作者想让它走向全球。整个项目像个轻巧的“思维框架”，虽然是为ADHD写的，但任何被AI废话烦到的人都能受益。文档本身也完全是这种风格：短、直接、没有一句废话。
+   活跃度: 未知，commits_recent为0且pushed_at为null，可能项目刚创建或长期未更新。  社区健康: 未知，GitHub API显示open_issues为0，closed_issues_recent为0，暂无社区活动迹象。
+   商业潜力: 文档未提及，但显然可作为付费AI提示词/技能包销售，或者集成到企业级AI助手定制服务中。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：企业知识库自动清洗管道——基于 MarkItDown 写一个后端服务，定时扫描共享盘里的 PDF/Word/PPT，自动转成干净的 Markdown 并写入向量数据库，让 HR 或法务部门用 RAG 聊天机器人快速查询政策文件。; 灵感2：个人“全格式笔记中心”集成——把 MarkItDown 嵌入笔记应用（如 Obsidian 插件或自建 Web 服务），用户上传任意附件就能生成结构化笔记草稿，再配合本地 LLM 生成摘要和标签，省去手动整理。; 灵感3：音视频内容运营工具——利用它对 YouTube/Audio 的转录能力，构建一个自媒体助手，自动把访谈视频转成带时间戳的 Markdown 纪要，并提取金句和待办事项，投喂给内容团队二次创作。
-   项目链接: https://github.com/microsoft/markitdown
+   衍生灵感: 灵感1：开发一个“AI回复风格工坊”，让用户通过可视化界面自定义这套规则，比如调整最长项目数、话痨等级、emoji开关，然后一键生成自己的SKILL.md，适配不同AI平台（ChatGPT、Copilot等）。; 灵感2：把这个技能扩展到非编程场景——比如打造一个“ADHD友好版智能家居助手”，AI给你播报操作步骤时只说“现在走到厨房，按开咖啡机”，不附带一堆废话，还能设置奖励提醒。; 灵感3：反向操作，做一个“反ADHD助手”——针对非ADHD人群，让AI故意给出详细背景、幽默段子和多角度分析，用来调试AI输出风格，或用于不同人格AI聊天产品的个化性配置。
+   项目链接: https://github.com/ayghri/i-have-adhd
 
-2. The-Swarm-Corporation/AutoHedge:
-   star: 4843  语言/技术: Python, Solana, Jupiter API, OpenAI API, Anthropic API, Swarms, 多Agent系统, JSON
-   项目简介: AutoHedge 是一个企业级的多智能体自动化对冲基金，通过多个专业AI代理协同完成市场分析、风险评估与交易执行，目前支持Solana链上全自动交易，并计划扩展到Coinbase等交易所。它就像一群不知疲倦的AI交易员，7x24小时帮你盯盘、研究、下注，而你只需要偶尔瞥一眼日志。
-   亮点: 多Agent架构（导演、量化、风控、执行）; 实时市场数据分析和自动执行; 风险优先设计，内置仓位管理与风险评估; 结构化JSON输出，便于集成; 企业级可配置日志; 模块化设计，可扩展至新交易所
-   详细报告: AutoHedge 是由 The Swarm Corporation 开源的一个面向加密货币的自动化对冲基金系统，核心卖点是“自治”和“多智能体协作”。它不是一个简单的交易机器人，而是一套完整的智能交易流水线。
-
-**核心逻辑**：系统将交易流程拆解为四个阶段，每个阶段由专门的Agent负责，类似一个现代公司的决策链条：
-1. **Director Agent（导演智能体）**：负责生成交易策略和投资论点。它像一位基金经理，定个大方向，比如“今天关注Solana生态的meme币”或“建仓前先分析大盘趋势”。
-2. **Quant Agent（量化智能体）**：负责技术和统计分析。它跑各种指标（如RSI、MACD、波动率），从历史数据和实时行情中寻找佐证，验证导演的观点是否靠谱。
-3. **Risk Manager（风控智能体）**：负责仓位大小和风险评估。它像个风险管理总监，根据账户余额、最大回撤限制、市场波动性等计算出“这笔单该下多重”，避免一梭子全仓导致爆仓。
-4. **Execution Agent（执行智能体）**：负责生成实际订单和上链执行。它调用Jupiter等交易接口，把风控批准的交易落地，然后输出结构化结果。
-
-**技术亮点**：
-- **实时数据**：直接对接Solana链上和Jupiter API，获取代币价格和搜索信息，保证分析基于最新市场状态。
-- **风险优先**：在交易执行前就强制插入风险评估，这种“先刹车再踩油门”的设计对资金安全很重要。
-- **结构化输出**：所有Agent的推荐和分析都以JSON格式输出，方便外部系统（如监控仪表盘、数据库）直接消费，解决了传统交易系统“数据格式混乱”的痛点。
-- **企业级日志**：每个步骤都有详细且可配置的日志记录，方便审计和排查问题，这是机构用金融系统的必备素养。
-- **可扩展性**：框架设计成模块化，你可以替换或新增策略、接入新的交易所，甚至调整Agent之间的协作逻辑。
-
-**当前状态**：官方只支持Solana全自动交易，Coinbase正在开发中，其他中心化交易所（CEX）列在路线图上。依赖的环境变量包括Jupiter API Key、OpenAI/Anthropic API Key（用于实验性Agents）、钱包私钥等。安装非常简单，通过pip一键安装，命令行运行 `autohedge` 即可启动。
-
-**潜在痛点**：虽然架构看起来很美，但实际效果没有数据佐证——GitHub仓库刚建，0星0fork，没有任何release，也没有贡献者或更新记录。这意味着它可能还是个“概念机”，尚未经过真实资金的长期考验。另外，文档只给了安装和架构图，没有提供具体的策略配置示例、回测工具或性能报告，这对想立刻上手的开发者有点不友好。
-
-整体而言，AutoHedge 展示了一种“AI Agent治理交易流程”的先进思路，但距离真正“打工人神器”还有一段路要走，目前更适合作为架构参考或实验项目。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于AutoHedge的框架，开发一个**多交易所自动套利机器人**——不仅支持Solana，还支持以太坊、BSC等链上的DEX，利用跨链价差和闪电贷做无风险套利。你只需扩展Execution Agent并接入更多聚合器。; 灵感2：将AutoHedge的**多Agent框架**改造为**金融舆情分析系统**：让Director生成热点话题，Quant抓取社交媒体和新闻数据验证情绪，Risk衡量舆论对市场的影响大小，最后生成投资建议报告——这个思路能直接用于传统股票市场。; 灵感3：把AutoHedge的**风险管理Agent**单独抽取成一个**通用仓位管理库**，支持对接任何交易API（如股票、期货、外汇），内置凯利公式、波动率调整、回撤熔断等风控算法，为个人量化交易者提供专业级“安全护栏”。; 灵感4：为AutoHedge开发一个**可视化监控层**，将各Agent的决策过程流转为实时图表，让用户像看自动驾驶一样理解“AI为什么这么操作”，增加透明度和信任感，这有助于产品商业化。
-   项目链接: https://github.com/The-Swarm-Corporation/AutoHedge
-
-3. bytedance/deer-flow:
-   star: 81924  语言/技术: Python, LangChain, LangGraph, Docker, MCP (Model Context Protocol), vLLM, SQLite/PostgreSQL, React/Next.js（前端，文档未明确但路径存在）, uv (Python包管理), pnpm
-   项目简介: DeerFlow（Deep Exploration and Efficient Research Flow）是字节跳动开源的一款超级智能体（Agent）编排框架，它通过编排子代理、记忆系统和沙盒环境，结合可扩展技能，让开发者能用一行提示让Claude Code等编码代理完成从环境部署到复杂任务自动化的一系列操作。项目2.0版完全重写，不仅支持多模型提供商（OpenAI、DeepSeek、Kimi、本地vLLM等），还集成了字节的InfoQuest搜索爬虫、MCP服务器、IM渠道、长期记忆、上下文压缩、沙盒文件系统等，适合构建从深度研究、代码生成到自主工作流的一站式AI助手。
-   亮点: 一键式代理引导：只需一句提示，Claude Code、Codex等编码代理即可自动克隆、配置并启动项目，大幅降低上手门槛。; 自动化配置向导：make setup交互式选择LLM提供商、Web搜索、沙盒模式，2分钟生成config.yaml和.env，还提供make doctor健康检查和support-bundle排障工具。; 支持丰富LLM后端：除标准OpenAI兼容接口外，还支持Codex CLI、Claude Code OAuth、vLLM本地模型以及OpenRouter等网关，甚至可配置Z.AI GLM-5.3-Flash等特殊模型。; 企业级沙盒安全机制：提供多种沙盒模式（Docker、AIO sandbox、provisioner），支持文件读写和bash权限控制，确保不可信任务隔离执行。; 深度集成与扩展性：内置MCP服务器、IM渠道支持、LangSmith/Langfuse/Monocle追踪，还提供嵌入式Python客户端，方便二次开发。
-   详细报告: DeerFlow 2.0是一个从零重写的开源超级智能体（Agent）框架，由字节跳动开发并开源。与1.x版本的非流式深度研究工具不同，2.0定位为「超级Agent Harness」，核心思想是将复杂的AI任务拆解为多个子代理的协作流程，同时管理长期记忆和沙盒执行环境，让开发者可以轻松构建能“做几乎任何事”的自主Agent。
-
-**核心逻辑与技术架构**：项目基于LangChain和LangGraph构建，LangChain负责封装和对接各种LLM，LangGraph则用于编排多代理的工作流和状态管理。这使得DeerFlow能支持多模型混合、动态工具调用和复杂的上下文传递。同时，项目深度集成了字节跳动自家的火山引擎模型生态，推荐使用豆包（Doubao-Seed-2.0-Code）、DeepSeek v3.2和Kimi 2.5，也兼容OpenAI、Claude等主流模型，甚至支持通过vLLM部署本地开源模型（如Qwen3），满足数据私密性需求。
-
-**配置与部署**：用户通过make setup启动交互式向导，选择LLM提供商、可选的Web搜索、沙箱模式、bash接入和文件写入权限等，自动生成最小的config.yaml并写入.env密钥，大约耗时2分钟。还提供make config复制全量模板，支持手动编辑高级配置（如多模型负载均衡、vLLM推理参数、Codex CLI / Claude Code OAuth等）。部署方式分为Docker（推荐开发环境）和生产模式（make up），生产模式下统一nginx入口并等待Gateway健康检查，数据库后端可选用SQLite或PostgreSQL，用于LangGraph检查点、存储与应用数据。
-
-**功能特性亮点**：项目强调“One-Line Agent Setup”——将部署说明提供给Claude Code、Codex、Cursor等编码代理，它们可自行完成克隆、安装、配置等操作，让开发者的自然语言成为驱动一切的工具。配置过程中可启用或禁用沙盒（Docker容器）和文件写入权限，确保任务在隔离环境中执行。多代理协作方面，支持子代理（Sub-Agents）动态运行、会话目标（Session Goals）、手动上下文压缩、长期记忆（Long-Term Memory）等功能，防止长对话上下文爆炸，提高连续任务的效率。此外，DeerFlow 2.0集成了BytePlus的InfoQuest智能搜索爬虫工具，用户可直接内置搜索能力，无需额外配置Tavily等第三方。
-
-**可观测性与扩展**：内置了LangSmith、Langfuse、Monocle三种追踪/可观测性工具对接，方便开发者调试和监控Agent行为。同时支持MCP（模型上下文协议）服务器、IM渠道（如钉钉、飞书等，文档未列详细名单）、个人访问令牌（可按用户隔离权限），以及计划任务（Scheduled Tasks）和终端工作台（TUI），让Agent可以定时触发或通过命令行交互。
-
-**安全与社区**：项目强调安全部署，强调不要在未授权环境下暴露服务，给出了IP白名单、反向代理认证、网络VLAN隔离等建议。开箱即用的MIT许可证，并鸣谢LangChain、LangGraph等开源社区。项目在GitHub Trending上曾登顶，拥有活跃贡献者，持续维护中。
-
-**注意**：因README被截断，部分功能细节（如IM渠道具体列表、嵌入式Python客户端的具体接口）文档未完整展示，无法展开说明。仅基于已有内容，该框架在易用性、模型兼容性和企业安全设计上表现出彩，是构建复杂Agent应用的优秀底座。
-   活跃度: 未知（API指标中pushed_at和commits均为空，需实时确认）  社区健康: 据README描述，项目曾在GitHub Trending日榜排第一，有核心贡献者维护，但当前API指标为空，无法直接验证。建议查看实时仓库动态。
-   商业潜力: 文档显示该项目由字节跳动开源，与火山引擎有深度合作（推荐火山引擎模型和编码计划），同时集成了BytePlus的InfoQuest商业搜索工具，具备明显云生态引流潜力。企业可用其构建内部AI代理中台，但商业授权和合规需进一步关注。
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于DeerFlow开发企业级「竞品情报自动侦察系统」——部署后接入子代理和InfoQuest，每天自动抓取竞品官网、新闻、招聘信息，利用长期记忆生成周报，并发送到企业IM群组，让打工人告别手动刷竞品动态的噩梦。; 灵感2：可以将其集成到代码仓库（如GitHub/GitLab）的Issue管理流程中，利用DeerFlow的子代理自动复现Bug、搜索历史提交、建议修复方案，并生成Pull Request草稿，成为开源维护者的「智能救火队员」。; 灵感3：构建「个人知识库自主研究员」——DeerFlow + MCP + 本地向量数据库，让用户以自然语言下达论文综述或技术调研任务，Agent自动在Sandbox中运行代码验证想法，并将研究结果沉淀为结构化文档，成为科研工作者的第二大脑。
-   项目链接: https://github.com/bytedance/deer-flow
-
-4. openai/skills:
+2. openai/skills:
    star: 25691  语言/技术: Codex, AI Agent, Markdown, Shell 脚本, GitHub
    项目简介: 一句话概括：这是一个已弃用的官方技能库，用于打包和分发 Codex 等 AI 代理可以复用的人工指令、脚本和资源，即 Agent Skills，旨在实现'一次编写，处处可用'，但现已迁移到 OpenAI Plugins 和 agentskills.io 标准。
    亮点: 提供结构化的 Agent Skills 目录（.system、.curated、.experimental），方便技能分类和查找; 内置 $skill-installer 工具，可通过名字或 GitHub URL 自动安装技能，简化使用流程; 明确标识技能许可协议，便于合规使用和再分发
@@ -86,3 +27,39 @@
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
    衍生灵感: 灵感1：基于 Agent Skills 的构建思想，可以开发一个“企业内部 AI 技能商城”，让不同团队将常用的数据分析、报表生成、客服应答等能力打包成技能，通过统一门户发布和订阅，实现全员 AI 能力复用。; 灵感2：借鉴该仓库的目录分层和自动安装机制，可以构建一个“个人 AI 助手插件管理器”，支持从远程 Git 地址增量安装/更新技能，并自动处理版本冲突，让 AI 在本地自动扩展新技能。; 灵感3：将此技能框架与 CI/CD 流水线集成，打造“自动化代码审查技能集”——当开发提 PR 时，AI 自动加载代码规范、漏洞检查和测试生成技能，提升研发效能。
    项目链接: https://github.com/openai/skills
+
+3. microsoft/markitdown:
+   star: 180692  语言/技术: Python 3.10+, Markdown, LLM / OpenAI API, Azure Document Intelligence, Azure Content Understanding, OCR (LLM Vision), Docker, 插件系统 (Plugin)
+   项目简介: MarkItDown 是微软开源的轻量级 Python 工具，能把 PDF、Word、Excel、PPT、图片、音频、HTML、EPUB、ZIP 甚至 YouTube 链接等几十种格式统统转成 Markdown，专为 LLM（大语言模型）和文本分析管线设计。它不像传统转换工具那样追求像素级还原，而是保留标题、列表、表格、链接等关键结构，让 AI 更“懂”文档。已集成 Azure Document Intelligence 和 Azure Content Understanding，支持 OCR 和插件扩展，是“打工人”喂数据给 AI 的神器。
+   亮点: 多格式统一转 Markdown：内置 PDF、Office 文档、图片、音频、HTML、EPUB、YouTube 等转换器，输出对 LLM 友好的结构化文本。; 天然补全 LLM 生态缺口：Markdown 与 GPT-4o 等主流模型的训练数据高度匹配，token 效率高，让 AI 更精准地理解文档。; 可扩展且安全：支持第三方插件（#markitdown-plugin），并提供了窄化 API（convert_local/convert_stream）以降低安全风险。
+   详细报告: MarkItDown 是一个命令行和 Python 双栖的工具，核心使命是“万物皆可 Markdown”。它把各种繁杂的办公文档、网页、媒体文件统一“翻译”成结构化的文本，然后就能直接投喂给大语言模型做摘要、问答、知识库构建等。它解决了大模型落地时最头疼的非结构化数据预处理问题——以前大家要用一堆临时脚本分别处理 PDF、Word、Excel，现在一条命令搞定。
+
+技术上，它用 Python 编写，底层通过不同的 converter 对接不同格式的解析库：PDF 有内置解析和 Azure 云解析两套方案；PPTX、DOCX、XLSX 都有对应的处理逻辑；图片会提取 EXIF 元数据，还能调用 LLM 做 OCR 识别或图像理解；音频能转录音频并抽取元数据；HTML、CSV/JSON/XML 基本是纯文本处理；ZIP 会递归遍历内部文件；YouTube 链接还能直接拉取字幕。所有这些转换结果都统一输出为 Markdown，保留标题层级、表头、超链接等，减少信息丢失。
+
+为了更强大的场景，它还支持接入微软的 Azure Document Intelligence 和 Azure Content Understanding。前者提供云端版式的精准布局分析，特别适合扫描版 PDF 和复杂表格；后者更是多模态全能选手，能处理文档、图片、音频甚至视频，还可以通过自定义分析器输出结构化的 YAML 字段（比如发票上的“金额”、“日期”），这是内置转换器做不到的。同时，MarkItDown 设计了插件机制，第三方开发者可以发布新格式的转换器，比如文中提到的 markitdown-ocr 插件，利用 LLM Vision 从图片中提取文字，不依赖任何传统 OCR 库。
+
+安装和用法也非常体贴：支持 pip 一键安装，也有 Docker 镜像；命令行可以管道输入，Python API 可以自由定制 LLM 客户端。文档里还强调了安全实践，因为转换器跟 open() 一样能访问系统资源，所以官方建议在不可信环境中用 convert_local() 这类窄化接口，防止 SSRF 或路径穿越。遗憾的是，由于 README 被截断，关于音频转录的具体模型和性能指标没有展开，但这不影响整体判断——它就是目前把“文件转文本供 AI 使用”这件事做到最系统化的开源项目之一。
+   活跃度: 未知  社区健康: 未知
+   商业潜力: 文档未提及
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：企业知识库自动清洗管道——基于 MarkItDown 写一个后端服务，定时扫描共享盘里的 PDF/Word/PPT，自动转成干净的 Markdown 并写入向量数据库，让 HR 或法务部门用 RAG 聊天机器人快速查询政策文件。; 灵感2：个人“全格式笔记中心”集成——把 MarkItDown 嵌入笔记应用（如 Obsidian 插件或自建 Web 服务），用户上传任意附件就能生成结构化笔记草稿，再配合本地 LLM 生成摘要和标签，省去手动整理。; 灵感3：音视频内容运营工具——利用它对 YouTube/Audio 的转录能力，构建一个自媒体助手，自动把访谈视频转成带时间戳的 Markdown 纪要，并提取金句和待办事项，投喂给内容团队二次创作。
+   项目链接: https://github.com/microsoft/markitdown
+
+4. browser-use/browser-use:
+   star: 113677  语言/技术: Python, Browser Use Library, LLM APIs (OpenAI, Anthropic, Gemini, ChatBrowserUse), MCP (未详细说明), Cloud API (Browser Use Cloud)
+   项目简介: Browser Use 是一个让 AI Agent 像人类一样控制浏览器的开源 Python 库。只需用自然语言描述任务（比如'填写这个求职申请'或'提取我的粉丝数据并导出 CSV'），它就能自动打开网页、点击、输入和抓取数据。该项目把 LLM 的能力与浏览器操作结合起来，堪称自动化网页操作的'程序员救星'。它同时提供开源自托管版本和全托管的云端版本，支持多种 LLM（如 OpenAI、Anthropic、Gemini），并允许自定义工具扩展，在真实浏览器任务中表现领先。
+   亮点: 核心亮点：用自然语言让 AI 自动控制浏览器，完成表单填写、数据提取等复杂网页交互。; 开源免费：MIT 许可证，可在本地运行，深度定制你的 LLM 和 Agent 行为。; 性能领先：在开源 benchmark 中排名第一，以 87.4% 的平均成功率领先 OpenAI、Anthropic、Google 和 Microsoft 的 computer-use agents。; 支持自定义扩展：允许开发者添加自己的工具（tools），极大扩展应用边界。; 集成便捷：可通过一段 prompt 快速集成到 Claude Code、Codex、Cursor 等现有 AI Agent 中。
+   详细报告: Browser Use 本质上是给 AI 安上了'眼睛和手'——过去大模型只能处理文本，而现在它可以像真人一样驱动浏览器。这个库的核心机制是：你定义一个 Agent，传入目标和 LLM（模型可自由选择，比如通过 ChatBrowserUse 这个优化过的模型，或用 OpenAI GPT、Anthropic Claude、Google Gemini 等）。Agent 内部会调用浏览器控制能力，自动解析网页界面、定位按钮、输入文本、提交表单，并读取当前页面状态，形成'感知 → 决策 → 操作'的闭环，直到任务完成为止。
+
+项目中列举的场景非常实用：一是自动填写各类表单，比如用户输入'用我的简历和信息填写这个求职申请'，浏览器就会自动打开界面，像人一样完成所有步骤；二是结构化数据提取，比如'提取关于关注者的结构化数据并导出为 CSV'——这种工作通常需要写爬虫或人工复制粘贴，如今只用一句话就能搞定。
+
+Browser Use 提供了两种用法。第一种是作为独立 Python 库在本地运行，你可以通过 `uv add browser-use` 安装，然后编写少量代码就可以调用，适合需要批量化、并发化或嵌入到自己的产品里的场景。第二种是 Browser Use Cloud 的托管服务，它提供远更强的代理能力（比如更完美的浏览器指纹、CAPTCHA 解决、代理轮换、1000+ 集成）和更简单的 API 调用（curl 即可）。另外还支持一种 'skill' 模式，通过一段自然语言 prompt 让现有 AI 编码助手（如 Cursor、Claude Code）获得控制浏览器的技能。
+
+在技术实现上，Browser Use 支持自定义 Tools 扩展（通过装饰器），支持真实浏览器 Profile 复用（沿用已有登录态），也支持远端云浏览器。此外，开源版和云版也形成了互补：开源版把控制权交给开发者，云版则提供了开箱即用的稳定性和对抗反爬机制。不过 README 里没有提底层具体是用的 Playwright 还是 Puppeteer 等，这部分属于未知。
+
+总体来看，Browser Use 相当于把繁琐的浏览器 RPA 变成了'说人话就能跑'的自动化工具，进一步拉低了网页自动化的门槛。它的价值不只在自动化本身，更在于它作为一个中间层，同时兼容多种 LLM，并预留了自定义接口，让开发者能够根据业务需求做出各种深度定制。
+   活跃度: 未知（未提供提交、发布时间等数据，从 README 中无法判断当前活跃度）。  社区健康: 未知（GitHub API 指标未返回有效数据，但 README 中提供了 Discord 社区、官方文档和博客，可能需要进一步查看项目 Star 和贡献者数量来评估）。
+   商业潜力: 文档未提及，但该项目的云服务（Browser Use Cloud）提供按量计费模式，开源版本也能作为吸引开发者的入口，未来可开展浏览器自动化即服务、AI Agent 中间件等商业方向。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：'万能客服工单自动处理机器人' —— 基于 Browser Use 开发一个自动登录企业内部工单系统，精准读取、分类、回复用户报障信息，并在后台完成记录，解放客服双手。; 灵感2：'竞品价格与市场情报雷达' —— 构建一个定时运行的 Python 脚本，用 Browser Use 批量访问竞品官网和电商页面，自动提取价格、库存、促销信息并汇入数据库，实现一键式价格监控和竞品动态预警。; 灵感3：'个人数字助理（AI 秘书）' —— 将 Browser Use 集成到个人智能助理中，用户只需说一句'帮我订机票/填报销单/下载发票'，AI 秘书就能打开对应网站，使用保存的登录信息完成任务，打造真正的私人勤务兵。
+   项目链接: https://github.com/browser-use/browser-use
