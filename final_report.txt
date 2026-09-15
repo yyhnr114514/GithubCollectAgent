@@ -1,70 +1,25 @@
-1. calesthio/OpenMontage:
-   star: 58664  语言/技术: Python 3.10+, Node.js 18+, React, Remotion, HTML/CSS/GSAP (HyperFrames), FFmpeg, YAML (pipeline manifests), Piper TTS, Ollama/LM Studio (规划中)
-   项目简介: OpenMontage 号称是'首个开源、Agent 驱动的视频制作系统'——把 Claude Code / Cursor / Copilot 这类 AI 编程助手直接改造成一座完整的'视频制片厂'。你只需要用大白话说一句'给我做个 60 秒讲神经网络如何学习的动画',Agent 就会自动完成选题调研（联网搜索）、脚本撰写、图片/视频素材生成、配音、配乐、剪辑编排到最后渲染成片的一整条流水线。它的独特之处在于不只是'把几张静图抖动一下假装是视频'，而是能构建免费素材库（Archive.org / NASA / Pexels 等），检索真实运动镜头、剪成时间线、渲染出'真·视频'。对于想批量产出短视频、纪录片、产品片却又不会 Premiere / AE 的'打工人'和独立创作者来说，妥妥是救星级工具。
-   亮点: 首个开源的 Agent 驱动全流程视频制作系统：从选题调研、脚本、素材生成、配音配乐到渲染成片,全链路由 AI 编程助手编排执行。; 真·视频能力：能从免费开放素材库（Archive.org/NASA/Wikimedia）与 stock 站点（Pexels/Pixabay/Unsplash）构建语料,检索真实运动片段并剪辑成时间线,而非仅对静图做动画。; Backlot 可视化故事板:本地看板随流水线实时填充,展示阶段进展、剧本、分镜卡、每个 provider 决策与花费,并作为'渲染前的审批闸门'暂停等待人工确认。; 零 API Key 也能出片:内置 Piper TTS 配音、Remotion/HyperFrames 渲染、FFmpeg 后期、自动词级字幕等免费工具链,付费 Key 全部可选。; 多维度质量保障:渲染前跑 ffprobe 校验、抽帧采样、音频电平分析、交付承诺核验、字幕检查;provider 选择按 7 个维度打分并保留可审计决策日志。; 预算控制体系:先估算、锁定额度、事后对账,支持 observe/warn/cap 模式、单次金额阈值审批(默认 $0.50)与总额上限(默认 $10)。; 从参考视频起步:粘贴 YouTube/Short/Reel/TikTok/本地片段,Agent 分析转录、节奏、场景、关键帧与风格,产出 2-3 个差异化方案、工具路径、成本估算与样片。; 跨 AI 助手兼容:内置 CLAUDE.md / CURSOR.md / COPILOT.md / CODEX.md / .windsurfrules,全部指向共享的 AGENT_GUIDE.md 与 PROJECT_CONTEXT.md。
-   详细报告: OpenMontage 的定位非常直白:它不是又一个'文本生成视频片段'的玩具,而是一整套'制片厂级'的 Agent 编排系统,把 AI 编程助手（Claude Code、Cursor、Copilot、Windsurf、Codex）当成总导演来用。
+1. multimodal-art-projection/YuE:
+   star: 8574  语言/技术: Python 3.12, PyTorch（由 .whl 打包与 Hugging Face 权重分发推断）, AR–NAR Mixture-of-Transformers, Flow Matching 生成声学潜变量, VAE 音频解码（48 kHz 立体声）, ABC 记谱法（symbolic score 表示）, Hugging Face Transformers / Hub（模型加载方式）, NVIDIA CUDA + BF16
+   项目简介: 一句话概括：YuE2 是一个开源的全曲音乐生成大模型，你给它一段歌词和一个风格提示词，它先写出「旋律+和弦」的乐谱方案，再把这个方案渲染成带人声和伴奏的完整歌曲。它最大的差异化在于「白盒」——不是黑箱吐一段音频，而是先产出一份人类可读、可改的 ABC 乐谱，改完再重新渲染。除了原创歌曲，它还能做零样本翻唱（把一首转录出来的歌换个风格重唱）以及通过对话让 Agent 改和声、改歌词、改编曲。官方宣称在自家 WildSongBench 上跟 Suno v5/v6 打得有来有回，best-of-8 设置下 SongBench 均分 6.9632，是目前评测设置里最高的观测均值。附带还有两个 SOTA 小模型：SheetSage2（音频转乐谱）和 MERT2（音乐理解）。
+   亮点: 白盒音乐生成：先生成可读可编辑的旋律+和弦乐谱（ABC 格式），人和 Agent 都能检查、修改，再渲染成完整录音——这是它区别于 Suno 这类黑箱产品最核心的技术壁垒; 前沿音质：在自建 WildSongBench（192 条 prompt）上，YuE2 best-of-8 拿到 6.9632 SongBench Avg，README 声称与 Suno v5/v6 处于同一水平线; 零样本翻唱：用 SheetSage2 把一段原始录音转成旋律乐谱，再用 cot='melody' 模式配新歌词/新风格重新演唱，无需针对翻唱做微调，948 首作品上达到 0.647 CLEWS mAP（无乐谱仅 0.006）; Agent 原生设计：仓库自带 yue2-music skill（SKILL.md），教 Agent 生成歌曲、转录翻唱、编辑 ABC 乐谱、检查音乐不变量，并组织 A/B 试听对比; 完整的阶段性 Python API：plan() → generate_semantic() → synthesize() → decode()，每一步产物（乐谱、语义 token、声学潜变量、生成配置）都落盘可复用
+   详细报告: 先把话说白：YuE2 干的是「AI 写歌」这件事，但它走了一条跟市面上大部分音乐生成工具不太一样的路。大多数产品（包括 README 里对比的 Suno、Mureka、MiniMax 等）本质上是「你给提示词，我吐音频」，中间过程是个黑箱，你听到的成品不满意，也只能改提示词再抽卡。YuE2 的卖点是把这个黑箱拆开一层——它先生成一份「旋律 + 和弦」的乐谱方案（用 ABC 记谱法表示），这份乐谱是纯文本、人类可读、可以被编辑的；确认或修改之后，再把它「渲染」成 48 kHz 立体声、带人声和伴奏的完整歌曲。作者管这个叫 white-box music generation，翻译成人话就是「先看图纸，再盖房子，图纸还能改」。
 
-【它解决什么痛点】
-传统上做一条像样的短视频,你得会选题、写稿、找素材、配音、配乐、剪辑、加字幕、导出,横跨五六个软件和无数个小时。OpenMontage 的思路是:你用一句自然语言下需求,例如'做个 75 秒关于雨夜城市生活的纪录片混剪,只用真实素材、无旁白、挽歌式基调、配乐',Agent 就接管整条流水线——联网调研选题、生成 AI 图像、写脚本并用带情感指导的语音合成配音、自动寻找免版税背景音乐、烧录词级字幕、最后渲染成片。
+技术架构上，README 给出的关键信息是：一个 AR–NAR 的 Mixture-of-Transformers 骨干网络，自回归地同时预测乐谱 token 和语义音乐 token，然后用 flow matching 生成声学潜变量，最后由 VAE 把这些潜变量解码成立体声音频。创作、翻唱、编辑三种任务的区别只在于「乐谱从哪来」——是模型自己生成的、是从录音转录出来的、还是人为编辑过的。API 被拆成了清晰的阶段：plan() 出乐谱方案，generate_semantic() 出语义 token，synthesize() 出潜变量，decode() 出音频。中间产物全部保存到输出目录，意味着你可以只重跑其中一段，不必每次从头抽卡——这对做 A/B 对比和迭代调参非常友好。
 
-【真·视频 vs 假·视频】
-README 特别强调了一个区分:很多方案只会'把一堆静图做成动画然后称之为视频'。OpenMontage 除了能做 image-based 视频外,还能在免费/开源工作流下做出'真正的视频':Agent 从免费 stock 素材(如 Pexels、Pixabay、Unsplash)与开放档案库(Archive.org、NASA、Wikimedia Commons)构建语料库,检索出真实的运动镜头,把它们编辑进时间线,再渲染出成品。这是它区别于同类工具的核心卖点之一。
+功能上有四种 cot（chain-of-thought 式乐谱规划）模式：cot='full' 生成完整可编辑的旋律+和弦方案（新歌默认）；cot='melody' 只固定旋律、伴奏自由发挥，官方推荐用于翻唱；cot='off' 直接从歌词和风格生成；abc=... 则允许你直接喂一份自己写的乐谱进去。翻唱流程是：先用 SheetSage2（一个音频转乐谱的 SOTA 模型）把原曲转录成旋律 ABC，审一遍，再配上新歌词或新风格去生成——README 特别提示翻唱要用不带和弦符号的乐谱，这样伴奏才能跟着新风格走。编辑流程则是导出 plan、复制 score.abc 改成 edited.abc、让 Agent 改和声/旋律/速度/曲式，再喂回去重新生成一整首录音（注意：它不保留原始波形，属于「重新演绎」而非「局部修音」）。
 
-【核心功能模块】
-1)流水线驱动(pipeline-driven)架构:真实工作通过 pipeline_defs/ 里的 YAML 清单、skills/pipelines/ 里的阶段导演技能,以及工具注册表(tool registry)来发现和执行工具,Agent 被要求'不许即兴发挥工作流',必须先选流程、读清单、读阶段技能、再用工具。
-2)Backlot 实时故事板:这是一个本地看板,随流水线运行自动填充——阶段亮起、剧本以影视剧本页形式出现、素材生成时场景卡闪烁,每个 provider 决策和花掉的每一分钱都上墙。它同时是真实的审批闸门:素材生成会在逐场景的 contact sheet 处暂停,展示 takes、prompts、单素材成本、质量分,让你在渲染之前就确认视觉,而不是事后追悔。
-3)零 Key 也能出片:开箱即得 Piper TTS(离线免费配音)、开源档案素材、React 的 Remotion 渲染(弹簧动画图像场景、文字卡、数据卡、图表、TikTok 式词级字幕、TalkingHead),以及 HTML/CSS/GSAP 的 HyperFrames 渲染(动态排版、产品 promo、发布 reel、网站转视频、绑定骨骼的 SVG 角色动画),再加 FFmpeg 做编码、字幕烧录、混音与调色。系统会在提案阶段就锁定用哪套渲染器(locked as render_runtime):数据驱动型解说默认 Remotion,重动效/适合用 HTML+GSAP 表达的短片默认 HyperFrames。
-4)可选 API Key 扩展:支持 fal.ai(FLUX/Veo/Kling/MiniMax/Recraft)、Atlas Cloud(Seedream/Nano Banana/GPT Image + Kling/Seedance/Hailuo)、Kling 官方直连、Suno(整首歌)、ElevenLabs、OpenAI、xAI Grok、Google(Imagen/TTS 700+ 音色)、Volcengine Ark(Seedance 2.0)、HeyGen、Runway Gen-4 等。有 GPU 的还能跑本地免费视频生成(wan2.2/wan2.1/hunyuan/ltx2/cogvideo)。
-5)质量保障:输出前跑多点自助审查,包括 ffprobe 校验、抽帧采样、音频电平分析、交付承诺核验与字幕检查。
+硬门槛方面要说清楚：Linux、Python 3.12、支持 BF16 的 NVIDIA GPU、24 GB 显存，模型权重首次使用时从 Hugging Face 下载。24 G 显存基本把消费级中端卡挡在门外了（4090 24G 刚够，往下就费劲），这是普通开发者上手前必须掂量的成本。许可证也要划重点：代码、Agent skill 和文档是 Apache 2.0，但模型权重是 CC BY-NC 4.0——也就是非商业用途，想拿去做商业产品得另外谈授权（README 留了合作与授权邮箱）。
 
-【技术栈与运行环境】
-依赖 Python 3.10+、FFmpeg、Node.js 18+,以及一个能读文件、能跑代码的 AI 编程助手。安装大致是 git clone 后 make setup(Windows 有 PowerShell 变体)。架构上分三层:tools/(工具,继承 BaseTool 后由注册表自动发现)、pipeline_defs/(YAML 清单)、skills/pipelines/(阶段技能)。授权协议是 GNU AGPLv3。
+配套生态还挺完整：除了主模型 YuE2-3B，还有解码器 YuE2-Vae / YuE2-Vae-legacy（后者是复现 benchmark 用的）、转录模型 SheetSage2、音乐理解模型 MERT-v2-FullSong / MERT-v2-30s（SheetSage2 的编码器）、以及评测集 WildSongBench。README 里宣称 MERT2 在 15 项 MARBLE 指标中拿下 14 项 SOTA、GTZAN 流派分类 91.72%；SheetSage2 在 13 项指标中拿下 10 项 SOTA、RWC-Pop 人声旋律音级 F1 达 82.51%——不过这些数字都是自报的，且 benchmark 也是自建的，需要第三方独立验证，作者自己也承认最高均分之差「不足以确立统计显著性」，这点挺诚实。
 
-【关于示例作品与成本】
-README 展示了不少成片:科幻预告片《SIGNAL FROM TOMORROW》、60 秒皮克斯风动画短片《THE LAST BANANA》(成本约 $1.33)、音乐驱动 3D 展示《OBJECTS IN OVERDRIVE》(Blender 渲染)、竖屏变形大片(约 $4)、产品片、音乐展示片(源生成成本约 $5)、纪录片《How Salt Made History》,以及'一句话生成完整 3D 世界'等。这些体现了它从概念、脚本、场景规划、生成、配音、作曲到 Remotion 合成的完整能力。
-
-【无法展开的部分】
-由于收到的 README 是被截断的(中间有大量内容省略),其内部关于 provider 选择评分 7 个维度的具体细则、工具契约详细字段、backlot 的具体实现、以及各流水线参数配置等细节,因文档不全无法详细点评该部分,请补充详细的文档内容。另外 GitHub API 指标显示 forks/issues/commits 均为 0、无 release、无 pushed_at、语言分布为空,这可能是项目极新或指标接口未采集到,因此项目的真实活跃度与社区健康度无法据此判断。
-   活跃度: 未知(GitHub API 指标中 pushed_at 为 null、commits_recent 为 0、无 latest_release,无法判断近期开发活跃度)。  社区健康: 未知(README 提到使用 GitHub Discussions 设有 Show and Tell / Ideas / Q&A 板块,并提供赞助渠道,但 GitHub API 指标显示 forks、issues、commits 均为 0,无法据此评估真实社区活跃度)。
-   商业潜力: 文档展示了明确的商业化想象空间:低成本出片(《THE LAST BANANA》约 $1.33、多支成片 $4-$5)、企业批量营销视频、自媒体内容矩阵、教育培训课件自动化、以及作为'视频生成成本/质量路由中间件'对外提供。但文档未给出定价、SaaS 形态或盈利模式等商业信息,故具体商业模式属未知。
+至于本文档没说的部分：训练数据来源与规模、训练算力、具体参数量构成、推理延迟/实时率、社区活跃度、issue 处理情况等，README 均未提及，GitHub API 指标也全是 0/空值，因此无法判断项目实际的热度和维护状态，请补充详细的文档内容后再做评估。总体上，这是一个定位「前沿研究 + 可玩工具」的开源项目，适合做音乐 AI 的研究者、想搭 Agent 工作流的开发者，以及需要可控编曲流程的音乐创作者。
+   活跃度: 未知。API 中 commits_recent=0、pushed_at=null、language_distribution 为空，无法判断实际提交频率与活跃度。  社区健康: 未知。GitHub API 返回 forks=0、open_issues=0、closed_issues_recent=0、latest_release=null，README 提供了 Discord 邀请链接和一个 v0.1.6 release 下载地址，但无法据此判断社区规模与响应质量。
+   商业潜力: README 提到可联系作者洽谈合作与授权（含 data partnership 邮箱），说明官方有商业化/合作意向；但模型权重为 CC BY-NC 4.0，明确限制商业用途，直接商用需另行获得授权。具体的商业模式、定价、SLA 等信息文档未提及。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感 1:基于本项目的 pipeline + Backlot 审批闸门机制,二次开发一个'企业级营销视频工厂'——接入公司品牌色、logo 与产品素材库,业务同学在 Slack/飞书里发一句需求,系统自动产出多版短视频广告,并在渲染前的人工闸门里审批分镜,解决市场团队'出片慢、外包贵'的问题。; 灵感 2:把它改造成'选题到成片的一条龙自媒体助手'——每天抓取热搜/竞品账号数据,自动从参考视频(YouTube/TikTok)拆解节奏与钩子风格,批量生成差异化脚本与成片,发布到多个平台,形成'内容矩阵 + 竞品跟拍'的自动化流水线。; 灵感 3:结合其'从参考视频起步'的能力,开发一个'教育课件视频生成器'——老师上传一段喜欢的教学视频,系统分析其结构后把知识点替换成自己的讲义,自动生成带词级字幕、配音和图表动画的课程短片,集成进现有的 LMS(学习管理系统)中优化课程制作流程。; 灵感 4:利用其多 provider 打分与决策日志机制,做一个'AI 视频生成成本/质量路由器'中间件——给任意团队屏蔽底层各家视频模型的差异,按预算与质量目标自动选 provider(甚至本地 GPU 模型),用于广告公司或工作室控制 API 开销。
-   项目链接: https://github.com/calesthio/OpenMontage
-
-2. multimodal-art-projection/YuE:
-   star: 7381  语言/技术: Python 3.12, PyTorch（隐含，文档未明说但为深度学习模型）, AR–NAR Mixture-of-Transformers 骨干网络, Flow Matching（声学 latent 生成）, VAE（latent 解码为立体声音频）, ABC 记谱法（符号乐谱表示）, BF16 混合精度推理, CUDA / NVIDIA GPU, Hugging Face Hub（模型分发）, SKILL.md Agent 技能包规范, MERT2（音乐理解表征编码器）, SheetSage2（音频转乐谱）
-   项目简介: 一句话概括：YuE2 是一个开源的全曲音乐生成大模型（3B 参数），你给它一段歌词加一个风格提示，它先写出一份可读、可播放、可编辑的“乐曲总谱”（旋律+和弦的 ABC 记谱），再把这份谱子渲染成 48kHz 立体声、带人声和伴奏的完整歌曲。它最大的痛点是解决了传统 AI 音乐生成“黑盒不可控”问题——过去你只能反复抽卡式地改 prompt，而 YuE2 把音乐变成白盒：人和 Agent 都能先看谱子、改和弦、改曲式、改歌词，再重新渲染，还能零样本翻唱（Cover）已有录音。按论文里的 WildSongBench 基准，它的 best-of-8 配置拿到 6.9632 平均分，宣称可对标 Suno v5/v6。
-   亮点: 白盒式音乐生成：先生成可编辑的旋律+和弦规划（ABC 乐谱），再渲染成音频，人可以直接改谱子改风格，而不是黑盒抽卡; 统一了创建 / 翻唱 / 编辑三种任务：同一个 checkpoint，区别只在于乐谱来自模型、来自转录音频、还是来自人手编辑; 零样本翻唱能力突出：在 948 首作品上 full-score 配置达到 0.647 CLEWS mAP，而无乐谱条件仅 0.006，说明符号规划是翻唱保真度的关键; 自带 Agent 技能（skills/yue2-music/SKILL.md），让 AI Agent 能自主完成写歌、转录、翻唱、改 ABC 谱、校验音乐不变量、组织听觉对比; 配套发布 MERT2（音乐理解，15 项 MARBLE 指标中 14 项 SOTA，GTZAN 流派准确率 91.72%）和 SheetSage2（音频转谱，13 项指标中 10 项 SOTA，RWC-Pop 人声旋律音级 F1 达 82.51%）; 输出全程可追溯：产物目录里保留乐谱、semantic tokens、acoustic latents、生成参数和模型标识
-   详细报告: YuE2 是 MAP（Multimodal Art Projection）团队推出的第二代开源音乐生成基础模型，核心卖点是两个词：前沿质量 + 可编辑作曲。
-
-先说它解决的痛点。目前主流的 AI 音乐工具（Suno、Mureka、MiniMax Music 等）本质是“歌词+风格提示 → 波形”的黑盒映射。你想改一个和弦、换一个曲式、把副歌提前两小节，唯一的手段就是改 prompt 然后重新抽卡，改完之后整首歌的所有细节都会变，你没法精确定位问题。对于专业音乐人来说这几乎不可用，因为你无法“指挥”它。YuE2 的思路是把生成过程拆成两级：先做符号层的作曲规划（melody-and-chord plan，用 ABC 记谱法表示），再做声学层的渲染。中间那层乐谱是白盒接口——人和 Agent 都能读、能播、能改。改完之后重新渲染，得到一首新的完整录音。README 明确说了：编辑会生成新的完整录音，不会保留原波形（除了编辑本身的那一小段），这点很重要，别指望它做成 DAW 里的非破坏性编辑。
-
-再说技术架构。README 给的描述是：一个 AR–NAR Mixture-of-Transformers 骨干网络，自回归地预测乐谱和 semantic tokens，然后用 flow matching 生成 acoustic latents，最后用 VAE 把 latents 解码成 48kHz 立体声音频（无量化）。这里“AR–NAR”说明它不是纯粹的逐 token 自回归，而是自回归与掩码/非自回归建模的混合专家式 Transformer——这种设计在音乐这种既要长程结构（曲式、段落重复）又要局部细节的任务上比较常见。flow matching 做声学 latent 生成属于当前 TTS/音频生成的主流路线之一（比传统扩散采样步数少、质量高）。三步式的 Python API 暴露得很清晰：plan() → generate_semantic() → synthesize() → decode()，这个分层设计对二次开发非常友好，你可以在任意一层插入自己的逻辑，比如自己写个 plan、自己替换 decoder。
-
-关于“怎么用”，它提供三种 cot 模式：cot="full" 生成完整的旋律+和弦规划（新歌默认）；cot="melody" 只给旋律规划、伴奏自由发挥（官方推荐用于翻唱）；cot="off" 直接用歌词和风格生成。另外 `abc=...` 允许你自己喂一份乐谱（full 或 melody 模式）。这个参数矩阵基本覆盖了“创作、翻唱、编辑”三大场景。
-
-翻唱流程值得单独说：先用 SheetSage2 把源录音转成旋律 ABC，人工（或 Agent）审一遍曲谱，然后配上新歌词或目标风格，用 cot="melody" 且不带和弦符号的谱子，让伴奏适配新风格。这里零样本能力是关键——它用的是通用生成器，没有为翻唱做专门的微调，但 full-score 条件下 CLEWS mAP 从 0.006 飙到 0.647，说明“符号条件”这件事本身就是巨大的信息杠杆。
-
-编辑流程则是：pipe.plan(**request) 导出 plan，里面有个 score.abc，复制出来改成 edited.abc，让 Agent 改它的和声、旋律、速度或曲式，再用 --abc-file edited.abc --cot full 重新渲染。这就形成了一个“音乐版 Git diff + 重新构建”的工作流。
-
-Agent 技能这块是这个项目很有意思的一步棋。它提供了一个 skills/yue2-music/SKILL.md，教 Agent 怎么生成歌曲、转录翻唱、编辑 ABC 谱、检查音乐不变量（musical invariants，比如旋律是否还保持、歌词顺序是否没乱）、组织多个版本的听觉对比。README 里那个示例请求特别典型：“做一版英文钢琴流行，保留原音频和乐谱；再做一版爵士和声，保持人声旋律和歌词顺序，把两版给我对比。”这基本上是把 AI 音乐制作从“单轮生成”推向“多轮迭代的对话式制作”。官方 demo 里那首 The Last Train 走了 9 步、14 个版本，从华语流行改到英文爵士、换和声、加萨克斯 solo，每一版都能听、都能看它的对话记录、乐谱、prompt 和歌词。
-
-性能方面，README 给了 WildSongBench（192 条 prompt，自动评测，日期标的是 2026 年 9 月 12 日）的完整 17 个系统对比表。YuE2 best-of-8 的 SongBench Avg 是 6.9632 排第一，标准 YuE2（从两个候选里挑）是 6.7316，Suno v5 是 6.8721，Mureka 9 是 6.9377，Suno v6 只有 6.5562。AudioBox PQ 上 YuE2 系列（8.27/8.26）也很靠前，但 LeVo 2 的 8.3966 更高；MuLan 上 Suno v5 的 0.5428 最高，YuE2 best-of-8 是 0.5051；PER（音素错误率）上 Suno v4.5 的 5.80% 最低，YuE2 best-of-8 是 9.79%——也就是说它的“唱清楚歌词”能力不是最强的。有意思的是 YuE 1 在这一代基准上只有 4.9165，说明二代是大幅跃迁。README 自己也很诚实地写了：“排名因指标而异；最高均值之间的微小差距不构成统计显著性。”这个态度值得点赞。注意 best-of-8 用了 8 倍算力，标准 YuE2 只挑 2 个候选，横向比的时候得看清配置。
-
-工程约束：Linux、Python 3.12、支持 BF16 的 NVIDIA GPU、24GB 显存起步。模型从 Hugging Face first-use 自动下载。输出 48kHz 立体声、无量化。用 pip install . 装运行时，Agent skill 要单独按你所用 Agent 的技能目录机制安装。
-
-生态与许可：代码、Agent skill、文档走 Apache 2.0；模型权重单独走 CC BY-NC 4.0——也就是说模型不能商用，代码可以。第三方组件保留各自原始许可。YuE-v1 的代码、文档和许可保留在 YuE-v1 分支上。技术报告“coming soon”，暂时让你引用 MERT 和 YuE 两篇论文。合作/授权/数据合作联系 gezhang@umich.edu。
-
-关于社区健康度：本次提供的 GitHub API 客观指标显示 forks 0、open_issues 0、闭源 issue 0、近期 commit 0、latest_release 为 null、pushed_at 为 null、语言分布为空。这组数据与 README 描述的活跃项目状态明显矛盾，推测是 API 抓取失败或指标未被正确采集，因此无法据此评估社区活跃度，请以实际仓库页面为准。
-
-哪些地方是文档未提及或无法确定的：项目的具体训练数据规模与构成、模型参数量以外的训练细节（除 3B 外）、分辨率/采样率的完整推理链路、Mixture-of-Transformers 的具体专家划分方式、flow matching 的采样步数与调度器、VAE 的具体结构与压缩率、Star 数（README 未提供，API 指标中也无 stars 字段）、推理速度/实时率（RTF）、是否支持 CPU 推理（README 只写了 NVIDIA GPU）、Windows/macOS 支持情况（只写 Linux）——这些均未在现有文档中说明，请补充详细的文档内容或技术报告。
-   活跃度: 未知  社区健康: 未知
-   商业潜力: 文档未提及
-   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 
+   衍生灵感: 灵感1：做一个「AI 音乐翻唱工作室」SaaS——用 SheetSage2 转录用户上传的歌曲得到旋律乐谱，再让用户填新歌词/选目标风格，走 cot='melody' 批量生成多个版本的翻唱 Demo，解决短视频创作者「想翻唱但不会编曲」的痛点。; 灵感2：把 yue2-music skill 接进一个多轮对话式「AI 制作人」产品——用户说「副歌太吵，和声换成爵士味，第二段加萨克斯 solo」，Agent 自动编辑 ABC 乐谱并重新渲染，把 README 里那个『The Last Train 9 步 14 个版本』的演示产品化，对标在线协作编曲工具。; 灵感3：构建「音乐版权与相似度风控」工具——组合使用 MERT2 的音乐表征和 SheetSage2 的音频转乐谱能力，把待发布曲目转成符号乐谱后做旋律相似度比对，用于流媒体平台或唱片公司的原创性预审，这是模型权重非商用协议下也相对合规的『理解侧』应用。; 灵感4：做一套「游戏/短视频动态 BGM 生成中间件」——利用白盒乐谱接口，让程序按场景参数（情绪、节奏、时长）动态生成并微调 ABC 乐谱，再渲染成 48 kHz 音频，解决传统 BGM 库『版权贵、复用感强』的问题（注意商用需先解决 CC BY-NC 授权）。; 灵感5：为音乐教育做一个「乐谱可视化 + AI 伴奏」练习工具——把学生的 ABC 乐谱直接喂给 abc=... 接口，生成带人声/伴奏的示范录音，或反过来用 SheetSage2 对学生演奏录音打分、指出旋律偏差。
    项目链接: https://github.com/multimodal-art-projection/YuE
 
-3. debpalash/VoiceStudio:
+2. debpalash/VoiceStudio:
    star: 27380  语言/技术: Python 3.11+, Bun / Node 20+, Tauri（致谢中提及）, Electron（README 提示正在重写中）, Docker（linux/amd64 镜像，含 CUDA/ROCm/CPU/worker-only 配置）, uv（Python 依赖管理）, CUDA, Apple Silicon MPS / MLX, ROCm（Linux）, REST / SSE / WebSocket 本地 API, OpenAI 兼容音频 API, MCP Server, OmniVoice / CosyVoice 3 / GPT-SoVITS / VoxCPM2 / IndexTTS 2.5 / KittenTTS / Sherpa-ONNX / MLX-Audio 等 TTS 引擎, WhisperX / Faster-Whisper / MLX Whisper / Parakeet MLX / Moonshine 等 ASR 引擎, Demucs（人声分离）, Pyannote（说话人分离）, CTranslate2, AudioSeal（音频水印）
    项目简介: 一句话概括：VoiceStudio（前身 OmniVoice-Studio）是一款“跑在自己电脑上”的多功能语音工作台——克隆音色、给视频配音、语音转写听写、做有声书和长音频，全都本地完成。它把 16 个 TTS 引擎和 11 个 ASR 引擎塞进同一个桌面应用（macOS/Windows/Linux/Docker），挂着 646 种语言的目录，不需要账号、API Key、订阅或按量计费。痛点很直白：市面上的语音服务要么把音频上传到别人家服务器，要么按分钟收费，要么不能换成自己想用的模型。VoiceStudio 换了个思路——算力你自己出，软件免费，数据默认不出本机；同时它还开放了本地 REST/SSE/WebSocket、OpenAI 兼容音频接口和 MCP Server，你可以把它当成一个自建的语音基础设施。
    亮点: 16 个 TTS 引擎 + 11 个 ASR 引擎的“可插拔军火库”，通过 Model Catalogue 一键安装/卸载/切换（Ctrl/Cmd+E 呼出引擎面板），默认用 k2-fsa/OmniVoice，覆盖 600+ 语言; 一条龙配音流水线：上传文件或导入 URL → 转写 → 翻译 → 保留说话人 → 合成 → 导出视频，附带波形+时间轴双语对轴编辑、术语表（Glossary）和译后语速/时序校验; 有声书/故事生产：多角色剧本、EPUB/PDF 导入、分章渲染、直接导出 .m4b——把“录有声书”这件事从几个月压缩到几杯咖啡的时间; 系统级听写小工具（Dictation Widget）：全局快捷键唤起、实时转写，还能接本地 LLM 做文本润色; 本地优先 + 隐私默认值：音频、转写、音色、项目默认全部留在本机，遥测默认关闭，开启时也只发白名单内的无内容元数据；另外内置 AudioSeal 不可感知水印，用来给合成语音做“出处标记”; 跨硬件智能调度：CUDA / Apple Silicon MPS / MLX / ROCm / CPU 自动检测与路由，显存不够自动 offload 到 CPU，还支持把模型下载与推理分发到远程 worker; 对外接口丰富：本地 REST/SSE/WebSocket、OpenAI 兼容音频 API、MCP Server——AI Agent 生态可以直接把它的合成与转写当工具调用; 批量队列 + 文件夹监听：一次排大队音频/视频任务，或者盯着某个目录，新视频一出现就自动处理（自动化剪辑/字幕组狂喜）
@@ -87,21 +42,38 @@ Agent 技能这块是这个项目很有意思的一步棋。它提供了一个 s
    衍生灵感: 灵感1：基于它的本地 REST/OpenAI 兼容音频 API + MCP Server，做一个“播客自动流水线”——RSS 拉新单集 → WhisperX 转写 → 用 LLM 生成中文摘要与双语字幕 → TTS 用主播音色克隆生成中文播客版 → 自动发布到小宇宙/YouTube。整个过程零人工，且音频不出公司内网，特别适合需要保密的行业媒体。; 灵感2：把它当“离线语音中台”集成进企业内部系统：OA/工单系统里接入 Dictation Widget 的同类能力，做成“医生口述病历 → 本地转写 → 本地 LLM 润色 → 结构化入档”的零外传方案；教育行业可做“教师录课 → 自动转写 → 多语言字幕 + AI 配音本地化”，规避学生音视频数据出境合规风险。; 灵感3：结合 Batch Queue 的“监听本地文件夹”能力，做一个小型影视/短视频本地化服务台：剧组把成片丢进 watched folder，自动完成人声/背景分离 → 说话人分离 → 逐角色翻译配音 → 导出带水印的成品，再用水印检测做反盗版溯源。这个方向商业化路径清晰（按项目收费，而非按 API 用量）。; 灵感4（偏研究/自研方向）：利用其 registry-based 的 TTS/ASR/插件接口和 engine acceptance 机制，把自己训练的模型（或私有微调音色）注册成一个新引擎，做成“公司自有音色库 + 内部评估基准”，横向对比不同引擎在自家业务语料上的克隆相似度和时延，产出选型报告。; 灵感5：做一个“无障碍阅读助手”：epub/pdf 一键转 .m4b 有声书的链路，配合多角色分配和 AudioSeal 水印，服务视障用户与通勤听书人群，可衍生出图书馆/出版机构的本地部署版本。
    项目链接: https://github.com/debpalash/VoiceStudio
 
-4. SnailSploit/Claude-Red:
-   star: 3695  语言/技术: Markdown (SKILL.md 结构化技能文档), Claude Skills 系统 / Claude Code / Claude.ai, Bash (install.sh 安装脚本与 git sparse-checkout 用法), Git (sparse-checkout / blob:none 稀疏克隆)
-   项目简介: 一句话概括：这是给 Claude 装上的『红队技能包』——作者把渗透测试、漏洞挖掘、红队作战的方法论拆成一份份结构化的 SKILL.md 文件，丢进 Claude Skills 系统后，Claude 就从『只会说正确的废话的聊天机器人』变成『懂工具的上下文感知红队操作员』。它的核心痛点在于：通用大模型虽然什么都知道一点，但干安全活儿时往往缺少体系化流程、工具链细节和边界情况（edge case）的处理经验；而这个项目把 SQL 注入、XSS、SSRF、SSTI、JWT、ADCS、WPA3、EDR 免杀、容器逃逸、CI/CD 投毒、社工钓鱼等攻防面，逐个封装成可被对话关键词按需触发的技能文档，用哪个加载哪个，不浪费上下文。
-   亮点: 把红队方法论『模块化』：23+ 个大类、上百个单点技能，每份 SKILL.md 只负责一个攻击面，专注、可单独安装、可分层组合; 按需加载、不占上下文：Claude 依据对话触发词自动匹配技能（例如聊到 SQL 注入就加载 offensive-sqli），即插即用; 覆盖面极广且颗粒度细：从 Web OWASP Top 10、JWT/OAuth、Active Directory(ADCS ESC1-15)、无线(WPA2/3、EAP、BLE、Zigbee、Z-Wave、LoRa)、云、移动、IoT、EDR 免杀、shellcode、漏洞挖掘(fuzzing)、供应链投毒到 AI 安全(提示注入/RAG 投毒)一应俱全; 提供多种落地姿势：Claude Skills 自动加载、Claude Code 的 --system-file 管道注入、Claude.ai 手动粘贴到 Project 系统提示词，以及交互式 install.sh 安装脚本; MIT 协议，作者明确列出贡献流程(CONTRIBUTING.md)、变更历史(CHANGELOG.md)与目标路线图(~130 个技能)
-   详细报告: 先给这个项目一个接地气的定位：它不是一段能跑起来的程序代码，而是一套『写给 AI 看的作战手册』。仓库里躺着一堆 SKILL.md 文件，每个文件针对一类攻击面，把方法论、工具链、坑点、以及从低危到拿到 shell 的升级路径整理成结构化的说明。作者称之为 offensive security skills for Claude，也就是让 Claude 在安全场景下表现得像个领域专家，而不是一个含糊其辞的搜索框。
+3. 666ghj/MiroFish:
+   star: 70537  语言/技术: Node.js, Python, uv, Docker, OpenAI SDK (兼容 LLM API), Zep Cloud (记忆服务), GraphRAG, OASIS 模拟引擎, 多智能体系统, 自然语言处理
+   项目简介: MiroFish 是一个基于多智能体（Multi-Agent）技术的群体智能预测引擎，通过从真实世界提取种子信息（新闻、政策草案、金融信号等），自动构建高保真的并行数字世界。在这个世界里，成千上万具有独立个性、长期记忆和行为逻辑的智能体自由互动并社会演化，用户可通过上帝视角动态注入变量，精准推演未来轨迹。简单说，就是让你在数字沙盘中预演未来，从而做出更优决策。
+   亮点: 群体智能预测：通过大量智能体交互涌现出集体行为，预测宏观事件趋势。; 高保真数字世界：智能体拥有独立人格、长期记忆和行为逻辑，可进行社会演化。; 自然语言交互：用户只需上传种子材料并描述预测需求，系统自动返回详细报告。; 深度互动：模拟结束后可与任一智能体对话，与报告Agent交互。; 基于 OASIS 引擎：利用开源的社会交互模拟框架，构建复杂的社交环境。
+   详细报告: MiroFish 是一个面向未来的 AI 预测引擎，它把多智能体模拟技术带到了一个新的高度。项目的核心逻辑是：从真实世界获取少量种子信息（比如一条新闻、一份政策草案、一组金融数据），然后自动构建一个数字孪生世界。在这个世界里，每个智能体都像真人一样有自己的性格、记忆和决策逻辑，它们会相互作用、交流、形成舆情或社会演化。你可以像上帝一样操控环境变量，观察系统在不同条件下可能产生的未来走向。
 
-痛点是什么？通用大模型在安全话题上往往『懂概念、缺章法』：它知道 SQL 注入是什么，但未必会系统地带你走完指纹识别→报错注入→盲注→带外(OOB)→绕 WAF 这一整套流程；它知道 Kerberoasting，但未必清楚 ADCS 的 ESC1 到 ESC15 分别踩什么配置。该项目的解法是『知识外挂』：把资深从业者的方法论固化进 SKILL.md，相当于给 Claude 挂载了一颗颗专用大脑。
+工作流程分五步：第一步是图构建（Graph Building），包括种子提取、个体/集体记忆注入和 GraphRAG 构建，把输入信息结构化，并建立知识图谱。第二步是环境设置（Environment Setup），进行实体关系提取、人设生成和智能体配置注入，为模拟准备角色。第三步是模拟（Simulation），采用双平台并行模拟引擎，自动解析预测需求，并动态更新时态记忆。第四步是报告生成（Report Generation），ReportAgent 带着丰富的工具与模拟后的环境深度交互，生成详细的预测报告。第五步是深度交互（Deep Interaction），你可以与模拟世界中的任意智能体聊天，或与 ReportAgent 进一步探讨。
 
-工作机制上，Claude Skills 系统的特点是按需加载——技能靠对话触发词匹配，你提到的技术方向决定加载哪份文档。这带来的好处是上下文成本可控：不用把上百个技能的全文塞进系统提示，聊到什么才加载什么，省钱又省 token。安装方式也照顾到了不同用户：仓库推荐直接 clone 到 ~/.claude/skills/claude-red 让 Claude 自动加载；也支持用 git sparse-checkout 只拉取某个类别（比如只装 web + active-directory）；在 Claude Code 里可以用 cat SKILL.md | claude --system-file - 把技能当系统提示文档喂进去；在 Claude.ai 网页版则手动粘贴到 Project 的系统提示或对话开头；还贴心提供了交互式 install.sh，支持 --target 指定目录、--category 指定单类别。
+技术上，MiroFish 采用前后端分离架构。后端使用 Python（≥3.11, ≤3.12），依赖管理使用 uv，提供 LLM API 接口（兼容 OpenAI SDK 格式），推荐使用阿里云百炼平台的 qwen-plus 模型。前端基于 Node.js 18+，使用 npm 管理依赖。数据存储和记忆服务用 Zep Cloud，负责长期记忆管理。模拟引擎核心是 OASIS（Open Agent Social Interaction Simulations），这是 CAMEL-AI 团队的开源项目，MiroFish 站在巨人的肩膀上，实现了群体智能的涌现。环境变量中需要配置 LLM 和 Zep 的 API 密钥，部署方式支持源码部署和 Docker 一键启动，对开发者非常友好。
 
-内容广度是这个项目最唬人的地方，也是它的技术壁垒所在——真正难的不是写 Markdown，而是把每个攻击面的『专家经验』提炼到位。分类上看：Web 应用 16 个技能，覆盖 SQLi、XSS、SSRF、SSTI、XXE、IDOR、文件上传、RCE、反序列化、竞态条件、HTTP 请求走私、开放重定向、参数污染、GraphQL、WAF 绕过、业务逻辑滥用；身份认证侧有 JWT 与 OAuth/OIDC；Active Directory 用一份大技能塞下 Kerberoast、ASREProast、ACL 滥用、ADCS ESC1-15、委派与混合 AAD；无线多达 14 个技能，从监听模式配置、WPA2-PSK 握手/PMKID 抓取与 hashcat 破解、WPA3-SAE 降级与 Dragonblood、802.1X/EAP 凭据中继与邪恶双子(RADIUS)，一路到 WPS Pixie Dust、KRACK/FragAttacks、BLE GATT 枚举与配对降级、蓝牙经典 KNOB/BlueBorne、Zigbee/Thread/Matter 的 Touchlink、Z-Wave 的 S0/S2 配网攻击、LoRaWAN 与 sub-GHz 的 KeeLoq/重放/TPMS；基础设施与红队方面涵盖初始访问、EDR 免杀(用户态 unhooking、间接系统调用、PPID 伪造)、shellcode、键盘记录架构、Windows 缓解机制(ACG/CIG/CFG/CET)与边界突破；漏洞开发方向有栈/堆破坏、ROP、缓解绕过、崩溃分析与 TOCTOU；还有 fuzzing(libFuzzer/AFL++)、侦察(OSINT)、API 安全、容器逃逸与 K8s、CI/CD 流水线与密钥窃取、密码学攻击(padding oracle、hash 扩展、TLS 攻击历史漏洞)、提权(Linux/Windows)、后渗透(横向、持久化、数据外泄)、反取证与 C2 框架(Cobalt Strike/Sliver/Mythic/Havoc)、供应链投毒与依赖混淆、社工钓鱼(GoPhish/EvilGinx2)、网络层攻击(ARP/LLMNR 投毒/MITM)、AI 安全(提示注入、越狱、RAG 投毒)，以及两个实用工具类技能：快速排查清单与专业报告(CVSS 评分、证据标准、给高管的摘要)。
-
-需要说明的是：README 是索引与安装指南，SKILL.md 正文并未在输入中给出，因此每个技能内部的具体技战术细节、命令示例、payload 清单等技术深度，根据已有文档内容无法展开说明，请补充详细的 SKILL.md 内容后再评估。另外从 GitHub API 客观指标看，forks、issues、commits、最近 push、最新 release、语言分布全为空或 0，这更可能是数据未采集成功，而非项目真的毫无动静。
-   活跃度: 未知（API 返回的提交、issue、推送时间、release 均为 0 或空，可能为数据未采集；README 中的 Roadmap 显示多个阶段已标记为 Complete、部分为 Planned，但无法据此确认最近活动时间）  社区健康: README 显示欢迎贡献并提供了 CONTRIBUTING.md(技能模板、frontmatter 标准、评审流程)与 CHANGELOG.md，作者为 Kai Aizen(SnailSploit)，并致谢了原始清单作者 Sahar Shlichov 的 offensive-checklist 项目。但 GitHub API 客观指标显示 forks=0、open_issues=0、closed_issues_recent=0、commits_recent=0、latest_release=null、pushed_at=null，数据疑似缺失，无法据此判断真实社区活跃度与维护节奏。
-   商业潜力: 文档未提及商业化计划。从形态推测，具备方向性价值：可作为安全培训/CTF 陪练、红队作业辅助、大模型安全评测基线的素材来源；但 README 未披露任何商业模式、收费或企业版信息，该部分请补充资料后再判断。
+这个项目最大的亮点在于它把“预测”变成了一种可交互、可探索的沉浸式体验。不再是一个黑盒输出答案，而是你可以走进未来世界，和其中的人物对话，理解它们为什么这样选择，甚至可以改变环境变量，重新跑一遍模拟，比较不同决策带来的结果。这种交互式预测能力，是传统统计模型或简单 AI 问答所不具备的。
+   活跃度: 未知（pushed_at 为 null）  社区健康: 早期阶段，根据 GitHub API 数据无 fork 和 open issue，社区参与度较低。
+   商业潜力: 高，可面向企业决策支持、市场预测、内容创作等领域，但受限于当前项目的成熟度，商业化需更多定制化开发。
    GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
-   衍生灵感: 灵感1：基于此项目做一个『多模型红队技能路由器』——把 SKILL.md 抽象成厂商无关的技能包格式，通过关键词/意图识别自动路由到 Claude、GPT、Gemini 或本地开源模型，用于企业内部授权的攻防演练陪练与新人培训平台。; 灵感2：把它改造成『蓝队镜像版』——沿用同样的 SKILL.md 结构与按需加载机制，为每个攻击技能配一份对应的检测与响应技能（如 SQLi→WAF 规则与日志特征、EDR 免杀→EDR 告警分析），做一个『红蓝双面技能库』，喂给 SOC 分析师或演练裁判系统。; 灵感3：将其集成进 CI/CD 与代码评审流程，做一个『攻击面自检 Bot』——在 PR 阶段自动加载 web/api/cicd/supply-chain 相关技能，对新增代码做安全检查清单式审查与风险提示，作为 SAST 的『方法论补丁』。; 灵感4：做成『授权范围守门员』式封装——在技能加载层加一层策略引擎（强制声明授权标的、时间窗、禁止清单、操作留痕），把这份能力打包成合规的红队作业助手，解决纯提示词方案缺乏审计与边界约束的问题。
-   项目链接: https://github.com/SnailSploit/Claude-Red
+   衍生灵感: 灵感1：企业舆情预测与品牌危机管理工具：上传市场新闻或用户评论，MiroFish 模拟不同公关策略下的舆论走向，帮助公关团队提前预判风险、选择最佳应对方案。; 灵感2：互动式小说 / 剧本创作平台：将小说世界观和人物设定输入系统，让故事角色在模拟世界中自主演进，作者可以实时干预剧情，测试不同结局，为创作提供无限灵感。; 灵感3：政策决策沙盘：政府部门或智库在政策正式发布前，模拟不同利益群体的反应和社会效果，通过调整政策参数（如补贴力度、执行时间）观察潜在影响，辅助制定更科学的政策。
+   项目链接: https://github.com/666ghj/MiroFish
+
+4. Panniantong/Agent-Reach:
+   star: 81553  语言/技术: Python, CLI（agent-reach 命令行）, MCP（mcporter 接入 Exa）, yt-dlp, feedparser, Jina Reader, Exa 语义搜索, gh CLI, Node.js, OpenCLI, twitter-cli, rdt-cli, bili-cli, xiaohongshu-mcp, xhs-cli, mcp-server-linkedin, Whisper（小宇宙播客转录）
+   项目简介: 一句话概括：Agent Reach 是一个给 AI Agent「一键装上互联网能力」的能力层（capability layer）。它本身不实现爬虫或读取逻辑，而是替你为每个平台挑选当下最稳的接入方案、装好依赖、做健康体检并提供「首选+备选」的后端路由。痛点很直白：AI Agent 能写代码、改文档，但让它去上网就抓瞎——YouTube 拿不到字幕、Twitter API 要付费、Reddit 匿名接口 403、小红书必须登录、B站风控拦截、网页抓回来一堆 HTML 标签。你要一个一个踩坑、装工具、调配置，光是让 Agent 读条推文就得折腾半天。Agent Reach 把这堆脏活变成一句话：把安装链接丢给 Agent，几分钟后它就能读推文、搜 Reddit、看 YouTube、刷小红书。
+   亮点: 一句话安装/更新：把 install.md 链接丢给 Claude Code、OpenClaw、Cursor、Windsurf 等任意能跑命令行的 Agent，Agent 自主完成安装、检查、配置全流程; 能力层而非工具层：不做底层读取，只负责选型、安装、体检、路由；读取由 Agent 直接调用上游工具，没有多余包装层; 多后端有序路由：每个平台是「首选 ▸ 备选」的有序列表，换接入方式 = 调整列表顺序而非重写代码；坏掉的后端会给出修复处方; 自带诊断：agent-reach doctor 一条命令告诉你每个渠道哪个通、哪个不通、当前走的是哪条后端、怎么修; 默认安全的安装策略：agent-reach install 默认只做只读环境检查，不装系统包、不写配置；只有显式 --system 才落地改动，并支持 --dry-run 预览; 覆盖 15+ 平台渠道：网页、YouTube、RSS、全网搜索、GitHub、Twitter/X、B站、Reddit、Facebook、Instagram、小红书、LinkedIn、V2EX、雪球、小宇宙播客; 凭据本地化：Cookie/Token 只存 ~/.agent-reach/config.yaml，文件权限 600，不上传不外传
+   详细报告: 从设计哲学上讲，Agent Reach 清晰地把「接入一个平台」这件事拆成了两层：上面一层是能力编排，下面一层是实际读取。它只做上面那一层——负责选型、安装、体检、路由；真正把推文、字幕、帖子读回来的活儿，由你的 Agent 直接调用上游工具完成，中间不存在一个多余的包装层。这个定位决定了它最核心的价值不是「又一个爬虫库」，而是「你新开一个 Agent 环境时，不用再重新踩一遍坑」。
+
+它的组织方式是 channels 目录下一平台一文件：web.py 路由到 Jina Reader，twitter.py 依次探测 twitter-cli ▸ OpenCLI ▸ bird，youtube.py 走 yt-dlp，github.py 走 gh CLI，bilibili.py 走 bili-cli ▸ OpenCLI ▸ 搜索 API，reddit.py 走 OpenCLI ▸ rdt-cli，facebook.py / instagram.py 走桌面版 OpenCLI 复用浏览器登录态，xiaohongshu.py 走 OpenCLI ▸ xiaohongshu-mcp ▸ xhs-cli，linkedin.py 走 mcp-server-linkedin ▸ Jina Reader，rss.py 走 feedparser，exa_search.py 通过 mcporter 接 Exa，__init__.py 负责渠道注册供 doctor 检测。关键细节是：每个渠道文件会按序**真实探测**各候选后端，不只是判断「命令存不存在」，而是实际验证能不能用，第一个完整可用的当选；探测失败的会给出修复处方。这意味着上游某个 CLI 停更、某个匿名接口被封、某平台风控升级，用户侧只需要等一次路由调整——README 里举了两个很具体的例子：2026 年 3 月一批单平台 CLI 集体停更，项目换了路由；2026 年 6 月 yt-dlp 被 B 站风控 412 封死，切换到了 bili-cli，用户零操作。
+
+安装体验上，它把「配置」这件最烦人的事外包给了 Agent 自己：你复制一句「帮我安装 Agent Reach：<install.md 链接>」给 Agent，Agent 会自己安装 CLI、检查系统基建（Node.js、gh CLI、mcporter 并给出缺失项安装方式）、判断当前是本地电脑还是服务器、默认只激活 6 个零配置渠道（网页、YouTube、RSS、GitHub、B站搜索、V2EX），然后列菜单问你要不要解锁需要登录态的渠道（小红书、Twitter、Reddit、Facebook、Instagram）。
+
+安全设计是它比较克制的一点：安装默认只读，不写系统；凭据存本地 600 权限文件；支持 --dry-run 预览；卸载支持 --dry-run 和 --keep-config（保留 token 只删 skill 文件）；架构可插拔——不信任某个组件直接换掉对应 channel 文件即可。项目还额外提醒了封号风险：走 Cookie/登录态的平台，脚本化调用可能被平台检测，建议用专用小号而非主账号，并用 Cookie-Editor 手工导出 Cookie 交给配置。
+
+需要注意的是，README 中提到的具体依赖版本、各渠道的完整 API 参数、SKILL.md 的实际内容、以及 doctor 输出的具体格式，因文档被截断而无法展开说明；项目声明的「持续维护、平台封了我们修」属于作者承诺，GitHub API 指标当前全为空（forks/issues/commits/release/pushed_at 均为 0 或 null），客观活跃度无法从现有数据评估，建议补充仓库的实际提交与 Issue 数据。
+   活跃度: 未知。README 中作者自述「这个项目我自己每天在用，所以我会一直维护它」「平台改了反爬或者 API 变了，我会想办法解决」，并给出 2026-03（单平台 CLI 集体停更换路由）和 2026-06（yt-dlp 被 B站风控封死切换 bili-cli）两个维护实例，主观维护意愿较强；但 API 指标中 pushed_at、commits_recent、latest_release 均为 null/0，客观活跃度无法验证。  社区健康: 未知。README 中展示了 Star History、TrendShift 图表和 MIT License、多语言文档（中/英/日/韩），并设有 GitHub Issues 作为反馈主入口，但 GitHub API 客观指标（forks、open_issues、closed_issues_recent、commits_recent、latest_release、pushed_at、language_distribution）当前全部为空或 0，无法据此评估真实社区健康状况与贡献活跃度，需补充实际仓库数据。
+   商业潜力: README 明确提到作者正在承接 Agent 相关的定制与落地合作，方向包括企业生产、运营、市场、投研、数据处理、内容处理等业务流程的 Agent 自动化，并留有微信/邮箱联系入口；同时项目方接入了 BrowserAct、腾讯云 Lighthouse、CoreClaw、优刻得星图等赞助商，说明已有商业合作与生态位。但具体的商业模式、定价与合作案例，文档未提及，需要补充。
+   GitHub 指标: 近30天提交 0, Open Issues 0, Forks 0
+   衍生灵感: 灵感1：把这套「多后端有序路由 + 真实探测 + 修复处方」的模式抽出来，做成一个通用的**数据源接入中间件（Data Source Gateway）**，用于企业内部系统。企业内常常同时有 SaaS API、内部爬虫、RPA 机器人等多条通路访问同一份数据，某条被封或限流时人工切换非常痛苦；复用 Agent Reach 的 channels 注册 + doctor 探测思路，可以实现「某条通路挂了自动降级到备选」的无人值守运维。; 灵感2：基于它的平台覆盖能力，构建一个**个人/团队级舆情与竞品监控日报 Agent**：定时抓取 Twitter 讨论、Reddit 帖子和评论、小红书口碑、B站技术视频字幕、LinkedIn 职位动态，再通过 Exa 语义搜索补齐全网信息，最后由 LLM 汇总成日报推送到飞书/企业微信。Agent Reach 直接解决掉「每个平台都要单独配一遍」的最大摩擦点。; 灵感3：把「Cookie 本地 600 权限存储 + 默认安全安装 + dry-run + 可插拔 channel」这套安全范式，反向借鉴到公司内部的 **AI Agent 权限治理平台**：为每个 Agent 建立凭据沙箱和可审计的调用链路，谁用了哪个平台的哪个凭据、走的是哪条后端，全部留痕，解决企业最怕的「Agent 拿着主账号的 token 到处乱跑」。; 灵感4：开发一个**内容沉淀/知识库采集器**：用 RSS + Jina Reader + YouTube 字幕 + 小宇宙 Whisper 转录四条零配置/低成本通路，把用户订阅的信息源自动转成结构化 Markdown，喂给本地 RAG 或 Obsidian 知识库，做成「打工人的第二大脑」自动进料管道。; 灵感5：针对 B站风控封死 yt-dlp 这个真实案例，可以做一个**平台反爬变更监测服务**：定期跑各平台的最小可用性探测，一旦发现某条通路失效就告警并推荐替代方案，本质上把 agent-reach doctor 从单机自检升级为行业公共基础设施。
+   项目链接: https://github.com/Panniantong/Agent-Reach
